@@ -1,0 +1,70 @@
+<x-admin-master>
+    @section('content')
+
+    <h3>Restaurants details:{{$restaurant->name}}</h3><br>
+    
+    <div class="card shadow mb-4">
+    <a href="{{route('restaurant.edit',$restaurant->id)}}">  
+      <input type="submit" value="Edit" class="btn btn-primary" style="float:right;"/>  
+     </a>
+    <form method="post" action="" enctype="multipart/form-data">
+        @csrf
+        <table>
+        <tr>
+            <td><label for="id"><h5>ID:</h5></label></td>
+            <td style="float:right;"><h5>{{$restaurant->id}}</h5></td>
+        </tr>
+        <tr>
+            <td><label for="id"><h5>Name:</h5></label></td>
+            <td style="float:right;"><h5>{{$restaurant->name}}</h5></td>
+        </tr>
+        <tr>
+            <td><label for="id"><h5>Address:</h5></label></td>
+            <td style="float:right;"><h5>{{$restaurant->address}}</h5></td>
+        </tr>
+        <tr>
+            <td><label for="id"><h5>Mobile:</h5></label></td>
+            <td style="float:right;"><h5>{{$restaurant->mobile}}</h5></td>
+        </tr>
+        <tr>
+            <td><label for="id"><h5>City:</h5></label></td>
+            <td style="float:right;"><h5>{{$restaurant->city->name}}</h5></td>
+        </tr>
+        <tr>
+            <td><label for="id"><h5>Logo:</h5></label></td>
+            <td style="float:right;"><div><img src="{{$restaurant->logo}}"  height="40px"></div></td>
+        </tr>
+        <tr>
+            <td><label for="id"><h5>Banner:</h5></label></td>
+            <td style="float:right;"><div><img src="{{$restaurant->banner}}"  height="40px"></div></td>
+        </tr>
+        <tr>
+            <td><label for="id"><h5>Minimum order value:</h5></label></td>
+            <td style="float:right;"><h5>{{$restaurant->min_order_value}}</h5></td>
+        </tr>
+        <tr>
+            <td><label for="id"><h5>Cost for two people:</h5></label></td>
+            <td style="float:right;"><h5>{{$restaurant->cost_for_two_people}}</h5></td>
+        </tr>
+        <tr>
+            <td><label for="id"><h5>Default preparation time:</h5></label></td>
+            <td style="float:right;"><h5>{{$restaurant->default_preparation_time}}</h5></td>
+        </tr>
+        <tr>
+            <td><label for="id"><h5>Cuisine:</h5></label></td>
+            <td style="float:right;"><h5>{{$restaurant->cuisine->name}}</h5></td>
+        </tr>
+        </table>
+        
+
+        
+        
+        
+        
+       
+    </form>
+    </div>
+
+   
+    @endsection
+</x-admin-master>
