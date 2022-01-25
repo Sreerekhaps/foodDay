@@ -26,6 +26,19 @@ class DiscountController extends Controller
             'uses'=>'required',
             'cuses'=>'required',
             'rest'=>'required',
+        ],[
+            'name.required' => 'Name is required',
+            'code.required' =>'Code is required',
+            'discount_type.required'=>'Discount type is required',
+            'amount.required' =>'Amount is required',
+            'min.required' =>'Minimum percentage amount is required',
+            'date.required' =>'Start date is required',
+            'date.required' =>'Start date is required',
+            'edate.required' =>'End date is required',
+            'uses.required' =>'Maximum uses is required',
+            'cuses.required' =>'Maximum uses per customer is required',
+            'rest.required' =>'Resturant is required',
+
         ]);
         $discount=new Discount;
         $discount->name=$inputs['name'];
@@ -60,6 +73,19 @@ class DiscountController extends Controller
             'uses'=>'required',
             'cuses'=>'required',
             'rest'=>'required'
+
+        ],[
+            'name.required' => 'Name is required',
+            'code.required' =>'Code is required',
+            'discount_type.required'=>'Discount type is required',
+            'amount.required' =>'Amount is required',
+            'min.required' =>'Minimum percentage amount is required',
+            'date.required' =>'Start date is required',
+            'date.required' =>'Start date is required',
+            'edate.required' =>'End date is required',
+            'uses.required' =>'Maximum uses is required',
+            'cuses.required' =>'Maximum uses per customer is required',
+            'rest.required' =>'Resturant is required',    
         ]);
        
         $discount->name=$inputs['name'];
@@ -79,8 +105,15 @@ class DiscountController extends Controller
     public function view(Discount $discount){
         return view('discount.view',['discounts'=>$discount]);
     }
-    public function destroy(Discount $discount){
+    public function destroy($id){
+       
+        
+        $discount=Discount::find($id);
+        
         $discount->delete();
+        
         return back();
-    }
+        
+        }
+    
 }

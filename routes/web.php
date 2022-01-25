@@ -19,6 +19,8 @@ Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+
+
 Route::middleware('web')->group(function(){
    Route::get('/admin', [App\Http\Controllers\AdminController::class, 'index'])->name('admin.index');
    Route::get('/admin/user/create', [App\Http\Controllers\AdminController::class, 'create'])->name('admin.create');
@@ -53,6 +55,8 @@ Route::middleware('web')->group(function(){
     Route::get('/order/{order}/edit', [App\Http\Controllers\OrderController::class, 'edit'])->name('order.edit');
     Route::patch('/order/{order}/update', [App\Http\Controllers\OrderController::class, 'update'])->name('order.update');
     Route::get('/order/{order}/view', [App\Http\Controllers\OrderController::class, 'view'])->name('order.view');
+    Route::get('/order/{id}', [App\Http\Controllers\OrderController::class, 'search'])->name('order.search');
+
     //////Discount/////////
     Route::get('/discount/create', [App\Http\Controllers\DiscountController::class, 'create'])->name('discount.create');
     Route::post('/discount/store', [App\Http\Controllers\DiscountController::class, 'store'])->name('discount.store');
@@ -60,8 +64,9 @@ Route::middleware('web')->group(function(){
     Route::get('/discount/{discount}/edit', [App\Http\Controllers\DiscountController::class, 'edit'])->name('discount.edit');
     Route::patch('/discount/{discount}/update', [App\Http\Controllers\DiscountController::class, 'update'])->name('discount.update');
     Route::get('/discount/{discount}/view', [App\Http\Controllers\DiscountController::class, 'view'])->name('discount.view');
-    Route::delete('/discount/{discount}/destroy', [App\Http\Controllers\DiscountController::class, 'destroy'])->name('discount.destroy');
+    Route::get('/discount/{id}', [App\Http\Controllers\DiscountController::class, 'destroy'])->name('discount.delete');
 
+  
 
 
 

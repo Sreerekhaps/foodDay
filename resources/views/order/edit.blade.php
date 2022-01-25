@@ -1,10 +1,16 @@
 <x-admin-master>
     @section('content')
 
-    <h3>Order Details:{{$orders->id}}</h3>
     <form method="post" action="{{route('order.update',$orders->id)}}" enctype="multipart/form-data">
         @csrf
         @method('PATCH')
+        <div class="container_fluid">
+    <div class="row d-flex justify-content-center align-items-center ">
+      <div class="col-xl-11">
+
+        <h3 class="text-black mb-4" >Order Details:{{$orders->id}}</h3>
+        <div class="card" style="border-radius: 15px;">
+          <div class="card-body">
         <div class="form-group">
             <label for="payment_status"> Payment status</label>
             <select name="payment_status" id="payment_status" class="form-control formselect required">
@@ -30,7 +36,9 @@
               
            </select>
         </div>
-       
+</div>
+</div>
+</section>   
 
         <a href="{{route('order.show')}}">Cancel </a>
         

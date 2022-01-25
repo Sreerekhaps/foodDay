@@ -15,6 +15,9 @@ class CityController extends Controller
     public function store(){
         $inputs=request()->validate([
             'name'=>'required|min:3'
+         
+        ],[
+            'name.required' => 'Name is required',    
         ]);
         $cities = new City;
         $cities->name = $inputs['name'];
@@ -33,6 +36,9 @@ class CityController extends Controller
     public function update(City $city){
         $inputs=request()->validate([
             'name'=>'required|min:3'
+
+        ],[
+            'name.required' => 'Name is required',        
         ]);
         $city->name=$inputs['name'];
         $city->save();

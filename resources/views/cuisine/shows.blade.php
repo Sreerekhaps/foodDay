@@ -17,31 +17,21 @@
                   <thead>
                     <tr>
                       <th>Name</th>
-                      <th>Edit</th>
-                      <th>View</th>
-
                       
-
-                     
                     </tr>
                   </thead>
                   <tfoot>
                     <tr>
                     <th>Name</th>
-                    <th>Edit</th>
-                    <th>View</th>
-
-
-                   
-                     
+          
                     </tr>
                   </tfoot>
                   <tbody>
                       @foreach($cuisines as $cuisine)
                       <tr>
-                          <td>{{$cuisine->name}}</td>
-                          <td><a href="{{route('cuisine.edit',$cuisine->id)}}" ><button class="btn btn-primary">Edit</button></a></td>
-                          <td><a href="{{route('cuisine.view',$cuisine->id)}}" ><button class="btn btn-primary">View</button></a></td>
+                          <td>{{$cuisine->name}} 
+                          <a href="{{route('cuisine.edit',$cuisine->id)}}" style="float:right;"><img src="{{asset('image/edit.png')}}" width="20px" alt=""></a>
+                          <a href="{{route('cuisine.view',$cuisine->id)}}" style="float:right;"><img src="{{asset('image/eyee.jpg')}}" width="28px" alt=""></a></td>
 
 
                       </tr>

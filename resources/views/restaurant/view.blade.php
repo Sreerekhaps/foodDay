@@ -32,11 +32,13 @@
         </tr>
         <tr>
             <td><label for="id"><h5>Logo:</h5></label></td>
-            <td style="float:right;"><div><img src="{{$restaurant->logo}}"  height="40px"></div></td>
+            <td style="float:right;"><div><img src="{{$restaurant->logo}}" height="100px" width="200px"> <br></div></td>
+           
         </tr>
+        
         <tr>
             <td><label for="id"><h5>Banner:</h5></label></td>
-            <td style="float:right;"><div><img src="{{$restaurant->banner}}"  height="40px"></div></td>
+            <td style="float:right;"><div><img src="{{$restaurant->banner}}"  height="100px" width="200px"></div></td>
         </tr>
         <tr>
             <td><label for="id"><h5>Minimum order value:</h5></label></td>
@@ -53,6 +55,34 @@
         <tr>
             <td><label for="id"><h5>Cuisine:</h5></label></td>
             <td style="float:right;"><h5>{{$restaurant->cuisine->name}}</h5></td>
+        </tr>
+        <tr>
+            <td><label for="id"><h5>Is Open:</h5></label></td>
+            <td style="float:right;">
+                           @if($restaurant->is_open ==1) 
+
+                            <i class="fas fa-check-circle"></i>
+                          
+                           @else
+                            <i class="far fa-times-circle"></i>
+                           @endif 
+                          </td>
+        </tr>
+        <tr>
+            <td><label for="id"><h5>Allow Pickup:</h5></label></td>
+            <td style="float:right;">
+                           @if($restaurant->allow_pickup ==1) 
+
+                            <i class="fas fa-check-circle"></i>
+                          
+                           @else
+                            <i class="far fa-times-circle"></i>
+                           @endif 
+                          </td>
+        </tr>
+        <tr>
+            <td><label for="id"><h5>Status:</h5></label></td>
+            <td style="float:right;"><h5>{{$restaurant->status}}</h5></td>
         </tr>
         </table>
         

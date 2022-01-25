@@ -48,8 +48,8 @@
             <td style="float:right;"><h5>{{$discounts->max_uses_per_customer}}</h5></td>
         </tr>
         <tr>
-            <td><label for="id"><h5>Payment method:</h5></label></td>
-            <td style="float:right;"><h5>{{$discounts->restaurant_id}}</h5></td>
+            <td><label for="id"><h5>Restaurant:</h5></label></td>
+            <td style="float:right;"><h5>{{$discounts->restaurant->name}}</h5></td>
         </tr>
        
         </table>

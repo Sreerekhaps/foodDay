@@ -9,7 +9,8 @@ class Discount extends Model
 {
     use HasFactory;
     protected $fillable=['name','code','discout_type','amount','min_percentage_amount','start_at','end_at'];
-    public function restaurants(){
-        return $this->hasMany(Restaurant::class);
+    public function restaurant(){
+        return $this->belongsTo(Restaurant::class);
     }
+    
 }

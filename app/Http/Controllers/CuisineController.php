@@ -14,6 +14,9 @@ class CuisineController extends Controller
     public function store(){
         $inputs=request()->validate([
             'name'=>'required|min:3'
+        ],[
+            'name.required' => 'Name is required',    
+
         ]);
         $cuisines= new Cuisine;
         $cuisines->name=$inputs['name'];
@@ -33,6 +36,10 @@ class CuisineController extends Controller
     public function update(Cuisine $cuisine){
         $inputs=request()->validate([
             'name'=>'required|min:3'
+
+        ],[
+            'name.required' => 'Name is required',    
+    
         ]);
         $cuisine->name=$inputs['name'];
         $cuisine->save();

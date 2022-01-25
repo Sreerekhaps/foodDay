@@ -22,8 +22,24 @@ class AdminController extends Controller
             'mobile'=>'required|min:10|max:12',
             'email'=>'required|email',
             'password'=>'required|min:4',
+        
+        ],[
+            'first_name.required' => 'First Name is required',
+            'last_name.required' =>'Last Name is required',
+            'phone_code.required'=>'Phone code is required',
+            'mobile.required' =>'Mobile is required',
+            'email.required' =>'Email is required',
+            'password.required' =>'Password is required',
+    
         ]);
-        auth()->user()->create($inputs);
+        $user = new User;
+        $user->first_name=$inputs['first_name'];
+        $user->last_name=$inputs['last_name'];
+        $user->phone_code=$inputs['phone_code'];
+        $user->mobile=$inputs['mobile'];
+        $user->email=$inputs['email'];
+        $user->password=$inputs['password'];
+        $user->save();
         return redirect()->route('admin.show');
         
     }
@@ -43,6 +59,14 @@ class AdminController extends Controller
             'mobile'=>'required|min:10|max:12',
             'email'=>'required|email',
             'password'=>'required|min:4',
+
+        ],[
+            'first_name.required' => 'First Name is required',
+            'last_name.required' =>'Last Name is required',
+            'phone_code.required'=>'Phone code is required',
+            'mobile.required' =>'Mobile is required',
+            'email.required' =>'Email is required',
+            'password.required' =>'Password is required',    
         ]);
         $user->first_name=$inputs['first_name'];
         $user->last_name=$inputs['last_name'];

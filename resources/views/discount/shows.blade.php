@@ -22,9 +22,8 @@
                       <th>Amount</th>
                       <th>Starts At</th>
                       <th>Ends At</th>
-                      <th>Edit</th>
-                      <th>View</th>
-                      <th>Delete</th>
+                      <th></th>
+                      <th></th>
 
                      
                     </tr>
@@ -37,9 +36,8 @@
                       <th>Amount</th>
                       <th>Starts At</th>
                       <th>Ends At</th>
-                      <th>Edit</th>
-                      <th>View</th>
-                      <th>Delete</th>
+                      <th></th>
+                      <th></th>
 
 
 
@@ -55,15 +53,14 @@
                           <td>{{$discount->amount}}</td>
                           <td>{{$discount->start_at}}</td>
                           <td>{{$discount->end_at}}</td>
-                          <td><a href="{{route('discount.edit',$discount->id)}}" ><button class="btn btn-primary">Edit</button></a></td>
-                          <td><a href="{{route('discount.view',$discount->id)}}" ><button class="btn btn-primary">View</button></a></td>
-                          <td>
-                            <form method="post" action="{{route('discount.destroy',$discount->id)}}">
+                          <td><a href="{{route('discount.edit',$discount->id)}}" ><img src="{{asset('image/edit.png')}}" width="20px" alt=""></a>
+                          <a href="{{route('discount.view',$discount->id)}}" ><img src="{{asset('image/eyee.jpg')}}" width="28px" alt=""></a><td>
+                            <form method="post" action="{{route('discount.delete',$discount->id)}}">
                               @csrf
                               @method('DELETE')
-                              <button class="btn btn-danger">Delete</button>
+                              <a href="/discount/{{$discount->id}}"><img src="{{asset('image/delete.png')}}" width="20px" alt=""></a></td>
                             </form>
-                          </td>
+                          
                           
 
 

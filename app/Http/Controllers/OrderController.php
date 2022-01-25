@@ -30,4 +30,21 @@ class OrderController extends Controller
     public function view(Order $order){
         return view('order.view',['orders'=>$order]);
     }
+    // public function search($id){
+    //     if($request->ajax()){
+    //         $data=Order::where("id","like","%".$request->search."%")->get();
+
+    //         $output='';
+    //         if(count($data)>0){
+
+               
+
+    //         }
+    //         else{
+    //             $output .='No result';
+    //         }
+    //     }
+        
+    // }
+         
 }

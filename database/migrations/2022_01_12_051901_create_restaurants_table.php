@@ -33,8 +33,9 @@ class CreateRestaurantsTable extends Migration
             $table->unsignedBigInteger('cuisine_id');
             $table->foreign('cuisine_id')->references('id')->on('cuisines')->onDelete('cascade');
             
-            $table->string('is_open');
-            $table->string('allow_pickup');
+            $table->boolean('is_open')->default(false);
+            $table->boolean('allow_pickup')->default(false);
+            $table->string('status')->default('Active');
             $table->timestamps();
         });
     }
