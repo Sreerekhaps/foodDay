@@ -7,9 +7,21 @@ use App\Models\Order;
 
 class OrderController extends Controller
 {
+
+    
     //
-    public function show(){
+    public function show(Request $request){
         $order=Order::all();
+        $order = Order::when(
+            $request->input('id'),
+            function ($query) use ($request)
+            {
+            $query->where('id', 'like', '%'.$request->input('id').'%');
+                 
+            }
+            ) ->orderBy('created_at', 'desc')->paginate(5);
+        
+            $request->flash();
         return view('order.shows',['orders'=>$order]);
     }
     public function edit(Order $order){

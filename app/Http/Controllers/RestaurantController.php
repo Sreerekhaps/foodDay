@@ -15,6 +15,7 @@ class RestaurantController extends Controller
 {
     //
     
+    
     public function create(){
         $cities=City::all();
         $cuisines=Cuisine::all();
@@ -97,8 +98,8 @@ class RestaurantController extends Controller
                 'mobile'=>'required',
                 'city'=>'required',
                 'location'=>'required',
-                'logo'=>'required',
-                'banner'=>'required',
+                'logo'=>['image', 'mimes:jpeg,png,jpg', 'max:2048'],
+                'banner'=>['image', 'mimes:jpeg,png,jpg', 'max:2048'],
                 'value'=>'required',
                 'cost'=>'required',
                 'time'=>'required',
@@ -124,18 +125,10 @@ class RestaurantController extends Controller
                 'status.required' =>'Status is required',    
             ]); 
             
-            if(request()->has('logo')) {
-
-                $inputs['logo'] = request()->file('logo')->store('images', 'public');
-                
-            }
            
-            if (request()->has('banner')) {
-                
-                $inputs['banner'] = request()->file('banner')->store('images', 'public');
-                
-            }
-
+            
+            
+            
             if (request()->has('is_open')) {
                 $inputs['is_open'] = 1;
             } else {
@@ -153,8 +146,17 @@ class RestaurantController extends Controller
             $restaurant->mobile = $inputs['mobile'];
             $restaurant->city_id = $inputs['city'];    
             
-            $restaurant->logo = $inputs['logo'];
-            $restaurant->banner = $inputs['banner'];
+            if(request()->has('logo')) {
+
+                $restaurant->logo= $inputs['logo'] = request()->file('logo')->store('images', 'public');
+                 
+             }
+             if (request()->has('banner')) {
+                
+               $restaurant->banner= $inputs['banner'] = request()->file('banner')->store('images', 'public');
+                
+            }
+
             
             $restaurant->min_order_value = $inputs['value'];
             $restaurant->cost_for_two_people = $inputs['cost'];
@@ -171,3 +173,4 @@ class RestaurantController extends Controller
         }
        
     }
+

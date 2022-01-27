@@ -31,11 +31,12 @@
 </div>
 </div>
 </section>
-        <a href="{{route('city.show')}}">Cancel </a>
+        <button type="submit" class="btn btn-primary" style="float:right;">Create</button>
+
+        <a href="{{route('city.show')}}"style="float:right;margin-top:8px;font-size: 18px;margin-right:15px;text-decoration: none;"><b>Cancel </b></a>
         
         
         
-        <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 
     <!-- @if(count($errors)> 0)

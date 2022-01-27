@@ -36,8 +36,8 @@
                           <td>{{$user->first_name}} {{$user->last_name}}</td>
                           <td>{{$user->mobile}}</td>
                           <td>{{$user->email}}</td>
-                         <td> <a href="{{route('admin.edit',$user->id)}}" style="float:right;"><img src="{{asset('image/edit.png')}}" width="20px" alt=""></a>
-                          <a href="{{route('admin.view',$user->id)}}" style="float:right;"><img src="{{asset('image/eyee.jpg')}}" width="28px" alt=""></a></td>
+                         <td> <a href="{{route('admin.edit',$user->id)}}" style="margin-right:5px"><img src="{{asset('image/edit.png')}}" width="20px" alt=""></a>
+                          <a href="{{route('admin.view',$user->id)}}" style="margin-right:0px"><img src="{{asset('image/eyee.jpg')}}" width="28px" alt=""></a></td>
                           
                           
                         </tr>

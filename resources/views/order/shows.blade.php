@@ -3,18 +3,13 @@
     @section('content')
 <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel=stylesheet > -->
     <h1>Orders</h1>
-    <div>
-      <label for="search">Search</label>
-      <form>
-        <div>
-         <input type="text" class="form-control typeahead">
-        </div>
-        <div id="search_list">
-
-        </div>
-      </form>
-    </div>
-    
+    <form>
+<input type="text" name="id" value="{{ old('id') }}">
+<span class="input-group-btn">
+<button class="btn btn-primary" type="submit">Search</button>
+</span>
+</form>
+    <br>
     <div class="card shadow mb-4">
       
             <div class="card-body">

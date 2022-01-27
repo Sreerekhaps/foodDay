@@ -89,8 +89,8 @@
         <label for="banner">Banner</label>
         <img src="{{$restaurants->banner}}" alt="" height="100px" width="200px">
         <input type="file" name="banner" class="form-control-file" id="banner">
-        @if ($errors->has('name'))
-                    <span class="text-danger">{{ $errors->first('name') }}</span>
+        @if ($errors->has('banner'))
+                    <span class="text-danger">{{ $errors->first('banner') }}</span>
                 @endif
         </div>
         
@@ -156,22 +156,12 @@
 </div>
 </div>
 </section>
-    
-       <a href="{{route('restaurant.show')}}">Cancel </a>
-        <button type="submit" class="btn btn-primary">Submit</button>
+       <button type="submit" class="btn btn-primary"style="float:right;">Update</button>
+       <a href="{{route('restaurant.show')}}"style="float:right;margin-top:8px;font-size: 18px;margin-right:15px;text-decoration: none;"><b>Cancel </b></a>
+        
     </form>
 
-    @if(count($errors)> 0)
-
-<div class="alert alert-danger">
-    <ul>
-        @foreach($errors->all() as $error)
-        <li>{{$error}}</li>
-        @endforeach
-    </ul>
-</div>
-
-@endif
+ 
 
     @endsection
 </x-admin-master>

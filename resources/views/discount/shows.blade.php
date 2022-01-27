@@ -53,8 +53,8 @@
                           <td>{{$discount->amount}}</td>
                           <td>{{$discount->start_at}}</td>
                           <td>{{$discount->end_at}}</td>
-                          <td><a href="{{route('discount.edit',$discount->id)}}" ><img src="{{asset('image/edit.png')}}" width="20px" alt=""></a>
-                          <a href="{{route('discount.view',$discount->id)}}" ><img src="{{asset('image/eyee.jpg')}}" width="28px" alt=""></a><td>
+                          <td><a href="{{route('discount.edit',$discount->id)}}"><img src="{{asset('image/edit.png')}}" width="20px" alt=""></a>
+                          <a href="{{route('discount.view',$discount->id)}}"><img src="{{asset('image/eyee.jpg')}}" width="28px" alt=""></a><td>
                             <form method="post" action="{{route('discount.delete',$discount->id)}}">
                               @csrf
                               @method('DELETE')

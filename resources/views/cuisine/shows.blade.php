@@ -30,8 +30,8 @@
                       @foreach($cuisines as $cuisine)
                       <tr>
                           <td>{{$cuisine->name}} 
-                          <a href="{{route('cuisine.edit',$cuisine->id)}}" style="float:right;"><img src="{{asset('image/edit.png')}}" width="20px" alt=""></a>
-                          <a href="{{route('cuisine.view',$cuisine->id)}}" style="float:right;"><img src="{{asset('image/eyee.jpg')}}" width="28px" alt=""></a></td>
+                          <a href="{{route('cuisine.edit',$cuisine->id)}}" style="float:right;margin-right:10px"><img src="{{asset('image/edit.png')}}" width="20px" alt=""></a>
+                          <a href="{{route('cuisine.view',$cuisine->id)}}" style="float:right;margin-right:20px"><img src="{{asset('image/eyee.jpg')}}" width="28px" alt=""></a></td>
 
 
                       </tr>

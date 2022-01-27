@@ -10,6 +10,6 @@ class Cuisine extends Model
     use HasFactory;
     protected $fillable=['name'];
     public function restaurants(){
-        return $this->hasMany(Restaurant::class);
+        return $this->belongsToMany(Restaurant::class,'cuisines_restaurants');
     }
 }

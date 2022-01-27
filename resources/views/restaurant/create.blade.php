@@ -73,16 +73,16 @@
         <div class="form-group">
         <label for="logo">Logo</label>
         <input type="file" name="logo" class="form-control-file" id="logo">
-        @if ($errors->has('logo'))
+        <!-- @if ($errors->has('logo'))
                     <span class="text-danger">{{ $errors->first('logo') }}</span>
-                @endif
+                @endif -->
         </div>
         <div class="form-group">
         <label for="banner">Banner</label>
         <input type="file" name="banner" class="form-control-file" id="banner">
-        @if ($errors->has('name'))
+        <!-- @if ($errors->has('name'))
                     <span class="text-danger">{{ $errors->first('name') }}</span>
-                @endif
+                @endif -->
         </div>
         <div class="form-group">
             <label for="email">Minimum order value</label>
@@ -111,7 +111,7 @@
        
         <div class="form-group">
             <label for="cuisine">Cuisine</label>
-            <select name="cuisine" id="cuisine" class="form-control formselect required"" >
+            <select name="cuisine" id="cuisine" class="form-control" >
                 <option value="0" disabled selected>___</option>
                @foreach($cuisines as $cuisine)
                <option value="{{ $cuisine->id}}">{{($cuisine->name)}}</option>
@@ -134,14 +134,30 @@
             <input type="checkbox" id="allow_pickup" name="allow_pickup" value="1">
            
         </div>
+
        
         <br>
         </div>
         </div>
         </section>  
-        <a href="{{route('restaurant.show')}}">Cancel </a>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary"style="float:right;">Create</button>
+
+        <a href="{{route('restaurant.show')}}"style="float:right;margin-top:8px;font-size: 18px;margin-right:15px;text-decoration: none;"><b>Cancel </b></a>
     </form>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+       
+       <script>
+         $(document).ready(function() {
+             // Select2 Multiple
+             $('.select2-multiple').select2({
+                 placeholder: "Select",
+                 allowClear: true,
+                 tokenSeparators:['/',','," "]
+             });
+ 
+         });
+ 
+     </script> -->
 
     
     <!-- @if(count($errors)> 0)

@@ -1,10 +1,10 @@
 <x-admin-master>
+
     @section('content')
 
     <h1>Restaurants</h1>
-    
-    
-
+   
+  
     <div class="card shadow mb-4">
     <div class="card-header py-3">
     <a href="{{route('restaurant.create')}}">  
@@ -48,18 +48,20 @@
 
                     </tr>
                   </tfoot>
+
                   <tbody>
                       @foreach($restaurants as $restaurant)
                       <tr>
                           <td>{{$restaurant->name}}</td>
 
-                            <td><a href="{{route('city.view',$restaurant->city->id)}}">{{$restaurant->city->name}}</a></td>
+                            <td class="not-active"><a href="{{route('city.view',$restaurant->city->id)}}">{{$restaurant->city->name}}</a></td>
 
                           <td>{{$restaurant->min_order_value}}</td>
                           <td>{{$restaurant->cost_for_two_people}}</td>
                           <td>{{$restaurant->default_preparation_time}}</td>
                           <td>
                            @if($restaurant->is_open ==1) 
+                           
 
                             <i class="fas fa-check-circle"></i>
                           
@@ -78,8 +80,8 @@
                            @endif 
                           </td>
                           <td>{{$restaurant->status}}</td>
-                          <td><a href="{{route('restaurant.edit',$restaurant->id)}}" style="float:right;"><img src="{{asset('image/edit.png')}}" width="20px" alt=""></a>
-                          <a href="{{route('restaurant.view',$restaurant->id)}}" style="float:right;"><img src="{{asset('image/eyee.jpg')}}" width="28px" alt=""></a></td>
+                          <td><a href="{{route('restaurant.edit',$restaurant->id)}}" style="float:right;margin-right:10px"><img src="{{asset('image/edit.png')}}" width="20px" alt=""></a>
+                          <a href="{{route('restaurant.view',$restaurant->id)}}" style="float:right;margin-right:20px"><img src="{{asset('image/eyee.jpg')}}" width="28px" alt=""></a></td>
 
                       </tr>
                       @endforeach

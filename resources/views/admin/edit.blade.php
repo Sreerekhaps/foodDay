@@ -76,9 +76,11 @@
 </div>
 </div>
 </section>
+
+
+        <button type="submit" class="btn btn-primary"  style="float:right;">Update</button>
+        <a href="{{route('admin.show')}}"  style="float:right;margin-top:8px;font-size: 18px;margin-right:15px;text-decoration: none;"><b>Cancel </b></a>
         
-        <a href="{{route('admin.show')}}">Cancel </a>
-        <button type="submit" class="btn btn-primary">Update</button>
     </form>
     <!-- @if(count($errors)> 0)
 

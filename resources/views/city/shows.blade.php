@@ -17,9 +17,7 @@
                   <thead>
                     <tr>
                       <th>Name</th>
-                     
-
-                     
+            
                     </tr>
                   </thead>
                   <tfoot>
@@ -34,8 +32,8 @@
                       @foreach($cities as $city)
                       <tr>
                           <td>{{$city->name}}
-                          <a href="{{route('city.edit',$city->id)}}" style="float:right;"><img src="{{asset('image/edit.png')}}" width="20px" alt=""></a>
-                          <a href="{{route('city.view',$city->id)}}" style="float:right;"><img src="{{asset('image/eyee.jpg')}}" width="28px" alt=""></a></td>
+                          <a href="{{route('city.edit',$city->id)}}" style="float:right;margin-left:20px"><img src="{{asset('image/edit.png')}}" width="20px" alt=""></a>
+                          <a href="{{route('city.view',$city->id)}}" style="float:right;margin-left:100px"><img src="{{asset('image/eyee.jpg')}}" width="28px" alt=""></a></td>
 
                       </tr>
                       @endforeach

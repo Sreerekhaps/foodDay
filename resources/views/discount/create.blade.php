@@ -123,8 +123,9 @@
 </div>
 
 </section>
-        <a href="{{route('discount.show')}}">Cancel</a>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary" style="float:right;">Create</button>
+
+        <a href="{{route('discount.show')}}"style="float:right;margin-top:8px;font-size: 18px;margin-right:15px;text-decoration: none;"><b>Cancel </b></a>
         
         
     </form>

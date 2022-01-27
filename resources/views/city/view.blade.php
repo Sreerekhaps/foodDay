@@ -10,11 +10,11 @@
         @csrf
         <table>
         <tr>
-            <td><label for="id"><h5>ID:</h5></label></td>
+            <td><label for="id" style="margin-left:20px"><h5>ID:</h5></label></td>
             <td style="float:right;"><h5>{{$cities->id}}</h5></td>
         </tr>
         <tr>
-            <td><label for="id"><h5>Name:</h5></label></td>
+            <td><label for="id" style="margin-left:20px"><h5>Name:</h5></label></td>
             <td style="float:right;"><h5>{{$cities->name}}</h5></td>
         </tr>
         </table>

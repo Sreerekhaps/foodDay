@@ -72,9 +72,10 @@
                 
 </section>
         
-        <a href="{{route('admin.show')}}">Cancel</a>
         <!-- <button type="submit" class="btn btn-primary" href="{{route('admin.create')}}">Create and Add another</button> -->
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary" style="float:right;">Create</button>
+        <a href="{{route('admin.show')}}" style="float:right;margin-top:8px;font-size: 18px;margin-right:15px;text-decoration: none;"><b>Cancel </b></a>
+
     </form>
 
     <!-- @if(count($errors)> 0)
