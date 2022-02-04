@@ -9,7 +9,7 @@
      </a>
     <form method="post" action="" enctype="multipart/form-data">
         @csrf
-        <table>
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
         <tr>
             <td><label for="id" style="margin-left:20px"><h5>ID:</h5></label></td>
             <td ><h5>{{$restaurant->id}}</h5></td>
@@ -54,7 +54,15 @@
         </tr>
         <tr>
             <td><label for="id" style="margin-left:20px"><h5>Cuisine:</h5></label></td>
-            <td><h5>{{$restaurant->cuisine->name}}</h5></td>
+            <td>@foreach($cuisines as $cuisine)
+                           @if($restaurant->cuisines->contains($cuisine->id))
+
+                            <a href="{{route('cuisine.view',$cuisine->id)}}">{{$cuisine->name}}</a>
+                          
+                          
+                           @endif 
+                          
+            @endforeach  </td>
         </tr>
         <tr>
             <td><label for="id" style="margin-left:20px"><h5>Is Open:</h5></label></td>

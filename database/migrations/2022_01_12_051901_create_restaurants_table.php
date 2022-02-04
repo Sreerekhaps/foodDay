@@ -29,10 +29,6 @@ class CreateRestaurantsTable extends Migration
             $table->string('min_order_value');
             $table->string('cost_for_two_people');
             $table->string('default_preparation_time');
-          
-            $table->unsignedBigInteger('cuisine_id');
-            $table->foreign('cuisine_id')->references('id')->on('cuisines')->onDelete('cascade');
-            
             $table->boolean('is_open')->default(false);
             $table->boolean('allow_pickup')->default(false);
             $table->string('status')->default('Active');

@@ -19,42 +19,27 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                      <th>Name</th>
-                      <th>City</th>
-                      <th>Minimum Order Value</th>
-                      <th>Cost For Two People</th>
-                      <th>Default Preparation Time</th>
-                      <th>Is Open</th>
-                      <th>Allow Pickup</th>
-                      <th>Status</th>
+                      <th>NAME</th>
+                      <th>CITY</th>
+                      <th>MINIMUM ORDER VALUE</th>
+                      <th>COST FOR TWO PEOPLE</th>
+                      <th>DEFAULT PREPERATION TIME</th>
+                      <th>IS OPEN</th>
+                      <th>ALLOW PICKUP</th>
+                      <th>STATUS</th>
                       <th></th>
 
 
                       
                     </tr>
                   </thead>
-                  <tfoot>
-                    <tr>
-                    <th>Name</th>
-                      <th>City</th>
-                      <th>Minimum Order Value</th>
-                      <th>Cost For Two People</th>
-                      <th>Default Preparation Time</th>
-                      <th>Is Open</th>
-                      <th>Allow Pickup</th>
-                      <th>Status</th>
-                      <th></th>
-
-
-                    </tr>
-                  </tfoot>
-
+                 
                   <tbody>
                       @foreach($restaurants as $restaurant)
                       <tr>
                           <td>{{$restaurant->name}}</td>
 
-                            <td class="not-active"><a href="{{route('city.view',$restaurant->city->id)}}">{{$restaurant->city->name}}</a></td>
+                            <td class="not-active"><a href="{{route('city.view',$restaurant->city->id)}}" style="text-decoration: none;">{{$restaurant->city->name}}</a></td>
 
                           <td>{{$restaurant->min_order_value}}</td>
                           <td>{{$restaurant->cost_for_two_people}}</td>
@@ -63,20 +48,20 @@
                            @if($restaurant->is_open ==1) 
                            
 
-                            <i class="fas fa-check-circle"></i>
+                            <i class="fas fa-check-circle" style="color:green"></i>
                           
                            @else
-                            <i class="far fa-times-circle"></i>
+                            <i class="far fa-times-circle" style="color:red"></i>
                            @endif 
                           </td>
 
                           <td>
                            @if($restaurant->allow_pickup ==1) 
 
-                            <i class="fas fa-check-circle"></i>
+                            <i class="fas fa-check-circle" style="color:green"></i>
                           
                            @else
-                            <i class="far fa-times-circle"></i>
+                            <i class="far fa-times-circle" style="color:red"></i>
                            @endif 
                           </td>
                           <td>{{$restaurant->status}}</td>

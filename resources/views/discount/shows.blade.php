@@ -16,34 +16,19 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                    <th>Name</th>
-                      <th>Code</th>
-                      <th>Discount Type</th>
-                      <th>Amount</th>
-                      <th>Starts At</th>
-                      <th>Ends At</th>
+                    <th>NAME</th>
+                      <th>CODE</th>
+                      <th>DISCOUNT TYPE</th>
+                      <th>AMOUNT</th>
+                      <th>STARTS AT</th>
+                      <th>ENDS AT </th>
                       <th></th>
                       <th></th>
 
                      
                     </tr>
                   </thead>
-                  <tfoot>
-                    <tr>
-                    <th>Name</th>
-                      <th>Code</th>
-                      <th>Discount Type</th>
-                      <th>Amount</th>
-                      <th>Starts At</th>
-                      <th>Ends At</th>
-                      <th></th>
-                      <th></th>
-
-
-
-
-                    </tr>
-                  </tfoot>
+                 
                   <tbody>
                   @foreach($discounts as $discount)
                       <tr>
@@ -53,8 +38,9 @@
                           <td>{{$discount->amount}}</td>
                           <td>{{$discount->start_at}}</td>
                           <td>{{$discount->end_at}}</td>
-                          <td><a href="{{route('discount.edit',$discount->id)}}"><img src="{{asset('image/edit.png')}}" width="20px" alt=""></a>
-                          <a href="{{route('discount.view',$discount->id)}}"><img src="{{asset('image/eyee.jpg')}}" width="28px" alt=""></a><td>
+                          <td>
+                          <a href="{{route('discount.view',$discount->id)}}"><img src="{{asset('image/eyee.jpg')}}" width="28px" alt=""></a>
+                          <a href="{{route('discount.edit',$discount->id)}}"><img src="{{asset('image/edit.png')}}" width="20px" alt=""></a><td>
                             <form method="post" action="{{route('discount.delete',$discount->id)}}">
                               @csrf
                               @method('DELETE')

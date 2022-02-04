@@ -8,13 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Restaurant extends Model
 {
     use HasFactory;
-    protected $fillable=['name','about','address','mobile','location','minimum_order_value',
+    protected $fillable=['name','about','address','mobile','location','min_order_value',
     'cost_for_two_people','default_preparation_time','is_open','allow_pickup','logo','banner'];
     public function city(){
         return $this->belongsTo(City::class);
     }
-    public function cuisine(){
-        return $this->belongsTo(Cuisine::class);
+    public function cuisines(){
+        return $this->belongsToMany(Cuisine::class,'cuisine_restaurant');
     }
     
     public function discounts(){

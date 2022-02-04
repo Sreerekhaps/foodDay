@@ -17,15 +17,13 @@ class CreateDiscountsTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('code');
-            $table->string('discount_type');
+            $table->string('discount_type')->default('fixed');
             $table->string('amount');
             $table->string('min_percentage_amount');
             $table->date('start_at');
             $table->date('end_at');
             $table->string('max_uses');
-            $table->string('max_uses_per_customer');
-            $table->unsignedBigInteger('restaurant_id');
-            $table->foreign('restaurant_id')->references('id')->on('restaurants')->onDelete('cascade');
+            $table->string('max_uses_per_customer');          
             $table->timestamps();
         });
     }

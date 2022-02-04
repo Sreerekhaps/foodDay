@@ -10,7 +10,7 @@
   <meta name="author" content="">
 
   <title>SB Admin 2 - Blank</title>
-
+ 
   <!-- Custom fonts for this template-->
   <link href="{{asset('vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
@@ -19,7 +19,8 @@
   <link href="{{asset('css/sb-admin-2.css')}}" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
   
- 
+  @yield('styles')
+  
 
 </head>
 
@@ -32,9 +33,11 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js"></script>
 
 
+
+
+
 <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css"></script> -->
-
 
 <!-- Page Wrapper -->
   <div id="wrapper">
@@ -142,6 +145,23 @@
       <li class="nav-item">
         <a class="nav-link" href="{{route('discount.show')}}">
         <i class="fas fa-rupee-sign"></i>     <span>Discount Codes</span></a>
+      </li>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+        <i class="fas fa-user-friends"></i>
+          <span>ROLES AND PERMISSIONS</span>
+        </a>
+        
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Roles and Permissions:</h6>
+            <a class="collapse-item" href="{{route('role.show')}}">Roles</a>
+
+            <a class="collapse-item" href="{{route('permission.show')}}">Permission</a>
+           
+          </div>
+        </div>
       </li>
 
       <!-- Divider -->
@@ -369,7 +389,7 @@
         <div class="modal-footer">
           
           <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-          <a class="btn btn-primary" href="/login">Logout</a>
+          <a class="btn btn-primary" href="{{route('logout.perform')}}">Logout</a>
         </div>
       </div>
     </div>
@@ -386,7 +406,7 @@
   <script src="{{asset('js/sb-admin-2.js')}}"></script>
 
   @yield('scripts')
-
+  @yield('javascript')
 </body>
 
 </html>

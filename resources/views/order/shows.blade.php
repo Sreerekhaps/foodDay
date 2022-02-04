@@ -31,26 +31,12 @@
                       
                     </tr>
                   </thead>
-                  <tfoot>
-                    <tr>
-                    <th>ID</th>
-                      <th>RESTAURANT</th>
-                      <th>CUSTOMER</th>
-                      <th>MOBILE</th>
-                      <th>ORDER TYPE</th>
-                      <th>ORDER STATUS</th>
-                      <th>PAYMENT STATUS</th>
-                      <th>GRAND TOTAL</th>
-                      <th>ORDER DATE</th>
-                      <th></th>
-
-                    </tr>
-                  </tfoot>
+                 
                   <tbody>
                   @foreach($orders as $order)
                       <tr>
-                          <td><a href="{{route('order.view',$order->id)}}">{{$order->id}}</a></td>
-                          <td><a href="{{route('restaurant.view',$order->restaurant->id)}}">{{$order->restaurant->name}}</a></td>
+                          <td><a href="{{route('order.view',$order->id)}}" style="text-decoration: none;">{{$order->id}}</a></td>
+                          <td><a href="{{route('restaurant.view',$order->restaurant->id)}}" style="text-decoration: none;">{{$order->restaurant->name}}</a></td>
                           <td>{{$order->customer}}</td>
                           <td>{{$order->mobile}}</td>
                           <td>{{$order->order_type}}</td>
@@ -58,8 +44,9 @@
                           <td>{{$order->payment_status}}</td>
                           <td>{{$order->grand_total}}</td>
                           <td>{{$order->order_date}}</td>
-                          <td><a href="{{route('order.edit',$order->id)}}" ><img src="{{asset('image/edit.png')}}" width="20px" alt=""></a>
-                          <a href="{{route('order.view',$order->id)}}" ><img src="{{asset('image/eyee.jpg')}}" width="28px" alt=""></a></td>
+                          <td>
+                          <a href="{{route('order.view',$order->id)}}" ><img src="{{asset('image/eyee.jpg')}}" width="28px" alt=""></a>
+                          <a href="{{route('order.edit',$order->id)}}" ><img src="{{asset('image/edit.png')}}" width="20px" alt=""></a></td>
 
 
                           

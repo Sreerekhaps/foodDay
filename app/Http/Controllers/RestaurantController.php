@@ -7,10 +7,6 @@ use App\Models\Restaurant;
 use App\Models\City;
 use App\Models\Cuisine;
 
-
-
-
-
 class RestaurantController extends Controller
 {
     //
@@ -19,9 +15,10 @@ class RestaurantController extends Controller
     public function create(){
         $cities=City::all();
         $cuisines=Cuisine::all();
+       
         return view('restaurant.create',compact('cities','cuisines'));
     }
-    public function store(){
+    public function store(Request $request){
         $inputs=request()->validate([
             'name'=>'required|min:3|max:30',
             'about'=>'required',
@@ -31,10 +28,10 @@ class RestaurantController extends Controller
             'location'=>'required',
             'logo'=>'required',
             'banner'=>'required',
-            'value'=>'required',
-            'cost'=>'required',
-            'time'=>'required',
-            'cuisine'=>'required',   
+            'min_order_value'=>'required',
+            'cost_for_two_people'=>'required',
+            'default_preparation_time'=>'required',
+            'cuisine_id'=>'required',   
             'is_open'=>['sometimes', 'in:1,0'],
             'allow_pickup'=>['sometimes', 'in:1,0']     
         ]);
@@ -56,28 +53,30 @@ class RestaurantController extends Controller
         } else {
             $inputs['allow_pickup'] = 0;
         }    
-        $rest = new Restaurant;
-        $rest->name = $inputs['name'];
-        $rest->about = $inputs['about'];
-        $rest->address = $inputs['address'];
-        $rest->mobile = $inputs['mobile'];
-        $rest->city_id = $inputs['city'];
-        $rest->location = $inputs['location'];
-        $rest->logo = $inputs['logo'];
-        $rest->banner = $inputs['banner'];
-        $rest->min_order_value = $inputs['value'];
-        $rest->cost_for_two_people = $inputs['cost'];
-        $rest->default_preparation_time = $inputs['time'];
-        $rest->cuisine_id = $inputs['cuisine'];
-        $rest->is_open=$inputs['is_open'];
-        $rest->allow_pickup=$inputs['allow_pickup'];
-        
-        
-        
-        $rest->save();
-        return redirect()->route('restaurant.show');  
 
-   
+        // $rest = new Restaurant;
+        // $rest->name = $inputs['name'];
+        // $rest->about = $inputs['about'];
+        // $rest->address = $inputs['address'];
+        // $rest->mobile = $inputs['mobile'];
+        // $rest->city_id = $inputs['city'];
+        // $rest->location = $inputs['location'];
+        // $rest->logo = $inputs['logo'];
+        // $rest->banner = $inputs['banner'];
+        // $rest->min_order_value = $inputs['value'];
+        // $rest->cost_for_two_people = $inputs['cost'];
+        // $rest->default_preparation_time = $inputs['time'];
+        // $rest->cuisine_id = $inputs['cuisine'];
+        // $rest->is_open=$inputs['is_open'];
+        // $rest->allow_pickup=$inputs['allow_pickup'];
+ 
+        // $rest->save();
+        $restaurants=Restaurant:: create($inputs);
+        if ($request->has('cuisine_id'))
+        {
+        $restaurants->cuisines()->attach($request->input('cuisine_id'));
+        } 
+        return redirect()->route('restaurant.show');  
         }
         public function show(){
             $restaurant=Restaurant::all();
@@ -87,10 +86,11 @@ class RestaurantController extends Controller
         public function edit(Restaurant $restaurant){
             $cities=City::all();
             $cuisines=Cuisine::all();
+            
             return view('restaurant.edit',['restaurants'=>$restaurant],compact('cities','cuisines'));
 
         }
-        public function update(Restaurant $restaurant){
+        public function update(Restaurant $restaurant,Request $request){
             $inputs=request()->validate([
                 'name'=>'required|min:3|max:30',
                 'about'=>'required',
@@ -100,9 +100,9 @@ class RestaurantController extends Controller
                 'location'=>'required',
                 'logo'=>['image', 'mimes:jpeg,png,jpg', 'max:2048'],
                 'banner'=>['image', 'mimes:jpeg,png,jpg', 'max:2048'],
-                'value'=>'required',
-                'cost'=>'required',
-                'time'=>'required',
+                'min_order_value'=>'required',
+                'cost_for_two_people'=>'required',
+                'default_preparation_time'=>'required',
                 'cuisine'=>'required',
                 'is_open'=>['sometimes', 'in:1,0'],
                 'allow_pickup'=>['sometimes', 'in:1,0'],
@@ -116,13 +116,13 @@ class RestaurantController extends Controller
                 'location.required' =>'Location is required',
                 'logo.required' =>'Logo is required',
                 'banner.required' =>'Banner is required',
-                'value.required' =>'Value is required',
-                'cost.required' =>'Cost is required',
-                'time.required' =>'Time is required',
+                'min_order_value.required' =>'Value is required',
+                'cost_for_two_people.required' =>'Cost is required',
+                'default_preparation_time.required' =>'Time is required',
                 'cuisine.required' =>'Cuisine is required',
                 'is_open.required' =>'Is open is required',
                 'allow_pickup.required' =>'Allow pickup is required',
-                'status.required' =>'Status is required',    
+               
             ]); 
             
            
@@ -158,18 +158,23 @@ class RestaurantController extends Controller
             }
 
             
-            $restaurant->min_order_value = $inputs['value'];
-            $restaurant->cost_for_two_people = $inputs['cost'];
-            $restaurant->default_preparation_time = $inputs['time'];
-            $restaurant->cuisine_id = $inputs['cuisine']; 
+            $restaurant->min_order_value = $inputs['min_order_value'];
+            $restaurant->cost_for_two_people = $inputs['cost_for_two_people'];
+            $restaurant->default_preparation_time = $inputs['default_preparation_time'];
+            
             $restaurant->is_open=$inputs['is_open'];
             $restaurant->allow_pickup=$inputs['allow_pickup'];
             $restaurant->status=$inputs['status'];
             $restaurant->save();
+        if ($request->has('cuisine'))
+        {
+        $restaurant->cuisines()->attach($request->input('cuisine'));
+        } 
             return redirect()->route('restaurant.show');  
         }
         public function view(Restaurant $restaurant){
-           return view('restaurant.view',['restaurant'=>$restaurant]);
+            $cuisines=Cuisine::all();
+           return view('restaurant.view',['restaurant'=>$restaurant],compact('cuisines'));
         }
        
     }

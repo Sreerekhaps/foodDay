@@ -15,29 +15,23 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                      <th>Name
-                      <th>Mobile</th>
-                      <th>Email</th>
+                      <th>NAME</th>
+                      <th>MOBILE</th>
+                      <th>EMAIL</th>
                       <th></th>
                       
                     </tr>
                   </thead>
-                  <tfoot>
-                    <tr>
-                    <th>Name</th>
-                      <th>Mobile</th>
-                      <th>Email</th>
-                      <th></th>
-                    </tr>
-                  </tfoot>
+                 
                   <tbody>
                       @foreach($users as $user)
                       <tr>
                           <td>{{$user->first_name}} {{$user->last_name}}</td>
                           <td>{{$user->mobile}}</td>
                           <td>{{$user->email}}</td>
-                         <td> <a href="{{route('admin.edit',$user->id)}}" style="margin-right:5px"><img src="{{asset('image/edit.png')}}" width="20px" alt=""></a>
-                          <a href="{{route('admin.view',$user->id)}}" style="margin-right:0px"><img src="{{asset('image/eyee.jpg')}}" width="28px" alt=""></a></td>
+                         <td> 
+                          <a href="{{route('admin.view',$user->id)}}" style="margin-right:5px"><img src="{{asset('image/eyee.jpg')}}" width="28px" alt=""></a>
+                          <a href="{{route('admin.edit',$user->id)}}" style="margin-right:-30px"><img src="{{asset('image/edit.png')}}" width="20px" alt=""></a></td>
                           
                           
                         </tr>

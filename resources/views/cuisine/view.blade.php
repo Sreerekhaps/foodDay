@@ -8,15 +8,19 @@
      </a>
     <form method="post" action="" enctype="multipart/form-data">
         @csrf
-        <table>
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  
+               
+        <tbody>
         <tr>
             <td><label for="id" style="margin-left:20px"><h5>ID:</h5></label></td>
-            <td style="float:right;"><h5>{{$cuisines->id}}</h5></td>
+            <td><h5>{{$cuisines->id}}</h5></td>
         </tr>
         <tr>
             <td><label for="id" style="margin-left:20px"><h5>Name:</h5></label></td>
-            <td style="float:right;"><h5>{{$cuisines->name}}</h5></td>
+            <td><h5>{{$cuisines->name}}</h5></td>
         </tr>
+</tbody>
         </table>
 
     </form>

@@ -20,7 +20,7 @@ class AdminController extends Controller
     }
     public function store(){
         $inputs=request()->validate([
-            'first_name'=>'required|min:3|max:10',
+            'first_name'=>'required|min:3|max:15',
             'last_name'=>'required|max:8',
             'phone_code'=>'required|max:5',
             'mobile'=>'required|min:10|max:12',

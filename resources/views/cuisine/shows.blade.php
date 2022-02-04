@@ -16,16 +16,11 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                      <th>Name</th>
+                      <th>NAME</th>
                       
                     </tr>
                   </thead>
-                  <tfoot>
-                    <tr>
-                    <th>Name</th>
-          
-                    </tr>
-                  </tfoot>
+                 
                   <tbody>
                       @foreach($cuisines as $cuisine)
                       <tr>

@@ -56,7 +56,6 @@ Route::middleware('web')->group(function(){
     Route::patch('/order/{order}/update', [App\Http\Controllers\OrderController::class, 'update'])->name('order.update');
     Route::get('/order/{order}/view', [App\Http\Controllers\OrderController::class, 'view'])->name('order.view');
     Route::get('/order/{id}', [App\Http\Controllers\OrderController::class, 'search'])->name('order.search');
-
     //////Discount/////////
     Route::get('/discount/create', [App\Http\Controllers\DiscountController::class, 'create'])->name('discount.create');
     Route::post('/discount/store', [App\Http\Controllers\DiscountController::class, 'store'])->name('discount.store');
@@ -65,8 +64,38 @@ Route::middleware('web')->group(function(){
     Route::patch('/discount/{discount}/update', [App\Http\Controllers\DiscountController::class, 'update'])->name('discount.update');
     Route::get('/discount/{discount}/view', [App\Http\Controllers\DiscountController::class, 'view'])->name('discount.view');
     Route::get('/discount/{id}', [App\Http\Controllers\DiscountController::class, 'destroy'])->name('discount.delete');
+    ///////Permission//////
+    Route::get('/permission/create', [App\Http\Controllers\PermissionController::class, 'create'])->name('permission.create');
+    Route::post('/permission/store', [App\Http\Controllers\PermissionController::class, 'store'])->name('permission.store');
+    Route::get('/permission/show', [App\Http\Controllers\PermissionController::class, 'show'])->name('permission.show');
+    Route::get('/permission/{permission}/edit', [App\Http\Controllers\PermissionController::class, 'edit'])->name('permission.edit');
+    Route::patch('/permission/{permission}/update', [App\Http\Controllers\PermissionController::class, 'update'])->name('permission.update');
+    Route::get('/permission/{permission}/view', [App\Http\Controllers\PermissionController::class, 'view'])->name('permission.view');
+    Route::get('/permission/{id}', [App\Http\Controllers\PermissionController::class, 'destroy'])->name('permission.delete');
+    ///////Role//////
+    Route::get('/role/create', [App\Http\Controllers\RoleController::class, 'create'])->name('role.create');
+    Route::post('/role/store', [App\Http\Controllers\RoleController::class, 'store'])->name('role.store');
+    Route::get('/role/show', [App\Http\Controllers\RoleController::class, 'show'])->name('role.show');
+    Route::get('/role/{role}/edit', [App\Http\Controllers\RoleController::class, 'edit'])->name('role.edit');
+    Route::patch('/role/{role}/update', [App\Http\Controllers\RoleController::class, 'update'])->name('role.update');
+    Route::get('/role/{role}/view', [App\Http\Controllers\RoleController::class, 'view'])->name('role.view');
 
-  
+
+
+
+
+
+    Route::group(['middleware' => ['auth']], function() {
+
+        /**
+        
+        * Logout Route
+        
+        */
+        
+        Route::get('/logout', [App\Http\Controllers\HomeController::class, 'perform'])->name('logout.perform');
+        
+        });
 
 
 
