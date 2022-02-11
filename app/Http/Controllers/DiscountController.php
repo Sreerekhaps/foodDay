@@ -12,7 +12,7 @@ class DiscountController extends Controller
     //
     public function create(){
         $restaurants=Restaurant::all();
-        return view('discount.create',compact('restaurants'));
+        return view('admin.discount.create',compact('restaurants'));
     }
     public function store(Request $request){
         $inputs=request()->validate([
@@ -58,15 +58,15 @@ class DiscountController extends Controller
         {
         $discount->restaurants()->attach($request->input('restaurant_id'));
         }
-        return redirect()->route('discount.show');
+        return redirect()->route('admin.discount.show');
     }
     public function show(Discount $discount){
         $discount=Discount::all();
-        return view('discount.shows',['discounts'=>$discount]);
+        return view('admin.discount.shows',['discounts'=>$discount]);
     }
     public function edit(Discount $discount){
         $restaurants=Restaurant::all();
-        return view('discount.edit',['discounts'=>$discount],compact('restaurants'));
+        return view('admin.discount.edit',['discounts'=>$discount],compact('restaurants'));
     }
     public function update(Discount $discount,Request $request){
         $inputs=request()->validate([
@@ -107,16 +107,16 @@ class DiscountController extends Controller
         $discount->save();
         if ($request->has('restaurant'))
         {
-        $discount->restaurants()->attach($request->input('restaurant'));
+        $discount->restaurants()->sync($request->input('restaurant'));
         }
-        return redirect()->route('discount.show');
+        return redirect()->route('admin.discount.show');
 
     }
       
         
     public function view(Discount $discount){
         $restaurants=Restaurant::all();
-        return view('discount.view',['discounts'=>$discount],compact('restaurants'));
+        return view('admin.discount.view',['discounts'=>$discount],compact('restaurants'));
     }
     public function destroy($id){
        

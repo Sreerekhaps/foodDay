@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Restaurant extends Model
 {
     use HasFactory;
-    protected $fillable=['name','about','address','mobile','location','min_order_value',
+    protected $fillable=['name','about','address','mobile','city_id','location','min_order_value',
     'cost_for_two_people','default_preparation_time','is_open','allow_pickup','logo','banner'];
     public function city(){
         return $this->belongsTo(City::class);
@@ -33,7 +33,7 @@ class Restaurant extends Model
         
         return asset('storage/' . $value);
         
-        }
+        }//display image
 
         public function getBannerAttribute($value) {
 
@@ -45,5 +45,5 @@ class Restaurant extends Model
             
             return asset('storage/' . $value);
             
-            }
+            }//display image
 }

@@ -22,10 +22,10 @@ class OrderController extends Controller
             ) ->orderBy('created_at', 'desc')->paginate(5);
         
             $request->flash();
-        return view('order.shows',['orders'=>$order]);
+        return view('admin.order.shows',['orders'=>$order]);
     }
     public function edit(Order $order){
-        return view('order.edit',['orders'=>$order]);
+        return view('admin.order.edit',['orders'=>$order]);
     }
     public function update(Order $order){
         $inputs=request()->validate([
@@ -37,10 +37,10 @@ class OrderController extends Controller
         $order->order_status=$inputs['order_status'];
        
         $order->save();
-        return redirect()->route('order.show');  
+        return redirect()->route('admin.order.show');  
     }
     public function view(Order $order){
-        return view('order.view',['orders'=>$order]);
+        return view('admin.order.view',['orders'=>$order]);
     }
     // public function search($id){
     //     if($request->ajax()){

@@ -9,7 +9,7 @@ class CuisineController extends Controller
 {
     //
     public function create(){
-        return view('cuisine.create');
+        return view('admin.cuisine.create');
     }
     public function store(){
         $inputs=request()->validate([
@@ -21,16 +21,16 @@ class CuisineController extends Controller
         $cuisines= new Cuisine;
         $cuisines->name=$inputs['name'];
         $cuisines->save();
-        return redirect()->route('cuisine.show');
+        return redirect()->route('admin.cuisine.show');
 
     }
     public function show(){
         $cuisine=Cuisine::all();
-        return view('cuisine.shows',['cuisines'=>$cuisine]);
+        return view('admin.cuisine.shows',['cuisines'=>$cuisine]);
 
     }
     public function edit(Cuisine $cuisine){
-        return view('cuisine.edit',['cuisines'=>$cuisine]);
+        return view('admin.cuisine.edit',['cuisines'=>$cuisine]);
         
     }
     public function update(Cuisine $cuisine){
@@ -43,10 +43,10 @@ class CuisineController extends Controller
         ]);
         $cuisine->name=$inputs['name'];
         $cuisine->save();
-        return redirect()->route('cuisine.show');
+        return redirect()->route('admin.cuisine.show');
     }
     public function view(Cuisine $cuisine){
-        return view('cuisine.view',['cuisines'=>$cuisine]);
+        return view('admin.cuisine.view',['cuisines'=>$cuisine]);
         
     }
 }

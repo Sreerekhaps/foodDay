@@ -11,6 +11,7 @@
 <form method="post" action="{{route('admin.update',$users->id)}}" enctype="multipart/form-data" >
 @csrf
 @method('PATCH')
+
 <section>
   <div class="container_fluid">
     <div class="row d-flex justify-content-center align-items-center ">

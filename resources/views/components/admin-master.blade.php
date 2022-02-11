@@ -121,29 +121,29 @@
 
       <!-- Nav Item - Charts -->
       <li class="nav-item">
-        <a class="nav-link" href="{{route('city.show')}}">
+        <a class="nav-link" href="{{route('admin.city.show')}}">
         <i class="fas fa-city"></i>          <span>Cities</span></a>
       </li>
 
       <!-- Nav Item - Tables -->
       <li class="nav-item">
-        <a class="nav-link" href="{{route('cuisine.show')}}">
+        <a class="nav-link" href="{{route('admin.cuisine.show')}}">
         <i class="far fa-clone"></i>         <span>Cuisines</span></a>
       </li>
       <!-- Nav Item - Tables -->
       <li class="nav-item">
-        <a class="nav-link" href="{{route('restaurant.show')}}">
+        <a class="nav-link" href="{{route('admin.restaurant.show')}}">
         <i class="fas fa-utensils"></i>          <span>Restaurants</span></a>
       </li>
       <!-- Nav Item - Tables -->
       <li class="nav-item">
-        <a class="nav-link" href="{{route('order.show')}}">
+        <a class="nav-link" href="{{route('admin.order.show')}}">
         <i class="fas fa-shopping-cart"></i>
           <span>Orders</span></a>
       </li>
       <!-- Nav Item - Tables -->
       <li class="nav-item">
-        <a class="nav-link" href="{{route('discount.show')}}">
+        <a class="nav-link" href="{{route('admin.discount.show')}}">
         <i class="fas fa-rupee-sign"></i>     <span>Discount Codes</span></a>
       </li>
       </li>
@@ -156,9 +156,9 @@
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Roles and Permissions:</h6>
-            <a class="collapse-item" href="{{route('role.show')}}">Roles</a>
+            <a class="collapse-item" href="{{route('admin.role.show')}}">Roles</a>
 
-            <a class="collapse-item" href="{{route('permission.show')}}">Permission</a>
+            <a class="collapse-item" href="{{route('admin.permission.show')}}">Permission</a>
            
           </div>
         </div>

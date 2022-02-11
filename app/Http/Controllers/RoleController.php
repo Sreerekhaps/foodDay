@@ -14,7 +14,7 @@ class RoleController extends Controller
     public function create(){
         $permissions=Permission::all();
        
-        return view('role.create',compact('permissions'));
+        return view('admin.role.create',compact('permissions'));
     }
     public function store(Request $request){
         
@@ -42,17 +42,17 @@ class RoleController extends Controller
         // $roles->permissions()->attach($request->permission);
         
         // $roles->save();
-        return redirect()->route('role.show');
+        return redirect()->route('admin.role.show');
     }
     public function show(){
         $role=Role::all();
-        return view('role.shows',['roles'=>$role]);
+        return view('admin.role.shows',['roles'=>$role]);
         
 
     }
     public function edit(Role $role){
         $permissions=Permission::all();
-        return view('role.edit',['roles'=>$role],compact('permissions'));
+        return view('admin.role.edit',['roles'=>$role],compact('permissions'));
 
     }
     public function update(Request $request,Role $role){
@@ -72,14 +72,14 @@ class RoleController extends Controller
         if ($request->has('permission_id'))
         {
             
-        $role->permissions()->attach($request->input('permission_id'));
+        $role->permissions()->sync($request->input('permission_id'));
         
         }   
-        return redirect()->route('role.show');
+        return redirect()->route('admin.role.show');
     }
     public function view(Role $role){
         $permissions=Permission::all();
-        return view('role.view',['roles'=>$role],compact('permissions'));
+        return view('admin.role.view',['roles'=>$role],compact('permissions'));
 
     }
 }

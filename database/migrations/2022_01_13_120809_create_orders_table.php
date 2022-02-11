@@ -18,7 +18,7 @@ class CreateOrdersTable extends Migration
             $table->date('order_date');
             $table->unsignedBigInteger('restaurant_id');
             $table->foreign('restaurant_id')->references('id')->on('restaurants')->onDelete('cascade');
-            $table->string('customer');
+           
             $table->string('mobile');
             $table->string('order_type');
             $table->string('order_status');

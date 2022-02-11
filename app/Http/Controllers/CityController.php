@@ -10,7 +10,7 @@ class CityController extends Controller
 {
     //
     public function create(){
-        return view('city.create');
+        return view('admin.city.create');
     }
     public function store(){
         $inputs=request()->validate([
@@ -22,15 +22,15 @@ class CityController extends Controller
         $cities = new City;
         $cities->name = $inputs['name'];
         $cities->save();
-        return redirect()->route('city.show');
+        return redirect()->route('admin.city.show');
     }
     public function show(){
         $city=City::all();
-        return view('city.shows',['cities'=>$city]);
+        return view('admin.city.shows',['cities'=>$city]);
 
     }
     public function edit(City $city){
-        return view('city.edit',['cities'=>$city]);
+        return view('admin.city.edit',['cities'=>$city]);
 
     }
     public function update(City $city){
@@ -42,11 +42,11 @@ class CityController extends Controller
         ]);
         $city->name=$inputs['name'];
         $city->save();
-        return redirect()->route('city.show');
+        return redirect()->route('admin.city.show');
     }
     public function view(City $city){
 
-        return view('city.view',['cities'=>$city]);
+        return view('admin.city.view',['cities'=>$city]);
 
     }
 }

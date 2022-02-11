@@ -13,7 +13,7 @@ class PermissionController extends Controller
     public function create(){
         $roles=Role::all();
        
-        return view('permission.create',compact('roles'));
+        return view('admin.permission.create',compact('roles'));
     }
     public function store(Request $request){
         
@@ -32,20 +32,20 @@ class PermissionController extends Controller
         $permission->roles()->attach($request->input('role_id'));
         }
         
-        return redirect()->route('permission.show');
+        return redirect()->route('admin.permission.show');
     }
     public function show(){
         $permission=Permission::all();
-        return view('permission.shows',['permissions'=>$permission]);
+        return view('admin.permission.shows',['permissions'=>$permission]);
         
 
     }
     public function edit(Permission $permission){
         $roles=Role::all();
-        return view('permission.edit',['permissions'=>$permission],compact('roles'));
+        return view('admin.permission.edit',['permissions'=>$permission],compact('roles'));
 
     }
-    public function update(Permission $permission){
+    public function update(Permission $permission,Request $request){
         $inputs=request()->validate([
             'name'=>'required|min:3',
             'guard_name'=>'required|min:3'
@@ -57,11 +57,15 @@ class PermissionController extends Controller
         $permission->name = $inputs['name'];
         $permission->guard_name = $inputs['guard_name'];
         $permission->save();
-        return redirect()->route('permission.show');
+        if ($request->has('role_id'))
+        {
+        $permission->roles()->sync($request->input('role_id'));
+        }
+        return redirect()->route('admin.permission.show');
     }
     public function view(Permission $permission){
         $roles=Role::all();
-        return view('permission.view',['permissions'=>$permission],compact('roles'));
+        return view('admin.permission.view',['permissions'=>$permission],compact('roles'));
 
     }
     public function destroy($id){

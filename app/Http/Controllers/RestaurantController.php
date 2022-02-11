@@ -16,7 +16,7 @@ class RestaurantController extends Controller
         $cities=City::all();
         $cuisines=Cuisine::all();
        
-        return view('restaurant.create',compact('cities','cuisines'));
+        return view('admin.restaurant.create',compact('cities','cuisines'));
     }
     public function store(Request $request){
         $inputs=request()->validate([
@@ -24,7 +24,7 @@ class RestaurantController extends Controller
             'about'=>'required',
             'address'=>'required',
             'mobile'=>'required',
-            'city'=>'required',
+            'city_id'=>'required',
             'location'=>'required',
             'logo'=>'required',
             'banner'=>'required',
@@ -59,7 +59,7 @@ class RestaurantController extends Controller
         // $rest->about = $inputs['about'];
         // $rest->address = $inputs['address'];
         // $rest->mobile = $inputs['mobile'];
-        // $rest->city_id = $inputs['city'];
+        // $rest->city_id = $inputs['city_id'];
         // $rest->location = $inputs['location'];
         // $rest->logo = $inputs['logo'];
         // $rest->banner = $inputs['banner'];
@@ -76,18 +76,18 @@ class RestaurantController extends Controller
         {
         $restaurants->cuisines()->attach($request->input('cuisine_id'));
         } 
-        return redirect()->route('restaurant.show');  
+        return redirect()->route('admin.restaurant.show');  
         }
         public function show(){
             $restaurant=Restaurant::all();
             
-            return view('restaurant.shows',['restaurants'=>$restaurant]);
+            return view('admin.restaurant.shows',['restaurants'=>$restaurant]);
         }
         public function edit(Restaurant $restaurant){
             $cities=City::all();
             $cuisines=Cuisine::all();
             
-            return view('restaurant.edit',['restaurants'=>$restaurant],compact('cities','cuisines'));
+            return view('admin.restaurant.edit',['restaurants'=>$restaurant],compact('cities','cuisines'));
 
         }
         public function update(Restaurant $restaurant,Request $request){
@@ -96,7 +96,7 @@ class RestaurantController extends Controller
                 'about'=>'required',
                 'address'=>'required',
                 'mobile'=>'required',
-                'city'=>'required',
+                'city_id'=>'required',
                 'location'=>'required',
                 'logo'=>['image', 'mimes:jpeg,png,jpg', 'max:2048'],
                 'banner'=>['image', 'mimes:jpeg,png,jpg', 'max:2048'],
@@ -112,7 +112,7 @@ class RestaurantController extends Controller
                 'about.required' =>'About is required',
                 'address.required'=>'Address is required',
                 'mobile.required' =>'Mobile is required',
-                'city.required' =>'City is required',
+                'city_id.required' =>'City is required',
                 'location.required' =>'Location is required',
                 'logo.required' =>'Logo is required',
                 'banner.required' =>'Banner is required',
@@ -144,7 +144,7 @@ class RestaurantController extends Controller
             $restaurant->about = $inputs['about'];
             $restaurant->address = $inputs['address'];
             $restaurant->mobile = $inputs['mobile'];
-            $restaurant->city_id = $inputs['city'];    
+            $restaurant->city_id = $inputs['city_id'];    
             
             if(request()->has('logo')) {
 
@@ -168,13 +168,13 @@ class RestaurantController extends Controller
             $restaurant->save();
         if ($request->has('cuisine'))
         {
-        $restaurant->cuisines()->attach($request->input('cuisine'));
+        $restaurant->cuisines()->sync($request->input('cuisine'));
         } 
-            return redirect()->route('restaurant.show');  
+            return redirect()->route('admin.restaurant.show');  
         }
         public function view(Restaurant $restaurant){
             $cuisines=Cuisine::all();
-           return view('restaurant.view',['restaurant'=>$restaurant],compact('cuisines'));
+           return view('admin.restaurant.view',['restaurant'=>$restaurant],compact('cuisines'));
         }
        
     }
