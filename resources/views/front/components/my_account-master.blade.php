@@ -32,16 +32,16 @@
                         <li class="nav-item active">
                             <a class="nav-link" href="home.html">Home <span class="sr-only">(current)</span></a>
                         </li>
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                             <a class="nav-link" href="restaurant-listing.html">Restaurants</a>
-                        </li>
+                        </li> -->
 
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                             <a class="nav-link" href="login.html">Sign In</a>
-                        </li>
+                        </li> -->
 
                         <li class="nav-item">
-                            <a class="nav-link" href="my-account.html">
+                            <a class="nav-link" href="/myaccount">
                                 <i class='bx bx-user mr-1'></i>
                                 My Account</a>
                         </li>
@@ -85,13 +85,13 @@
                             <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-address"
                                 role="tab" aria-controls="v-pills-messages" aria-selected="false"><i
                                     class='bx bxs-home-smile'></i> Addresses</a>
-                            <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-account"
+                            <a class="nav-link"  id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-account"
                                 role="tab" aria-controls="v-pills-settings" aria-selected="false"><i
                                     class='bx bxs-user-rectangle'></i> Account Details</a>
                             <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-password"
                                 role="tab" aria-controls="v-pills-settings" aria-selected="false"><i
                                     class='bx bxs-wallet-alt'></i> Change Password</a>
-                            <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-logout"
+                            <a class="nav-link"  href="/logoutuser"
                                 role="tab" aria-controls="v-pills-settings" aria-selected="false"><i
                                     class='bx bxs-log-out'></i> Logout</a>
                             <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-no-orders"
@@ -550,11 +550,11 @@
                                 </div>
                             </div>
 
-                           <div class="tab-pane fade" id="v-pills-account" role="tabpanel"
+                            <div class="tab-pane fade" id="v-pills-account" role="tabpanel"
                                 aria-labelledby="v-pills-settings-tab">
                                 <div class="my-account-content">
                                     <h4>Account Details</h4>
-                                    <form method="post" action="">
+                                    <form method="post" action="{{route('profile_update',$LoggedUserInfo->id)}}">
                                     @csrf
                                     @method('PATCH')
                                         <div class="form-row">

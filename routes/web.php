@@ -115,14 +115,17 @@ Route::name('admin.')->prefix('admin')->namespace('Admin')->group(function (){
     Route::get('/front', [App\Http\Controllers\FrontController::class, 'index'])->name('index');
     Route::get('/signin', [App\Http\Controllers\FrontController::class, 'signin']);
     Route::post('/check', 'App\Http\Controllers\FrontController@check') ->name('check');//signin
+    Route::get('/my_home', [App\Http\Controllers\FrontController::class, 'my_home']);
+
     Route::get('/signup', [App\Http\Controllers\FrontController::class, 'signup']);
     Route::post('/signup_store', [App\Http\Controllers\FrontController::class, 'signup_store']);//signup data store  
     Route::get('/myaccount', [App\Http\Controllers\FrontController::class, 'myaccount']);
-    Route::patch('/profile/update', [App\Http\Controllers\FrontController::class, 'profile_update'])->name('profile_update');
+    Route::get('/address', [App\Http\Controllers\FrontController::class, 'address']);
 
-    
-    // Route::get('/front_logout', [App\Http\Controllers\FrontController::class, 'front_logout']);
-    // Route::get('/forgotpassword', [App\Http\Controllers\FrontController::class, 'forgotpassword']);
+    Route::patch('/profile/update', [App\Http\Controllers\FrontController::class, 'profile_update'])->name('profile_update');
+    Route::get('/logoutuser', [App\Http\Controllers\FrontController::class, 'logout']);
+
+    Route::get('/forgotpassword', [App\Http\Controllers\FrontController::class, 'forgotpassword']);
 
 
 

@@ -87,7 +87,7 @@
                     </div>
                     @endif
                     <div class="form-group">
-                        <a href="#">Forgot password?</a>
+                        <a href="/forgotpassword">Forgot password?</a>
                     </div>
 
                     <div class="form-group">

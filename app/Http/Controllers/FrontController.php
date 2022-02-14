@@ -16,6 +16,9 @@ class FrontController extends Controller
     public function signin(){
         return view('front.signin');
     }
+    public function my_home(){
+        return view('front.my_home');
+    }
     public function signup(){
         return view('front.signup');
     }
@@ -96,7 +99,7 @@ class FrontController extends Controller
         //check password
         if(Hash::check($request->password, $userInfo->password)){
         $request->session()->put('LoggedUser', $userInfo->id);
-        return redirect('/myaccount');
+        return redirect('/my_home');
         }else{
         return back()->with('fail','Incorrect password');
         }
@@ -136,5 +139,15 @@ class FrontController extends Controller
         
         return back();  
 
+    }
+    public function logout(){
+        if(session()->has('LoggedUser')){
+            session()->pull('LoggedUser');
+            return redirect('/front');
+        }
+    }
+    public function address(){
+        $data=['LoggedUserInfo'=>Customer::where('id','=',session('LoggedUser'))->first()];
+        return view('my_account',$data);
     }
 }
