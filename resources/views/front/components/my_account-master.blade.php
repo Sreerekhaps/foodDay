@@ -554,7 +554,7 @@
                                 aria-labelledby="v-pills-settings-tab">
                                 <div class="my-account-content">
                                     <h4>Account Details</h4>
-                                    <form method="post" action="{{route('profile_update',$LoggedUserInfo->id)}}">
+                                    <form method="post" action="">
                                     @csrf
                                     @method('PATCH')
                                         <div class="form-row">
