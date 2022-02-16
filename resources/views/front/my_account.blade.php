@@ -1,25 +1,32 @@
+<x-my_account-master>
 @section('content')
  
-<div class="tab-pane fade" id="v-pills-account" role="tabpanel"
+<div class="tab-pane fade show active" id="v-pills-account" role="tabpanel"
                                 aria-labelledby="v-pills-settings-tab">
                                 <div class="my-account-content">
                                     <h4>Account Details</h4>
                                     <form method="post" action="{{route('profile_update',$LoggedUserInfo->id)}}">
                                     @csrf
                                     @method('PATCH')
+
+                                    @if(Session::get('success'))
+                                    <div class="alert alert-success">
+                                        {{Session::get('success')}}
+                                    </div>
+                                    @endif
                                         <div class="form-row">
                                             <div class="col-lg-12">
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control" placeholder="First Name" value="{{$LoggedUserInfo['first_name']}}">
+                                                    <input type="text" class="form-control" name="first_name" placeholder="First Name" value="{{$LoggedUserInfo['first_name']}}">
                                                 </div>
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control" placeholder="Last Name" value="{{$LoggedUserInfo['last_name']}}">
+                                                    <input type="text" class="form-control" name="last_name" placeholder="Last Name" value="{{$LoggedUserInfo['last_name']}}">
                                                 </div>
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control" placeholder="Email" value="{{$LoggedUserInfo['email']}}">
+                                                    <input type="text" class="form-control" name="email" placeholder="Email" value="{{$LoggedUserInfo['email']}}">
                                                 </div>
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control" placeholder="Mobile" value="{{$LoggedUserInfo['mobile']}}">
+                                                    <input type="text" class="form-control" name="mobile" placeholder="Mobile" value="{{$LoggedUserInfo['mobile']}}">
                                                 </div>
                                                 <div class="form-group  mb-0">
                                                     <button class="btn btn-primary">Save Changes</button>
@@ -29,4 +36,19 @@
                                     </form>
                                 </div>
                             </div>
+         
+
 @endsection('content')
+
+@section('javascript')
+@parent
+<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@2.8.2/dist/alpine.min.js"></script>
+<script>
+$("document").ready(function(){
+setTimeout(function(){
+$("div.alert").remove();
+}, 3000 ); // 3 sec
+});
+</script>
+@stop
+</x-my_account-master>

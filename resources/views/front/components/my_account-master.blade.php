@@ -30,7 +30,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item active">
-                            <a class="nav-link" href="home.html">Home <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="{{route('my_home')}}">Home <span class="sr-only">(current)</span></a>
                         </li>
                         <!-- <li class="nav-item">
                             <a class="nav-link" href="restaurant-listing.html">Restaurants</a>
@@ -82,13 +82,13 @@
                             <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-wishlist"
                                 role="tab" aria-controls="v-pills-messages" aria-selected="false"><i
                                     class='bx bxs-heart'></i> Wishlist</a>
-                            <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-address"
+                            <a class="nav-link" href="{{route('address')}}"
                                 role="tab" aria-controls="v-pills-messages" aria-selected="false"><i
                                     class='bx bxs-home-smile'></i> Addresses</a>
-                            <a class="nav-link"  id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-account"
+                            <a class="nav-link"   href="{{route('account')}}"
                                 role="tab" aria-controls="v-pills-settings" aria-selected="false"><i
                                     class='bx bxs-user-rectangle'></i> Account Details</a>
-                            <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-password"
+                            <a class="nav-link"  href="{{route('show_password')}}"
                                 role="tab" aria-controls="v-pills-settings" aria-selected="false"><i
                                     class='bx bxs-wallet-alt'></i> Change Password</a>
                             <a class="nav-link"  href="/logoutuser"
@@ -102,530 +102,10 @@
 
                 </div>
 
-                <div class="col-lg-9">
-                    <div class="account-menu-items">
-                        <div class="tab-content" id="v-pills-tabContent">
-
-                            <div class="tab-pane fade show active" id="v-pills-orders" role="tabpanel"
-                                aria-labelledby="v-pills-profile-tab">
-                                <div class="my-account-content">
-                                    <h4>Order History</h4>
-
-                                    <div class="row">
-
-                                        <div class="col-md-12">
-                                            <div class="card order-card">
-                                                <div class="card-body">
-                                                    <div class="rest-delivery">
-                                                        <h5>Down Town Restaurant</h5>
-                                                        <h6>Delivered on Oct 12, 7:28 PM</h6>
-                                                    </div>
-                                                    <p class="rest-address">
-                                                        <i class="bx bx-location-plus"></i> 7th Street, Downtown, West
-                                                        Avenue, London, United Kingodom, 784512.
-                                                    </p>
-                                                    <div class="order-id-time">
-                                                        <p>Order #245458745454</p>
-                                                        <p>Oct 12, 7:00 PM</p>
-                                                    </div>
-                                                    <p class="items">Veg Masala roll, Veg burger, Veg special
-                                                        spicy noodles</p>
-                                                    <div class="total-buttons">
-                                                        <h5>Total Paid: $199.00</h5>
-                                                        <div class="button-wrap">
-                                                            <button type="button"
-                                                                class="btn btn-outline-primary btn-sm"><i
-                                                                    class="bx bx-star"></i>
-                                                                Rate</button>
-                                                            <button type="button" data-toggle="modal"
-                                                                class="btn btn-outline-primary btn-sm"
-                                                                data-target="#exampleModal2">
-                                                                Details</button>
-                                                            <button class="btn btn-primary btn-sm"><i
-                                                                    class="bx bx-download align-middle mr-1"></i>
-                                                                Download</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="card order-card">
-                                                <div class="card-body">
-                                                    <div class="rest-delivery">
-                                                        <h5>Down Town Restaurant</h5>
-                                                        <h6>Delivered on Oct 12, 7:28 PM</h6>
-                                                    </div>
-                                                    <p class="rest-address">
-                                                        <i class="bx bx-location-plus"></i> 7th Street, Downtown, West
-                                                        Avenue, London, United Kingodom, 784512.
-                                                    </p>
-                                                    <div class="order-id-time">
-                                                        <p>Order #245458745454</p>
-                                                        <p>Oct 12, 7:00 PM</p>
-                                                    </div>
-                                                    <p class="items">Veg Masala roll, Veg burger, Veg special
-                                                        spicy noodles</p>
-                                                    <div class="total-buttons">
-                                                        <h5>Total Paid: $199.00</h5>
-                                                        <div class="button-wrap">
-                                                            <button type="button"
-                                                                class="btn btn-outline-primary btn-sm"><i
-                                                                    class="bx bx-star"></i>
-                                                                Rate</button>
-                                                            <button type="button" data-toggle="modal"
-                                                                class="btn btn-outline-primary btn-sm"
-                                                                data-target="#exampleModal2">
-                                                                Details</button>
-                                                            <button class="btn btn-primary btn-sm"><i
-                                                                    class="bx bx-download align-middle mr-1"></i>
-                                                                Download</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="card order-card">
-                                                <div class="card-body">
-                                                    <div class="rest-delivery">
-                                                        <h5>Down Town Restaurant</h5>
-                                                        <h6>Delivered on Oct 12, 7:28 PM</h6>
-                                                    </div>
-                                                    <p class="rest-address">
-                                                        <i class="bx bx-location-plus"></i> 7th Street, Downtown, West
-                                                        Avenue, London, United Kingodom, 784512.
-                                                    </p>
-                                                    <div class="order-id-time">
-                                                        <p>Order #245458745454</p>
-                                                        <p>Oct 12, 7:00 PM</p>
-                                                    </div>
-                                                    <p class="items">Veg Masala roll, Veg burger, Veg special
-                                                        spicy noodles</p>
-                                                    <div class="total-buttons">
-                                                        <h5>Total Paid: $199.00</h5>
-                                                        <div class="button-wrap">
-                                                            <button type="button"
-                                                                class="btn btn-outline-primary btn-sm"><i
-                                                                    class="bx bx-star"></i>
-                                                                Rate</button>
-                                                            <button type="button" data-toggle="modal"
-                                                                class="btn btn-outline-primary btn-sm"
-                                                                data-target="#exampleModal2">
-                                                                Details</button>
-                                                            <button class="btn btn-primary btn-sm"><i
-                                                                    class="bx bx-download align-middle mr-1"></i>
-                                                                Download</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="card order-card">
-                                                <div class="card-body">
-                                                    <div class="rest-delivery">
-                                                        <h5>Down Town Restaurant</h5>
-                                                        <h6>Delivered on Oct 12, 7:28 PM</h6>
-                                                    </div>
-                                                    <p class="rest-address">
-                                                        <i class="bx bx-location-plus"></i> 7th Street, Downtown, West
-                                                        Avenue, London, United Kingodom, 784512.
-                                                    </p>
-                                                    <div class="order-id-time">
-                                                        <p>Order #245458745454</p>
-                                                        <p>Oct 12, 7:00 PM</p>
-                                                    </div>
-                                                    <p class="items">Veg Masala roll, Veg burger, Veg special
-                                                        spicy noodles</p>
-                                                    <div class="total-buttons">
-                                                        <h5>Total Paid: $199.00</h5>
-                                                        <div class="button-wrap">
-                                                            <button type="button"
-                                                                class="btn btn-outline-primary btn-sm"><i
-                                                                    class="bx bx-star"></i>
-                                                                Rate</button>
-                                                            <button type="button" data-toggle="modal"
-                                                                class="btn btn-outline-primary btn-sm"
-                                                                data-target="#exampleModal2">
-                                                                Details</button>
-                                                            <button class="btn btn-primary btn-sm"><i
-                                                                    class="bx bx-download align-middle mr-1"></i>
-                                                                Download</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="card order-card">
-                                                <div class="card-body">
-                                                    <div class="rest-delivery">
-                                                        <h5>Down Town Restaurant</h5>
-                                                        <h6>Delivered on Oct 12, 7:28 PM</h6>
-                                                    </div>
-                                                    <p class="rest-address">
-                                                        <i class="bx bx-location-plus"></i> 7th Street, Downtown, West
-                                                        Avenue, London, United Kingodom, 784512.
-                                                    </p>
-                                                    <div class="order-id-time">
-                                                        <p>Order #245458745454</p>
-                                                        <p>Oct 12, 7:00 PM</p>
-                                                    </div>
-                                                    <p class="items">Veg Masala roll X 1, Veg burger x 2, Veg special
-                                                        spicy noodles x 2</p>
-                                                    <div class="total-buttons">
-                                                        <h5>Total Paid: $199.00</h5>
-                                                        <div class="button-wrap">
-                                                            <button type="button"
-                                                                class="btn btn-outline-primary btn-sm"><i
-                                                                    class="bx bx-star"></i>
-                                                                Rate</button>
-                                                            <button type="button" data-toggle="modal"
-                                                                class="btn btn-outline-primary btn-sm"
-                                                                data-target="#exampleModal2">
-                                                                Details</button>
-                                                            <button class="btn btn-primary btn-sm"><i
-                                                                    class="bx bx-download align-middle mr-1"></i>
-                                                                Download</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="card order-card">
-                                                <div class="card-body">
-                                                    <div class="rest-delivery">
-                                                        <h5>Down Town Restaurant</h5>
-                                                        <h6>Delivered on Oct 12, 7:28 PM</h6>
-                                                    </div>
-                                                    <p class="rest-address">
-                                                        <i class="bx bx-location-plus"></i> 7th Street, Downtown, West
-                                                        Avenue, London, United Kingodom, 784512.
-                                                    </p>
-                                                    <div class="order-id-time">
-                                                        <p>Order #245458745454</p>
-                                                        <p>Oct 12, 7:00 PM</p>
-                                                    </div>
-                                                    <p class="items">Veg Masala roll, Veg burger, Veg special
-                                                        spicy noodles</p>
-                                                    <div class="total-buttons">
-                                                        <h5>Total Paid: $199.00</h5>
-                                                        <div class="button-wrap bd-example">
-                                                            <button type="button"
-                                                                class="btn btn-outline-primary btn-sm"><i
-                                                                    class="bx bx-star"></i>
-                                                                Rate</button>
-                                                            <button type="button" data-toggle="modal"
-                                                                class="btn btn-outline-primary btn-sm"
-                                                                data-target="#exampleModal2">
-                                                                Details</button>
-                                                            <button class="btn btn-primary btn-sm"><i
-                                                                    class="bx bx-download align-middle mr-1"></i>
-                                                                Download</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-
-
-                                    </div>
-
-                                </div>
-                            </div>
-
-
-                            <div class="tab-pane fade" id="v-pills-wishlist" role="tabpanel"
-                                aria-labelledby="v-pills-messages-tab">
-                                <div class="my-account-content">
-                                    <h4>Wishlist</h4>
-                                    <div class="table-responsive-lg">
-                                        <table class="wishlist-table table mb-0">
-                                            <thead>
-                                                <tr>
-                                                    <th>Product</th>
-                                                    <th>Price</th>
-                                                    <th>Quantity</th>
-                                                    <th>Total</th>
-                                                    <th></th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-
-                                                <tr>
-                                                    <td class="product-item">
-                                                        <div class="dish-image">
-                                                            <a href="#"><img src="assets/images/img1.jpg"
-                                                                    alt="product"></a>
-                                                        </div>
-                                                        <div class="product-name">
-                                                            <a href="#">Spicy Beetroot &amp; Potato Burger</a>
-                                                        </div>
-                                                    </td>
-                                                    <td>$250</td>
-                                                    <td>
-                                                        <div class="add-remove-button">
-                                                            <div class="input-group">
-                                                                <input type="button" value="-" class="button-minus"
-                                                                    data-field="quantity">
-                                                                <input type="number" step="1" max="" value="1"
-                                                                    name="quantity" class="quantity-field">
-                                                                <input type="button" value="+" class="button-plus"
-                                                                    data-field="quantity">
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <button type="button" class="btn-link">
-                                                            <i class='bx bx-cart'></i>Add to cart</button>
-                                                    </td>
-                                                    <td>
-                                                        <a href="#" class="float-right"><i class="bx bx-trash"></i></a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="product-item">
-                                                        <div class="dish-image">
-                                                            <a href="#"><img src="assets/images/img2.jpg"
-                                                                    alt="product"></a>
-                                                        </div>
-                                                        <div class="product-name">
-                                                            <a href="#">Spicy Beetroot &amp; Potato Burger</a>
-                                                        </div>
-                                                    </td>
-                                                    <td>$250</td>
-                                                    <td>
-                                                        <div class="add-remove-button">
-                                                            <div class="input-group">
-                                                                <input type="button" value="-" class="button-minus"
-                                                                    data-field="quantity">
-                                                                <input type="number" step="1" max="" value="1"
-                                                                    name="quantity" class="quantity-field">
-                                                                <input type="button" value="+" class="button-plus"
-                                                                    data-field="quantity">
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <button type="button" class="btn-link">
-                                                            <i class='bx bx-cart'></i>Add to cart</button>
-                                                    </td>
-                                                    <td>
-                                                        <a href="#" class="float-right"><i class="bx bx-trash"></i></a>
-                                                    </td>
-                                                </tr>
-
-                                                <tr>
-                                                    <td class="product-item">
-                                                        <div class="dish-image">
-                                                            <a href="#"><img src="assets/images/img3.jpg"
-                                                                    alt="product"></a>
-                                                        </div>
-                                                        <div class="product-name">
-                                                            <a href="#">Spicy Beetroot &amp; Potato Burger</a>
-                                                        </div>
-                                                    </td>
-                                                    <td>$250</td>
-                                                    <td>
-                                                        <div class="add-remove-button">
-                                                            <div class="input-group">
-                                                                <input type="button" value="-" class="button-minus"
-                                                                    data-field="quantity">
-                                                                <input type="number" step="1" max="" value="1"
-                                                                    name="quantity" class="quantity-field">
-                                                                <input type="button" value="+" class="button-plus"
-                                                                    data-field="quantity">
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <button type="button" class="btn-link">
-                                                            <i class='bx bx-cart'></i>Add to cart</button>
-                                                    </td>
-                                                    <td>
-                                                        <a href="#" class="float-right"><i class="bx bx-trash"></i></a>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-
-                                </div>
-                            </div>
-
-
-                            <div class="tab-pane fade" id="v-pills-address" role="tabpanel"
-                                aria-labelledby="v-pills-messages-tab">
-                                <div class="my-account-content food-item-cards-wrap">
-                                    <h4>Manage Addresses</h4>
-                                    <div class="row">
-
-                                        <div class="col-md-6">
-                                            <div class="card address-card">
-                                                <div class="card-body">
-                                                    <h5 class="card-title">Home</h5>
-                                                    <h6>John Doe, 7845 155 555,</h6>
-                                                    <p class="card-text">
-                                                        7th Street, Downtown, West Avenue, London, United Kingodom,
-                                                        784512.
-                                                    </p>
-                                                    <button type="button" class="btn-link" data-toggle="modal"
-                                                        data-target="#exampleModal">
-                                                        <i class='bx bx-edit'></i>Edit</button>
-                                                    <button class="btn-link"><i class='bx bx-trash'></i>Delete</button>
-                                                    <button class="btn-link"><i class='bx bx-location-plus'></i>Set as
-                                                        default</button>
-
-                                                    <!-- <a href="#" class=""><i class='bx bx-trash' ></i>Delete</a> -->
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="card address-card">
-                                                <div class="card-body">
-                                                    <h5 class="card-title">Home</h5>
-                                                    <h6>John Doe, 7845 155 555,</h6>
-                                                    <p class="card-text">
-                                                        7th Street, Downtown, West Avenue, London, United Kingodom,
-                                                        784512.
-                                                    </p>
-                                                    <button type="button" class="btn-link" data-toggle="modal"
-                                                        data-target="#exampleModal">
-                                                        <i class='bx bx-edit'></i>Edit</button>
-                                                    <button class="btn-link"><i class='bx bx-trash'></i>Delete</button>
-                                                    <button class="btn-link"><i class='bx bx-location-plus'></i>Set as
-                                                        default</button>
-                                                    <!-- <a href="#" class=""><i class='bx bx-trash' ></i>Delete</a> -->
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="card address-card">
-                                                <div class="card-body">
-                                                    <h5 class="card-title">Home</h5>
-                                                    <h6>John Doe, 7845 155 555,</h6>
-                                                    <p class="card-text">
-                                                        7th Street, Downtown, West Avenue, London, United Kingodom,
-                                                        784512.
-                                                    </p>
-                                                    <button type="button" class="btn-link" data-toggle="modal"
-                                                        data-target="#exampleModal">
-                                                        <i class='bx bx-edit'></i>Edit</button>
-                                                    <button class="btn-link"><i class='bx bx-trash'></i>Delete</button>
-                                                    <button class="btn-link"><i class='bx bx-location-plus'></i>Set as
-                                                        default</button>
-                                                    <!-- <a href="#" class=""><i class='bx bx-trash' ></i>Delete</a> -->
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="card address-card">
-                                                <div class="card-body">
-                                                    <h5 class="card-title">Home</h5>
-                                                    <h6>John Doe, 7845 155 555,</h6>
-                                                    <p class="card-text">
-                                                        7th Street, Downtown, West Avenue, London, United Kingodom,
-                                                        784512.
-                                                    </p>
-                                                    <button type="button" class="btn-link" data-toggle="modal"
-                                                        data-target="#exampleModal">
-                                                        <i class='bx bx-edit'></i>Edit</button>
-                                                    <button class="btn-link"><i class='bx bx-trash'></i>Delete</button>
-                                                    <button class="btn-link"><i class='bx bx-location-plus'></i>Set as
-                                                        default</button>
-                                                    <!-- <a href="#" class=""><i class='bx bx-trash' ></i>Delete</a> -->
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-                                    
-                                    <button type="button" class="btn btn-primary" data-toggle="modal"
-                                        data-target="#exampleModal">Add Address</button>
-
-                                </div>
-                            </div>
-
-                            <div class="tab-pane fade" id="v-pills-account" role="tabpanel"
-                                aria-labelledby="v-pills-settings-tab">
-                                <div class="my-account-content">
-                                    <h4>Account Details</h4>
-                                    <form method="post" action="{{route('profile_update',$LoggedUserInfo->id)}}">
-                                    @csrf
-                                    @method('PATCH')
-                                        <div class="form-row">
-                                            <div class="col-lg-12">
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control" placeholder="First Name" value="{{$LoggedUserInfo['first_name']}}">
-                                                </div>
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control" placeholder="Last Name" value="{{$LoggedUserInfo['last_name']}}">
-                                                </div>
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control" placeholder="Email" value="{{$LoggedUserInfo['email']}}">
-                                                </div>
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control" placeholder="Mobile" value="{{$LoggedUserInfo['mobile']}}">
-                                                </div>
-                                                <div class="form-group  mb-0">
-                                                    <button class="btn btn-primary">Save Changes</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-
-
-                            <div class="tab-pane fade" id="v-pills-password" role="tabpanel"
-                                aria-labelledby="v-pills-settings-tab">
-                                <div class="my-account-content">
-                                    <h4>Change Password</h4>
-                                    <form>
-                                        <div class="form-row">
-                                            <div class="col-lg-12">
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control"
-                                                        placeholder="Current Password">
-                                                </div>
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control" placeholder="New Password">
-                                                </div>
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control"
-                                                        placeholder="Confirm New Password">
-                                                </div>
-                                                <div class="form-group  mb-0">
-                                                    <button class="btn btn-primary">Save Changes</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-
-                            <div class="tab-pane fade" id="v-pills-no-orders" role="tabpanel"
-                                aria-labelledby="v-pills-settings-tab">
-                                <div class="my-account-content">
-                                    <h4>Order History</h4>
-                                    <div class="empty-orders-div ">
-                                        <!-- <img src="assets/images/cart.svg" alt=""> -->
-                                        <i class="bx bx-shopping-bag"></i>
-                                        <p class="mb-1">Look like you haven't made any orders yet.</p>
-                                        <p class="mb-0">Click <a href="">here</a> to continue shopping.</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-
-                </div>
-
+              @yield('content')
+              @yield('change_password')
+              @yield('address')
+              
                 <!-- View Orders Modal -->
                 <div class="modal fade address-model view-orders-model" id="exampleModal2" tabindex="-1" role="dialog"
                     aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -787,34 +267,68 @@
                                     <i class="bx bx-x btn-close"></i>
                                 </button>
                                 <h5 class="mb-4">Add Delivery Address</h5>
-                                <form>
+                                @section('content')
+                                @if(Session::has('success'))
+                                    <div class="alert alert-success">
+                                        {{ Session::get('success') }}
+                                        @php
+                                            Session::forget('success');
+                                        @endphp
+                                    </div>
+                                    @endif
+                                <form method="post" action="{{route('address_store')}}" enctype="multipart/form-data">
+                                    @csrf
                                     <div class="form-row">
 
                                         <div class="form-group col-lg-12">
-                                            <input type="text" class="form-control" placeholder="Address Type">
-                                        </div>
-                                        <div class="form-group col-lg-6">
-                                            <input type="text" class="form-control" placeholder="First Name">
-                                        </div>
-                                        <div class="form-group col-lg-6">
-                                            <input type="text" class="form-control" placeholder="Last Name">
-                                        </div>
-                                        <div class="form-group col-lg-6">
-                                            <input type="text" class="form-control" placeholder="Email">
-                                        </div>
-                                        <div class="form-group col-lg-6">
-                                            <input type="text" class="form-control" placeholder="Mobile">
-                                        </div>
-                                        <div class="form-group col-lg-6">
-                                            <input type="text" class="form-control" placeholder="City">
-                                        </div>
-                                        <div class="form-group col-lg-6">
-                                            <input type="text" class="form-control" placeholder="Zip Code">
+                                            <input type="text" name="location" class="form-control" placeholder="Location">
+                                            @if ($errors->has('location'))
+                                                <span class="text-danger">{{ $errors->first('location') }}</span>
+                                            @endif
                                         </div>
                                         <div class="form-group col-lg-12">
-                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
-                                                placeholder="Adress"></textarea>
+                                            <input type="text" name="house_name"class="form-control" placeholder="House Name/Flat No/Building">
+                                            @if ($errors->has('house_name'))
+                                                <span class="text-danger">{{ $errors->first('house_name') }}</span>
+                                            @endif
                                         </div>
+                                        <div class="form-group col-lg-6">
+                                            <input type="text" name="area" class="form-control" placeholder="Area/Street">
+                                            @if ($errors->has('area'))
+                                                <span class="text-danger">{{ $errors->first('area') }}</span>
+                                            @endif
+                                        </div>
+                                        <div class="form-group col-lg-6">
+                                            <input type="text" name="city" class="form-control" placeholder="City">
+                                            @if ($errors->has('city'))
+                                                <span class="text-danger">{{ $errors->first('city') }}</span>
+                                            @endif
+                                        </div>
+                                        <div class="form-group col-lg-12">
+                                            <input type="text" name="landmark" class="form-control" placeholder="Landmark">
+                                            @if ($errors->has('landmark'))
+                                                <span class="text-danger">{{ $errors->first('landmark') }}</span>
+                                            @endif
+                                        </div>
+                                        <div class="form-group col-lg-6">
+                                            <input type="text" name="pincode" class="form-control" placeholder="Pincode">
+                                            @if ($errors->has('pincode'))
+                                                <span class="text-danger">{{ $errors->first('pincode') }}</span>
+                                            @endif
+                                        </div>
+                                        <div class="form-group col-lg-6">
+                                            <input type="text" name="home" class="form-control" placeholder="Home">
+                                            @if ($errors->has('home'))
+                                                <span class="text-danger">{{ $errors->first('home') }}</span>
+                                            @endif
+                                        </div>
+                                        <div class="form-group col-lg-12">
+                                            <input type="text" name="note_a_driver" class="form-control" placeholder="Note for Driver">
+                                            @if ($errors->has('note_a_driver'))
+                                                <span class="text-danger">{{ $errors->first('note_a_driver') }}</span>
+                                            @endif
+                                        </div>
+                                        
 
                                         <div class="form-group col-md-6 mb-md-0 d-none d-md-block">
                                             <button type="button" class="btn btn-outline-primary w-100"
@@ -951,6 +465,8 @@
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
         </script>
     <script src="assets/js/custom.js"></script>
+    @yield('javascript')
+
 </body>
 
 </html>
