@@ -19,7 +19,7 @@ Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
- 
+Route::group(['middleware' => ['auth']], function() {
 
 Route::name('admin.')->prefix('admin')->namespace('Admin')->group(function (){
 
@@ -103,7 +103,7 @@ Route::name('admin.')->prefix('admin')->namespace('Admin')->group(function (){
     Route::get('/driver/{driver}/view', [App\Http\Controllers\AdminController::class, 'driver_view'])->name('driver.view');
 
 });
-Route::group(['middleware' => ['auth']], function() {
+
         /**
         * Logout Route
         */  
@@ -111,8 +111,10 @@ Route::group(['middleware' => ['auth']], function() {
         
     });
 
+   
 
     Route::get('/front', [App\Http\Controllers\FrontController::class, 'index'])->name('index');
+   
     Route::get('/signin', [App\Http\Controllers\FrontController::class, 'signin'])->name('signin');
     Route::post('/check', 'App\Http\Controllers\FrontController@check') ->name('check');//signin
     Route::get('/my_home', [App\Http\Controllers\FrontController::class, 'my_home'])->name('my_home');
@@ -126,13 +128,16 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('/changePassword',[App\Http\Controllers\FrontController::class, 'change_password'])->name('change_password');
     Route::get('/address', [App\Http\Controllers\FrontController::class, 'address'])->name('address');
     Route::post('/address_store', [App\Http\Controllers\FrontController::class, 'address_store'])->name('address_store');
+    Route::get('/edit_address/{id}', [App\Http\Controllers\FrontController::class, 'edit_address'])->name('edit_address');
+    Route::get('/address/{id}', [App\Http\Controllers\FrontController::class, 'address_destroy'])->name('address_destroy');
 
 
     Route::get('/logoutuser', [App\Http\Controllers\FrontController::class, 'logout']);
 
-    Route::get('/forgotpassword', [App\Http\Controllers\FrontController::class, 'forgotpassword']);
-
-
+    Route::get('/forgotpassword/create', [FrontController::class, 'forgotpassword'])->name('forgotpassword');
+    Route::post('/forgotpassword/store', [FrontController::class, 'forgotpasswordstore'])->name('forgotpasswordstore');
+    Route::get('/reset_password/{token}', [FrontController::class, 'ResetPassword'])->name('ResetPassword');
+    Route::post('/reset_password', [FrontController::class, 'ResetPasswordStore'])->name('ResetPasswordStore');
 
 
 

@@ -6,11 +6,23 @@ use Illuminate\Http\Request;
 use App\Models\Customer;
 use App\Models\Address;
 
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 
+
+use DB;
+use Carbon\Carbon;
+
+use Mail;
+
+use Illuminate\Support\Str;
+// use Illuminate\Support\Facades\Hash;
+// use Illuminate\Support\Facades\Auth;
+use Hash;
+use Auth;
 class FrontController extends Controller
 {
+    
+   
     //
     public function index(){
         return view('front.index');
@@ -48,46 +60,7 @@ class FrontController extends Controller
         $save= $customer->save();
         return redirect('/signin');
             
-        // if($save){
-
-        //     return back()->with('success','new customer added successfully');
-            
-        //     }else{
-            
-        //     return back()->with('fail','something went wrong');
-            
-            
-            
-        //     }
-            
-            
-            
-        }
-        
-    
-    // public function sign_in_fun(Request $request)
-    // {
-    //    $this->validate($request, [
-    //    'email'   => 'required|email',
-    //    'password'  => 'required|alphaNum|min:3'
-    //  ]);
-
-    //  $user_data = array(
-    //   'email'  => $request->get('email'),
-    //   'password' => $request->get('password')
-    //  );
-
-    //  if(Auth::attempt($user_data))
-    //  {
-    //   return redirect('/home');
-    //  }
-    //  else
-    //  {
-    //   return back()->with('error', 'Wrong Login Details');
-    //  }
-
-    // }
-
+    }
     public function check(Request $request)//signin 
 {
     $request->validate([
@@ -111,6 +84,54 @@ class FrontController extends Controller
     public function forgotpassword(){
         return view('front.forgotpassword');
     }
+    ////////////////////
+    public function forgotpasswordstore(Request $request) {
+        $request->validate([
+            'email' => 'required|email|exists:customers',
+        ]);
+
+        $token = Str::random(64);
+        DB::table('password_resets')->insert([
+            'email' => $request->email,
+            'token' => $token,
+            'created_at' => Carbon::now()
+        ]);
+
+        Mail::send('front.forgotpassword-email', ['token' => $token], function($message) use($request){
+            $message->to($request->email);
+            $message->from(env('MAIL_FROM_ADDRESS'), env('APP_NAME'));
+            $message->subject('Reset Password');
+        });
+
+        return back()->with('message', 'We have emailed your password reset link!');
+    }
+
+    //////////////////
+    public function ResetPassword($token) {
+        return view('front.reset_password', ['token' => $token]);
+    }
+    ///////////////////
+    public function ResetPasswordStore(Request $request) {
+        $request->validate([
+            
+            'new_password' => 'required|string|min:8|confirmed',
+            'confirm_password' => 'required'
+        ]);
+
+        $update = DB::table('password_resets')->where(['token' => $request->token])->first();
+
+        if(!$update){
+            return back()->withInput()->with('error', 'Invalid token!');
+        }
+
+        $customer = Customer::where('email', $request->email)->update(['password' => Hash::make($request->password)]);
+
+        // Delete password_resets record
+        DB::table('password_resets')->where(['email'=> $request->email])->delete();
+
+        return redirect('/login')->with('message', 'Your password has been successfully changed!');
+    }
+    ///////////////////
     public function myaccount(){
         $data=['LoggedUserInfo'=>Customer::where('id','=',session('LoggedUser'))->first()];
         return view('front.components.my_account-master',$data);
@@ -159,19 +180,23 @@ class FrontController extends Controller
               'confirm_password' => 'required',
             ]);
     
-            $customer = auth('api')::customer();
+            $customer = Auth::customer();
             // dd($customer);
             if (!Hash::check($request->current_password, $customer->password)) {
                 return back()->with('error', 'Current password does not match!');
             }
+            else{
+
+                $customer->password = Hash::make($request->password);
+                $customer->save();
+        
+                return back()->with('success', 'Password successfully changed!');
+            }
     
-            $customer->password = Hash::make($request->password);
-            $customer->save();
-    
-            return back()->with('success', 'Password successfully changed!');
         }
-        public function address(){
-            return view('front.address');
+        public function address(Address $address){
+            $address=Address::all();
+            return view('front.address',['address'=>$address]);
         }
         public function address_store(){
             $inputs=request()->validate([
@@ -191,7 +216,7 @@ class FrontController extends Controller
                 'city.required' =>'City is required',
                 'landmark.required' =>'Landmark is required',
                 'pincode.required' =>'Pincode is required',
-                'home.required' =>'Home is required',
+                'home.required' =>'Address Type is required',
                 'note_a_driver.required' =>'Note for Driver is required',
 
             ]);
@@ -207,6 +232,23 @@ class FrontController extends Controller
             $address->save();
             return back();
             
+        }
+        // public function edit_address(){
+        //     return view('front.edit_address');
+        // }
+        public function edit_address($id){
+            $address=Address::find($id);
+            
+            return response()->json([
+                'status'=>200,
+                'address'=>$address,
+            ]);
+    
+        }
+        public function address_destroy($id){
+            $address=Address::find($id);
+            $address->delete();
+            return back();
         }
 }
 

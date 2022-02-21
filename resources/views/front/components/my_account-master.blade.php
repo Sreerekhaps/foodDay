@@ -106,6 +106,7 @@
               @yield('change_password')
               @yield('address')
               
+              
                 <!-- View Orders Modal -->
                 <div class="modal fade address-model view-orders-model" id="exampleModal2" tabindex="-1" role="dialog"
                     aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -317,7 +318,16 @@
                                             @endif
                                         </div>
                                         <div class="form-group col-lg-6">
-                                            <input type="text" name="home" class="form-control" placeholder="Home">
+                                        <select name="home" id="home" class="form-select form-select-md" >
+                                            <option value="0" disabled selected>Address Type</option>
+                                            
+                                            <option value="Home">Home</option>
+                                            <option value="Office">Office</option>
+                                            <option value="Other">Other</option>
+
+
+                                            
+                                        </select>
                                             @if ($errors->has('home'))
                                                 <span class="text-danger">{{ $errors->first('home') }}</span>
                                             @endif
@@ -466,6 +476,7 @@
         </script>
     <script src="assets/js/custom.js"></script>
     @yield('javascript')
+    @yield('edit')
 
 </body>
 

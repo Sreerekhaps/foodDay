@@ -12,7 +12,7 @@
     <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
     <link rel="icon" type="image/png" href="assets/images/favicon.png">
     <link rel="stylesheet" href="assets/css/styles.css">
-    <title>FoodDay - Login</title>
+    <title>FoodDay - Reset password</title>
 </head>
 
 <body>
@@ -63,38 +63,41 @@
 
     <!-- <div class="search-nav">
         <div class="container">
-            <h3 class="mb-0">Forgot Password?</h3>
+            <h3 class="mb-0">Reset Your Password</h3>
         </div>
     </div> -->
 
     <section class="log-reg-sec">
+
         <div class="content">
             <div class="form-content">
                 <img src="assets/images/logo-round.png" alt="" class="form-logo">
-                <h1 class="text-center">Forgot Password?</h1>
-                <form action="" method="POST">
+                <h1 class="text-center">Reset Password?</h1>
+                <form action="{{ route('ResetPasswordStore') }}" method="POST">
                           @csrf
-                        
-                    <span class="email-text">Enter your email below to receive your password reset
-                        instructions.</span>
+                          <input type="hidden" name="token" value="{{ $token }}">
+                    <input type="hidden" name="token" value="{{$token}}">
+                    <span class="email-text">Enter a new password for your account</span>
 
                     <div class="form-group">
-                        <input type="text" class="form-control" name="email" placeholder="Email">
+                        <input type="password" class="form-control" name="new_password" placeholder="New Password">
                     </div>
-                    @if ($errors->has('email'))
-                                      <span class="text-danger">{{ $errors->first('email') }}</span>
-                                  @endif
+                    <div class="form-group">
+                        <input type="password" class="form-control" name="confirm_password" placeholder="Confirm New Password">
+                    </div>
+
                     <div class="form-group">
                         <button class="btn btn-primary w-100">Reset Password</button>
                     </div>
                     <div class="form-group text-center mb-0">
                         <span>Don't have an account?</span>
-                        <a href="/signup">Sign up</a>
+                        <a href="">Sign up</a>
                     </div>
 
                 </form>
             </div>
         </div>
+
     </section>
 
 
