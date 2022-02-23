@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FrontController;
 
 /*
 |--------------------------------------------------------------------------
@@ -111,7 +112,8 @@ Route::name('admin.')->prefix('admin')->namespace('Admin')->group(function (){
         
     });
 
-   
+  
+  
 
     Route::get('/front', [App\Http\Controllers\FrontController::class, 'index'])->name('index');
    
@@ -134,12 +136,19 @@ Route::name('admin.')->prefix('admin')->namespace('Admin')->group(function (){
 
     Route::get('/logoutuser', [App\Http\Controllers\FrontController::class, 'logout']);
 
-    Route::get('/forgotpassword/create', [FrontController::class, 'forgotpassword'])->name('forgotpassword');
-    Route::post('/forgotpassword/store', [FrontController::class, 'forgotpasswordstore'])->name('forgotpasswordstore');
-    Route::get('/reset_password/{token}', [FrontController::class, 'ResetPassword'])->name('ResetPassword');
-    Route::post('/reset_password', [FrontController::class, 'ResetPasswordStore'])->name('ResetPasswordStore');
+    // Route::get('/forgotpassword/create', [App\Http\Controllers\FrontController::class, 'forgotpassword'])->name('forgotpassword');
+    // Route::post('/forgotpassword/store', [App\Http\Controllers\FrontController::class, 'forgotpasswordstore'])->name('forgotpasswordstore');
+    // Route::get('/reset_password/{token}', [FrontController::class, 'ResetPassword'])->name('ResetPassword');
+    // Route::post('/reset_password', [FrontController::class, 'ResetPasswordStore'])->name('ResetPasswordStore');
 
+//////////////search/////////////
+Route::get('/search', [App\Http\Controllers\FrontController::class, 'search'])->name('search');
+Route::get('/restaurant_listing', [App\Http\Controllers\FrontController::class, 'restaurant_listing'])->name('restaurant_listing');
+Route::get('/restaurant_details/{restaurant}', [FrontController::class, 'restaurant_details'])->name('restaurant_details');
+///////////////////////////////
 
+/////////Forgot Password///////
+Route::get('/password/forgot',[FrontController::class,'showforgotForm'])->name('showforgotForm');
+Route::post('/password/forgot',[FrontController::class,'sendresetLink'])->name('sendresetLink');
 
-
-
+//////////////////////////////

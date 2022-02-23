@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+   
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -33,9 +34,9 @@
                         <li class="nav-item active">
                             <a class="nav-link" href="{{route('my_home')}}">Home <span class="sr-only">(current)</span></a>
                         </li>
-                        <!-- <li class="nav-item">
-                            <a class="nav-link" href="restaurant-listing.html">Restaurants</a>
-                        </li> -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="/restaurant_listing">Restaurants</a>
+                        </li>
 
                         <!-- <li class="nav-item">
                             <a class="nav-link" href="/signin">Sign In</a>
@@ -67,16 +68,17 @@
         <div class="container">
             <div class="banner-content">
                 <h2>Delivering your favorite food to your door step.</h2>
-                <form action="">
+                <form action="{{route('search')}}" method="GET">
                     <div class="input-group search-location-group">
-                        <input type="text" class="form-control" placeholder="Enter your delivery location"
+                        <input type="text" class="form-control" name="location" placeholder="Enter your delivery location"
                             aria-label="delivery location" aria-describedby="button-addon2">
                         <a href="" class="btn-locate"><i class='bx bx-target-lock'></i> Locate Me</a>
                         <!-- <button class="btn-locate"><i class='bx bx-target-lock'></i> Locate Me</button> -->
 
                         <div class="input-group-append btn-find-food">
-                            <button class="btn btn-danger" type="button"
-                                onclick="window.location.href = 'restaurant-listing.html';">Find Food</button>
+                            <button class="btn btn-danger" type="submit">Find Food</button>
+                            
+
                         </div>
                     </div>
                 </form>

@@ -67,16 +67,15 @@
         <div class="container">
             <div class="banner-content">
                 <h2>Delivering your favorite food to your door step.</h2>
-                <form action="">
+                <form action="{{route('search')}}" method="GET">
                     <div class="input-group search-location-group">
-                        <input type="text" class="form-control" placeholder="Enter your delivery location"
+                    <input type="text" class="form-control" name="location"  placeholder="Enter your delivery location"
                             aria-label="delivery location" aria-describedby="button-addon2">
                         <a href="" class="btn-locate"><i class='bx bx-target-lock'></i> Locate Me</a>
                         <!-- <button class="btn-locate"><i class='bx bx-target-lock'></i> Locate Me</button> -->
 
                         <div class="input-group-append btn-find-food">
-                            <button class="btn btn-danger" type="button"
-                                onclick="window.location.href = 'restaurant-listing.html';">Find Food</button>
+                            <button class="btn btn-danger" type="submit">Find Food</button>
                         </div>
                     </div>
                 </form>

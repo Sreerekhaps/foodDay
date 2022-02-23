@@ -12,7 +12,7 @@
     <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
     <link rel="icon" type="image/png" href="assets/images/favicon.png">
     <link rel="stylesheet" href="assets/css/styles.css">
-    <title>FoodDay - Login</title>
+    <title>FoodDay - Restaurant listing</title>
 </head>
 
 <body>
@@ -31,15 +31,21 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item active">
-                            <a class="nav-link" href="{{route('index')}}">Home <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="/my_home">Home <span class="sr-only">(current)</span></a>
                         </li>
-                       
+                        <li class="nav-item">
+                            <a class="nav-link" href="/restaurant_listing">Restaurants</a>
+                        </li>
+
+                        <!-- <li class="nav-item">
+                            <a class="nav-link" href="/signin">Sign In</a>
+                        </li> -->
 
                         <li class="nav-item">
-                            <a class="nav-link" href="/sign_in">Sign In</a>
+                            <a class="nav-link" href="/myaccount">
+                                <i class='bx bx-user mr-1'></i>
+                                My Account</a>
                         </li>
-
-                       
                         <li class="nav-item">
                             <a class="nav-link" href="cart.html">
                                 <span class="cart-badge-wrap">
@@ -55,54 +61,94 @@
     </header>
     <!-- Header -->
 
-    <!-- <div class="search-nav">
+    <div class="search-nav">
         <div class="container">
-            <h3 class="mb-0">Sign in</h3>
-        </div>
-    </div> -->
 
-    <section class="log-reg-sec">
-        <div class="content">
-            <div class="form-content">
-                <img src="assets/images/logo-round.png" alt="" class="form-logo">
-                <h1 class="text-center">Sign in to FoodDay</h1>
-                <form action=" {{ route('check')}} " method="post">
-                @csrf
-               
-                    <div class="form-group">
-                        <input type="text" name="email" class="form-control" placeholder="Email">
-                         @error("email")
-                            <p style="color:red">{{$errors->first("email")}}
-                         @enderror
-                    </div>
-                    <div class="form-group">
-                        <input type="password" name="password" class="form-control" placeholder="Password">
-                         @error("password")
-                            <p style="color:red">{{$errors->first("password")}}
-                         @enderror
-                    </div>
-                    @if(Session::get('fail'))
-                    <div class="alert alert-danger" role="alert"> 
-                     {{ Session::get('fail') }} 
-                    </div>
-                    @endif
-                    <div class="form-group">
-                        <a href="{{route('showforgotForm')}}">Forgot password?</a>
-                    </div>
-
-                    <div class="form-group">
-                        <button class="btn btn-primary w-100">Sign in</button>
-                    </div>
-                    <div class="form-group text-center mb-0">
-                        <span>Don't have an account?</span>
-                        <a href="/signup">Sign up</a>
-                    </div>
-
-                </form>
+            
+            
+            <h3>All restaurants delivering to</h3>
+            
+            
+            <p>Change location</p>
+            <div class="row">
+                <div class="col-lg-8 col-xl-6">
+                    <form action="{{route('search')}}" method="GET">
+                        <div class="input-group search-location-group">
+                            <input type="text" name="location" class="form-control" placeholder="Enter your delivery location"
+                               >
+                            <a href="" class="btn-locate"><i class='bx bx-target-lock'></i> Locate Me</a>
+                            <!-- <button class="btn-locate"><i class='bx bx-target-lock'></i> Locate Me</button> -->
+                            <div class="input-group-append btn-find-food">
+                            <button class="btn btn-primary" type="submit">Search</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
+
+            <!-- location popup -->
+
+            <!-- <div class="location-popup">
+                <h5 class="mb-3">Add your delivery address</h5>
+                <p class="mb-4">To find out if we can delivery at your location, please enter your address
+                </p>
+                <form action="">
+                    <button class="btn btn-light">Set Location</button>
+                </form>
+            </div> -->
+
+            <!-- location popup end -->
+
+        </div>
+    </div>
+
+    <section class="py-60">
+        <div class="container">
+            <h4 class="mb-4">Restaurants</h4>
+            <div class="row rest-listing-row">
+            @foreach($restaurants as $rest)
+                <div class="col-md-4 col-sm-6">
+               
+                    <a href="{{route('restaurant_details',$rest->id)}}" class="card restaurant-card">
+                        <span class="restaurant-status">
+                        @if($rest->is_open ==1)
+                            <em class="ribbon"></em>Open
+                        @endif
+                        </span>
+                        @if($rest->is_open ==0)
+                        <span class="restaurant-status closed"> 
+                        <em class="ribbon"></em>Closed      
+                        @endif
+                        </span>
+                        <div class="restaurant-image" style="
+                                background-image: url('{{$rest->banner}}');
+                              ">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">{{$rest->name}}</h5>
+                            <div class="cuisines">
+                                <span>{{$rest->location}}</span><span>
+                                @foreach($cuisines as $cuisine)
+                                 @if($rest->cuisines->contains($cuisine->id))
+                                  {{$cuisine->name}},
+                                 @endif               
+                                @endforeach 
+                                </span>
+                            </div>
+                            <p class="location"><i class="bx bx-location-plus"></i> {{$rest->address}}</p>
+                            <div class="details">
+                                <span class="badge"><i class='bx bxs-star'></i> 4.2</span>
+                                <span class="badge">{{$rest->default_preparation_time}}hours</span>
+                                <span class="badge">{{$rest->cost_for_two_people}} for two</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                @endforeach
+            </div>
+            
         </div>
     </section>
-
 
 
     <!-- footer -->

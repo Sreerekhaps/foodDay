@@ -5,18 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Customer;
 use App\Models\Address;
+use App\Models\Restaurant;
+use App\Models\Cuisine;
 
-use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
-
-
-use DB;
-use Carbon\Carbon;
-
-use Mail;
-
-use Illuminate\Support\Str;
 // use Illuminate\Support\Facades\Hash;
-// use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Hash;
 use Auth;
 class FrontController extends Controller
@@ -30,9 +23,7 @@ class FrontController extends Controller
     public function signin(){
         return view('front.signin');
     }
-    public function my_home(){
-        return view('front.my_home');
-    }
+   
     public function signup(){
         return view('front.signup');
     }
@@ -80,57 +71,63 @@ class FrontController extends Controller
         }
         }
 }
-
-    public function forgotpassword(){
+//////////////////////////////////
+    public function showforgotForm(){
         return view('front.forgotpassword');
     }
-    ////////////////////
-    public function forgotpasswordstore(Request $request) {
+
+    public function sendresetLink(Request $request){
         $request->validate([
-            'email' => 'required|email|exists:customers',
+         'email'=>'required|email|exists:customers,email'
         ]);
-
-        $token = Str::random(64);
-        DB::table('password_resets')->insert([
-            'email' => $request->email,
-            'token' => $token,
-            'created_at' => Carbon::now()
-        ]);
-
-        Mail::send('front.forgotpassword-email', ['token' => $token], function($message) use($request){
-            $message->to($request->email);
-            $message->from(env('MAIL_FROM_ADDRESS'), env('APP_NAME'));
-            $message->subject('Reset Password');
-        });
-
-        return back()->with('message', 'We have emailed your password reset link!');
     }
+    ////////////////////
+    // public function forgotpasswordstore(Request $request) {
+    //     $request->validate([
+    //         'email' => 'required|email|exists:customers',
+    //     ]);
+
+    //     $token = Str::random(64);
+    //     DB::table('password_resets')->insert([
+    //         'email' => $request->email,
+    //         'token' => $token,
+    //         'created_at' => Carbon::now()
+    //     ]);
+
+    //     Mail::send('front.forgotpassword-email', ['token' => $token], function($message) use($request){
+    //         $message->to($request->email);
+    //         $message->from(env('MAIL_FROM_ADDRESS'), env('APP_NAME'));
+    //         $message->subject('Reset Password');
+    //     });
+
+    //     return back()->with('message', 'We have emailed your password reset link!');
+    // }
 
     //////////////////
-    public function ResetPassword($token) {
-        return view('front.reset_password', ['token' => $token]);
-    }
-    ///////////////////
-    public function ResetPasswordStore(Request $request) {
-        $request->validate([
+    // public function ResetPassword($token) {
+    //     return view('front.reset_password', ['token' => $token]);
+    // }
+    // ///////////////////
+    // public function ResetPasswordStore(Request $request) {
+    //     $request->validate([
             
-            'new_password' => 'required|string|min:8|confirmed',
-            'confirm_password' => 'required'
-        ]);
+    //         'new_password' => 'required|string|min:8|confirmed',
+    //         'confirm_password' => 'required'
+    //     ]);
 
-        $update = DB::table('password_resets')->where(['token' => $request->token])->first();
+    //     $update = DB::table('password_resets')->where(['token' => $request->token])->first();
 
-        if(!$update){
-            return back()->withInput()->with('error', 'Invalid token!');
-        }
+    //     if(!$update){
+    //         return back()->withInput()->with('error', 'Invalid token!');
+    //     }
 
-        $customer = Customer::where('email', $request->email)->update(['password' => Hash::make($request->password)]);
+    //     $customer = Customer::where('email', $request->email)->update(['password' => Hash::make($request->password)]);
 
-        // Delete password_resets record
-        DB::table('password_resets')->where(['email'=> $request->email])->delete();
+    //     // Delete password_resets record
+    //     DB::table('password_resets')->where(['email'=> $request->email])->delete();
 
-        return redirect('/login')->with('message', 'Your password has been successfully changed!');
-    }
+    //     return redirect('/login')->with('message', 'Your password has been successfully changed!');
+    // }
     ///////////////////
     public function myaccount(){
         $data=['LoggedUserInfo'=>Customer::where('id','=',session('LoggedUser'))->first()];
@@ -250,5 +247,70 @@ class FrontController extends Controller
             $address->delete();
             return back();
         }
+
+
+
+        /////////////////////////////
+        public function my_home(Request $request){
+            // $restaurant=Restaurant::all();
+            // $restaurant = Restaurant::when(
+            //     $request->input('location'),
+            //     function ($query) use ($request)
+            //     {
+            //     $query->where('location', 'like', '%'.$request->input('location').'%');
+                     
+            //     }
+            //     ) ->orderBy('created_at', 'desc')->paginate(5);
+            
+            //     $request->flash();
+            return view('my_home');
+        }
+        
+        public function restaurant_listing(Restaurant $restaurant){
+            $restaurant=Restaurant::all();
+            $cuisines=Cuisine::all();
+            return view('front.restaurant_listing',['restaurants'=>$restaurant],compact('cuisines'));
+        }
+        public function search(Request $request){
+           
+            $search_text=$request->location;
+            $rest=Restaurant::where('location','LIKE','%'.$search_text.'%')->get();
+            $cuisines=Cuisine::all();
+            return view('front.restaurant_listing',['restaurants'=>$rest],compact('cuisines'));
+        }
+
+
+        public function restaurant_details(Restaurant $restaurant )
+
+{
+
+$cuisines=Cuisine::all();
+
+return view('front.restaurant_details', ['restaurant'=>$restaurant], compact('cuisines'));
+
+}
+      
+        // public function search_restaurant(){
+        
+        
+        // $search_text=$_GET['location'];
+        //     $rest=Restaurant::where('location','%'.$search_text.'%')->get();
+
+        //     return view('front.search_restaurant');
+        // }
+        ///////////////
+        // $rest=Restaurant::all();
+        // $rest = Restaurant::when(
+        // $request->input('location'),
+        // function ($query) use ($request)
+        // {
+        // $query->where('location', 'like', '%'.$request->input('location').'%');
+             
+        // }
+        // ) ->orderBy('created_at', 'desc')->paginate(5);
+    
+        // $request->flash();
+        ////////////////////////////
+       
 }
 
