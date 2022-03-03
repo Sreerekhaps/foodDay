@@ -159,3 +159,7 @@ Route::get('/password/reset/{token}',[FrontController::class,'showresetForm'])->
 Route::post('/password/reset',[FrontController::class,'resetPassword'])->name('resetPassword');
 
 //////////////////////////////
+
+//////////Cart///////////////
+Route::get('/cart',[FrontController::class,'cart'])->name('cart');
+Route::get('/add-to-cart/{id}', [FrontController::class, 'addToCart'])->name('addToCart');

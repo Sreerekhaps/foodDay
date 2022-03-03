@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Itemfood extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'food_item', 'image', 'description','status','type','name', 'rate'
+    ];
     public function restaurants(){
         return $this->hasMany(Restaurant::class);
     }

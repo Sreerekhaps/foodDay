@@ -159,16 +159,12 @@
                                                             </div>
                                                             
                                                             <div class="add-remove-button">
-                                                                <div class="input-group">
-                                                                    <input type="button" value="-" class="button-minus"
-                                                                        data-field="quantity" />
-                                                                    <input type="number" step="1" max="" value="0"
-                                                                        name="quantity" class="quantity-field" />
-                                                                    <input type="button" value="+" class="button-plus"
-                                                                        data-field="quantity" data-toggle="modal"
-                                                                        data-target="#add-repeat" />
-                                                                </div>
-                                                               
+                                                                <button type="button"  class="btn btn-outline-primary"
+                                                                    data-toggle="modal" data-target="#dishModal" >
+                                                                    <a href="{{route('addToCart',$item->id)}}">
+                                                                    ADD </a>
+                                                                </button>
+                                                            </div>
                                                           
                                                             </div>
                                                             
@@ -177,7 +173,7 @@
                                                     </div>
                                                    
                                                 </div>
-                                                </div>
+                                                
                                                    
                                                    
                                            
@@ -231,141 +227,7 @@
     <!-- modal -->
 
     <!-- Modal -->
-    <div class="modal fade dish-modal" id="dishModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <div class="dish-modal-head">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <!-- <span aria-hidden="true">&times;</span> -->
-                            <i class='bx bx-x btn-close'></i>
-                        </button>
-                        <h5>Spicy Beetroot & Potato Burger</h5>
-                    </div>
-                    <div class="dish-modal-content">
-                        <div class="modifiers">
-                            <h5>Salad dressings</h5>
-                            <h6>
-                                Select minimum 2
-                                <span class="badge badge-light float-right">Required</span>
-                            </h6>
-                            <ul>
-                                <li>
-                                    <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="exampleCheck1" />
-                                        <label class="form-check-label" for="exampleCheck1">Chilly
-                                            Sause<span>+$2.50</span></label>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="exampleCheck2" />
-                                        <label class="form-check-label" for="exampleCheck2">Tomato
-                                            Sause<span>+$2.50</span></label>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="exampleCheck2" />
-                                        <label class="form-check-label" for="exampleCheck2">Tomato
-                                            Sause<span>+$2.50</span></label>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="exampleCheck2" />
-                                        <label class="form-check-label" for="exampleCheck2">Tomato
-                                            Sause<span>+$2.50</span></label>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="exampleCheck2" />
-                                        <label class="form-check-label" for="exampleCheck2">Tomato
-                                            Sause<span>+$2.50</span></label>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="exampleCheck2" />
-                                        <label class="form-check-label" for="exampleCheck2">Tomato
-                                            Sause<span>+$2.50</span></label>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="exampleCheck2" />
-                                        <label class="form-check-label" for="exampleCheck2">Tomato
-                                            Sause<span>+$2.50</span></label>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="exampleCheck2" />
-                                        <label class="form-check-label" for="exampleCheck2">Tomato
-                                            Sause<span>+$2.50</span></label>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="exampleCheck2" />
-                                        <label class="form-check-label" for="exampleCheck2">Tomato
-                                            Sause<span>+$2.50</span></label>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="exampleCheck3" />
-                                        <label class="form-check-label" for="exampleCheck3">Soya
-                                            Sause<span>+$2.50</span></label>
-                                    </div>
-                                </li>
-                            </ul>
-                            <h5>People also added</h5>
-                            <h6>
-                                Select upto 5
-                                <span class="badge badge-light float-right">Optional</span>
-                            </h6>
-                            <ul>
-                                <li>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="exampleRadios"
-                                            id="exampleRadios1" value="option1" checked />
-                                        <label class="form-check-label" for="exampleRadios1">
-                                            Thick Crust<span>+$2.50</span>
-                                        </label>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="exampleRadios"
-                                            id="exampleRadios2" value="option2" />
-                                        <label class="form-check-label" for="exampleRadios2">
-                                            Thin Crust<span>+$2.50</span>
-                                        </label>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-
-                        <div class="text-to-kitchen">
-                            <div class="form-group">
-                                <textarea class="form-control" id="exampleFormControlTextarea1"
-                                    placeholder="Enter additional information about your order" rows="3"></textarea>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="add-button-block dish-modal-footer">
-                        <span>Item total: <span class="amount">$39</span></span>
-                        <button type="button" class="btn btn-primary ">
-                            Add Item
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    
 
     <!--cart modal popup button-->
     <!-- <div class="popup-cart d-md-none">

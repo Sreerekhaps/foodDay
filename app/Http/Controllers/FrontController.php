@@ -319,7 +319,36 @@ public function logout(){
         // return view('front.restaurant_details',['restaurant'=>$restaurant], compact('cuisines','itemfoods'));
 
         // }
-            
+     //////////////Add to Cart///////////////
+     public function cart()
+    {
+        
+        return view('front.cart');
+    }
+     
+    public function addToCart($id)
+    {
+        $itemfoods = Itemfood::findOrFail($id);
+           
+        $cart = session()->get('cart', []);
+   
+        if(isset($cart[$id])) {
+            $cart[$id]['quantity']++;
+        } else {
+            $cart[$id] = [
+                "food_item" => $itemfoods->food_item,
+                "quantity" => 1,
+                "rate" => $itemfoods->rate,
+                
+            ];
+        }
+          
+        session()->put('cart', $cart);
+        return redirect()->route('cart')->with('success', 'Product added to cart successfully!');
+        
+
+    }
+     
                 
             
 }
