@@ -31,14 +31,14 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item active">
-                            <a class="nav-link" href="home.html">Home <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="/front">Home <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="restaurant-listing.html">Restaurants</a>
+                            <a class="nav-link" href="/restaurant_listing">Restaurants</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="login.html">Sign In</a>
+                            <a class="nav-link" href="/signin">Sign In</a>
                         </li>
 
                         <li class="nav-item">
@@ -72,6 +72,11 @@
             <div class="form-content">
                 <img src="assets/images/logo-round.png" alt="" class="form-logo">
                 <h1 class="text-center">Forgot Password?</h1>
+                @if (Session::has('success'))
+                         <div class="alert alert-success" role="alert">
+                            {{ Session::get('success') }}
+                        </div>
+                    @endif
                 <form action="{{route('sendresetLink')}}" method="POST">
                           @csrf
                         

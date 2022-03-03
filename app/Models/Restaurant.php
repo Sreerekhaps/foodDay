@@ -46,4 +46,8 @@ class Restaurant extends Model
             return asset('storage/' . $value);
             
             }//display image
+
+            public function itemfoods(){
+                return $this->belongsToMany(Itemfood::class,'itemfood_restaurants');
+            }
 }

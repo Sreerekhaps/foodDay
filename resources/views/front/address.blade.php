@@ -41,7 +41,7 @@
                                 </div>
                             </div>
     </div>
-                             <!-- Address Modal -->
+                             <!-- Address Modal Edit -->
                              <div class="modal fade  " id="edit-modal" tabindex="-1" role="dialog"
                     aria-labelledby="edit-modal-label" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -100,7 +100,7 @@
                                         </div>
                                         <div class="form-group col-lg-6">
                                             <select name="home" id="home" class="form-control">
-                                            <option value="{{$addr->home}}">{{$add->home}}</option>   
+                                            <option value="{{$addr->home}}">{{$addr->home}}</option>   
 
                                                
 

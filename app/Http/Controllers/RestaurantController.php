@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Restaurant;
 use App\Models\City;
 use App\Models\Cuisine;
+use App\Models\Itemfood;
+
 
 class RestaurantController extends Controller
 {
@@ -15,8 +17,9 @@ class RestaurantController extends Controller
     public function create(){
         $cities=City::all();
         $cuisines=Cuisine::all();
+        $itemfoods=Itemfood::all();
        
-        return view('admin.restaurant.create',compact('cities','cuisines'));
+        return view('admin.restaurant.create',compact('cities','cuisines','itemfoods'));
     }
     public function store(Request $request){
         $inputs=request()->validate([
@@ -31,7 +34,8 @@ class RestaurantController extends Controller
             'min_order_value'=>'required',
             'cost_for_two_people'=>'required',
             'default_preparation_time'=>'required',
-            'cuisine_id'=>'required',   
+            'cuisine_id'=>'required',  
+            'itemfood_id'=>'required', 
             'is_open'=>['sometimes', 'in:1,0'],
             'allow_pickup'=>['sometimes', 'in:1,0']     
         ]);
@@ -76,6 +80,11 @@ class RestaurantController extends Controller
         {
         $restaurants->cuisines()->attach($request->input('cuisine_id'));
         } 
+        if ($request->has('itemfood_id'))
+        {
+        $restaurants->itemfoods()->attach($request->input('itemfood_id'));
+        } 
+
         return redirect()->route('admin.restaurant.show');  
         }
         public function show(){

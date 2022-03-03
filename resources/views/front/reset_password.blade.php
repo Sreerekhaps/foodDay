@@ -11,7 +11,7 @@
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
     <link rel="icon" type="image/png" href="assets/images/favicon.png">
-    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="{{asset('assets/css/styles.css')}}">
     <title>FoodDay - Reset password</title>
 </head>
 
@@ -73,17 +73,38 @@
             <div class="form-content">
                 <img src="assets/images/logo-round.png" alt="" class="form-logo">
                 <h1 class="text-center">Reset Password?</h1>
-                <form action="{{ route('ResetPasswordStore') }}" method="POST">
+                @if (Session::has('info'))
+                         <div class="alert alert-success" role="alert">
+                            {{ Session::get('info') }}
+                        </div>
+                    @endif
+                    @if (Session::has('fail'))
+                         <div class="alert alert-danger" role="alert">
+                            {{ Session::get('fail') }}
+                        </div>
+                    @endif
+                <form action="{{route('resetPassword')}}" method="POST">
                           @csrf
                           <input type="hidden" name="token" value="{{ $token }}">
                     <input type="hidden" name="token" value="{{$token}}">
                     <span class="email-text">Enter a new password for your account</span>
-
                     <div class="form-group">
-                        <input type="password" class="form-control" name="new_password" placeholder="New Password">
+                        <input type="text" class="form-control" name="email" placeholder="Email" value="{{$email ?? old('email')}}">
+                        @if ($errors->has('email'))
+                                      <span class="text-danger">{{ $errors->first('email') }}</span>
+                                  @endif
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-control" name="confirm_password" placeholder="Confirm New Password">
+                        <input type="password" class="form-control" name="password" placeholder="New Password">
+                        @if ($errors->has('password'))
+                                      <span class="text-danger">{{ $errors->first('password') }}</span>
+                                  @endif
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" name="password_confirmation" placeholder="Confirm New Password">
+                        @if ($errors->has('password_confirmation'))
+                                      <span class="text-danger">{{ $errors->first('password_confirmation') }}</span>
+                                  @endif
                     </div>
 
                     <div class="form-group">
@@ -213,7 +234,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
         </script>
-    <script src="assets/js/custom.js"></script>
+    <script src="{{asset('assets/js/custom.js')}}"></script>
 </body>
 
 </html>

@@ -121,52 +121,43 @@
                             <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
                                 aria-labelledby="pills-home-tab">
                                 <ul class="nav sub-cat-nav">
-                                  
+                                  @foreach($itemfoods as $item)
+                                  @if($restaurant->itemfoods->contains($item->id))
                                     <li class="nav-item">
-                                        <a class="nav-link js-scroll-trigger active" href="#sub-cat2">Burgers</a>
+                                        <a class="nav-link js-scroll-trigger" href="#sub-cat2">{{$item->food_item}}</a>
                                     </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link js-scroll-trigger" href="#sub-cat3">Pizza</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link js-scroll-trigger" href="#sub-cat4">Burgers</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link js-scroll-trigger" href="#sub-cat5">Pizza</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link js-scroll-trigger" href="#sub-cat6">Burgers</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link js-scroll-trigger" href="#sub-cat7">Pizza</a>
-                                    </li>
+                                    @endif
+                                    @endforeach
                                 </ul>
 
                                 <div class="food-item-cards-wrap">
                                     <div class="sub-cat mt-0" id="sub-cat1">
                                         <h4 class="mb-4">Most Popular</h4>
+                                       
                                         <div class="row">
+                                        @foreach($itemfoods as $item)
+                                        @if($restaurant->itemfoods->contains($item->id))
                                             <div class="col-lg-6">
                                                 <div class="food-item-card">
                                                     <div class="food-item-img" style="
-                                background-image: url('assets/images/img2.jpg');
+                                background-image: url({{asset('assets/images/img2.jpg')}});
                               "></div>
                                                     <div class="food-item-body">
                                                         <h5 class="card-title">
-                                                            Spicy Beetroot & Potato Burger
+                                                            {{$item->food_item}}
                                                         </h5>
                                                         <p class="description">
-                                                            Lorem ipsum dolor sit amet consectetur
-                                                            adipisicing elit. Expedita?
+                                                           {{$item->description}}
                                                         </p>
                                                         <div class="pricing">
                                                             <div class="price-wrap">
                                                                 <div class="non-div food-type-div">
                                                                     <i class="bx bxs-circle"></i>
                                                                 </div>
-                                                                <span class="price">$11.99</span>
-                                                                <span class="actual-price">$13.99</span>
+                                                                <span class="price">{{$item->rate}}</span>
+                                                                <span class="actual-price">$110.99</span>
                                                             </div>
+                                                            
                                                             <div class="add-remove-button">
                                                                 <div class="input-group">
                                                                     <input type="button" value="-" class="button-minus"
@@ -177,845 +168,39 @@
                                                                         data-field="quantity" data-toggle="modal"
                                                                         data-target="#add-repeat" />
                                                                 </div>
+                                                               
+                                                          
                                                             </div>
+                                                            
                                                         </div>
+                                                       
                                                     </div>
+                                                   
                                                 </div>
-                                            </div>
-
-                                            <div class="col-lg-6">
-                                                <div class="food-item-card">
-                                                    <div class="food-item-img" style="
-                                background-image: url('assets/images/img2.jpg');
-                              "></div>
-                                                    <div class="food-item-body">
-                                                        <h5 class="card-title">
-                                                            Spicy Beetroot & Potato Burger
-                                                        </h5>
-                                                        <p class="description">
-                                                            Lorem ipsum dolor sit amet consectetur
-                                                            adipisicing elit. Expedita?
-                                                        </p>
-                                                        <div class="pricing">
-                                                            <div class="price-wrap">
-                                                                <div class="non-div food-type-div">
-                                                                    <i class="bx bxs-circle"></i>
-                                                                </div>
-                                                                <span class="price">$11.99</span>
-                                                                <span class="actual-price">$13.99</span>
-                                                            </div>
-                                                            <div class="add-remove-button">
-                                                                <button type="button" class="btn btn-outline-primary"
-                                                                    data-toggle="modal" data-target="#dishModal">
-                                                                    ADD
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
                                                 </div>
+                                                   
+                                                   
+                                           
+                                            @endif
+                                            @endforeach  
                                             </div>
-
-                                            <div class="col-lg-6">
-                                                <div class="food-item-card">
-                                                    <div class="food-item-img" style="
-                                background-image: url('assets/images/img2.jpg');
-                              "></div>
-                                                    <div class="food-item-body">
-                                                        <h5 class="card-title">
-                                                            Spicy Beetroot & Potato Burger
-                                                        </h5>
-                                                        <div class="pricing">
-                                                            <div class="price-wrap">
-                                                                <div class="veg-div food-type-div">
-                                                                    <i class="bx bxs-circle"></i>
-                                                                </div>
-                                                                <span class="price">$11.99</span>
-                                                                <span class="actual-price">$13.99</span>
-                                                            </div>
-                                                            <div class="add-remove-button">
-                                                                <div class="input-group">
-                                                                    <input type="button" value="-" class="button-minus"
-                                                                        data-field="quantity" />
-                                                                    <input type="number" step="1" max="" value="0"
-                                                                        name="quantity" class="quantity-field" />
-                                                                    <input type="button" value="+" class="button-plus"
-                                                                        data-field="quantity" data-toggle="modal"
-                                                                        data-target="#dishModal" />
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-lg-6">
-                                                <div class="food-item-card">
-                                                    <div class="food-item-img" style="
-                                background-image: url('assets/images/test1.jpg');
-                              "></div>
-                                                    <div class="food-item-body">
-                                                        <h5 class="card-title">
-                                                            Spicy Beetroot & Potato Burger
-                                                        </h5>
-                                                        <p class="description">
-                                                            Lorem ipsum dolor sit amet consectetur
-                                                            adipisicing elit. Expedita?
-                                                        </p>
-                                                        <div class="pricing">
-                                                            <div class="price-wrap">
-                                                                <div class="veg-div food-type-div">
-                                                                    <i class="bx bxs-circle"></i>
-                                                                </div>
-                                                                <span class="price">$11.99</span>
-                                                                <span class="actual-price">$13.99</span>
-                                                            </div>
-                                                            <div class="add-remove-button">
-                                                                <div class="input-group">
-                                                                    <input type="button" value="-" class="button-minus"
-                                                                        data-field="quantity" />
-                                                                    <input type="number" step="1" max="" value="0"
-                                                                        name="quantity" class="quantity-field" />
-                                                                    <input type="button" value="+" class="button-plus"
-                                                                        data-field="quantity" data-toggle="modal"
-                                                                        data-target="#dishModal" />
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <div class="food-item-card">
-                                                    <div class="food-item-img" style="
-                                background-image: url('assets/images/test2.jpg');
-                              "></div>
-                                                    <div class="food-item-body">
-                                                        <h5 class="card-title">
-                                                            Spicy Beetroot & Potato Burger
-                                                        </h5>
-                                                        <p class="description">
-                                                            Lorem ipsum dolor sit amet consectetur
-                                                            adipisicing elit. Expedita?
-                                                        </p>
-                                                        <div class="pricing">
-                                                            <div class="price-wrap">
-                                                                <div class="veg-div food-type-div">
-                                                                    <i class="bx bxs-circle"></i>
-                                                                </div>
-                                                                <span class="price">$11.99</span>
-                                                                <span class="actual-price">$13.99</span>
-                                                            </div>
-                                                            <div class="add-remove-button">
-                                                                <div class="input-group">
-                                                                    <input type="button" value="-" class="button-minus"
-                                                                        data-field="quantity" />
-                                                                    <input type="number" step="1" max="" value="0"
-                                                                        name="quantity" class="quantity-field" />
-                                                                    <input type="button" value="+" class="button-plus"
-                                                                        data-field="quantity" data-toggle="modal"
-                                                                        data-target="#dishModal" />
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-lg-6">
-                                                <div class="food-item-card">
-                                                    <div class="food-item-img" style="
-                                background-image: url('assets/images/test3.jpg');
-                              "></div>
-                                                    <div class="food-item-body">
-                                                        <h5 class="card-title">
-                                                            Spicy Beetroot & Potato Burger
-                                                        </h5>
-                                                        <div class="pricing">
-                                                            <div class="price-wrap">
-                                                                <div class="non-div food-type-div">
-                                                                    <i class="bx bxs-circle"></i>
-                                                                </div>
-                                                                <span class="price">$11.99</span>
-                                                                <span class="actual-price">$13.99</span>
-                                                            </div>
-                                                            <div class="add-remove-button">
-                                                                <div class="input-group">
-                                                                    <input type="button" value="-" class="button-minus"
-                                                                        data-field="quantity" />
-                                                                    <input type="number" step="1" max="" value="0"
-                                                                        name="quantity" class="quantity-field" />
-                                                                    <input type="button" value="+" class="button-plus"
-                                                                        data-field="quantity" data-toggle="modal"
-                                                                        data-target="#dishModal" />
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <div class="food-item-card">
-                                                    <div class="food-item-img" style="
-                                background-image: url('assets/images/test4.jpg');
-                              "></div>
-                                                    <div class="food-item-body">
-                                                        <h5 class="card-title">
-                                                            Spicy Beetroot & Potato Burger
-                                                        </h5>
-                                                        <div class="pricing">
-                                                            <div class="price-wrap">
-                                                                <div class="non-div food-type-div">
-                                                                    <i class="bx bxs-circle"></i>
-                                                                </div>
-                                                                <span class="price">$11.99</span>
-                                                                <span class="actual-price">$13.99</span>
-                                                            </div>
-                                                            <div class="add-remove-button">
-                                                                <div class="input-group">
-                                                                    <input type="button" value="-" class="button-minus"
-                                                                        data-field="quantity" />
-                                                                    <input type="number" step="1" max="" value="0"
-                                                                        name="quantity" class="quantity-field" />
-                                                                    <input type="button" value="+" class="button-plus"
-                                                                        data-field="quantity" data-toggle="modal"
-                                                                        data-target="#dishModal" />
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-lg-6">
-                                                <div class="food-item-card unavailable">
-                                                    <div class="food-item-img" style="
-                                background-image: url('assets/images/test5.jpg');
-                              "></div>
-                                                    <div class="food-item-body">
-                                                        <h5 class="card-title">
-                                                            Spicy Beetroot & Potato Burger
-                                                        </h5>
-                                                        <div class="pricing">
-                                                            <div class="price-wrap">
-                                                                <div class="non-div food-type-div">
-                                                                    <i class="bx bxs-circle"></i>
-                                                                </div>
-                                                                <span class="price">$11.99</span>
-                                                                <span class="actual-price">$13.99</span>
-                                                            </div>
-                                                            <span class="unavailable-text">Unavailable</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <div class="food-item-card unavailable">
-                                                    <div class="food-item-img" style="
-                                background-image: url('assets/images/img2.jpg');
-                              "></div>
-                                                    <div class="food-item-body">
-                                                        <h5 class="card-title">
-                                                            Spicy Beetroot & Potato Burger
-                                                        </h5>
-                                                        <div class="pricing">
-                                                            <div class="price-wrap">
-                                                                <div class="non-div food-type-div">
-                                                                    <i class="bx bxs-circle"></i>
-                                                                </div>
-                                                                <span class="price">$11.99</span>
-                                                                <span class="actual-price">$13.99</span>
-                                                            </div>
-                                                            <span class="unavailable-text">Unavailable</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-lg-6">
-                                                <div class="food-item-card">
-                                                    <div class="food-item-img" style="
-                                background-image: url('assets/images/img1.jpg');
-                              "></div>
-                                                    <div class="food-item-body">
-                                                        <h5 class="card-title">
-                                                            Spicy Beetroot & Potato Burger
-                                                        </h5>
-                                                        <div class="pricing">
-                                                            <div class="price-wrap">
-                                                                <div class="non-div food-type-div">
-                                                                    <i class="bx bxs-circle"></i>
-                                                                </div>
-                                                                <span class="price">$11.99</span>
-                                                                <span class="actual-price">$13.99</span>
-                                                            </div>
-                                                            <div class="add-remove-button">
-                                                                <button type="button" class="btn btn-outline-primary"
-                                                                    data-toggle="modal" data-target="#dishModal">
-                                                                    ADD
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <div class="food-item-card">
-                                                    <div class="food-item-img" style="
-                                background-image: url('assets/images/img2.jpg');
-                              "></div>
-                                                    <div class="food-item-body">
-                                                        <h5 class="card-title">
-                                                            Spicy Beetroot & Potato Burger
-                                                        </h5>
-                                                        <div class="pricing">
-                                                            <div class="price-wrap">
-                                                                <div class="non-div food-type-div">
-                                                                    <i class="bx bxs-circle"></i>
-                                                                </div>
-                                                                <span class="price">$11.99</span>
-                                                                <span class="actual-price">$13.99</span>
-                                                            </div>
-                                                            <div class="add-remove-button">
-                                                                <button type="button" class="btn btn-outline-primary"
-                                                                    data-toggle="modal" data-target="#dishModal">
-                                                                    ADD
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                                               
+                                                          
                                         </div>
+                                                               
+                                     </div>
+                                                          
                                     </div>
-
-                                    <div class="sub-cat" id="sub-cat2">
-                                        <h4 class="mb-4">Burgers</h4>
-                                        <div class="row">
-                                            <div class="col-lg-6">
-                                                <div class="food-item-card">
-                                                    <div class="food-item-img" style="
-                                background-image: url('assets/images/img1.jpg');
-                              "></div>
-                                                    <div class="food-item-body">
-                                                        <h5 class="card-title">
-                                                            Spicy Beetroot & Potato Burger
-                                                        </h5>
-                                                        <div class="pricing">
-                                                            <div class="price-wrap">
-                                                                <div class="non-div food-type-div">
-                                                                    <i class="bx bxs-circle"></i>
-                                                                </div>
-                                                                <span class="price">$11.99</span>
-                                                                <span class="actual-price">$13.99</span>
-                                                            </div>
-                                                            <div class="add-remove-button">
-                                                                <button type="button" class="btn btn-outline-primary"
-                                                                    data-toggle="modal" data-target="#dishModal">
-                                                                    ADD
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <div class="food-item-card">
-                                                    <div class="food-item-img" style="
-                                background-image: url('assets/images/img2.jpg');
-                              "></div>
-                                                    <div class="food-item-body">
-                                                        <h5 class="card-title">
-                                                            Spicy Beetroot & Potato Burger
-                                                        </h5>
-                                                        <div class="pricing">
-                                                            <div class="price-wrap">
-                                                                <div class="non-div food-type-div">
-                                                                    <i class="bx bxs-circle"></i>
-                                                                </div>
-                                                                <span class="price">$11.99</span>
-                                                                <span class="actual-price">$13.99</span>
-                                                            </div>
-                                                            <div class="add-remove-button">
-                                                                <button type="button" class="btn btn-outline-primary"
-                                                                    data-toggle="modal" data-target="#dishModal">
-                                                                    ADD
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <div class="food-item-card">
-                                                    <div class="food-item-img" style="
-                                background-image: url('assets/images/img1.jpg');
-                              "></div>
-                                                    <div class="food-item-body">
-                                                        <h5 class="card-title">
-                                                            Spicy Beetroot & Potato Burger
-                                                        </h5>
-                                                        <div class="pricing">
-                                                            <div class="price-wrap">
-                                                                <div class="non-div food-type-div">
-                                                                    <i class="bx bxs-circle"></i>
-                                                                </div>
-                                                                <span class="price">$11.99</span>
-                                                                <span class="actual-price">$13.99</span>
-                                                            </div>
-                                                            <div class="add-remove-button">
-                                                                <button type="button" class="btn btn-outline-primary"
-                                                                    data-toggle="modal" data-target="#dishModal">
-                                                                    ADD
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <div class="food-item-card">
-                                                    <div class="food-item-img" style="
-                                background-image: url('assets/images/img2.jpg');
-                              "></div>
-                                                    <div class="food-item-body">
-                                                        <h5 class="card-title">
-                                                            Spicy Beetroot & Potato Burger
-                                                        </h5>
-                                                        <div class="pricing">
-                                                            <div class="price-wrap">
-                                                                <div class="non-div food-type-div">
-                                                                    <i class="bx bxs-circle"></i>
-                                                                </div>
-                                                                <span class="price">$11.99</span>
-                                                                <span class="actual-price">$13.99</span>
-                                                            </div>
-                                                            <div class="add-remove-button">
-                                                                <button type="button" class="btn btn-outline-primary"
-                                                                    data-toggle="modal" data-target="#dishModal">
-                                                                    ADD
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <div class="food-item-card">
-                                                    <div class="food-item-img" style="
-                                background-image: url('assets/images/img1.jpg');
-                              "></div>
-                                                    <div class="food-item-body">
-                                                        <h5 class="card-title">
-                                                            Spicy Beetroot & Potato Burger
-                                                        </h5>
-                                                        <div class="pricing">
-                                                            <div class="price-wrap">
-                                                                <div class="non-div food-type-div">
-                                                                    <i class="bx bxs-circle"></i>
-                                                                </div>
-                                                                <span class="price">$11.99</span>
-                                                                <span class="actual-price">$13.99</span>
-                                                            </div>
-                                                            <div class="add-remove-button">
-                                                                <button type="button" class="btn btn-outline-primary"
-                                                                    data-toggle="modal" data-target="#dishModal">
-                                                                    ADD
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <div class="food-item-card">
-                                                    <div class="food-item-img" style="
-                                background-image: url('assets/images/img2.jpg');
-                              "></div>
-                                                    <div class="food-item-body">
-                                                        <h5 class="card-title">
-                                                            Spicy Beetroot & Potato Burger
-                                                        </h5>
-                                                        <div class="pricing">
-                                                            <div class="price-wrap">
-                                                                <div class="non-div food-type-div">
-                                                                    <i class="bx bxs-circle"></i>
-                                                                </div>
-                                                                <span class="price">$11.99</span>
-                                                                <span class="actual-price">$13.99</span>
-                                                            </div>
-                                                            <div class="add-remove-button">
-                                                                <button type="button" class="btn btn-outline-primary"
-                                                                    data-toggle="modal" data-target="#dishModal">
-                                                                    ADD
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <div class="food-item-card">
-                                                    <div class="food-item-img" style="
-                                background-image: url('assets/images/img1.jpg');
-                              "></div>
-                                                    <div class="food-item-body">
-                                                        <h5 class="card-title">
-                                                            Spicy Beetroot & Potato Burger
-                                                        </h5>
-                                                        <div class="pricing">
-                                                            <div class="price-wrap">
-                                                                <div class="non-div food-type-div">
-                                                                    <i class="bx bxs-circle"></i>
-                                                                </div>
-                                                                <span class="price">$11.99</span>
-                                                                <span class="actual-price">$13.99</span>
-                                                            </div>
-                                                            <div class="add-remove-button">
-                                                                <button type="button" class="btn btn-outline-primary"
-                                                                    data-toggle="modal" data-target="#dishModal">
-                                                                    ADD
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <div class="food-item-card">
-                                                    <div class="food-item-img" style="
-                                background-image: url('assets/images/img2.jpg');
-                              "></div>
-                                                    <div class="food-item-body">
-                                                        <h5 class="card-title">
-                                                            Spicy Beetroot & Potato Burger
-                                                        </h5>
-                                                        <div class="pricing">
-                                                            <div class="price-wrap">
-                                                                <div class="non-div food-type-div">
-                                                                    <i class="bx bxs-circle"></i>
-                                                                </div>
-                                                                <span class="price">$11.99</span>
-                                                                <span class="actual-price">$13.99</span>
-                                                            </div>
-                                                            <div class="add-remove-button">
-                                                                <button type="button" class="btn btn-outline-primary"
-                                                                    data-toggle="modal" data-target="#dishModal">
-                                                                    ADD
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="sub-cat" id="sub-cat3">
-                                        <h4 class="mb-4">Pizzas</h4>
-                                        <div class="row">
-                                            <div class="col-lg-6">
-                                                <div class="food-item-card">
-                                                    <div class="food-item-img" style="
-                                background-image: url('assets/images/img1.jpg');
-                              "></div>
-                                                    <div class="food-item-body">
-                                                        <h5 class="card-title">
-                                                            Spicy Beetroot & Potato Burger
-                                                        </h5>
-                                                        <div class="pricing">
-                                                            <div class="price-wrap">
-                                                                <div class="non-div food-type-div">
-                                                                    <i class="bx bxs-circle"></i>
-                                                                </div>
-                                                                <span class="price">$11.99</span>
-                                                                <span class="actual-price">$13.99</span>
-                                                            </div>
-                                                            <div class="add-remove-button">
-                                                                <button type="button" class="btn btn-outline-primary"
-                                                                    data-toggle="modal" data-target="#dishModal">
-                                                                    ADD
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <div class="food-item-card">
-                                                    <div class="food-item-img" style="
-                                background-image: url('assets/images/img2.jpg');
-                              "></div>
-                                                    <div class="food-item-body">
-                                                        <h5 class="card-title">
-                                                            Spicy Beetroot & Potato Burger
-                                                        </h5>
-                                                        <div class="pricing">
-                                                            <div class="price-wrap">
-                                                                <div class="non-div food-type-div">
-                                                                    <i class="bx bxs-circle"></i>
-                                                                </div>
-                                                                <span class="price">$11.99</span>
-                                                                <span class="actual-price">$13.99</span>
-                                                            </div>
-                                                            <div class="add-remove-button">
-                                                                <button type="button" class="btn btn-outline-primary"
-                                                                    data-toggle="modal" data-target="#dishModal">
-                                                                    ADD
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <div class="food-item-card">
-                                                    <div class="food-item-img" style="
-                                background-image: url('assets/images/img1.jpg');
-                              "></div>
-                                                    <div class="food-item-body">
-                                                        <h5 class="card-title">
-                                                            Spicy Beetroot & Potato Burger
-                                                        </h5>
-                                                        <div class="pricing">
-                                                            <div class="price-wrap">
-                                                                <div class="non-div food-type-div">
-                                                                    <i class="bx bxs-circle"></i>
-                                                                </div>
-                                                                <span class="price">$11.99</span>
-                                                                <span class="actual-price">$13.99</span>
-                                                            </div>
-                                                            <div class="add-remove-button">
-                                                                <button type="button" class="btn btn-outline-primary"
-                                                                    data-toggle="modal" data-target="#dishModal">
-                                                                    ADD
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <div class="food-item-card">
-                                                    <div class="food-item-img" style="
-                                background-image: url('assets/images/img2.jpg');
-                              "></div>
-                                                    <div class="food-item-body">
-                                                        <h5 class="card-title">
-                                                            Spicy Beetroot & Potato Burger
-                                                        </h5>
-                                                        <div class="pricing">
-                                                            <div class="price-wrap">
-                                                                <div class="non-div food-type-div">
-                                                                    <i class="bx bxs-circle"></i>
-                                                                </div>
-                                                                <span class="price">$11.99</span>
-                                                                <span class="actual-price">$13.99</span>
-                                                            </div>
-                                                            <div class="add-remove-button">
-                                                                <button type="button" class="btn btn-outline-primary"
-                                                                    data-toggle="modal" data-target="#dishModal">
-                                                                    ADD
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <div class="food-item-card">
-                                                    <div class="food-item-img" style="
-                                background-image: url('assets/images/img1.jpg');
-                              "></div>
-                                                    <div class="food-item-body">
-                                                        <h5 class="card-title">
-                                                            Spicy Beetroot & Potato Burger
-                                                        </h5>
-                                                        <div class="pricing">
-                                                            <div class="price-wrap">
-                                                                <div class="non-div food-type-div">
-                                                                    <i class="bx bxs-circle"></i>
-                                                                </div>
-                                                                <span class="price">$11.99</span>
-                                                                <span class="actual-price">$13.99</span>
-                                                            </div>
-                                                            <div class="add-remove-button">
-                                                                <button type="button" class="btn btn-outline-primary"
-                                                                    data-toggle="modal" data-target="#dishModal">
-                                                                    ADD
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <div class="food-item-card">
-                                                    <div class="food-item-img" style="
-                                background-image: url('assets/images/img2.jpg');
-                              "></div>
-                                                    <div class="food-item-body">
-                                                        <h5 class="card-title">
-                                                            Spicy Beetroot & Potato Burger
-                                                        </h5>
-                                                        <div class="pricing">
-                                                            <div class="price-wrap">
-                                                                <div class="non-div food-type-div">
-                                                                    <i class="bx bxs-circle"></i>
-                                                                </div>
-                                                                <span class="price">$11.99</span>
-                                                                <span class="actual-price">$13.99</span>
-                                                            </div>
-                                                            <div class="add-remove-button">
-                                                                <button type="button" class="btn btn-outline-primary"
-                                                                    data-toggle="modal" data-target="#dishModal">
-                                                                    ADD
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <div class="food-item-card">
-                                                    <div class="food-item-img" style="
-                                background-image: url('assets/images/img1.jpg');
-                              "></div>
-                                                    <div class="food-item-body">
-                                                        <h5 class="card-title">
-                                                            Spicy Beetroot & Potato Burger
-                                                        </h5>
-                                                        <div class="pricing">
-                                                            <div class="price-wrap">
-                                                                <div class="non-div food-type-div">
-                                                                    <i class="bx bxs-circle"></i>
-                                                                </div>
-                                                                <span class="price">$11.99</span>
-                                                                <span class="actual-price">$13.99</span>
-                                                            </div>
-                                                            <div class="add-remove-button">
-                                                                <button type="button" class="btn btn-outline-primary"
-                                                                    data-toggle="modal" data-target="#dishModal">
-                                                                    ADD
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <div class="food-item-card">
-                                                    <div class="food-item-img" style="
-                                background-image: url('assets/images/img2.jpg');
-                              "></div>
-                                                    <div class="food-item-body">
-                                                        <h5 class="card-title">
-                                                            Spicy Beetroot & Potato Burger
-                                                        </h5>
-                                                        <div class="pricing">
-                                                            <div class="price-wrap">
-                                                                <div class="non-div food-type-div">
-                                                                    <i class="bx bxs-circle"></i>
-                                                                </div>
-                                                                <span class="price">$11.99</span>
-                                                                <span class="actual-price">$13.99</span>
-                                                            </div>
-                                                            <div class="add-remove-button">
-                                                                <button type="button" class="btn btn-outline-primary"
-                                                                    data-toggle="modal" data-target="#dishModal">
-                                                                    ADD
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                                      
+                                </div>           
+                                
                                 </div>
-                            </div>
-                            <div class="tab-pane fade" id="pills-profile" role="tabpanel"
-                                aria-labelledby="pills-profile-tab">
-                                <ul class="nav sub-cat-nav">
-                                    <li class="nav-item">
-                                        <a class="nav-link js-scroll-trigger active" href="#sub-cat11">Most Popular</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link js-scroll-trigger" href="#sub-cat12">Burgers</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link js-scroll-trigger" href="#sub-cat13">Pizza</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link js-scroll-trigger" href="#sub-cat14">Burgers</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link js-scroll-trigger" href="#sub-cat15">Pizza</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link js-scroll-trigger" href="#sub-cat16">Burgers</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link js-scroll-trigger" href="#sub-cat17">Pizza</a>
-                                    </li>
-                                </ul>
-
-                                Lunch details goes here Lorem ipsum, dolor sit amet
-                                consectetur adipisicing elit. Nostrum alias at molestiae autem
-                                libero harum ratione modi eius dolor esse, consectetur dolore
-                                quibusdam, voluptatum id veniam expedita asperiores itaque hic
-                                quo debitis quae nihil in non! Sit possimus repudiandae cum
-                                commodi? Dolorum excepturi ad adipisci ducimus deleniti ab
-                                vitae aliquam. Corporis reiciendis dolorum inventore corrupti
-                                molestiae fugiat maiores ullam veritatis dolorem
-                                exercitationem magni, et quisquam expedita ipsam dolores
-                                deleniti quis aperiam tempore nihil animi beatae cupiditate
-                                unde! Amet architecto dolor laudantium nostrum, sed
-                                necessitatibus doloremque error qui porro reiciendis itaque
-                                molestiae voluptatibus tempore consectetur impedit iure culpa
-                                aperiam perspiciatis nihil?
-                            </div>
-                            <div class="tab-pane fade" id="pills-contact" role="tabpanel"
-                                aria-labelledby="pills-contact-tab">
-                                <ul class="nav sub-cat-nav">
-                                    <li class="nav-item">
-                                        <a class="nav-link js-scroll-trigger active" href="#sub-cat21">Most Popular</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link js-scroll-trigger" href="#sub-cat22">Burgers</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link js-scroll-trigger" href="#sub-cat23">Pizza</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link js-scroll-trigger" href="#sub-cat24">Burgers</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link js-scroll-trigger" href="#sub-cat25">Pizza</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link js-scroll-trigger" href="#sub-cat26">Burgers</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link js-scroll-trigger" href="#sub-cat27">Pizza</a>
-                                    </li>
-                                </ul>
-
-                                Dinner info goes here Lorem ipsum dolor sit amet consectetur
-                                adipisicing elit. Quaerat quas ea soluta in adipisci explicabo
-                                perspiciatis ipsam molestias modi nulla accusamus corrupti
-                                quibusdam, odio eum necessitatibus sed! Porro ipsa praesentium
-                                magnam eaque neque. Qui commodi necessitatibus adipisci fugiat
-                                debitis quasi voluptas nisi quas, sint ex unde vero ipsum
-                                veniam modi. Ipsam dicta deleniti similique dolores
-                                exercitationem est ex, nihil voluptate quo ducimus alias
-                                accusamus reprehenderit molestias suscipit animi cumque
-                                perferendis provident sapiente magnam vitae repellendus natus
-                                ipsa temporibus dolorem. Eaque labore aperiam illo ut ipsum
-                                totam delectus soluta nam earum facilis. Iusto earum doloribus
-                                excepturi minima est, sint eligendi quos.
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                        </div>                             
+   
+                        
+                                             
+                       
+                
                 <div class="col-lg-4 cart-col">
                     <div class="cart d-none d-md-block">
                         
@@ -1037,8 +222,11 @@
 
                     <!-- Empty cart end  -->
                 </div>
+                
             </div>
+            
         </div>
+         
     </section>
     <!-- modal -->
 
@@ -1189,7 +377,7 @@
 
 
     <!-- modal add or Repeat item -->
-    <div class="modal fade dish-modal" id="add-repeat" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <!-- <div class="modal fade dish-modal" id="add-repeat" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -1226,7 +414,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <!-- modal repeat item-->
     <!-- modal Add Repeat-2 item -->
     <div class="modal fade dish-modal" id="add-repeat-2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"

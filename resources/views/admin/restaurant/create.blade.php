@@ -239,6 +239,28 @@
                     <div class="row align-items-center pt-3 pb-2">
 
                     <div class="col-md-3 ps-5">
+                    <h6 class="mb-0">Item</h6>
+                    </div>
+                    <div class="col-md-9 pe-5">
+                    <select id="selectall-tag1" class=" form-control items" name="itemfood_id[]" multiple="multiple">
+
+                      @foreach($itemfoods as $item)
+                      <option value="{{$item->id}}">{{$item->food_item}}</option>
+                      @endforeach
+
+                      </select>
+                  </div>
+
+                  @if ($errors->has('itemfood_id'))
+                            <span class="text-danger">{{ $errors->first('itemfood_id') }}</span>
+                        @endif
+                    </div> 
+
+                    
+                    <hr class="mx-n3">
+                    <div class="row align-items-center pt-3 pb-2">
+
+                    <div class="col-md-3 ps-5">
                     <h6 class="mb-0"> Is open</h6>
                     </div>
                     <div class="col-md-9 pe-5">
@@ -293,7 +315,10 @@
   <script>
     $(document).ready(function() {
     $('.categories').select2();
+    $('.items').select2();
 });
+
   </script>
+ 
 @stop
 </x-admin-master>

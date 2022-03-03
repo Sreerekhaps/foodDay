@@ -132,6 +132,8 @@ Route::name('admin.')->prefix('admin')->namespace('Admin')->group(function (){
     Route::post('/address_store', [App\Http\Controllers\FrontController::class, 'address_store'])->name('address_store');
     Route::get('/edit_address/{id}', [App\Http\Controllers\FrontController::class, 'edit_address'])->name('edit_address');
     Route::get('/address/{id}', [App\Http\Controllers\FrontController::class, 'address_destroy'])->name('address_destroy');
+    Route::patch('/edit_address/{address}', [App\Http\Controllers\FrontController::class, 'update_address'])->name('update_address');
+
 
 
     Route::get('/logoutuser', [App\Http\Controllers\FrontController::class, 'logout']);
@@ -145,10 +147,15 @@ Route::name('admin.')->prefix('admin')->namespace('Admin')->group(function (){
 Route::get('/search', [App\Http\Controllers\FrontController::class, 'search'])->name('search');
 Route::get('/restaurant_listing', [App\Http\Controllers\FrontController::class, 'restaurant_listing'])->name('restaurant_listing');
 Route::get('/restaurant_details/{restaurant}', [FrontController::class, 'restaurant_details'])->name('restaurant_details');
+// Route::get('/restaurant_items', [FrontController::class, 'restaurant_items'])->name('restaurant_items');
+
+
 ///////////////////////////////
 
 /////////Forgot Password///////
 Route::get('/password/forgot',[FrontController::class,'showforgotForm'])->name('showforgotForm');
 Route::post('/password/forgot',[FrontController::class,'sendresetLink'])->name('sendresetLink');
+Route::get('/password/reset/{token}',[FrontController::class,'showresetForm'])->name('showresetForm');
+Route::post('/password/reset',[FrontController::class,'resetPassword'])->name('resetPassword');
 
 //////////////////////////////
