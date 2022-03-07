@@ -304,15 +304,7 @@ public function logout(){
         }
 
 
-        public function restaurant_details(Restaurant $restaurant )
-
-        {
-        $itemfoods=Itemfood::all();
-        $cuisines=Cuisine::all();
-
-        return view('front.restaurant_details', ['restaurant'=>$restaurant], compact('cuisines','itemfoods'));
-
-        }
+       
         // public function restaurant_items(Restaurant $restaurant){
         //     $itemfoods=Itemfood::all();
         //     $cuisines=Cuisine::all();
@@ -322,8 +314,12 @@ public function logout(){
      //////////////Add to Cart///////////////
      public function cart()
     {
+       
+
+            return view('front.cart');
+
         
-        return view('front.cart');
+        
     }
      
     public function addToCart($id)
@@ -344,9 +340,68 @@ public function logout(){
         }
           
         session()->put('cart', $cart);
-        return redirect()->route('cart')->with('success', 'Product added to cart successfully!');
+        return redirect()->back()->with('success', 'Product added to cart successfully!');
         
 
+    }
+    public function removeFromCart($id){
+        $itemfoods = Itemfood::findOrFail($id);
+           
+        $cart = session()->get('cart', []);
+   
+        if(isset($cart[$id])) {
+            $cart[$id]['quantity']--;
+        } else {
+            $cart[$id] = [
+                "food_item" => $itemfoods->food_item,
+                "quantity" => 1,
+                "rate" => $itemfoods->rate,
+            
+                
+            ];
+        }
+          
+        session()->put('cart', $cart);
+        return redirect()->back()->with('success', 'Product added to cart successfully!');
+
+    }
+    public function remove(Request $request)
+    {
+        if($request->id) {
+            $cart = session()->get('cart');
+            if(isset($cart[$request->id])) {
+                unset($cart[$request->id]);
+                session()->put('cart', $cart);
+            }
+            session()->flash('success', 'Product removed successfully');
+        }
+    }
+    public function cart2(){
+
+       
+            return view('front.cart2');
+            
+        
+
+    }
+    public function emptycart(){
+        return view('front.emptycart');
+    }
+    public function restaurant_details(Restaurant $restaurant )
+
+    {
+    $itemfoods=Itemfood::all();
+    $cuisines=Cuisine::all();
+
+    return view('front.restaurant_details', ['restaurant'=>$restaurant], compact('cuisines','itemfoods'));
+
+    }
+
+    public function checkout(Restaurant $restaurant){
+        $address=Address::all();
+        $itemfoods=Itemfood::all();
+        $restaurant=Restaurant::all();
+        return view('front.checkout',['restaurants'=>$restaurant],compact('itemfoods','address'));
     }
      
                 

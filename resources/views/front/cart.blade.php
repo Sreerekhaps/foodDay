@@ -31,10 +31,10 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item active">
-                            <a class="nav-link" href="home.html">Home <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="/my_home">Home <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="restaurant-listing.html">Restaurants</a>
+                            <a class="nav-link" href="/restaurant_listing">Restaurants</a>
                         </li>
 
                         <li class="nav-item">
@@ -42,18 +42,39 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="my-account.html">
+                            <a class="nav-link" href="/myaccount">
                                 <i class='bx bx-user mr-1'></i>
                                 My Account</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="cart.html">
-                                <span class="cart-badge-wrap">
-                                    <span class="cart-badge">9</span>
-                                    <i class='bx bx-shopping-bag mr-1'></i>
-                                </span>
-                                Cart</a>
-                        </li>
+                        @if(count((array) session('cart'))==0)
+
+<a class="nav-link" href="/empty_cart">
+
+<span class="cart-badge-wrap">
+
+<span class="cart-badge">{{ count((array) session('cart')) }}</span>
+
+<i class='bx bx-shopping-bag mr-1'></i>
+
+</span>
+
+Cart</a>
+
+@else
+
+<a class="nav-link" href="/cart_items">
+
+<span class="cart-badge-wrap">
+
+<span class="cart-badge">{{ count((array) session('cart')) }}</span>
+
+<i class='bx bx-shopping-bag mr-1'></i>
+
+</span>
+
+Cart</a>
+
+@endif
                     </ul>
                 </div>
             </nav>
@@ -101,16 +122,24 @@
                             <td>
                                 <div class="add-remove-button">
                                     <div class="input-group">
-                                        <input type="button" value="-" class="button-minus" data-field="quantity">
+                                    <a href="{{route('removeFromCart',$id)}}" min="0" class="number-button  minus">-</a>
                                         <input type="number" step="1" max="" value="{{ $details['quantity'] }}" name="quantity"
                                             class="quantity-field">
-                                        <input type="button" value="+" class="button-plus" data-field="quantity">
+                                        <a href="{{route('addToCart',$id)}}" class="number-button  plus">+</a>
                                     </div>
                                 </div>
                             </td>
                             <td>{{$total}}</td>
-                            <td>
-                                <a href="#" class="float-right"><i class='bx bx-trash'></i></a>
+                            
+                            <td class="actions" data-th="">
+                            <a href="{{route('remove')}}" class="float-right"><i class='bx bx-trash'></i></a>
+                    </td>
+                            <!-- <form method="delete" action="{{route('remove',$id)}}">
+                            @csrf
+                              @method('DELETE')
+                                <a href="{{route('remove')}}" class="float-right"><i class='bx bx-trash'></i></a>
+                          
+                            </form> -->
                             </td>
                         </tr>
                        @endforeach

@@ -12,7 +12,7 @@
     <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
     <link rel="icon" type="image/png" href="assets/images/favicon.png">
     <link rel="stylesheet" href="assets/css/styles.css">
-    <title>FoodDay - Restaurant listing</title>
+    <title>FoodDay - Empty Cart</title>
 </head>
 
 <body>
@@ -31,50 +31,29 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item active">
-                            <a class="nav-link" href="/my_home">Home <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="home.html">Home <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/restaurant_listing">Restaurants</a>
+                            <a class="nav-link" href="restaurant-listing.html">Restaurants</a>
                         </li>
 
-                        <!-- <li class="nav-item">
-                            <a class="nav-link" href="/signin">Sign In</a>
-                        </li> -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="login.html">Sign In</a>
+                        </li>
 
                         <li class="nav-item">
                             <a class="nav-link" href="/myaccount">
                                 <i class='bx bx-user mr-1'></i>
                                 My Account</a>
                         </li>
-                        @if(count((array) session('cart'))==0)
-
-<a class="nav-link" href="/empty_cart">
-
-<span class="cart-badge-wrap">
-
-<span class="cart-badge">{{ count((array) session('cart')) }}</span>
-
-<i class='bx bx-shopping-bag mr-1'></i>
-
-</span>
-
-Cart</a>
-
-@else
-
-<a class="nav-link" href="/cart_items">
-
-<span class="cart-badge-wrap">
-
-<span class="cart-badge">{{ count((array) session('cart')) }}</span>
-
-<i class='bx bx-shopping-bag mr-1'></i>
-
-</span>
-
-Cart</a>
-
-@endif
+                        <li class="nav-item">
+                            <a class="nav-link" href="cart.html">
+                                <span class="cart-badge-wrap">
+                                    <span class="cart-badge">9</span>
+                                    <i class='bx bx-shopping-bag mr-1'></i>
+                                </span>
+                                Cart</a>
+                        </li>
                     </ul>
                 </div>
             </nav>
@@ -82,92 +61,29 @@ Cart</a>
     </header>
     <!-- Header -->
 
+    <!-- <div class="search-nav">
+        <div class="container">
+            <h3 class="mb-0">Status or info page</h3>
+        </div>
+    </div> -->
+
     <div class="search-nav">
         <div class="container">
-
-            
-            
-            <h3>All restaurants delivering to</h3>
-            
-            
-            <p>Change location</p>
-            <div class="row">
-                <div class="col-lg-8 col-xl-6">
-                    <form action="{{route('search')}}" method="GET">
-                        <div class="input-group search-location-group">
-                            <input type="text" name="location" class="form-control" placeholder="Enter your delivery location"
-                               >
-                            <a href="" class="btn-locate"><i class='bx bx-target-lock'></i> Locate Me</a>
-                            <!-- <button class="btn-locate"><i class='bx bx-target-lock'></i> Locate Me</button> -->
-                            <div class="input-group-append btn-find-food">
-                            <button class="btn btn-primary" type="submit">Search</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-
-            <!-- location popup -->
-
-            <!-- <div class="location-popup">
-                <h5 class="mb-3">Add your delivery address</h5>
-                <p class="mb-4">To find out if we can delivery at your location, please enter your address
-                </p>
-                <form action="">
-                    <button class="btn btn-light">Set Location</button>
-                </form>
-            </div> -->
-
-            <!-- location popup end -->
-
+            <h3 class="mb-0">Cart</h3>
         </div>
     </div>
 
-    <section class="py-60">
+    <section class="py-60 min-window-height">
         <div class="container">
-            <h4 class="mb-4">Restaurants</h4>
-            <div class="row rest-listing-row">
-            @foreach($restaurants as $rest)
-                <div class="col-md-4 col-sm-6">
-               
-                    <a href="{{route('restaurant_details',$rest->id)}}" class="card restaurant-card">
-                        <span class="restaurant-status">
-                        @if($rest->is_open ==1)
-                            <em class="ribbon"></em>Open
-                        @endif
-                        </span>
-                        @if($rest->is_open ==0)
-                        <span class="restaurant-status closed"> 
-                        <em class="ribbon"></em>Closed      
-                        @endif
-                        </span>
-                        <div class="restaurant-image" style="
-                                background-image: url('{{$rest->banner}}');
-                              ">
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">{{$rest->name}}</h5>
-                            <div class="cuisines">
-                                <span>{{$rest->location}}</span><span>
-                                @foreach($cuisines as $cuisine)
-                                 @if($rest->cuisines->contains($cuisine->id))
-                                  {{$cuisine->name}},
-                                 @endif               
-                                @endforeach 
-                                </span>
-                            </div>
-                            <p class="location"><i class="bx bx-location-plus"></i> {{$rest->address}}</p>
-                            <div class="details">
-                                <span class="badge"><i class='bx bxs-star'></i> 4.2</span>
-                                <span class="badge">{{$rest->default_preparation_time}}hours</span>
-                                <span class="badge">{{$rest->cost_for_two_people}} for two</span>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                @endforeach
+
+            <div class="empty-orders-div">
+                <!-- <img src="assets/images/cart.svg" alt="" class="mt-0"> -->
+                <i class="bx bx-shopping-bag"></i>
+                <h4 class="mb-3">Your Cart is Empty</h4>
+                <p class="mb-2">Looks like you haven't added anything to your cart yet.</p>
+                <a href="/restaurant_listing" class="btn btn-primary mt-3">See Restaurants Near You</a>
             </div>
-            
+
         </div>
     </section>
 
@@ -207,7 +123,7 @@ Cart</a>
                                 <input type="text" class="form-control" placeholder="Enter your email" aria-label=""
                                     aria-describedby="button-addon2">
                                 <div class="input-group-append">
-                                    <button class="btn btn-primary" type="button" id="find-food-btn"><i
+                                    <button class="btn btn-danger" type="button" id="find-food-btn"><i
                                             class='bx bx-send'></i></button>
                                 </div>
                             </div>
@@ -251,7 +167,7 @@ Cart</a>
                     </a>
                 </div>
                 <div class="col-4 item">
-                    <a href="{{route('cart')}}">
+                    <a href="cart.html">
                         <i class='bx bx-cart'><span class="badge badge-light">22</span></i>
                         <span>Cart</span>
                     </a>

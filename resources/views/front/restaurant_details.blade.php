@@ -39,18 +39,40 @@
                         </li>
 
                         
-                        <li class="nav-item">
-                            <a class="nav-link" href="cart.html">
-                                <span class="cart-badge-wrap">
-                                    <span class="cart-badge">9</span>
-                                    <i class='bx bx-shopping-bag mr-1'></i>
-                                </span>
-                                Cart</a>
-                        </li>
+                        @if(count((array) session('cart'))==0)
+
+<a class="nav-link" href="/emptycart">
+
+<span class="cart-badge-wrap">
+
+<span class="cart-badge">{{ count((array) session('cart')) }}</span>
+
+<i class='bx bx-shopping-bag mr-1'></i>
+
+</span>
+
+Cart</a>
+
+@else
+
+<a class="nav-link" href="/cart2">
+
+<span class="cart-badge-wrap">
+
+<span class="cart-badge">{{ count((array) session('cart')) }}</span>
+
+<i class='bx bx-shopping-bag mr-1'></i>
+
+</span>
+
+Cart</a>
+
+@endif
                     </ul>
                 </div>
             </nav>
         </div>
+        
     </header>
     <!-- Header -->
 
@@ -138,6 +160,8 @@
                                         @foreach($itemfoods as $item)
                                         @if($restaurant->itemfoods->contains($item->id))
                                             <div class="col-lg-6">
+                                            
+                                            
                                                 <div class="food-item-card">
                                                     <div class="food-item-img" style="
                                 background-image: url({{asset('assets/images/img2.jpg')}});
@@ -151,53 +175,170 @@
                                                         </p>
                                                         <div class="pricing">
                                                             <div class="price-wrap">
+                                                            @if($item->type==1)
                                                                 <div class="non-div food-type-div">
                                                                     <i class="bx bxs-circle"></i>
                                                                 </div>
+                                                                
+                                                                @elseif($item->type==0)
+                                                                <div class="veg-div food-type-div">
+                                                                    <i class="bx bxs-circle"></i>
+                                                                </div>
+                                                                @endif
                                                                 <span class="price">{{$item->rate}}</span>
                                                                 <span class="actual-price">$110.99</span>
                                                             </div>
                                                             
-                                                            <div class="add-remove-button">
+                                                            <!-- @if($item->status==1)
+                                                            <span class="unavailable-text">Unavailable</span>
+                                                            @endif -->
+                                                            <!-- <div class="add-remove-button">
+                                                                <div class="input-group">
+                                                                    <input type="button" value="-" class="button-minus"
+                                                                        data-field="quantity" />
+                                                                    <input type="number" step="1" max="" value="0"
+                                                                        name="quantity" class="quantity-field" />
+                                                                        <a href="{{route('addToCart',$item->id)}}"><input type="button"  value="+" class="button-plus"
+                                                                        data-field="quantity" data-toggle="modal"
+                                                                        data-target="#add-repeat" /></a>
+                                                                </div>
+                                                            </div> -->
+                                                            
+                                                            <!-- <a href="{{route('addToCart',$item->id)}}" class="number-button  plus">+</a>
+                                                             <a href="#" class="number-button minus">-</a> -->
+                                                            <!-- <div class="add-remove-button">
                                                                 <button type="button"  class="btn btn-outline-primary"
-                                                                    data-toggle="modal" data-target="#dishModal" >
+                                                                    data-toggle="modal"  >
                                                                     <a href="{{route('addToCart',$item->id)}}">
                                                                     ADD </a>
                                                                 </button>
                                                             </div>
-                                                          
+                                                           -->
+
+                                                           <div class="add-remove-button">
+                                                               
+                                                                <div class="input-group">
+                                                                <a href="{{route('removeFromCart',$item->id)}}" class="number-button  minus">-</a>
+                                                                    <input type="number" step="1" max="" value="0"
+                                                                        name="quantity" class="quantity-field" />
+                                                                        <a href="{{route('addToCart',$item->id)}}" class="number-button  plus">+</a>
+                                                                </div>
+                                                                
                                                             </div>
-                                                            
-                                                        </div>
-                                                       
+                                                            </div>
                                                     </div>
-                                                   
                                                 </div>
-                                                
-                                                   
-                                                   
-                                           
-                                            @endif
-                                            @endforeach  
                                             </div>
-                                                               
-                                                          
+                                       @endif
+                                       @endforeach
+                                                </div>
+                                            </div>
                                         </div>
-                                                               
-                                     </div>
-                                                          
                                     </div>
-                                                      
-                                </div>           
-                                
                                 </div>
-                        </div>                             
-   
+                                  
+</div>          
+
+
+</div>
+<div class="col-lg-4 cart-col">
+                    <div class="cart d-none d-md-block">
+                        <div class="cart-head">
+                            <span>Your order</span>
+                        </div>
                         
+                        @foreach($itemfoods as $item)
+                                        @if($restaurant->itemfoods->contains($item->id))
+                        <div class="cart-body">
+                            <div class="cart-item">
+                                <div class="details">
+                                    <h6> {{ $item->food_item }}</h6>
+                                  
+                                   
+                                </div>
+                                <div class="price">
+                                    <h6>${{ $item->rate }}.00</h6>
+                                    
+                                    <div class="add-remove-button">
+                                    
+                                        <div class="input-group">
+                                       
+                                        <a href="{{route('removeFromCart',$item->id)}}" class="number-button  minus">-</a>
+                                            <input type="number" step="1" max="" value="0" name="quantity"
+                                                class="quantity-field" />
+                                                <a href="{{route('addToCart',$item->id)}}" class="number-button  plus">+</a>
+                                                
+                                        </div>
+                                        
+
+                                   
+                                   
+                                    
+                                    </div>
+                                   
+                                </div>
+                            </div>
+
+                        </div>
+                        @endif
+                @endforeach
+                
+                            
+                        <div class="cart-footer">
+                        @php $total = 0 @endphp
+                            @foreach((array) session('cart') as $id => $details)
+                                @php $total += $details['rate'] * $details['quantity'] @endphp
+                            @endforeach
+                            <ul>
+                                <li>
+                                    <h5>
+                                        <span>SubTotal</span>
+                                        <span class="float-right">${{$total}}.00</span>
+                                    </h5>
+                                </li>
+                                <li>
+                                    <p>
+                                        <span>Delivery fre</span>
+                                        <span class="float-right">$00.00</span>
+                                    </p>
+                                </li>
+                                <li>
+                                    <p>
+                                        <span>Tax</span> <span class="float-right">$00.00</span>
+                                    </p>
+                                </li>
+                                <li>
+                                    <h4>
+                                        <span>Total</span>
+                                        <span class="float-right">${{$total}}.00</span>
+                                    </h4>
+                                </li>
+                                <button class="btn btn-primary mt-3 w-100"
+                                    onclick="window.location.href='cart.html';">Proceed to Buy</button>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Empty cart. Use this when the cart is empty -->
+
+                    <!-- <div class="cart">
+                        <div class="empty-cart text-center">
+                            <h4>Your cart is empty</h4>
+                            <p class="mb-0">Add items to get started.</p>
+                        </div>
+                    </div> -->
+
+                    <!-- Empty cart end  -->
+                </div>
+            </div>
+        </div>
+       
+
+
                                              
                        
                 
-                <div class="col-lg-4 cart-col">
+                <!-- <div class="col-lg-4 cart-col">
                     <div class="cart d-none d-md-block">
                         
                         <div class="cart-body">
@@ -205,318 +346,112 @@
                         </div>
 
                        
-                    </div>
+                    </div> -->
 
                     <!-- Empty cart. Use this when the cart is empty -->
 
-                    <div class="cart">
+                    <!-- <div class="cart">
                         <div class="empty-cart text-center">
                             <h4>Your cart is empty</h4>
                             <p class="mb-0">Add items to get started.</p>
                         </div>
-                    </div>
+                    </div> -->
 
                     <!-- Empty cart end  -->
-                </div>
+                <!-- </div>
                 
-            </div>
+            </div> -->
             
-        </div>
+        
          
     </section>
-    <!-- modal -->
-
-    <!-- Modal -->
-    
-
-    <!--cart modal popup button-->
-    <!-- <div class="popup-cart d-md-none">
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cartmodal">
-            <i class="bx bx-cart"></i>
-            <span>2</span>
-        </button>
-    </div> -->
-
-
-    <!-- modal add or Repeat item -->
-    <!-- <div class="modal fade dish-modal" id="add-repeat" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class=" mb-0">Repeat Last Used Customization</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <i class='bx bx-x btn-close'></i>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="menu-list">
-                        <div class="row">
-
-                            <div class="col-md-12 col-12">
-
-                                <h5 class=" ">
-                                    Spicy Beetroot
-                                </h5>
-                                <p class="mb-0">Tomato sauce
-                                </p>
-                                <p class="mb-0">Onion sauce
-                                </p>
-
-                                <div class="d-flex align-items-center justify-content-between mt-3">
-                                    <a href="#" data-target="#add-repeat-2" data-toggle="modal" data-dismiss="modal">Add
-                                        More</a>
-                                    <button type="button" class="btn btn-primary-1 repeat-btn ml-3">
-                                        Repeat Last
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> -->
-    <!-- modal repeat item-->
-    <!-- modal Add Repeat-2 item -->
-    <div class="modal fade dish-modal" id="add-repeat-2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-
-                <div class="modal-body">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <i class='bx bx-x btn-close'></i>
-                    </button>
-
-                    <div class="item-details mb-0">
-                        <h4>Remove Your Items</h4>
-
-                    </div>
-
-                    <div class="repeat-item">
-                        <div class="left">
-                            <h5 class="mb-2">Spicy Beetroot</h5>
-                            <h6>Size</h6>
-                            <p>Medium</p>
-                            <h6>Modifier</h6>
-                            <p>Tomato sauce</p>
-                            <p>Onion Sprinkled</p>
-                        </div>
-                        <div class="right">
-                            <div class="add-remove-button">
-                                <div class="input-group">
-                                    <input type="button" value="-" class="button-minus" data-field="quantity">
-                                    <input type="number" step="1" max="" value="0" name="quantity"
-                                        class="quantity-field">
-                                    <input type="button" value="+" class="button-plus" data-field="quantity"
-                                        data-toggle="modal" data-target="">
-                                </div>
-                            </div>
-                            <h6 class="text-right">$566</h6>
-                        </div>
-                    </div>
-                    <div class="repeat-item">
-                        <div class="left">
-                            <h5 class="mb-2">Spicy Beetroot</h5>
-                            <h6>Size</h6>
-                            <p>Medium</p>
-                            <h6>Modifier</h6>
-                            <p>Tomato sauce</p>
-                            <p>Onion Sprinkled</p>
-                        </div>
-                        <div class="right">
-                            <div class="add-remove-button">
-                                <div class="input-group">
-                                    <input type="button" value="-" class="button-minus" data-field="quantity">
-                                    <input type="number" step="1" max="" value="0" name="quantity"
-                                        class="quantity-field">
-                                    <input type="button" value="+" class="button-plus" data-field="quantity"
-                                        data-toggle="modal" data-target="">
-                                </div>
-                            </div>
-                            <h6 class="text-right">$566</h6>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-
-    <div class="mobile-footer">
-        <div class="row">
-            <div class="col-7 item d-flex align-items-center pr-0">
-                <div class="mobile-left">
-                    <i class="bx bx-cart mob-space bx-sm pl-0"></i>
-                    <p class="mob-space">10 Items</p>
-                    <h6 class="mob-space">$356.56</h6>
-                </div>
-            </div>
-            <div class="col-5 item text-right">
-                <button class="btn btn-primary mob-btn" data-toggle="modal" data-target="#cartmodal">View Cart</button>
-            </div>
-        </div>
-    </div>
-
+   
     <!--cart modal-->
     <div class="modal fade" id="cartmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog  modal-dialog-scrollable" role="document">
             <div class="modal-content">
 
-                <div class="cart">
-                    <div class="cart-head">
-                        <span>Your order</span>
-
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <i class='bx bx-x btn-close'></i>
-                        </button>
-                    </div>
-                    <div class="cart-body">
-                        <div class="cart-item">
-                            <div class="details">
-                                <h6>Spicy Beetroot & Potato Burger</h6>
-                                <p class="text-to-kitchen">
-                                    Text to kitchen. Delete this if you are not using.
-                                    adipisicing elit. Enim illum adipisci natus ducimus,
-                                    voluptatem
-                                </p>
-                                <ul class="modifiers">
-                                    <h6>Toppings</h6>
-                                    <li>Extra chease <span>$5.00</span></li>
-                                    <li>Drinks <span>$6.00</span></li>
-                                    <li>Butter <span>$7.00</span></li>
-                                </ul>
-                            </div>
-                            <div class="price">
-                                <h6>$12.99</h6>
-                                <div class="add-remove-button">
-                                    <div class="input-group">
-                                        <input type="button" value="-" class="button-minus" data-field="quantity" />
-                                        <input type="number" step="1" max="" value="1" name="quantity"
-                                            class="quantity-field" />
-                                        <input type="button" value="+" class="button-plus" data-field="quantity" />
-                                    </div>
-                                </div>
-                            </div>
+            <div class="col-lg-4 cart-col">
+                    <div class="cart d-none d-md-block">
+                        <div class="cart-head">
+                            <span>Your order</span>
                         </div>
-
-                        <div class="cart-item">
-                            <div class="details">
-                                <h6>Spicy Beetroot & Potato Burger</h6>
-                                <ul class="modifiers">
-                                    <h6>Toppings</h6>
-                                    <li>Extra chease <span>$5.00</span></li>
-                                    <li>Drinks <span>$6.00</span></li>
-                                    <li>Butter <span>$7.00</span></li>
-                                </ul>
-                            </div>
-                            <div class="price">
-                                <h6>$12.99</h6>
-                                <div class="add-remove-button">
-                                    <div class="input-group">
-                                        <input type="button" value="-" class="button-minus" data-field="quantity" />
-                                        <input type="number" step="1" max="" value="1" name="quantity"
-                                            class="quantity-field" />
-                                        <input type="button" value="+" class="button-plus" data-field="quantity" />
+                        @php $total = 0 @endphp
+        @if(session('cart'))
+            @foreach(session('cart') as $id => $details)
+           
+                @php
+                 $total=0;
+                 $total += $details['rate'] * $details['quantity'] 
+                 @endphp
+                        <div class="cart-body">
+                            <div class="cart-item">
+                                <div class="details">
+                                    <h6>{{ $details['food_item'] }}</h6>
+                                    <p class="text-to-kitchen">
+                                        Text to kitchen. Delete this if you are not using.
+                                        adipisicing elit. Enim illum adipisci natus ducimus,
+                                        voluptatem
+                                    </p>
+                                    <!-- <ul class="modifiers">
+                                        <h6>Toppings</h6>
+                                        <li>Extra chease <span>$5.00</span></li>
+                                        <li>Drinks <span>$6.00</span></li>
+                                        <li>Butter <span>$7.00</span></li>
+                                    </ul> -->
+                                </div>
+                                <div class="price">
+                                    <h6>${{ $details['rate'] }}</h6>
+                                    <div class="add-remove-button">
+                                        <div class="input-group">
+                                            <input type="button" value="-" class="button-minus" data-field="quantity" />
+                                            <input type="number" step="1" max="" value="1" name="quantity"
+                                                class="quantity-field" />
+                                            <input type="button" value="+" class="button-plus" data-field="quantity" />
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                            </div>
+                @endforeach
+                            @endif
 
-                        <div class="cart-item">
-                            <div class="details">
-                                <h6>Spicy Beetroot & Potato Burger</h6>
-                            </div>
-                            <div class="price">
-                                <h6>$12.99</h6>
-                                <div class="add-remove-button">
-                                    <div class="input-group">
-                                        <input type="button" value="-" class="button-minus" data-field="quantity" />
-                                        <input type="number" step="1" max="" value="1" name="quantity"
-                                            class="quantity-field" />
-                                        <input type="button" value="+" class="button-plus" data-field="quantity" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="cart-item">
-                            <div class="details">
-                                <h6>Spicy Beetroot & Potato Burger</h6>
-                                <ul class="modifiers">
-                                    <h6>Addons</h6>
-                                    <li>Extra chease</li>
-                                    <li>Drinks</li>
-                                    <li>Butter</li>
-                                </ul>
-                            </div>
-                            <div class="price">
-                                <h6>$12.99</h6>
-                                <div class="add-remove-button">
-                                    <div class="input-group">
-                                        <input type="button" value="-" class="button-minus" data-field="quantity" />
-                                        <input type="number" step="1" max="" value="1" name="quantity"
-                                            class="quantity-field" />
-                                        <input type="button" value="+" class="button-plus" data-field="quantity" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="cart-item">
-                            <div class="details">
-                                <h6>Spicy Beetroot & Potato Burger</h6>
-                            </div>
-                            <div class="price">
-                                <h6>$12.99</h6>
-                                <div class="add-remove-button">
-                                    <div class="input-group">
-                                        <input type="button" value="-" class="button-minus" data-field="quantity" />
-                                        <input type="number" step="1" max="" value="1" name="quantity"
-                                            class="quantity-field" />
-                                        <input type="button" value="+" class="button-plus" data-field="quantity" />
-                                    </div>
-                                </div>
-                            </div>
+                            <div class="cart-footer">
+                            @php $total = 0 @endphp
+                            @foreach((array) session('cart') as $id => $details)
+                                @php $total += $details['rate'] * $details['quantity'] @endphp
+                               
+                            @endforeach
+                            <ul>
+                                <li>
+                                    <h5>
+                                        <span>{{$total}}</span>
+                                        <span class="float-right">$121.99</span>
+                                    </h5>
+                                </li>
+                                <li>
+                                    <p>
+                                        <span>Delivery fre</span>
+                                        <span class="float-right">$20.00</span>
+                                    </p>
+                                </li>
+                                <li>
+                                    <p>
+                                        <span>Tax</span> <span class="float-right">$18.00</span>
+                                    </p>
+                                </li>
+                                <li>
+                                    <h4>
+                                        <span>Total</span>
+                                        <span class="float-right">${{$total}}</span>
+                                    </h4>
+                                </li>
+                                <button class="btn btn-primary mt-3 w-100"
+                                    onclick="window.location.href='cart.html';">Proceed to Buy</button>
+                            </ul>
                         </div>
                     </div>
-
-                    <div class="cart-footer">
-                        <ul>
-                            <li>
-                                <h5>
-                                    <span>SubTotal</span>
-                                    <span class="float-right">$121.99</span>
-                                </h5>
-                            </li>
-                            <li>
-                                <p>
-                                    <span>Delivery fre</span>
-                                    <span class="float-right">$20.00</span>
-                                </p>
-                            </li>
-                            <li>
-                                <p>
-                                    <span>Tax</span> <span class="float-right">$18.00</span>
-                                </p>
-                            </li>
-                            <li>
-                                <h4>
-                                    <span>Total</span>
-                                    <span class="float-right">$159.99</span>
-                                </h4>
-                            </li>
-                            <!-- <li>
-                                <button class="btn btn-primary" onclick="window.location.href='cart.html';">
-                                    Proceed to Buy
-                                </button>
-                            </li> -->
-                        </ul>
-                    </div>
-                </div>
 
 
             </div>

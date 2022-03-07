@@ -48,7 +48,7 @@
                                 My Account</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="cart.html">
+                            <a class="nav-link" href="{{route('cart')}}">
                                 <span class="cart-badge-wrap">
                                     <span class="cart-badge">9</span>
                                     <i class='bx bx-shopping-bag mr-1'></i>
