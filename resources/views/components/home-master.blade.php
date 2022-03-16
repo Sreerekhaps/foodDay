@@ -46,14 +46,35 @@
                                 <i class='bx bx-user mr-1'></i>
                                 My Account</a>
                         </li> -->
-                        <li class="nav-item">
-                            <a class="nav-link" href="cart.html">
-                                <span class="cart-badge-wrap">
-                                    <span class="cart-badge">9</span>
-                                    <i class='bx bx-shopping-bag mr-1'></i>
-                                </span>
-                                Cart</a>
-                        </li>
+                        @if(count((array) session('cart'))==0)
+
+<a class="nav-link" href="/emptycart">
+
+<span class="cart-badge-wrap">
+
+<span class="cart-badge">{{ count((array) session('cart')) }}</span>
+
+<i class='bx bx-shopping-bag mr-1'></i>
+
+</span>
+
+Cart</a>
+
+@else
+
+<a class="nav-link" href="/cart2">
+
+<span class="cart-badge-wrap">
+
+<span class="cart-badge">{{ count((array) session('cart')) }}</span>
+
+<i class='bx bx-shopping-bag mr-1'></i>
+
+</span>
+
+Cart</a>
+
+@endif
                     </ul>
                 </div>
             </nav>

@@ -78,9 +78,9 @@
                         <div class="form-row">
                             <div class="form-group col-lg-6">
                                 <h6 class="checkout-title">Delivery Type</h6>
-                                <select class="form-control " name="delivery_method">
-                                    <option value="delivery" selected="">Delivery</option>
-                                    <option value="pickup">Pickup</option>
+                                <select class="form-control " name="mySelect" id="mySelect" onchange="myFunction()">
+                                    <option value="delivery" id="delivery" name="method" selected="">Delivery</option>
+                                    <option value="pickup" id="pickup" name="method">Pickup</option>
                                 </select>
                             </div>
                         </div>
@@ -89,7 +89,15 @@
                    
 
                     <div class="form-row">
-                        <div class="form-group col-lg-12">
+                    
+                    <!-- <script>
+                        function myFunction() {
+                        var x = document.getElementById("mySelect").value;
+                        document.getElementById("demo").innerHTML=x;
+                        }
+                    </script> -->
+                    
+                        <div class="form-group col-lg-12" id="demo">
                             <form>
                                 <h6 class="checkout-title">Promo Codes</h6>
                                 <div class="row cuisine-dish-wrap">
@@ -116,24 +124,12 @@
                                 <img src="./assets/images/cash.png" alt="Icon">
                             </div>
                         </div>
-                        <div class="form-group col-lg-12">
-                            <div class="custom-radio">
-                                <input type="radio" id="radio2" name="payment-type">
-                                <label for="radio2">Pay via Stripe</label>
-                                <img src="./assets/images/stripe.png" alt="Icon">
-                            </div>
-                        </div>
-                        <div class="form-group col-lg-12">
-                            <div class="custom-radio">
-                                <input type="radio" id="radio5" name="payment-type">
-                                <label for="radio5">Pay via Paypal</label>
-                                <img src="./assets/images/paypal.png" alt="Icon">
-                            </div>
-                        </div>
+                       
 
                     </div>
 
                     <div class="checkout-delivery-address food-item-cards-wrap">
+                        
                         <h6 class="checkout-title">Delivery Address</h6>
                         <div class="row">
                         @foreach($address as $add)
@@ -167,10 +163,42 @@
 
                         <button type="button" class="btn btn-outline-primary mb-lg-auto mb-4" data-toggle="modal"
                             data-target="#exampleModal">Add New Address</button>
+                           
+<!-- <div class="form-group col-lg-12">
+                            <form>
+                                <h6 class="checkout-title">Promo Codes</h6>
+                                <div class="row cuisine-dish-wrap">
+                                    <div class="col-md-6 cuisine-col">
+                                        <div class="input-group coupon-group">
+                                            <input type="text" class="form-control" placeholder="Enter promo code"
+                                                aria-label="delivery location" aria-describedby="button-addon2">
+                                            <div class="input-group-append">
+                                                <button class="btn btn-primary" type="button"
+                                                    id="find-food-btn">Apply</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-lg-12">
+                            <h6 class="checkout-title">Promo Codes</h6>
+                        </div>
+                        <div class="form-group col-lg-12">
+                            <div class="custom-radio">
+                                <input type="radio" id="radio1" name="payment-type" checked="checked">
+                                <label for="radio1">Pay via Cash</label>
+                                <img src="./assets/images/cash.png" alt="Icon">
+                            </div>
+                        </div>
+                       
+                   
+                    </div>
+           
+</div> -->
 
                     </div>
-                </div>
-
+                    </div>
                 <div class="col-lg-4 cart-col">
 
                     <div class="cart">
@@ -223,12 +251,13 @@
                                 </li>
                             </ul>
                             <button class="btn btn-primary mt-3 w-100"
-                                onclick="window.location.href='order-success.html';">Checkout</button>
+                                onclick="window.location.href='order_tracking';">Checkout</button>
                         </div>
 
                     </div>
 
                 </div>
+                
             </div>
 
         </div>
@@ -238,68 +267,103 @@
 
     <!-- Address Modal -->
     <div class="modal fade address-model" id="exampleModal" tabindex="-1" role="dialog"
-        aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <i class="bx bx-x btn-close"></i>
-                    </button>
-                    <h5 class="mb-4 mr-3">Add Delivery Address</h5>
-                    <form>
-                        <div class="form-row">
+                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <i class="bx bx-x btn-close"></i>
+                                </button>
+                                <h5 class="mb-4">Add New Address</h5>
+                                @section('content')
+                                @if(Session::has('success'))
+                                    <div class="alert alert-success">
+                                        {{ Session::get('success') }}
+                                        @php
+                                            Session::forget('success');
+                                        @endphp
+                                    </div>
+                                    @endif
+                                <form method="post" action="{{route('address_store')}}" enctype="multipart/form-data">
+                                    @csrf
+                                    <div class="form-row">
 
-                            <div class="form-group col-lg-12">
-                                <input type="text" class="form-control" placeholder="Address Type">
-                            </div>
-                            <div class="form-group col-lg-6">
-                                <input type="text" class="form-control" placeholder="First Name">
-                            </div>
-                            <div class="form-group col-lg-6">
-                                <input type="text" class="form-control" placeholder="Last Name">
-                            </div>
-                            <div class="form-group col-lg-6">
-                                <input type="text" class="form-control" placeholder="Email">
-                            </div>
-                            <div class="form-group col-lg-6">
-                                <input type="text" class="form-control" placeholder="Mobile">
-                            </div>
-                            <div class="form-group col-lg-6">
-                                <input type="text" class="form-control" placeholder="City">
-                            </div>
-                            <div class="form-group col-lg-6">
-                                <input type="text" class="form-control" placeholder="Zip Code">
-                            </div>
-                            <div class="form-group col-lg-12">
-                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
-                                    placeholder="Address"></textarea>
-                            </div>
-                            <div class="form-group col-lg-12">
-                                <select class="custom-select" name="address_type" id="address_type">
-                                    <option selected="" disabled="">Address Type</option>
-                                    <option value="home">Home</option>
-                                    <option value="office">Office</option>
-                                    <option value="other">Other</option>
-                                </select>
-                            </div>
-                            <div class="form-group col-md-6 mb-md-0 d-none d-md-block">
-                                <button type="button" class="btn btn-outline-primary w-100" data-dismiss="modal"
-                                    aria-label="Close">Close</button>
-                            </div>
-                            <div class="form-group col-md-6 mb-0">
-                                <button class="btn btn-secondary w-100">Save changes</button>
+                                        <div class="form-group col-lg-12">
+                                            <input type="text" name="location" class="form-control" placeholder="Location">
+                                            @if ($errors->has('location'))
+                                                <span class="text-danger">{{ $errors->first('location') }}</span>
+                                            @endif
+                                        </div>
+                                        <div class="form-group col-lg-12">
+                                            <input type="text" name="house_name"class="form-control" placeholder="House Name/Flat No/Building">
+                                            @if ($errors->has('house_name'))
+                                                <span class="text-danger">{{ $errors->first('house_name') }}</span>
+                                            @endif
+                                        </div>
+                                        <div class="form-group col-lg-6">
+                                            <input type="text" name="area" class="form-control" placeholder="Area/Street">
+                                            @if ($errors->has('area'))
+                                                <span class="text-danger">{{ $errors->first('area') }}</span>
+                                            @endif
+                                        </div>
+                                        <div class="form-group col-lg-6">
+                                            <input type="text" name="city" class="form-control" placeholder="City">
+                                            @if ($errors->has('city'))
+                                                <span class="text-danger">{{ $errors->first('city') }}</span>
+                                            @endif
+                                        </div>
+                                        <div class="form-group col-lg-12">
+                                            <input type="text" name="landmark" class="form-control" placeholder="Landmark">
+                                            @if ($errors->has('landmark'))
+                                                <span class="text-danger">{{ $errors->first('landmark') }}</span>
+                                            @endif
+                                        </div>
+                                        <div class="form-group col-lg-6">
+                                            <input type="text" name="pincode" class="form-control" placeholder="Pincode">
+                                            @if ($errors->has('pincode'))
+                                                <span class="text-danger">{{ $errors->first('pincode') }}</span>
+                                            @endif
+                                        </div>
+                                        <div class="form-group col-lg-6">
+                                        <select name="home" id="home" class="form-select form-select-md" >
+                                            <option value="0" disabled selected>Address Type</option>
+                                            
+                                            <option value="Home">Home</option>
+                                            <option value="Office">Office</option>
+                                            <option value="Other">Other</option>
+
+
+                                            
+                                        </select>
+                                            @if ($errors->has('home'))
+                                                <span class="text-danger">{{ $errors->first('home') }}</span>
+                                            @endif
+                                        </div>
+                                        <div class="form-group col-lg-12">
+                                            <input type="text" name="note_a_driver" class="form-control" placeholder="Note for Driver">
+                                            @if ($errors->has('note_a_driver'))
+                                                <span class="text-danger">{{ $errors->first('note_a_driver') }}</span>
+                                            @endif
+                                        </div>
+                                        
+
+                                        <div class="form-group col-md-6 mb-md-0 d-none d-md-block">
+                                            <button type="button" class="btn btn-outline-primary w-100"
+                                                data-dismiss="modal" aria-label="Close">Close</button>
+                                        </div>
+                                        <div class="form-group col-md-6 mb-0">
+                                            <button class="btn btn-secondary w-100">Save changes</button>
+                                        </div>
+
+                                    </div>
+                                </form>
                             </div>
 
                         </div>
-                    </form>
+                    </div>
                 </div>
 
-            </div>
-        </div>
-    </div>
-
-    <!-- Address Modal End -->
-
+                <!-- Address Modal End -->
 
     <!-- footer -->
 
@@ -413,6 +477,11 @@
         </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
     <script src="assets/js/custom.js"></script>
+
+
+    
+                        
+             
 </body>
 
 </html>

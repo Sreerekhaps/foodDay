@@ -132,8 +132,8 @@ Cart</a>
                                                             <div class="add-remove-button">
                                                                 <div class="input-group">
                                                                 <a href="{{route('removeFromCart',$id)}}" class="number-button  minus">-</a>
-                                                                    <input type="number" step="1" max="" value="{{ $details['quantity'] }}"
-                                                                        name="quantity" class="quantity-field" />
+                                                                    <input type="number"  step="1" max="" value="{{ $details['quantity'] }}"
+                                                                        name="quantity" class="quantity-field" min="1"/>
                                                                         <a href="{{route('addToCart',$id)}}" class="number-button  plus">+</a>
                                                                 </div>
                                                             </div>

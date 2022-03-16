@@ -12,7 +12,7 @@
     <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
     <link rel="icon" type="image/png" href="assets/images/favicon.png">
     <link rel="stylesheet" href="assets/css/styles.css">
-    <title>FoodDay - Login</title>
+    <title>FoodDay - Order Summery</title>
 </head>
 
 <body>
@@ -31,44 +31,29 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item active">
-                            <a class="nav-link" href="{{route('index')}}">Home <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="home.html">Home <span class="sr-only">(current)</span></a>
                         </li>
-                       
+                        <li class="nav-item">
+                            <a class="nav-link" href="restaurant-listing.html">Restaurants</a>
+                        </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="/sign_in">Sign In</a>
+                            <a class="nav-link" href="login.html">Sign In</a>
                         </li>
 
-                       
-                        @if(count((array) session('cart'))==0)
-
-<a class="nav-link" href="/emptycart">
-
-<span class="cart-badge-wrap">
-
-<span class="cart-badge">{{ count((array) session('cart')) }}</span>
-
-<i class='bx bx-shopping-bag mr-1'></i>
-
-</span>
-
-Cart</a>
-
-@else
-
-<a class="nav-link" href="/cart2">
-
-<span class="cart-badge-wrap">
-
-<span class="cart-badge">{{ count((array) session('cart')) }}</span>
-
-<i class='bx bx-shopping-bag mr-1'></i>
-
-</span>
-
-Cart</a>
-
-@endif
+                        <li class="nav-item">
+                            <a class="nav-link" href="my-account.html">
+                                <i class='bx bx-user mr-1'></i>
+                                My Account</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="cart.html">
+                                <span class="cart-badge-wrap">
+                                    <span class="cart-badge">9</span>
+                                    <i class='bx bx-shopping-bag mr-1'></i>
+                                </span>
+                                Cart</a>
+                        </li>
                     </ul>
                 </div>
             </nav>
@@ -76,54 +61,33 @@ Cart</a>
     </header>
     <!-- Header -->
 
-    <!-- <div class="search-nav">
+    <div class="search-nav">
         <div class="container">
-            <h3 class="mb-0">Sign in</h3>
+            <h3 class="mb-0">Order Summery</h3>
         </div>
-    </div> -->
+    </div>
 
-    <section class="log-reg-sec">
-        <div class="content">
-            <div class="form-content">
-                <img src="assets/images/logo-round.png" alt="" class="form-logo">
-                <h1 class="text-center">Sign in to FoodDay</h1>
-                <form action=" {{ route('check')}} " method="post">
-                @csrf
-               
-                    <div class="form-group">
-                        <input type="text" name="email" class="form-control" placeholder="Email">
-                         @error("email")
-                            <p style="color:red">{{$errors->first("email")}}
-                         @enderror
+    <section class="py-60">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                    <div class=" order-success-div">
+                        <div class="success-check">
+                            <i class='bx bx-check'></i>
+                        </div>
+                        <h4>Order Placed!</h4>
+                        <p>Your order number is <strong>#123456</strong>. The restaurant will deliver your order by
+                            <strong>11.22PM.</strong>
+                            You can view your order on your account page, when you are logged in.
+                            For any questions, reach out to us on hello@foodday.co
+                        </p>
+                        <a href="/my_home" class="btn btn-outline-primary mt-3 mr-sm-3">Continue Shopping</a>
+                        <a href="/order_tracking" class="btn btn-primary mt-3">View Order</a>
                     </div>
-                    <div class="form-group">
-                        <input type="password" name="password" class="form-control" placeholder="Password">
-                         @error("password")
-                            <p style="color:red">{{$errors->first("password")}}
-                         @enderror
-                    </div>
-                    @if(Session::get('fail'))
-                    <div class="alert alert-danger" role="alert"> 
-                     {{ Session::get('fail') }} 
-                    </div>
-                    @endif
-                    <div class="form-group">
-                        <a href="{{route('showforgotForm')}}">Forgot password?</a>
-                    </div>
-
-                    <div class="form-group">
-                        <button class="btn btn-primary w-100">Sign in</button>
-                    </div>
-                    <div class="form-group text-center mb-0">
-                        <span>Don't have an account?</span>
-                        <a href="/signup">Sign up</a>
-                    </div>
-
-                </form>
+                </div>
             </div>
         </div>
     </section>
-
 
 
     <!-- footer -->

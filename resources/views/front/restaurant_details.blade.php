@@ -39,7 +39,7 @@
                         </li>
 
                         
-                        @if(count((array) session('cart'))==0)
+ @if(count((array) session('cart'))==0)
 
 <a class="nav-link" href="/emptycart">
 
@@ -160,8 +160,8 @@ Cart</a>
                                         @foreach($itemfoods as $item)
                                         @if($restaurant->itemfoods->contains($item->id))
                                             <div class="col-lg-6">
-                                            
-                                            
+                                            @if($item->status==0)
+                                            <div class="food-item-card unavailable">
                                                 <div class="food-item-card">
                                                     <div class="food-item-img" style="
                                 background-image: url({{asset('assets/images/img2.jpg')}});
@@ -188,6 +188,7 @@ Cart</a>
                                                                 <span class="price">{{$item->rate}}</span>
                                                                 <span class="actual-price">$110.99</span>
                                                             </div>
+                                                            <span class="unavailable-text">Unavailable</span>
                                                             
                                                             <!-- @if($item->status==1)
                                                             <span class="unavailable-text">Unavailable</span>
@@ -206,14 +207,44 @@ Cart</a>
                                                             
                                                             <!-- <a href="{{route('addToCart',$item->id)}}" class="number-button  plus">+</a>
                                                              <a href="#" class="number-button minus">-</a> -->
-                                                            <!-- <div class="add-remove-button">
-                                                                <button type="button"  class="btn btn-outline-primary"
-                                                                    data-toggle="modal"  >
-                                                                    <a href="{{route('addToCart',$item->id)}}">
-                                                                    ADD </a>
-                                                                </button>
+                                                            
+
+                                                         
                                                             </div>
-                                                           -->
+                                                    </div>
+                                                </div>
+                                                </div>
+                                                @else
+                                                <div class="food-item-card available">
+                                                <div class="food-item-card">
+                                                    <div class="food-item-img" style="
+                                background-image: url({{asset('assets/images/img2.jpg')}});
+                              "></div>
+                                                    <div class="food-item-body">
+                                                        <h5 class="card-title">
+                                                            {{$item->food_item}}
+                                                        </h5>
+                                                        <p class="description">
+                                                           {{$item->description}}
+                                                        </p>
+                                                        <div class="pricing">
+                                                            <div class="price-wrap">
+                                                            @if($item->type==1)
+                                                                <div class="non-div food-type-div">
+                                                                    <i class="bx bxs-circle"></i>
+                                                                </div>
+                                                                
+                                                                @elseif($item->type==0)
+                                                                <div class="veg-div food-type-div">
+                                                                    <i class="bx bxs-circle"></i>
+                                                                </div>
+                                                                @endif
+                                                                <span class="price">{{$item->rate}}</span>
+                                                                <span class="actual-price">$110.99</span>
+                                                            </div>
+                                                            <span class="unavailable-text">Available</span>
+                                                            
+                                                           
 
                                                            <div class="add-remove-button">
                                                                
@@ -225,9 +256,19 @@ Cart</a>
                                                                 </div>
                                                                 
                                                             </div>
+                                                            <div class="add-remove-button">
+                                                                <button type="button"  class="btn btn-outline-primary"
+                                                                    data-toggle="modal"  >
+                                                                    <a href="{{route('addToCart',$item->id)}}">
+                                                                    ADD </a>
+                                                                </button>
+                                                            </div>
+                                                          
                                                             </div>
                                                     </div>
                                                 </div>
+                                                </div>
+                                                @endif
                                             </div>
                                        @endif
                                        @endforeach
@@ -241,30 +282,39 @@ Cart</a>
 
 
 </div>
+
 <div class="col-lg-4 cart-col">
+
                     <div class="cart d-none d-md-block">
+                    @if(count((array) session('cart'))!=0)
                         <div class="cart-head">
                             <span>Your order</span>
                         </div>
                         
-                        @foreach($itemfoods as $item)
-                                        @if($restaurant->itemfoods->contains($item->id))
+                        @php $total = 0 @endphp
+        @if(session('cart'))
+            @foreach(session('cart') as $id => $details)
+           
+                @php
+                 $total=0;
+                 $total += $details['rate'] * $details['quantity'] 
+                 @endphp
                         <div class="cart-body">
                             <div class="cart-item">
                                 <div class="details">
-                                    <h6> {{ $item->food_item }}</h6>
+                                    <h6> {{ $details['food_item'] }}</h6>
                                   
                                    
                                 </div>
                                 <div class="price">
-                                    <h6>${{ $item->rate }}.00</h6>
+                                    <h6>${{ $details['rate'] }}.00</h6>
                                     
                                     <div class="add-remove-button">
                                     
                                         <div class="input-group">
                                        
                                         <a href="{{route('removeFromCart',$item->id)}}" class="number-button  minus">-</a>
-                                            <input type="number" step="1" max="" value="0" name="quantity"
+                                            <input type="number" step="1" max="" value="{{ $details['quantity'] }}" name="quantity"
                                                 class="quantity-field" />
                                                 <a href="{{route('addToCart',$item->id)}}" class="number-button  plus">+</a>
                                                 
@@ -280,8 +330,9 @@ Cart</a>
                             </div>
 
                         </div>
-                        @endif
+                        
                 @endforeach
+                @endif
                 
                             
                         <div class="cart-footer">
@@ -330,6 +381,7 @@ Cart</a>
 
                     <!-- Empty cart end  -->
                 </div>
+               
             </div>
         </div>
        
@@ -337,8 +389,9 @@ Cart</a>
 
                                              
                        
-                
-                <!-- <div class="col-lg-4 cart-col">
+               
+                <div class="col-lg-4 cart-col">
+                @else
                     <div class="cart d-none d-md-block">
                         
                         <div class="cart-body">
@@ -346,23 +399,23 @@ Cart</a>
                         </div>
 
                        
-                    </div> -->
+                    </div>
 
                     <!-- Empty cart. Use this when the cart is empty -->
 
-                    <!-- <div class="cart">
+                    <div class="cart">
                         <div class="empty-cart text-center">
                             <h4>Your cart is empty</h4>
                             <p class="mb-0">Add items to get started.</p>
                         </div>
-                    </div> -->
+                    </div>
 
                     <!-- Empty cart end  -->
-                <!-- </div>
-                
-            </div> -->
+                </div>
+                @endif
+            </div>
             
-        
+           
          
     </section>
    
@@ -432,7 +485,7 @@ Cart</a>
                                 </li>
                                 <li>
                                     <p>
-                                        <span>Delivery fre</span>
+                                        <span>Delivery fee</span>
                                         <span class="float-right">$20.00</span>
                                     </p>
                                 </li>

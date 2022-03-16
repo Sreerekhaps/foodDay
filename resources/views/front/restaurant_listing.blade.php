@@ -128,9 +128,10 @@ Cart</a>
             <h4 class="mb-4">Restaurants</h4>
             <div class="row rest-listing-row">
             @foreach($restaurants as $rest)
+            @if($rest->is_open==1)
                 <div class="col-md-4 col-sm-6">
                
-                    <a href="{{route('restaurant_details',$rest->id)}}" class="card restaurant-card">
+                    <a href="{{route('restaurant_details',$rest->id)}}" class="card restaurant-card available">
                         <span class="restaurant-status">
                         @if($rest->is_open ==1)
                             <em class="ribbon"></em>Open
@@ -165,6 +166,45 @@ Cart</a>
                         </div>
                     </a>
                 </div>
+                @else
+                <div class="col-md-4 col-sm-6">
+               
+                    <a href="{{route('restaurant_details',$rest->id)}}" class="card restaurant-card unavailable">
+                        <span class="restaurant-status">
+                        @if($rest->is_open ==1)
+                            <em class="ribbon"></em>Open
+                        @endif
+                        </span>
+                        @if($rest->is_open ==0)
+                        <span class="restaurant-status closed"> 
+                        <em class="ribbon"></em>Closed      
+                        @endif
+                        </span>
+                        <div class="restaurant-image" style="
+                                background-image: url('{{$rest->banner}}');
+                              ">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">{{$rest->name}}</h5>
+                            <div class="cuisines">
+                                <span>{{$rest->location}}</span><span>
+                                @foreach($cuisines as $cuisine)
+                                 @if($rest->cuisines->contains($cuisine->id))
+                                  {{$cuisine->name}},
+                                 @endif               
+                                @endforeach 
+                                </span>
+                            </div>
+                            <p class="location"><i class="bx bx-location-plus"></i> {{$rest->address}}</p>
+                            <div class="details">
+                                <span class="badge"><i class='bx bxs-star'></i> 4.2</span>
+                                <span class="badge">{{$rest->default_preparation_time}}hours</span>
+                                <span class="badge">{{$rest->cost_for_two_people}} for two</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                @endif
                 @endforeach
             </div>
             

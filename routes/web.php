@@ -168,4 +168,6 @@ Route::delete('remove-from-cart', [FrontController::class, 'remove'])->name('rem
 Route::get('/cart2',[FrontController::class,'cart2'])->name('cart2');
 Route::get('/emptycart',[FrontController::class,'emptycart'])->name('emptycart');
 Route::get('/checkout',[FrontController::class,'checkout'])->name('checkout');
+Route::get('/order',[FrontController::class,'order'])->name('order');
+Route::get('/order_tracking',[FrontController::class,'order_tracking'])->name('order_tracking');
 

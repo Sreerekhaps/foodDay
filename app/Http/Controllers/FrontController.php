@@ -397,13 +397,18 @@ public function logout(){
 
     }
 
-    public function checkout(Restaurant $restaurant){
+    public function checkout(){
         $address=Address::all();
         $itemfoods=Itemfood::all();
         $restaurant=Restaurant::all();
         return view('front.checkout',['restaurants'=>$restaurant],compact('itemfoods','address'));
     }
-     
+     public function order(){
+         return view('front.order');
+     }
+     public function order_tracking(){
+         return view('front.order_tracking');
+     }
                 
             
 }

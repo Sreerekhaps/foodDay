@@ -48,7 +48,7 @@
                         </li>
                         @if(count((array) session('cart'))==0)
 
-<a class="nav-link" href="/empty_cart">
+<a class="nav-link" href="/emptycart">
 
 <span class="cart-badge-wrap">
 
@@ -62,7 +62,7 @@ Cart</a>
 
 @else
 
-<a class="nav-link" href="/cart_items">
+<a class="nav-link" href="/cart2">
 
 <span class="cart-badge-wrap">
 
