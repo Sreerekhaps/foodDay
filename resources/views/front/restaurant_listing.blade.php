@@ -10,9 +10,10 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="icon" type="image/png" href="assets/images/favicon.png">
-    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="icon" type="image/png" href="{{asset('assets/images/favicon.png')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/styles.css')}}">
     <title>FoodDay - Restaurant listing</title>
+    @livewireStyles
 </head>
 
 <body>
@@ -31,10 +32,10 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item active">
-                            <a class="nav-link" href="/my_home">Home <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="">Home <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/restaurant_listing">Restaurants</a>
+                            <a class="nav-link" href="{{route('customer.restaurant_listing')}}">Restaurants</a>
                         </li>
 
                         <!-- <li class="nav-item">
@@ -42,13 +43,13 @@
                         </li> -->
 
                         <li class="nav-item">
-                            <a class="nav-link" href="/myaccount">
+                            <a class="nav-link" href="{{route('customer.myaccount')}}">
                                 <i class='bx bx-user mr-1'></i>
                                 My Account</a>
                         </li>
                         @if(count((array) session('cart'))==0)
 
-<a class="nav-link" href="/empty_cart">
+<a class="nav-link" href="{{route('customer.emptycart')}}">
 
 <span class="cart-badge-wrap">
 
@@ -62,7 +63,7 @@ Cart</a>
 
 @else
 
-<a class="nav-link" href="/cart_items">
+<a class="nav-link" href="{{route('customer.cart2')}}">
 
 <span class="cart-badge-wrap">
 
@@ -93,7 +94,7 @@ Cart</a>
             <p>Change location</p>
             <div class="row">
                 <div class="col-lg-8 col-xl-6">
-                    <form action="{{route('search')}}" method="GET">
+                    <form action="{{route('customer.search')}}" method="GET">
                         <div class="input-group search-location-group">
                             <input type="text" name="location" class="form-control" placeholder="Enter your delivery location"
                                >
@@ -131,7 +132,7 @@ Cart</a>
             @if($rest->is_open==1)
                 <div class="col-md-4 col-sm-6">
                
-                    <a href="{{route('restaurant_details',$rest->id)}}" class="card restaurant-card available">
+                    <a href="{{route('customer.restaurant_details',$rest->id)}}" class="card restaurant-card available">
                         <span class="restaurant-status">
                         @if($rest->is_open ==1)
                             <em class="ribbon"></em>Open
@@ -169,7 +170,7 @@ Cart</a>
                 @else
                 <div class="col-md-4 col-sm-6">
                
-                    <a href="{{route('restaurant_details',$rest->id)}}" class="card restaurant-card unavailable">
+                    <a href="{{route('customer.restaurant_details',$rest->id)}}" class="card restaurant-card unavailable">
                         <span class="restaurant-status">
                         @if($rest->is_open ==1)
                             <em class="ribbon"></em>Open
@@ -291,7 +292,7 @@ Cart</a>
                     </a>
                 </div>
                 <div class="col-4 item">
-                    <a href="{{route('cart')}}">
+                    <a href="{{route('customer.cart')}}">
                         <i class='bx bx-cart'><span class="badge badge-light">22</span></i>
                         <span>Cart</span>
                     </a>
@@ -322,7 +323,8 @@ Cart</a>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
         </script>
-    <script src="assets/js/custom.js"></script>
+    <script src="{{asset('assets/js/custom.js')}}"></script>
+    @livewireScripts
 </body>
 
 </html>

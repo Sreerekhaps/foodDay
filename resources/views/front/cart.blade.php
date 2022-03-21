@@ -31,24 +31,24 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item active">
-                            <a class="nav-link" href="/my_home">Home <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="{{route('customer.my_home')}}">Home <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/restaurant_listing">Restaurants</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="login.html">Sign In</a>
+                            <a class="nav-link" href="{{route('customer.restaurant_listing')}}">Restaurants</a>
                         </li>
 
+                        <!-- <li class="nav-item">
+                            <a class="nav-link" href="{{route('customer.signin')}}">Sign In</a>
+                        </li> -->
+
                         <li class="nav-item">
-                            <a class="nav-link" href="/myaccount">
+                            <a class="nav-link" href="{{route('customer.myaccount')}}">
                                 <i class='bx bx-user mr-1'></i>
                                 My Account</a>
                         </li>
                         @if(count((array) session('cart'))==0)
 
-<a class="nav-link" href="/emptycart">
+<a class="nav-link" href="{{route('customer.emptycart')}}">
 
 <span class="cart-badge-wrap">
 
@@ -62,7 +62,7 @@ Cart</a>
 
 @else
 
-<a class="nav-link" href="/cart2">
+<a class="nav-link" href="{{route('customer.cart2')}}">
 
 <span class="cart-badge-wrap">
 

@@ -81,8 +81,8 @@
                             You can view your order on your account page, when you are logged in.
                             For any questions, reach out to us on hello@foodday.co
                         </p>
-                        <a href="/my_home" class="btn btn-outline-primary mt-3 mr-sm-3">Continue Shopping</a>
-                        <a href="/order_tracking" class="btn btn-primary mt-3">View Order</a>
+                        <a href="{{route('customer.my_home')}}" class="btn btn-outline-primary mt-3 mr-sm-3">Continue Shopping</a>
+                        <a href="{{route('customer.order_tracking')}}" class="btn btn-primary mt-3">View Order</a>
                     </div>
                 </div>
             </div>

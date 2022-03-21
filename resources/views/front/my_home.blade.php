@@ -11,8 +11,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="icon" type="image/png" href="assets/images/favicon.png">
-    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="icon" type="image/png" href="{{asset('assets/images/favicon.png')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/styles.css')}}">
     <title>FoodDay - Home</title>
 </head>
 
@@ -22,7 +22,7 @@
     <header>
         <div class="container-fluid">
             <nav id="navbar_top" class="navbar navbar-expand-lg navbar-light fixed-top">
-                <a class="navbar-brand" href="{{route('my_home')}}"><img src="assets/images/logo.png" alt=""></a>
+                <a class="navbar-brand" href="{{route('customer.my_home')}}"><img src="assets/images/logo.png" alt=""></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
                     data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                     aria-label="Toggle navigation">
@@ -32,24 +32,20 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item active">
-                            <a class="nav-link" href="{{route('my_home')}}">Home <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="{{route('customer.my_home')}}">Home <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/restaurant_listing">Restaurants</a>
+                            <a class="nav-link" href="{{route('customer.restaurant_listing')}}">Restaurants</a>
                         </li>
 
-                        <!-- <li class="nav-item">
-                            <a class="nav-link" href="/signin">Sign In</a>
-                        </li> -->
-
                         <li class="nav-item">
-                            <a class="nav-link" href="/myaccount">
+                            <a class="nav-link" href="{{route('customer.myaccount')}}">
                                 <i class='bx bx-user mr-1'></i>
                                 My Account</a>
                         </li>
                         @if(count((array) session('cart'))==0)
 
-<a class="nav-link" href="/emptycart">
+<a class="nav-link" href="{{route('customer.emptycart')}}">
 
 <span class="cart-badge-wrap">
 
@@ -63,7 +59,7 @@ Cart</a>
 
 @else
 
-<a class="nav-link" href="/cart2">
+<a class="nav-link" href="{{rote('customer.cart2')}}">
 
 <span class="cart-badge-wrap">
 
@@ -89,11 +85,11 @@ Cart</a>
         <div class="container">
             <div class="banner-content">
                 <h2>Delivering your favorite food to your door step.</h2>
-                <form action="{{route('search')}}" method="GET">
+                <form action="{{route('customer.search')}}" method="GET">
                     <div class="input-group search-location-group">
                         <input type="text" class="form-control" name="location" placeholder="Enter your delivery location"
                             aria-label="delivery location" aria-describedby="button-addon2">
-                        <a href="" class="btn-locate"><i class='bx bx-target-lock'></i> Locate Me</a>
+                        <a href="{{route('customer.search')}}" class="btn-locate"><i class='bx bx-target-lock'></i> Locate Me</a>
                         <!-- <button class="btn-locate"><i class='bx bx-target-lock'></i> Locate Me</button> -->
 
                         <div class="input-group-append btn-find-food">
@@ -118,7 +114,7 @@ Cart</a>
                 <div class="col-lg-4">
                     <div class="item">
                         <div class="item-image">
-                            <img src="assets/images/meal.svg" alt="">
+                            <img src="{{asset('assets/images/meal.svg')}}" alt="">
                         </div>
                         <div class="item-desc">
                             <h4>Choose Your Dish</h4>
@@ -131,7 +127,7 @@ Cart</a>
                 <div class="col-lg-4">
                     <div class="item">
                         <div class="item-image">
-                            <img src="assets/images/delivery.svg" alt="">
+                            <img src="{{asset('assets/images/delivery.svg')}}" alt="">
                         </div>
                         <div class="item-desc">
                             <h4>We Deliver Your Meals</h4>
@@ -143,7 +139,7 @@ Cart</a>
                 <div class="col-lg-4">
                     <div class="item">
                         <div class="item-image">
-                            <img src="assets/images/eat-enjoy.svg" alt="">
+                            <img src="{{asset('assets/images/eat-enjoy.svg')}}" alt="">
                         </div>
                         <div class="item-desc">
                             <h4>Eat And Enjoy</h4>
@@ -165,7 +161,7 @@ Cart</a>
                     <a href="restaurant-details.html" class="card restaurant-card">
                         <span class="restaurant-status"><em class="ribbon"></em>Open</span>
                         <div class="restaurant-image" style="
-                                    background-image: url('assets/images/banner1.jpg');
+                                    background-image: url({{asset('assets/images/banner1.jpg')}});
                                   ">
                         </div>
                         <div class="card-body">
@@ -187,7 +183,7 @@ Cart</a>
                     <a href="restaurant-details.html" class="card restaurant-card">
                         <span class="restaurant-status"><em class="ribbon"></em>Open</span>
                         <div class="restaurant-image" style="
-                                    background-image: url('assets/images/test1.jpg');
+                                    background-image: url({{asset('assets/images/banner1.jpg')}});
                                   ">
                         </div>
                         <div class="card-body">
@@ -209,7 +205,7 @@ Cart</a>
                     <a href="restaurant-details.html" class="card restaurant-card">
                         <span class="restaurant-status"><em class="ribbon"></em>Open</span>
                         <div class="restaurant-image" style="
-                                    background-image: url('assets/images/test2.jpg');
+                                    background-image: url({{asset('assets/images/banner1.jpg')}});
                                   "></div>
                         <div class="card-body">
                             <h5 class="card-title">Golden Dragon</h5>
@@ -230,7 +226,7 @@ Cart</a>
                     <a href="restaurant-details.html" class="card restaurant-card unavailable">
                         <span class="restaurant-status closed"><em class="ribbon"></em>Closed</span>
                         <div class="restaurant-image" style="
-                                    background-image: url('assets/images/test3.jpg');
+                                    background-image: url({{asset('assets/images/banner1.jpg')}});
                                   "></div>
                         <div class="card-body">
                             <h5 class="card-title">Golden Dragon</h5>
@@ -251,7 +247,7 @@ Cart</a>
                     <a href="restaurant-details.html" class="card restaurant-card unavailable">
                         <span class="restaurant-status closed"><em class="ribbon"></em>Closed</span>
                         <div class="restaurant-image" style="
-                                    background-image: url('assets/images/test4.jpg');
+                                    background-image: url({{asset('assets/images/banner1.jpg')}});
                                   "></div>
                         <div class="card-body">
                             <h5 class="card-title">Golden Dragon</h5>
@@ -272,7 +268,7 @@ Cart</a>
                     <a href="restaurant-details.html" class="card restaurant-card unavailable">
                         <span class="restaurant-status closed"><em class="ribbon"></em>Closed</span>
                         <div class="restaurant-image" style="
-                                    background-image: url('assets/images/test5.jpg');
+                                    background-image: url({{asset('assets/images/banner1.jpg')}});
                                   "></div>
                         <div class="card-body">
                             <h5 class="card-title">Golden Dragon</h5>
@@ -488,7 +484,7 @@ Cart</a>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
         </script>
-    <script src="assets/js/custom.js"></script>
+    <script src="{{asset('assets/js/custom.js')}}"></script>
 </body>
 
 </html>

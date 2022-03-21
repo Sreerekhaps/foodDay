@@ -5,7 +5,7 @@
                                 aria-labelledby="v-pills-settings-tab">
                                 <div class="my-account-content">
                                     <h4>Account Details</h4>
-                                    <form method="post" action="{{route('profile_update',$LoggedUserInfo->id)}}">
+                                    <form method="post" action="{{route('customer.profile_update',$customer->id)}}">
                                     @csrf
                                     @method('PATCH')
 
@@ -17,16 +17,16 @@
                                         <div class="form-row">
                                             <div class="col-lg-12">
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control" name="first_name" placeholder="First Name" value="{{$LoggedUserInfo['first_name']}}">
+                                                    <input type="text" class="form-control" name="first_name" placeholder="First Name" value="{{$customer['first_name']}}">
                                                 </div>
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control" name="last_name" placeholder="Last Name" value="{{$LoggedUserInfo['last_name']}}">
+                                                    <input type="text" class="form-control" name="last_name" placeholder="Last Name" value="{{$customer['last_name']}}">
                                                 </div>
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control" name="email" placeholder="Email" value="{{$LoggedUserInfo['email']}}">
+                                                    <input type="text" class="form-control" name="email" placeholder="Email" value="{{$customer['email']}}">
                                                 </div>
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control" name="mobile" placeholder="Mobile" value="{{$LoggedUserInfo['mobile']}}">
+                                                    <input type="text" class="form-control" name="mobile" placeholder="Mobile" value="{{$customer['mobile']}}">
                                                 </div>
                                                 <div class="form-group  mb-0">
                                                     <button class="btn btn-primary">Save Changes</button>

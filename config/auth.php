@@ -18,6 +18,10 @@ return [
         'passwords' => 'users',
         
     ],
+    'customers' => [
+        'driver' =>'eloquent',
+        'model' =>App\Models\Customer::class,
+    ],
     
 
     /*
@@ -41,6 +45,10 @@ return [
         'web' => [
             'driver' => 'session',
             'provider' => 'users',
+        ],
+        'customer' => [
+            'driver' => 'session',
+            'provider' => 'customers',
         ],
         
     ],
@@ -70,10 +78,10 @@ return [
             'model' => App\Models\User::class,
         ],
 
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+        'customers' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Customer::class,
+        ],
     ],
 
     /*
@@ -98,6 +106,13 @@ return [
             'expire' => 60,
             'throttle' => 60,
         ],
+        'customers' =>[
+            'driver' => 'eloquent',
+            'model' => App\Models\Customer::class,
+
+
+        ], 
+
     ],
 
     /*

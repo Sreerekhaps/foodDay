@@ -31,24 +31,20 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item active">
-                            <a class="nav-link" href="home.html">Home <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="{{route('index')}}">Home <span class="sr-only">(current)</span></a>
                         </li>
                         <!-- <li class="nav-item">
                             <a class="nav-link" href="restaurant-listing.html">Restaurants</a>
                         </li> -->
 
                         <li class="nav-item">
-                            <a class="nav-link" href="/signin">Sign In</a>
+                            <a class="nav-link" href="{{route('customer.signin')}}">Sign In</a>
                         </li>
 
-                        <!-- <li class="nav-item">
-                            <a class="nav-link" href="my-account.html">
-                                <i class='bx bx-user mr-1'></i>
-                                My Account</a>
-                        </li> -->
+                        
                         @if(count((array) session('cart'))==0)
 
-<a class="nav-link" href="/emptycart">
+<a class="nav-link" href="{{route('customer.emptycart')}}">
 
 <span class="cart-badge-wrap">
 
@@ -62,7 +58,7 @@ Cart</a>
 
 @else
 
-<a class="nav-link" href="/cart2">
+<a class="nav-link" href="{{route('customer.cart2')}}">
 
 <span class="cart-badge-wrap">
 
@@ -88,7 +84,7 @@ Cart</a>
         <div class="container">
             <div class="banner-content">
                 <h2>Delivering your favorite food to your door step.</h2>
-                <form action="{{route('search')}}" method="GET">
+                <form action="{{route('customer.search')}}" method="GET">
                     <div class="input-group search-location-group">
                     <input type="text" class="form-control" name="location"  placeholder="Enter your delivery location"
                             aria-label="delivery location" aria-describedby="button-addon2">

@@ -9,8 +9,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="icon" type="image/png" href="assets/images/favicon.png">
-    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="icon" type="image/png" href="{{asset('assets/images/favicon.png')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/styles.css')}}">
     <title>FoodDay - My Account</title>
 </head>
 
@@ -30,7 +30,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item active">
-                            <a class="nav-link" href="{{route('my_home')}}">Home <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="{{route('customer.my_home')}}">Home <span class="sr-only">(current)</span></a>
                         </li>
                         <!-- <li class="nav-item">
                             <a class="nav-link" href="restaurant-listing.html">Restaurants</a>
@@ -41,13 +41,13 @@
                         </li> -->
 
                         <li class="nav-item">
-                            <a class="nav-link" href="/myaccount">
+                            <a class="nav-link" href="{{route('customer.myaccount')}}">
                                 <i class='bx bx-user mr-1'></i>
                                 My Account</a>
                         </li>
                         @if(count((array) session('cart'))==0)
 
-<a class="nav-link" href="/emptycart">
+<a class="nav-link" href="{{route('customer.emptycart')}}">
 
 <span class="cart-badge-wrap">
 
@@ -61,7 +61,7 @@ Cart</a>
 
 @else
 
-<a class="nav-link" href="/cart2">
+<a class="nav-link" href="{{route('customer.cart2')}}">
 
 <span class="cart-badge-wrap">
 
@@ -103,16 +103,16 @@ Cart</a>
                             <!-- <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-wishlist"
                                 role="tab" aria-controls="v-pills-messages" aria-selected="false"><i
                                     class='bx bxs-heart'></i> Wishlist</a> -->
-                            <a class="nav-link" href="{{route('address')}}"
+                            <a class="nav-link" href="{{route('customer.address')}}"
                                 role="tab" aria-controls="v-pills-messages" aria-selected="false"><i
                                     class='bx bxs-home-smile'></i> Addresses</a>
-                            <a class="nav-link"   href="{{route('account')}}"
+                            <a class="nav-link"   href="{{route('customer.account')}}"
                                 role="tab" aria-controls="v-pills-settings" aria-selected="false"><i
                                     class='bx bxs-user-rectangle'></i> Account Details</a>
-                            <a class="nav-link"  href="{{route('show_password')}}"
+                            <a class="nav-link"  href="{{route('customer.show_password')}}"
                                 role="tab" aria-controls="v-pills-settings" aria-selected="false"><i
                                     class='bx bxs-wallet-alt'></i> Change Password</a>
-                            <a class="nav-link"  href="/logoutuser"
+                            <a class="nav-link"  href="{{route('customer.logout')}}"
                                 role="tab" aria-controls="v-pills-settings" aria-selected="false"><i
                                     class='bx bxs-log-out'></i> Logout</a>
                             <!-- <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-no-orders"
@@ -298,7 +298,7 @@ Cart</a>
                                         @endphp
                                     </div>
                                     @endif
-                                <form method="post" action="{{route('address_store')}}" enctype="multipart/form-data">
+                                <form method="post" action="{{route('customer.address_store')}}" enctype="multipart/form-data">
                                     @csrf
                                     <div class="form-row">
 
@@ -495,7 +495,7 @@ Cart</a>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
         </script>
-    <script src="assets/js/custom.js"></script>
+    <script src="{{asset('assets/js/custom.js')}}"></script>
     @yield('javascript')
     @yield('edit')
 

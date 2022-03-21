@@ -4,7 +4,7 @@
                                 aria-labelledby="v-pills-settings-tab">
                                 <div class="my-account-content">
                                     <h4>Change Password</h4>
-                                   <form action="{{route('change_password')}}" method="post" class="needs-validation" novalidate enctype="multipart">
+                                   <form action="{{route('customer.change_password')}}" method="post" class="needs-validation" novalidate enctype="multipart">
                                     @csrf
                                     
 
@@ -22,19 +22,19 @@
                                                         
                                                 </div>
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control" name="password" placeholder="New Password">
-                                                    @if ($errors->has('password'))
+                                                    <input type="text" class="form-control" name="new_password" placeholder="New Password">
+                                                    @if ($errors->has('new_password'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
+                                        <strong>{{ $errors->first('new_password') }}</strong>
                                     </span>
                                 @endif
                                                 </div>
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control" name="confirm_password"
+                                                    <input type="text" class="form-control" name="new_confirm_password"
                                                         placeholder="Confirm New Password">
-                                                        @if ($errors->has('confirm_password'))
+                                                        @if ($errors->has('new_confirm_password'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('confirm_password') }}</strong>
+                                        <strong>{{ $errors->first('new_confirm_password') }}</strong>
                                     </span>
                                 @endif
                                                 </div>

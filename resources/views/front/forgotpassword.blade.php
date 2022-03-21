@@ -31,18 +31,18 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item active">
-                            <a class="nav-link" href="/front">Home <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="{{route('index')}}">Home <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/restaurant_listing">Restaurants</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="/signin">Sign In</a>
+                            <a class="nav-link" href="{{route('customer.restaurant_listing')}}">Restaurants</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="my-account.html">
+                            <a class="nav-link" href="{{route('customer.signin')}}">Sign In</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('customer.myaccount')}}">
                                 <i class='bx bx-user mr-1'></i>
                                 My Account</a>
                         </li>
@@ -77,7 +77,7 @@
                             {{ Session::get('success') }}
                         </div>
                     @endif
-                <form action="{{route('sendresetLink')}}" method="POST">
+                <form action="{{route('customer.sendresetLink')}}" method="POST">
                           @csrf
                         
                     <span class="email-text">Enter your email below to receive your password reset
@@ -94,7 +94,7 @@
                     </div>
                     <div class="form-group text-center mb-0">
                         <span>Don't have an account?</span>
-                        <a href="/signup">Sign up</a>
+                        <a href="{{route('customer.signup')}}">Sign up</a>
                     </div>
 
                 </form>

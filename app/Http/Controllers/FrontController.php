@@ -8,6 +8,7 @@ use App\Models\Address;
 use App\Models\Restaurant;
 use App\Models\Cuisine;
 use App\Models\Itemfood;
+use App\Rules\MatchOldPassword;
 
 
 use Carbon\Carbon;
@@ -53,7 +54,7 @@ class FrontController extends Controller
         $customer->password = Hash::make($request->password);
         
         $save= $customer->save();
-        return redirect('/signin');
+        return redirect('signin');
             
     }
     public function check(Request $request)//signin 
@@ -62,26 +63,38 @@ class FrontController extends Controller
         'email'=>'required|email',  
         'password'=>'required|min:4',
         ]);
-        $userInfo = Customer::where('email','=', $request->email)->first();
-        if(!$userInfo){
-        return back()->with('fail','We do not recognize your email address');
+
+        $userInfo=$request->only('email','password');
+        if(Auth::guard('customer')->attempt($userInfo)){
+            return redirect('/customer/my_home');
         }else{
-        //check password
-        if(Hash::check($request->password, $userInfo->password)){
-        $request->session()->put('LoggedUser', $userInfo->id);
-        return redirect('/my_home');
-        }else{
-        return back()->with('fail','Incorrect password');
+            return back()->with('fail','We do not recognize your email address');
         }
-        }
+        // $userInfo = Customer::where('email','=', $request->email)->first();
+        // if(!$userInfo){
+        // return back()->with('fail','We do not recognize your email address');
+        // }else{
+        // //check password
+        // if(Hash::check($request->password, $userInfo->password)){
+        // $request->session()->put('LoggedUser', $userInfo->id);
+        // return redirect('customer/my_home');
+        // }else{
+        // return back()->with('fail','Incorrect password');
+        // }
+        // }
 }
 ////////////////Logout//////////////////////////
 public function logout(){
-    if(session()->has('LoggedUser')){
-        session()->pull('LoggedUser');
-        return redirect('/front');
-    }
+    Auth::guard('customer')->logout();
+    return redirect('/front');
+   
 }
+// public function logout(){
+//     if(session()->has('LoggedUser')){
+//         session()->pull('LoggedUser');
+//         return redirect('/front');
+//     }
+// }
 
 ////////////////Forgot Password//////////////////
     public function showforgotForm(){
@@ -98,7 +111,7 @@ public function logout(){
             'token'=>$token,
             'created_at'=>Carbon::now(),
         ]);
-        $action_link=route('showresetForm',['token'=>$token,'email'=>$request->email]);
+        $action_link=route('customer.showresetForm',['token'=>$token,'email'=>$request->email]);
         $body="we are recieved the reset main for account associated with ".$request->email.".you can reset 
         the password by clicking the below link";
         \Mail::send('email_forgot',['action_link'=>$action_link,'body'=>$body],function($message) use ($request){
@@ -138,14 +151,14 @@ public function logout(){
     
     ////////////////////
    
-    public function myaccount(){
-        $data=['LoggedUserInfo'=>Customer::where('id','=',session('LoggedUser'))->first()];
-        return view('front.components.my_account-master',$data);
+    public function myaccount(Customer $customer){
+        $customer=Auth::user();
+        return view('front.components.my_account-master',['customer'=>$customer]);
         
     }
 
     public function profile_update(Request $request,$id){
-        $customer=Customer::find($id);
+        $customer=Customer::findorFail($id);
         $customer->first_name=$request->first_name;
         $customer->last_name=$request->last_name;
         $customer->mobile=$request->mobile;
@@ -162,9 +175,9 @@ public function logout(){
 
     }
    
-    public function account(){
-        $data=['LoggedUserInfo'=>Customer::where('id','=',session('LoggedUser'))->first()];
-        return view('my_account',$data);
+    public function account(Customer $customer){
+        $customer=Auth::user();
+        return view('front.my_account',['customer'=>$customer]);
     }
     ///////////Change Password///////////////
     public function show_password(){
@@ -172,25 +185,15 @@ public function logout(){
     }
     public function change_password(Request $request) {  
         
-            $request->validate([
-              'current_password' => 'required',
-              'password' => 'required|string|min:6|',
-              'confirm_password' => 'required',
-            ]);
-    
-            $customer = Auth::customer();
-            dd($customer);
-            if (!Hash::check($request->current_password, $customer->password)) {
-                return back()->with('error', 'Current password does not match!');
-            }
-            else{
-
-                $customer->password = Hash::make($request->password);
-                $customer->save();
-        
-                return back()->with('success', 'Password successfully changed!');
-            }
-    
+        $request->validate([
+            'current_password' => ['required', new MatchOldPassword],
+            'new_password' => ['required'],
+            'new_confirm_password' => ['same:new_password'],
+        ]);
+   
+        Customer::find(auth()->user()->id)->update(['password'=> Hash::make($request->new_password)]);
+   
+        return back();
         }
         /////////////Address///////////////////
         public function address(Address $address){

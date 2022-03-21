@@ -30,18 +30,18 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item active">
-                            <a class="nav-link" href="/my_home">Home <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="{{route('customer.my_home')}}">Home <span class="sr-only">(current)</span></a>
                         </li>
                     
 
                         <li class="nav-item">
-                            <a class="nav-link" href="/sign_in">Sign In</a>
+                            <a class="nav-link" href="{{route('customer.signin')}}">Sign In</a>
                         </li>
 
                         
  @if(count((array) session('cart'))==0)
 
-<a class="nav-link" href="/emptycart">
+<a class="nav-link" href="{{route('customer.emptycart')}}">
 
 <span class="cart-badge-wrap">
 
@@ -55,7 +55,7 @@ Cart</a>
 
 @else
 
-<a class="nav-link" href="/cart2">
+<a class="nav-link" href="{{route('customer.cart2')}}">
 
 <span class="cart-badge-wrap">
 
@@ -157,121 +157,8 @@ Cart</a>
                                         <h4 class="mb-4">Most Popular</h4>
                                        
                                         <div class="row">
-                                        @foreach($itemfoods as $item)
-                                        @if($restaurant->itemfoods->contains($item->id))
-                                            <div class="col-lg-6">
-                                            @if($item->status==0)
-                                            <div class="food-item-card unavailable">
-                                                <div class="food-item-card">
-                                                    <div class="food-item-img" style="
-                                background-image: url({{asset('assets/images/img2.jpg')}});
-                              "></div>
-                                                    <div class="food-item-body">
-                                                        <h5 class="card-title">
-                                                            {{$item->food_item}}
-                                                        </h5>
-                                                        <p class="description">
-                                                           {{$item->description}}
-                                                        </p>
-                                                        <div class="pricing">
-                                                            <div class="price-wrap">
-                                                            @if($item->type==1)
-                                                                <div class="non-div food-type-div">
-                                                                    <i class="bx bxs-circle"></i>
-                                                                </div>
-                                                                
-                                                                @elseif($item->type==0)
-                                                                <div class="veg-div food-type-div">
-                                                                    <i class="bx bxs-circle"></i>
-                                                                </div>
-                                                                @endif
-                                                                <span class="price">{{$item->rate}}</span>
-                                                                <span class="actual-price">$110.99</span>
-                                                            </div>
-                                                            <span class="unavailable-text">Unavailable</span>
-                                                            
-                                                            <!-- @if($item->status==1)
-                                                            <span class="unavailable-text">Unavailable</span>
-                                                            @endif -->
-                                                            <!-- <div class="add-remove-button">
-                                                                <div class="input-group">
-                                                                    <input type="button" value="-" class="button-minus"
-                                                                        data-field="quantity" />
-                                                                    <input type="number" step="1" max="" value="0"
-                                                                        name="quantity" class="quantity-field" />
-                                                                        <a href="{{route('addToCart',$item->id)}}"><input type="button"  value="+" class="button-plus"
-                                                                        data-field="quantity" data-toggle="modal"
-                                                                        data-target="#add-repeat" /></a>
-                                                                </div>
-                                                            </div> -->
-                                                            
-                                                            <!-- <a href="{{route('addToCart',$item->id)}}" class="number-button  plus">+</a>
-                                                             <a href="#" class="number-button minus">-</a> -->
-                                                            
-
-                                                         
-                                                            </div>
-                                                    </div>
-                                                </div>
-                                                </div>
-                                                @else
-                                                <div class="food-item-card available">
-                                                <div class="food-item-card">
-                                                    <div class="food-item-img" style="
-                                background-image: url({{asset('assets/images/img2.jpg')}});
-                              "></div>
-                                                    <div class="food-item-body">
-                                                        <h5 class="card-title">
-                                                            {{$item->food_item}}
-                                                        </h5>
-                                                        <p class="description">
-                                                           {{$item->description}}
-                                                        </p>
-                                                        <div class="pricing">
-                                                            <div class="price-wrap">
-                                                            @if($item->type==1)
-                                                                <div class="non-div food-type-div">
-                                                                    <i class="bx bxs-circle"></i>
-                                                                </div>
-                                                                
-                                                                @elseif($item->type==0)
-                                                                <div class="veg-div food-type-div">
-                                                                    <i class="bx bxs-circle"></i>
-                                                                </div>
-                                                                @endif
-                                                                <span class="price">{{$item->rate}}</span>
-                                                                <span class="actual-price">$110.99</span>
-                                                            </div>
-                                                            <span class="unavailable-text">Available</span>
-                                                            
-                                                           
-
-                                                           <div class="add-remove-button">
-                                                               
-                                                                <div class="input-group">
-                                                                <a href="{{route('removeFromCart',$item->id)}}" class="number-button  minus">-</a>
-                                                                    <input type="number" step="1" max="" value="0"
-                                                                        name="quantity" class="quantity-field" />
-                                                                        <a href="{{route('addToCart',$item->id)}}" class="number-button  plus">+</a>
-                                                                </div>
-                                                                
-                                                            </div>
-                                                            <div class="add-remove-button">
-                                                                <button type="button"  class="btn btn-outline-primary"
-                                                                    data-toggle="modal"  >
-                                                                    <a href="{{route('addToCart',$item->id)}}">
-                                                                    ADD </a>
-                                                                </button>
-                                                            </div>
-                                                          
-                                                            </div>
-                                                    </div>
-                                                </div>
-                                                </div>
-                                                @endif
-                                            </div>
-                                       @endif
-                                       @endforeach
+                                       <livewire:fooditem :restaurant="$restaurant"/>
+                                           
                                                 </div>
                                             </div>
                                         </div>
@@ -283,137 +170,7 @@ Cart</a>
 
 </div>
 
-<div class="col-lg-4 cart-col">
-
-                    <div class="cart d-none d-md-block">
-                    @if(count((array) session('cart'))!=0)
-                        <div class="cart-head">
-                            <span>Your order</span>
-                        </div>
-                        
-                        @php $total = 0 @endphp
-        @if(session('cart'))
-            @foreach(session('cart') as $id => $details)
-           
-                @php
-                 $total=0;
-                 $total += $details['rate'] * $details['quantity'] 
-                 @endphp
-                        <div class="cart-body">
-                            <div class="cart-item">
-                                <div class="details">
-                                    <h6> {{ $details['food_item'] }}</h6>
-                                  
-                                   
-                                </div>
-                                <div class="price">
-                                    <h6>${{ $details['rate'] }}.00</h6>
-                                    
-                                    <div class="add-remove-button">
-                                    
-                                        <div class="input-group">
-                                       
-                                        <a href="{{route('removeFromCart',$item->id)}}" class="number-button  minus">-</a>
-                                            <input type="number" step="1" max="" value="{{ $details['quantity'] }}" name="quantity"
-                                                class="quantity-field" />
-                                                <a href="{{route('addToCart',$item->id)}}" class="number-button  plus">+</a>
-                                                
-                                        </div>
-                                        
-
-                                   
-                                   
-                                    
-                                    </div>
-                                   
-                                </div>
-                            </div>
-
-                        </div>
-                        
-                @endforeach
-                @endif
-                
-                            
-                        <div class="cart-footer">
-                        @php $total = 0 @endphp
-                            @foreach((array) session('cart') as $id => $details)
-                                @php $total += $details['rate'] * $details['quantity'] @endphp
-                            @endforeach
-                            <ul>
-                                <li>
-                                    <h5>
-                                        <span>SubTotal</span>
-                                        <span class="float-right">${{$total}}.00</span>
-                                    </h5>
-                                </li>
-                                <li>
-                                    <p>
-                                        <span>Delivery fre</span>
-                                        <span class="float-right">$00.00</span>
-                                    </p>
-                                </li>
-                                <li>
-                                    <p>
-                                        <span>Tax</span> <span class="float-right">$00.00</span>
-                                    </p>
-                                </li>
-                                <li>
-                                    <h4>
-                                        <span>Total</span>
-                                        <span class="float-right">${{$total}}.00</span>
-                                    </h4>
-                                </li>
-                                <button class="btn btn-primary mt-3 w-100"
-                                    onclick="window.location.href='cart.html';">Proceed to Buy</button>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <!-- Empty cart. Use this when the cart is empty -->
-
-                    <!-- <div class="cart">
-                        <div class="empty-cart text-center">
-                            <h4>Your cart is empty</h4>
-                            <p class="mb-0">Add items to get started.</p>
-                        </div>
-                    </div> -->
-
-                    <!-- Empty cart end  -->
-                </div>
-               
-            </div>
-        </div>
-       
-
-
-                                             
-                       
-               
-                <div class="col-lg-4 cart-col">
-                @else
-                    <div class="cart d-none d-md-block">
-                        
-                        <div class="cart-body">
-                            
-                        </div>
-
-                       
-                    </div>
-
-                    <!-- Empty cart. Use this when the cart is empty -->
-
-                    <div class="cart">
-                        <div class="empty-cart text-center">
-                            <h4>Your cart is empty</h4>
-                            <p class="mb-0">Add items to get started.</p>
-                        </div>
-                    </div>
-
-                    <!-- Empty cart end  -->
-                </div>
-                @endif
-            </div>
+                                <livewire:cart />
             
            
          

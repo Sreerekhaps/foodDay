@@ -10,8 +10,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="icon" type="image/png" href="assets/images/favicon.png">
-    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="icon" type="image/png" href="{{asset('assets/images/favicon.png')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/styles.css')}}">
     <title>FoodDay - Signup</title>
 </head>
 
@@ -31,14 +31,14 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item active">
-                            <a class="nav-link" href="home.html">Home <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="{{route('index')}}">Home <span class="sr-only">(current)</span></a>
                         </li>
                         <!-- <li class="nav-item">
                             <a class="nav-link" href="restaurant-listing.html">Restaurants</a>
                         </li> -->
 
                         <li class="nav-item">
-                            <a class="nav-link" href="login.html">Sign In</a>
+                            <a class="nav-link" href="{{route('customer.signin')}}">Sign In</a>
                         </li>
 
                         <!-- <li class="nav-item">
@@ -48,7 +48,7 @@
                         </li> -->
                         @if(count((array) session('cart'))==0)
 
-<a class="nav-link" href="/emptycart">
+<a class="nav-link" href="{{route('customer.emptycart')}}">
 
 <span class="cart-badge-wrap">
 
@@ -62,7 +62,7 @@ Cart</a>
 
 @else
 
-<a class="nav-link" href="/cart2">
+<a class="nav-link" href="{{route('customer.cart2')}}">
 
 <span class="cart-badge-wrap">
 
@@ -93,7 +93,7 @@ Cart</a>
             <div class="form-content">
                 <img src="assets/images/logo-round.png" alt="" class="form-logo">
                 <h1 class="text-center">Sign up to FoodDay</h1>
-                <form method="post" action="/signup_store">
+                <form method="post" action="{{route('customer.signup_store')}}">
                 @csrf
                     <!-- <div class="form-group ">
                         <a href="#" class="fb btn btn-blue w-100">
@@ -134,7 +134,7 @@ Cart</a>
                     </div>
                     <div class="form-group text-center mb-0">
                         <span>Already have an account?</span>
-                        <a href="/signin">Sign In</a>
+                        <a href="{{route('customer.signin')}}">Sign In</a>
                     </div>
 
                 </form>
@@ -254,7 +254,7 @@ Cart</a>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
         </script>
-    <script src="assets/js/custom.js"></script>
+    <script src="{{asset('assets/js/custom.js')}}"></script>
 </body>
 
 </html>

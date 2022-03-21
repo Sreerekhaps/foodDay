@@ -10,8 +10,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="icon" type="image/png" href="assets/images/favicon.png">
-    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="icon" type="image/png" href="{{asset('assets/images/favicon.png')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/styles.css')}}">
     <title>FoodDay - Login</title>
 </head>
 
@@ -36,13 +36,13 @@
                        
 
                         <li class="nav-item">
-                            <a class="nav-link" href="/sign_in">Sign In</a>
+                            <a class="nav-link" href="{{route('customer.signin')}}">Sign In</a>
                         </li>
 
                        
                         @if(count((array) session('cart'))==0)
 
-<a class="nav-link" href="/emptycart">
+<a class="nav-link" href="{{route('customer.emptycart')}}">
 
 <span class="cart-badge-wrap">
 
@@ -56,7 +56,7 @@ Cart</a>
 
 @else
 
-<a class="nav-link" href="/cart2">
+<a class="nav-link" href="{{route('customer.cart2')}}">
 
 <span class="cart-badge-wrap">
 
@@ -87,7 +87,7 @@ Cart</a>
             <div class="form-content">
                 <img src="assets/images/logo-round.png" alt="" class="form-logo">
                 <h1 class="text-center">Sign in to FoodDay</h1>
-                <form action=" {{ route('check')}} " method="post">
+                <form action="{{route('customer.check')}}" method="post">
                 @csrf
                
                     <div class="form-group">
@@ -108,7 +108,7 @@ Cart</a>
                     </div>
                     @endif
                     <div class="form-group">
-                        <a href="{{route('showforgotForm')}}">Forgot password?</a>
+                        <a href="{{route('customer.showforgotForm')}}">Forgot password?</a>
                     </div>
 
                     <div class="form-group">
@@ -116,7 +116,7 @@ Cart</a>
                     </div>
                     <div class="form-group text-center mb-0">
                         <span>Don't have an account?</span>
-                        <a href="/signup">Sign up</a>
+                        <a href="{{route('customer.signup')}}">Sign up</a>
                     </div>
 
                 </form>
@@ -236,7 +236,7 @@ Cart</a>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
         </script>
-    <script src="assets/js/custom.js"></script>
+    <script src="{{asset('assets/js/custom.js')}}"></script>
 </body>
 
 </html>
