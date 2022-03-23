@@ -116,7 +116,7 @@ Cart</a>
                 $total += $details['rate'] * $details['quantity'] @endphp
                                                 <div class="food-item-card">
                                                     <div class="food-item-img ct-img" style="
-                                background-image: url('assets/images/img2.jpg');
+                                background-image: url({{asset('assets/images/img2.jpg')}});
                               "></div>
                                                     <div class="food-item-body">
 
@@ -131,10 +131,10 @@ Cart</a>
                                                             <span class="price">${{ $details['rate'] }}</span>
                                                             <div class="add-remove-button">
                                                                 <div class="input-group">
-                                                                <a href="{{route('removeFromCart',$id)}}" class="number-button  minus">-</a>
+                                                                <a href="" class="number-button  minus">-</a>
                                                                     <input type="number"  step="1" max="" value="{{ $details['quantity'] }}"
                                                                         name="quantity" class="quantity-field" min="1"/>
-                                                                        <a href="{{route('addToCart',$id)}}" class="number-button  plus">+</a>
+                                                                        <a href="{{route('customer.addToCart',$id)}}" class="number-button  plus">+</a>
                                                                 </div>
                                                             </div>
                                                         </div>

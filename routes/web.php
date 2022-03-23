@@ -153,7 +153,7 @@ Route::prefix('customer')->name('customer.')->group(function (){
         Route::get('/cart',[FrontController::class,'cart'])->name('cart');
         Route::get('/add-to-cart/{id}', [FrontController::class, 'addToCart'])->name('addToCart');
         Route::get('/remove-from-cart/{id}', [FrontController::class, 'removeFromCart'])->name('removeFromCart');
-        Route::delete('remove-from-cart', [FrontController::class, 'remove'])->name('remove');
+        Route::delete('cartDelete/{id}', [FrontController::class, 'cartDelete'])->name('cartDelete');
         Route::get('/cart2',[FrontController::class,'cart2'])->name('cart2');
         Route::get('/emptycart',[FrontController::class,'emptycart'])->name('emptycart');
         Route::get('/checkout',[FrontController::class,'checkout'])->name('checkout');

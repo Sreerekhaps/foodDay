@@ -8,10 +8,11 @@
                         
                         @php $total = 0 @endphp
         @if(session('cart'))
+        
             @foreach(session('cart') as $id => $details)
            
                 @php
-                 $total=0;
+                
                  $total += $details['rate'] * $details['quantity'] 
                  @endphp
                         <div class="cart-body">
@@ -85,16 +86,7 @@
                         </div>
                     </div>
 
-                    <!-- Empty cart. Use this when the cart is empty -->
-
-                    <!-- <div class="cart">
-                        <div class="empty-cart text-center">
-                            <h4>Your cart is empty</h4>
-                            <p class="mb-0">Add items to get started.</p>
-                        </div>
-                    </div> -->
-
-                    <!-- Empty cart end  -->
+                   
                 </div>
                
             </div>

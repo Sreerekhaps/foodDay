@@ -59,7 +59,7 @@ Cart</a>
 
 @else
 
-<a class="nav-link" href="{{rote('customer.cart2')}}">
+<a class="nav-link" href="{{route('customer.cart2')}}">
 
 <span class="cart-badge-wrap">
 

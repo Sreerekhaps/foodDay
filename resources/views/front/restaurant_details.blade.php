@@ -13,6 +13,7 @@
   <link rel="icon" type="image/png" href="{{asset('assets/images/favicon.png')}}">
     <link rel="stylesheet" href="{{asset('assets/css/styles.css')}}">
     <title>FoodDay - Restaurant Page</title>
+    @livewireStyles
 </head>
 
 <body>
@@ -156,10 +157,10 @@ Cart</a>
                                     <div class="sub-cat mt-0" id="sub-cat1">
                                         <h4 class="mb-4">Most Popular</h4>
                                        
-                                        <div class="row">
+                                       
                                        <livewire:fooditem :restaurant="$restaurant"/>
                                            
-                                                </div>
+                                                
                                             </div>
                                         </div>
                                     </div>
@@ -392,6 +393,7 @@ Cart</a>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"
         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script src="{{asset('assets/js/custom.js')}}"></script>
+    @livewireScripts
 </body>
 
 </html>

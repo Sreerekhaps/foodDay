@@ -131,16 +131,11 @@ Cart</a>
                             </td>
                             <td>{{$total}}</td>
                             
-                            <td class="actions" data-th="">
-                            <a href="{{route('remove')}}" class="float-right"><i class='bx bx-trash'></i></a>
-                    </td>
-                            <!-- <form method="delete" action="{{route('remove',$id)}}">
-                            @csrf
-                              @method('DELETE')
-                                <a href="{{route('remove')}}" class="float-right"><i class='bx bx-trash'></i></a>
-                          
-                            </form> -->
+                            <td>
+                               <a href="{{route('customer.cartDelete',$id)}}" class="float-right"><i class='bx bx-trash'></i></a>
                             </td>
+                           
+                           
                         </tr>
                        @endforeach
                        @endif
