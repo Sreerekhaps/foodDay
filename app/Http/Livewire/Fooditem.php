@@ -10,6 +10,8 @@ class Fooditem extends Component
 {
     public $itemfoods;
     public $restaurant=[];
+    public $cart;
+    public $sum=[];
     
     
     public function mount($restaurant){
@@ -31,6 +33,7 @@ class Fooditem extends Component
             $cart[$id]['quantity']++;
         } else {
             $cart[$id] = [
+                "id"=>$itemfoods->id,
                 "food_item" => $itemfoods->food_item,
                 "quantity" => 1,
                 "rate" => $itemfoods->rate,
@@ -39,6 +42,7 @@ class Fooditem extends Component
         }
           
         session()->put('cart', $cart);
+        $ss=$cart[$id]['quantity'];
         
         $this->emit('increment');
     }
@@ -47,11 +51,22 @@ class Fooditem extends Component
         $itemfoods = Itemfood::findOrFail($id);
            
         $cart = session()->get('cart', []);
+        $itemId=$cart[$id]['quantity'];
+
+        
    
-        if(isset($cart[$id])) {
+        if(isset($cart[$id]) && $cart[$id]['quantity'] > "1") {
             $cart[$id]['quantity']--;
-        } else {
+        } 
+        elseif($itemId== 1){
+           
+                unset($cart[$id]);
+            }
+        
+        
+        else {
             $cart[$id] = [
+                "id"=>$itemfoods->id,
                 "food_item" => $itemfoods->food_item,
                 "quantity" => 1,
                 "rate" => $itemfoods->rate,
@@ -62,6 +77,20 @@ class Fooditem extends Component
           
         session()->put('cart', $cart);
         $this->emit('decrement');
+    }
+     
+    public function itemQuantity($id){
+
+        $item = Itemfood::findOrFail($id);
+        $cartId=$this->cart;
+        
+        if($cartId==$item)
+        {
+            return $cart[$id]['quantity'];
+        }
+       
+        
+        
     }
 
     public function render()

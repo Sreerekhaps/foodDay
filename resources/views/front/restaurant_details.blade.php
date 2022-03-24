@@ -36,7 +36,7 @@
                     
 
                         <li class="nav-item">
-                            <a class="nav-link" href="{{route('customer.signin')}}">Sign In</a>
+                            <a class="nav-link" href="{{route('customer.myaccount')}}">My Account</a>
                         </li>
 
                         
@@ -178,96 +178,7 @@ Cart</a>
     </section>
    
     <!--cart modal-->
-    <div class="modal fade" id="cartmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog  modal-dialog-scrollable" role="document">
-            <div class="modal-content">
-
-            <div class="col-lg-4 cart-col">
-                    <div class="cart d-none d-md-block">
-                        <div class="cart-head">
-                            <span>Your order</span>
-                        </div>
-                        @php $total = 0 @endphp
-        @if(session('cart'))
-            @foreach(session('cart') as $id => $details)
-           
-                @php
-                 $total=0;
-                 $total += $details['rate'] * $details['quantity'] 
-                 @endphp
-                        <div class="cart-body">
-                            <div class="cart-item">
-                                <div class="details">
-                                    <h6>{{ $details['food_item'] }}</h6>
-                                    <p class="text-to-kitchen">
-                                        Text to kitchen. Delete this if you are not using.
-                                        adipisicing elit. Enim illum adipisci natus ducimus,
-                                        voluptatem
-                                    </p>
-                                    <!-- <ul class="modifiers">
-                                        <h6>Toppings</h6>
-                                        <li>Extra chease <span>$5.00</span></li>
-                                        <li>Drinks <span>$6.00</span></li>
-                                        <li>Butter <span>$7.00</span></li>
-                                    </ul> -->
-                                </div>
-                                <div class="price">
-                                    <h6>${{ $details['rate'] }}</h6>
-                                    <div class="add-remove-button">
-                                        <div class="input-group">
-                                            <input type="button" value="-" class="button-minus" data-field="quantity" />
-                                            <input type="number" step="1" max="" value="1" name="quantity"
-                                                class="quantity-field" />
-                                            <input type="button" value="+" class="button-plus" data-field="quantity" />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            </div>
-                @endforeach
-                            @endif
-
-                            <div class="cart-footer">
-                            @php $total = 0 @endphp
-                            @foreach((array) session('cart') as $id => $details)
-                                @php $total += $details['rate'] * $details['quantity'] @endphp
-                               
-                            @endforeach
-                            <ul>
-                                <li>
-                                    <h5>
-                                        <span>{{$total}}</span>
-                                        <span class="float-right">$121.99</span>
-                                    </h5>
-                                </li>
-                                <li>
-                                    <p>
-                                        <span>Delivery fee</span>
-                                        <span class="float-right">$20.00</span>
-                                    </p>
-                                </li>
-                                <li>
-                                    <p>
-                                        <span>Tax</span> <span class="float-right">$18.00</span>
-                                    </p>
-                                </li>
-                                <li>
-                                    <h4>
-                                        <span>Total</span>
-                                        <span class="float-right">${{$total}}</span>
-                                    </h4>
-                                </li>
-                                <button class="btn btn-primary mt-3 w-100"
-                                    onclick="window.location.href='cart.html';">Proceed to Buy</button>
-                            </ul>
-                        </div>
-                    </div>
-
-
-            </div>
-        </div>
-    </div>
+    
 
     <!-- footer -->
 

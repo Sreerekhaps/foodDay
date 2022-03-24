@@ -12,8 +12,8 @@
     <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
-    <link rel="icon" type="image/png" href="assets/images/favicon.png">
-    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="icon" type="image/png" href="{{asset('assets/images/favicon.png')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/styles.css')}}">
     <title>FoodDay - Cart</title>
 </head>
 
@@ -78,7 +78,7 @@
                         <div class="form-row">
                             <div class="form-group col-lg-6">
                                 <h6 class="checkout-title">Delivery Type</h6>
-                                <select class="form-control " name="mySelect" id="mySelect" onchange="myFunction()">
+                                <select class="form-control " name="mySelect" id="mySelect" onchange="status(this)">
                                     <option value="delivery" id="delivery" name="method" selected="">Delivery</option>
                                     <option value="pickup" id="pickup" name="method">Pickup</option>
                                 </select>
@@ -87,7 +87,7 @@
                     </form>
 
                    
-
+<div id="yes">
                     <div class="form-row">
                     
                     <!-- <script>
@@ -115,19 +115,19 @@
                             </form>
                         </div>
                         <div class="col-lg-12">
-                            <h6 class="checkout-title">Promo Codes</h6>
+                            <h6 class="checkout-title">Payment</h6>
                         </div>
                         <div class="form-group col-lg-12">
                             <div class="custom-radio">
                                 <input type="radio" id="radio1" name="payment-type" checked="checked">
                                 <label for="radio1">Pay via Cash</label>
-                                <img src="./assets/images/cash.png" alt="Icon">
+                                <img src="{{asset('./assets/images/cash.png')}}" alt="Icon">
                             </div>
                         </div>
                        
 
                     </div>
-
+                    
                     <div class="checkout-delivery-address food-item-cards-wrap">
                         
                         <h6 class="checkout-title">Delivery Address</h6>
@@ -153,7 +153,7 @@
                                             data-target="#exampleModal">
                                             Edit</button>
                                         <button class="btn btn-outline-primary btn-sm">
-                                        <a href="/address/{{$add->id}}">Delete</a></button>
+                                        <a href="/customer/address/{{$add->id}}">Delete</a></button>
                                     </div>
                                 </div>
                             </div>
@@ -161,9 +161,17 @@
                             @endforeach
                         </div>
 
+</div>
+
+                                               
+                      
+
                         <button type="button" class="btn btn-outline-primary mb-lg-auto mb-4" data-toggle="modal"
                             data-target="#exampleModal">Add New Address</button>
+
+
                            
+                             
 <!-- <div class="form-group col-lg-12">
                             <form>
                                 <h6 class="checkout-title">Promo Codes</h6>
@@ -198,7 +206,10 @@
 </div> -->
 
                     </div>
+                    
                     </div>
+
+                  
                 <div class="col-lg-4 cart-col">
 
                     <div class="cart">
@@ -255,19 +266,57 @@
                         </div>
 
                     </div>
+                    
 
                 </div>
                 
+                
             </div>
+            
+                    
+            <div id="no">
+                            <div class="form-group col-lg-12" id="demo">
+                            <form>
+                                <h6 class="checkout-title">Promo Codes</h6>
+                                <div class="row cuisine-dish-wrap">
+                                    <div class="col-md-6 cuisine-col">
+                                        <div class="input-group coupon-group">
+                                            <input type="text" class="form-control" placeholder="Enter promo code"
+                                                aria-label="delivery location" aria-describedby="button-addon2">
+                                            <div class="input-group-append">
+                                                <button class="btn btn-primary" type="button"
+                                                    id="find-food-btn">Apply</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-lg-12">
+                            <h6 class="checkout-title">Payment</h6>
+                        </div>
+                        <div class="form-group col-lg-12">
+                            <div class="custom-radio">
+                                <input type="radio" id="radio1" name="payment-type" checked="checked">
+                                <label for="radio1">Pay via Cash</label>
+                                <img src="{{asset('./assets/images/cash.png')}}" alt="Icon">
+                            </div>
+                        </div>
+                       
 
-        </div>
+                    </div>  
+              
+                    </div>
+                            
+                    
     </section>
-
+    
 
 
     <!-- Address Modal -->
     <div class="modal fade address-model" id="exampleModal" tabindex="-1" role="dialog"
                     aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
                             <div class="modal-body">
@@ -284,7 +333,7 @@
                                         @endphp
                                     </div>
                                     @endif
-                                <form method="post" action="{{route('address_store')}}" enctype="multipart/form-data">
+                                <form method="post" action="{{route('customer.address_store')}}" enctype="multipart/form-data">
                                     @csrf
                                     <div class="form-row">
 
@@ -357,11 +406,17 @@
 
                                     </div>
                                 </form>
+
+
+                                
                             </div>
 
                         </div>
                     </div>
+                    
                 </div>
+
+                
 
                 <!-- Address Modal End -->
 
@@ -476,9 +531,25 @@
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
         </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
-    <script src="assets/js/custom.js"></script>
+    <script src="{{asset('assets/js/custom.js')}}"></script>
+
+    <script type="text/javascript">
+
+function status(select){
+   if(select.value=='delivery'){
+    document.getElementById('yes').style.display = "block";
+    document.getElementById('no').style.display = "none";
+   }else
+   {
+    document.getElementById('yes').style.display = "none";
+    document.getElementById('no').style.display = "block";
+
+   }
+}
 
 
+
+</script>
     
                         
              

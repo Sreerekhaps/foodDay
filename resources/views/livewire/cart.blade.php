@@ -29,10 +29,12 @@
                                     
                                         <div class="input-group">
                                        
-                                        <a href="" class="number-button  minus">-</a>
+                                        <input wire:click="removeItemFromCart({{ $details['id'] }})" type="button" value="-" class="button-minus changeQuantity" id="changeQuantity"
+                                                            data-field="quantity" />
                                             <input type="number" step="1" max="" value="{{ $details['quantity'] }}" name="quantity"
                                                 class="quantity-field" />
-                                                <a href="" class="number-button  plus">+</a>
+                                                <input wire:click="addItemToCart({{ $details['id'] }})" type="button" value="+" class="button-plus changeQuantity" id="changeQuantity"
+                                                            data-field="quantity" />
                                                 
                                         </div>
                                         
@@ -81,7 +83,7 @@
                                     </h4>
                                 </li>
                                 <button class="btn btn-primary mt-3 w-100"
-                                    onclick="window.location.href='cart.html';">Proceed to Buy</button>
+                                    wire:click="checkout">Proceed to Buy</button>
                             </ul>
                         </div>
                     </div>

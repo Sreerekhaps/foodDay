@@ -13,6 +13,7 @@
     <link rel="icon" type="image/png" href="{{asset('assets/images/favicon.png')}}">
     <link rel="stylesheet" href="{{asset('assets/css/styles.css')}}">
     <title>FoodDay - Cart</title>
+    @livewireStyles
 </head>
 
 <body>
@@ -34,7 +35,7 @@
                             <a class="nav-link" href="home.html">Home <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="restaurant-listing.html">Restaurants</a>
+                            <a class="nav-link" href="{{route('customer.restaurant_listing')}}">Restaurants</a>
                         </li>
 
                         <li class="nav-item">
@@ -46,36 +47,36 @@
                                 <i class='bx bx-user mr-1'></i>
                                 My Account</a>
                         </li>
-                        @if(count((array) session('cart'))==0)
+        @if(count((array) session('cart'))==0)
 
-<a class="nav-link" href="{{route('customer.emptycart')}}">
+            <a class="nav-link" href="{{route('customer.emptycart')}}">
 
-<span class="cart-badge-wrap">
+            <span class="cart-badge-wrap">
 
-<span class="cart-badge">{{ count((array) session('cart')) }}</span>
+            <span class="cart-badge">{{ count((array) session('cart')) }}</span>
 
-<i class='bx bx-shopping-bag mr-1'></i>
+            <i class='bx bx-shopping-bag mr-1'></i>
 
-</span>
+            </span>
 
-Cart</a>
+            Cart</a>
 
-@else
+        @else
 
-<a class="nav-link" href="{{route('customer.cart2')}}">
+            <a class="nav-link" href="{{route('customer.cart2')}}">
 
-<span class="cart-badge-wrap">
+            <span class="cart-badge-wrap">
 
-<span class="cart-badge">{{ count((array) session('cart')) }}</span>
+            <span class="cart-badge">{{ count((array) session('cart')) }}</span>
 
-<i class='bx bx-shopping-bag mr-1'></i>
+            <i class='bx bx-shopping-bag mr-1'></i>
 
-</span>
+            </span>
 
-Cart</a>
+            Cart</a>
 
-@endif
-                    </ul>
+        @endif
+                                </ul>
                 </div>
             </nav>
         </div>
@@ -92,219 +93,10 @@ Cart</a>
     <section class="py-60">
         <div class="container cart-page-new">
             <div class="row cuisine-dish-wrap">
-                <div class="col-lg-8 cuisine-col">
-               
+              
 
-                    <div class="rest-menus" id="rest-menus">
-
-
-                        <div class="tab-content" id="pills-tabContent">
-                            <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
-                                aria-labelledby="pills-home-tab">
-
-                                <div class="food-item-cards-wrap">
-                                    <div class="sub-cat mt-0" id="sub-cat1">
-                                        
-                                        <h4 class="mb-4 mt-0">Your order</h4>
-                                        <div class="row">
-                                            <div class="col-lg-12">
-                                            @php $total = 0 @endphp
-        @if(session('cart'))
-            @foreach(session('cart') as $id => $details)
-                @php 
-                $total=0;
-                $total += $details['rate'] * $details['quantity'] @endphp
-                                                <div class="food-item-card">
-                                                    <div class="food-item-img ct-img" style="
-                                background-image: url({{asset('assets/images/img2.jpg')}});
-                              "></div>
-                                                    <div class="food-item-body">
-
-                                                        <h5 class="card-title">
-                                                        {{ $details['food_item'] }}
-                                                        </h5>
-                                                        <p class="description">description
-                                                            Lorem ipsum dolor sit amet consectetur
-                                                            adipisicing elit. Expedita?
-                                                        </p>
-                                                        <div class="pricing">
-                                                            <span class="price">${{ $details['rate'] }}</span>
-                                                            <div class="add-remove-button">
-                                                                <div class="input-group">
-                                                                <a href="" class="number-button  minus">-</a>
-                                                                    <input type="number"  step="1" max="" value="{{ $details['quantity'] }}"
-                                                                        name="quantity" class="quantity-field" min="1"/>
-                                                                        <a href="{{route('customer.addToCart',$id)}}" class="number-button  plus">+</a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                      
-                                                        <p class="text-to-kitchen">
-                                                            Text to kitchen. Delete this if you are not using.
-                                                            adipisicing elit. Enim illum adipisci natus ducimus,
-                                                            voluptatem
-                                                        </p>
-                                                        
-
-                                                    </div>
-                                                    
-                                                </div>
-                                                
-</div>
-@endforeach
-                       @endif               
-                                            
-                                            
-                                           
-                                           
-                                               
-                                            </div>
-                                            
-                                            
-                                            </div>
-</div>
-</div>
-                        
-
-                                     
-
-                                
-                            <!-- <div class="tab-pane fade" id="pills-profile" role="tabpanel"
-                                aria-labelledby="pills-profile-tab">
-                                <ul class="nav sub-cat-nav">
-                                    <li class="nav-item">
-                                        <a class="nav-link js-scroll-trigger active" href="#sub-cat11">Most Popular</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link js-scroll-trigger" href="#sub-cat12">Burgers</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link js-scroll-trigger" href="#sub-cat13">Pizza</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link js-scroll-trigger" href="#sub-cat14">Burgers</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link js-scroll-trigger" href="#sub-cat15">Pizza</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link js-scroll-trigger" href="#sub-cat16">Burgers</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link js-scroll-trigger" href="#sub-cat17">Pizza</a>
-                                    </li>
-                                </ul>
-
-                                Lunch details goes here Lorem ipsum, dolor sit amet
-                                consectetur adipisicing elit. Nostrum alias at molestiae autem
-                                libero harum ratione modi eius dolor esse, consectetur dolore
-                                quibusdam, voluptatum id veniam expedita asperiores itaque hic
-                                quo debitis quae nihil in non! Sit possimus repudiandae cum
-                                commodi? Dolorum excepturi ad adipisci ducimus deleniti ab
-                                vitae aliquam. Corporis reiciendis dolorum inventore corrupti
-                                molestiae fugiat maiores ullam veritatis dolorem
-                                exercitationem magni, et quisquam expedita ipsam dolores
-                                deleniti quis aperiam tempore nihil animi beatae cupiditate
-                                unde! Amet architecto dolor laudantium nostrum, sed
-                                necessitatibus doloremque error qui porro reiciendis itaque
-                                molestiae voluptatibus tempore consectetur impedit iure culpa
-                                aperiam perspiciatis nihil?
-                            </div>
-                            <div class="tab-pane fade" id="pills-contact" role="tabpanel"
-                                aria-labelledby="pills-contact-tab">
-                                <ul class="nav sub-cat-nav">
-                                    <li class="nav-item">
-                                        <a class="nav-link js-scroll-trigger active" href="#sub-cat21">Most Popular</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link js-scroll-trigger" href="#sub-cat22">Burgers</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link js-scroll-trigger" href="#sub-cat23">Pizza</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link js-scroll-trigger" href="#sub-cat24">Burgers</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link js-scroll-trigger" href="#sub-cat25">Pizza</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link js-scroll-trigger" href="#sub-cat26">Burgers</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link js-scroll-trigger" href="#sub-cat27">Pizza</a>
-                                    </li>
-                                </ul>
-
-                                Dinner info goes here Lorem ipsum dolor sit amet consectetur
-                                adipisicing elit. Quaerat quas ea soluta in adipisci explicabo
-                                perspiciatis ipsam molestias modi nulla accusamus corrupti
-                                quibusdam, odio eum necessitatibus sed! Porro ipsa praesentium
-                                magnam eaque neque. Qui commodi necessitatibus adipisci fugiat
-                                debitis quasi voluptas nisi quas, sint ex unde vero ipsum
-                                veniam modi. Ipsam dicta deleniti similique dolores
-                                exercitationem est ex, nihil voluptate quo ducimus alias
-                                accusamus reprehenderit molestias suscipit animi cumque
-                                perferendis provident sapiente magnam vitae repellendus natus
-                                ipsa temporibus dolorem. Eaque labore aperiam illo ut ipsum
-                                totam delectus soluta nam earum facilis. Iusto earum doloribus
-                                excepturi minima est, sint eligendi quos.
-                            </div> -->
-                        </div>
-                    </div>
-                
-                <div class="col-lg-4 cart-col">
-                    <div class="cart">
-                        <div class="cart-head">
-                            <span>Price Details</span>
-                        </div>
-
-                        <div class="cart-footer mt-4">
-                        @php $total = 0 @endphp
-                            @foreach((array) session('cart') as $id => $details)
-                                @php $total += $details['rate'] * $details['quantity'] @endphp
-                            @endforeach
-                            <ul>
-                                <li>
-                                    <h5>
-                                        <span>SubTotal</span>
-                                        <span class="float-right">${{$total}}</span>
-                                    </h5>
-                                </li>
-                                <li>
-                                    <p>
-                                        <span>Delivery fre</span>
-                                        <span class="float-right">$0.00</span>
-                                    </p>
-                                </li>
-                                <li>
-                                    <p>
-                                        <span>Tax</span> <span class="float-right">$0.00</span>
-                                    </p>
-                                </li>
-                                <li>
-                                    <h4>
-                                        <span>Total</span>
-                                        <span class="float-right">${{$total}}</span>
-                                    </h4>
-                                </li>
-                                <button class="btn btn-primary mt-3 w-100"
-                                    onclick="window.location.href='/checkout';">Checkout</button>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <!-- Empty cart. Use this when the cart is empty -->
-
-                    <!-- <div class="cart">
-                        <div class="empty-cart">
-                            <h4>Your cart is empty</h4>
-                            <p class="mb-0">Add items to get started.</p>
-                        </div>
-                    </div> -->
-
-                    <!-- Empty cart end  -->
-                </div>
+                                        <livewire:cart-navbar />
+                                   
             </div>
         </div>
     </section>
@@ -421,6 +213,7 @@ Cart</a>
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
         </script>
     <script src="{{asset('assets/js/custom.js')}}"></script>
+    @livewireScripts
 </body>
 
 </html>

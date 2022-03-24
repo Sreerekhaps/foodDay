@@ -5,21 +5,11 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use App\Models\Itemfood;
 
-class Cart extends Component
+class CartNavbar extends Component
 {
-    public $show = false;
 
-    protected $listeners = [
-        'increment' => 'refreshComponent',
-        'decrement' => 'refreshComponent',
 
-    ];
-
-    public function refreshComponent(){
-        $this->show=true;
-
-    }
-    public function addItemToCart($id)
+    public function addToCartNav($id)
     {
         $itemfoods = Itemfood::findOrFail($id);
            
@@ -44,7 +34,7 @@ class Cart extends Component
         $this->emit('increment');
     }
     
-    public function removeItemFromCart($id){
+    public function removeFromCartNav($id){
         $itemfoods = Itemfood::findOrFail($id);
            
         $cart = session()->get('cart', []);
@@ -73,18 +63,10 @@ class Cart extends Component
         }
           
         session()->put('cart', $cart);
-        
         $this->emit('decrement');
     }
-    public function checkout()
-    {
-        return redirect()->to('/customer/checkout');
-    }
-
-
     public function render()
     {
-        
-        return view('livewire.cart');
+        return view('livewire.cart-navbar');
     }
 }

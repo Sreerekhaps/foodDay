@@ -10,8 +10,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="icon" type="image/png" href="assets/images/favicon.png">
-    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="icon" type="image/png" href="{{asset('assets/images/favicon.png')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/styles.css')}}">
     <title>FoodDay - Cart</title>
 </head>
 
@@ -112,7 +112,7 @@ Cart</a>
                         <tr data-id="{{ $id }}">
                             <td class="product-item">
                                 <div class="dish-image">
-                                    <a href="#"><img src="assets/images/img1.jpg" alt="product"></a>
+                                    <a href="#"><img src="{{asset('assets/images/img1.jpg')}}" alt="product"></a>
                                 </div>
                                 <div class="product-name">
                                     <a href="#">{{ $details['food_item'] }}</a>
@@ -122,10 +122,10 @@ Cart</a>
                             <td>
                                 <div class="add-remove-button">
                                     <div class="input-group">
-                                    <a href="{{route('removeFromCart',$id)}}" min="0" class="number-button  minus">-</a>
+                                    <a href="{{route('customer.removeFromCart',$id)}}" min="0" class="number-button  minus">-</a>
                                         <input type="number" step="1" max="" value="{{ $details['quantity'] }}" name="quantity"
                                             class="quantity-field">
-                                        <a href="{{route('addToCart',$id)}}" class="number-button  plus">+</a>
+                                        <a href="{{route('customer.addToCart',$id)}}" class="number-button  plus">+</a>
                                     </div>
                                 </div>
                             </td>
@@ -304,7 +304,7 @@ Cart</a>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
         </script>
-    <script src="assets/js/custom.js"></script>
+    <script src="{{asset('assets/js/custom.js')}}"></script>
 </body>
 
 </html>
