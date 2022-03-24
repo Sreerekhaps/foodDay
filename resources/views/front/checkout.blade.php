@@ -12,15 +12,16 @@
     <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
-    <link rel="icon" type="image/png" href="{{asset('assets/images/favicon.png')}}">
+   <link rel="icon" type="image/png" href="{{asset('assets/images/favicon.png')}}">
     <link rel="stylesheet" href="{{asset('assets/css/styles.css')}}">
     <title>FoodDay - Cart</title>
+    @livewireStyles
 </head>
 
 <body>
 
-    <!-- header -->
-    <header>
+     <!-- header -->
+     <header>
         <div class="container-fluid">
             <nav id="navbar_top" class="navbar navbar-expand-lg navbar-light fixed-top">
                 <a class="navbar-brand" href="home.html"><img src="assets/images/logo.png" alt=""></a>
@@ -48,14 +49,7 @@
                                 <i class='bx bx-user mr-1'></i>
                                 My Account</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="cart.html">
-                                <span class="cart-badge-wrap">
-                                    <span class="cart-badge">9</span>
-                                    <i class='bx bx-shopping-bag mr-1'></i>
-                                </span>
-                                Cart</a>
-                        </li>
+                        <livewire:cart-count />
                     </ul>
                 </div>
             </nav>
@@ -74,153 +68,93 @@
 
             <div class="row cuisine-dish-wrap">
                 <div class="col-lg-8 cuisine-col">
-                    <form>
-                        <div class="form-row">
-                            <div class="form-group col-lg-6">
-                                <h6 class="checkout-title">Delivery Type</h6>
-                                <select class="form-control " name="mySelect" id="mySelect" onchange="status(this)">
-                                    <option value="delivery" id="delivery" name="method" selected="">Delivery</option>
-                                    <option value="pickup" id="pickup" name="method">Pickup</option>
-                                </select>
-                            </div>
-                        </div>
-                    </form>
 
-                   
-<div id="yes">
-                    <div class="form-row">
-                    
-                    <!-- <script>
-                        function myFunction() {
-                        var x = document.getElementById("mySelect").value;
-                        document.getElementById("demo").innerHTML=x;
-                        }
-                    </script> -->
-                    
-                        <div class="form-group col-lg-12" id="demo">
-                            <form>
-                                <h6 class="checkout-title">Promo Codes</h6>
-                                <div class="row cuisine-dish-wrap">
-                                    <div class="col-md-6 cuisine-col">
-                                        <div class="input-group coupon-group">
-                                            <input type="text" class="form-control" placeholder="Enter promo code"
-                                                aria-label="delivery location" aria-describedby="button-addon2">
-                                            <div class="input-group-append">
-                                                <button class="btn btn-primary" type="button"
-                                                    id="find-food-btn">Apply</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="col-lg-12">
-                            <h6 class="checkout-title">Payment</h6>
-                        </div>
-                        <div class="form-group col-lg-12">
-                            <div class="custom-radio">
-                                <input type="radio" id="radio1" name="payment-type" checked="checked">
-                                <label for="radio1">Pay via Cash</label>
-                                <img src="{{asset('./assets/images/cash.png')}}" alt="Icon">
-                            </div>
-                        </div>
+                    <form method="Post" action="" enctype="multipart/form-data" >
+                        @csrf
                        
+                            <div class="form-row">
+                                <div class="form-group col-lg-6">
+                                    <h6 class="checkout-title">Delivery Type</h6>
+                                    <select class="form-control " name="delivery_method" id="select" onchange="status(this)">
+                                        <option value="delivery" selected="delivery">Delivery</option>
+                                        <option value="pickup">Pickup</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <h6 class="checkout-title">Payment</h6>
+                            <div class="form-group col-lg-12">
+                                <div class="custom-radio">
+                                    <input type="radio" id="radio1" name="payment-type" checked="checked">
+                                    <label for="radio1">Pay via Cash</label>
+                                    <img src="{{asset('images/cash.png')}}" alt="Icon">
+                                </div>
+                             </div>
 
-                    </div>
-                    
-                    <div class="checkout-delivery-address food-item-cards-wrap">
-                        
+         
+
+                    <div class="checkout-delivery-address food-item-cards-wrap" id="sub1">
                         <h6 class="checkout-title">Delivery Address</h6>
-                        <div class="row">
-                        @foreach($address as $add)
+                          <div class="row">
+                            @foreach($address as $value)
                             <div class="col-xl-6">
                                 <div class="card address-card">
                                     <div class="card-body deliverable">
                                         <div class="delivery">
                                             <i class='bx bxs-check-circle'></i>
-                                            <h5 class="card-title">{{$add->home}}</h5>
+                                            <h5 class="card-title">{{$value->home}}</h5>
                                         </div>
-                                        <!-- <h6>John Doe, 7845 155 555,</h6> -->
+                                        <h6>{{$value->location}}, {{$value->pincode}}</h6>
                                         <p class="card-text">
-                                        <h6>{{$add->area}},{{$add->house_name}},{{$add->city}},
-                                                        {{$add->pincode}}</h6   >
-                                        </p>
-                                        <p>
-                                        {{$add->landmark}}
+                                           {{$value->landmark}}
+                                          
                                         </p>
                                         <button class="btn btn-primary btn-sm">Deliver here</button>
                                         <button type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal"
                                             data-target="#exampleModal">
                                             Edit</button>
                                         <button class="btn btn-outline-primary btn-sm">
-                                        <a href="/customer/address/{{$add->id}}">Delete</a></button>
+                                            <a href="customer/AddressDel/{{$value->id}}"> Delete</a></button>
                                     </div>
                                 </div>
                             </div>
-
-                            @endforeach
+                    @endforeach
+                           
                         </div>
-
-</div>
-
-                                               
-                      
 
                         <button type="button" class="btn btn-outline-primary mb-lg-auto mb-4" data-toggle="modal"
                             data-target="#exampleModal">Add New Address</button>
 
+                       </div>
+                    @if('delvery_method' !='delivery')
+                      <div class="checkout-delivery-address" id="pick1">
 
-                           
-                             
-<!-- <div class="form-group col-lg-12">
-                            <form>
-                                <h6 class="checkout-title">Promo Codes</h6>
-                                <div class="row cuisine-dish-wrap">
-                                    <div class="col-md-6 cuisine-col">
-                                        <div class="input-group coupon-group">
-                                            <input type="text" class="form-control" placeholder="Enter promo code"
-                                                aria-label="delivery location" aria-describedby="button-addon2">
-                                            <div class="input-group-append">
-                                                <button class="btn btn-primary" type="button"
-                                                    id="find-food-btn">Apply</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="col-lg-12">
-                            <h6 class="checkout-title">Promo Codes</h6>
-                        </div>
-                        <div class="form-group col-lg-12">
-                            <div class="custom-radio">
-                                <input type="radio" id="radio1" name="payment-type" checked="checked">
-                                <label for="radio1">Pay via Cash</label>
-                                <img src="./assets/images/cash.png" alt="Icon">
-                            </div>
-                        </div>
+                        <h6 class="checkout-title">Pick up</h6>
+                        <p>This is a Pickup order. You'll need to go to
+                            <strong>vxvxv</strong> to
+                            pick up this order.
+                            Pick up at <strong>cvxcv</strong>.vxzvcxcz
+                            <strong>xcxzc</strong> </p>
                        
-                   
                     </div>
-           
-</div> -->
+                    @endif
+                      </div>
 
-                    </div>
-                    
-                    </div>
+                    </form>
 
-                  
-                <div class="col-lg-4 cart-col">
-
-                    <div class="cart">
+                              
+                               <div class="col-lg-4 cart-col">
+                    <div class="cart d-none d-md-block">
                         <div class="cart-head">
                             <span>Your order</span>
                         </div>
-                        @if(session('cart'))
+                            @php $total = 0 @endphp
+        @if(session('cart'))
             @foreach(session('cart') as $id => $details)
-                @php 
-                $total=0;
-                $total += $details['rate'] * $details['quantity'] @endphp
+           
+                @php
+                 $total=0;
+                 $total += $details['rate'] * $details['quantity'] 
+                 @endphp
                         <div class="cart-body">
                             <div class="cart-item">
                                 <div class="details">
@@ -229,200 +163,163 @@
                                    
                                 </div>
                                 <div class="price">
-                                    <h6>${{ $details['rate'] }}</h6>
-                                    
-                                    
-                                   
+                                    <h6>${{ $total }}.00</h6>
+                                  
                                 </div>
                             </div>
 
                         </div>
-                        @endforeach
-                       @endif  
-                
-
+                @endforeach
+                            @endif
                         <div class="cart-footer">
-                        @php $total = 0 @endphp
+                              @php $total = 0 @endphp
                             @foreach((array) session('cart') as $id => $details)
                                 @php $total += $details['rate'] * $details['quantity'] @endphp
+                               
                             @endforeach
                             <ul>
                                 <li>
-                                    <h5><span>SubTotal</span> <span class="float-right">${{$total}}</span></h5>
+                                    <h5>
+                                        <span>SubTotal</span>
+                                        <span class="float-right">${{$total}}.00</span>
+                                    </h5>
                                 </li>
                                 <li>
-                                    <p><span>Delivery fre</span> <span class="float-right">$0.00</span></p>
+                                    <p>
+                                        <span>Delivery fre</span>
+                                        <span class="float-right">$00.00</span>
+                                    </p>
                                 </li>
                                 <li>
-                                    <p><span>Tax</span> <span class="float-right">$0.00</span></p>
+                                    <p>
+                                        <span>Tax</span> <span class="float-right">$00.00</span>
+                                    </p>
                                 </li>
                                 <li>
-                                    <h4><span>Total</span> <span class="float-right">${{$total}}</span>
+                                    <h4>
+                                        <span>Total</span>
+                                        <span class="float-right">${{$total}}.00</span>
                                     </h4>
+                                
                                 </li>
-                            </ul>
-                            <button class="btn btn-primary mt-3 w-100"
-                                onclick="window.location.href='order_tracking';">Checkout</button>
-                        </div>
+                                <li>
+                                    <p>
+                                         <span>Please keep the exact change for <b>${{$total}}</b> handy to help us serve you better.</span>
 
+                                    </p>
+                                </li>
+                                <button class="btn btn-primary mt-3 w-100"
+                                    onclick="window.location.href='{{route('customer.checkout')}}';">Checkout</button>
+                            </ul>
+                        </div>
                     </div>
-                    
 
                 </div>
-                
-                
             </div>
-            
-                    
-            <div id="no">
-                            <div class="form-group col-lg-12" id="demo">
-                            <form>
-                                <h6 class="checkout-title">Promo Codes</h6>
-                                <div class="row cuisine-dish-wrap">
-                                    <div class="col-md-6 cuisine-col">
-                                        <div class="input-group coupon-group">
-                                            <input type="text" class="form-control" placeholder="Enter promo code"
-                                                aria-label="delivery location" aria-describedby="button-addon2">
-                                            <div class="input-group-append">
-                                                <button class="btn btn-primary" type="button"
-                                                    id="find-food-btn">Apply</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="col-lg-12">
-                            <h6 class="checkout-title">Payment</h6>
-                        </div>
-                        <div class="form-group col-lg-12">
-                            <div class="custom-radio">
-                                <input type="radio" id="radio1" name="payment-type" checked="checked">
-                                <label for="radio1">Pay via Cash</label>
-                                <img src="{{asset('./assets/images/cash.png')}}" alt="Icon">
-                            </div>
-                        </div>
-                       
 
-                    </div>  
-              
-                    </div>
-                            
-                    
+        </div>
     </section>
-    
+
 
 
     <!-- Address Modal -->
-    <div class="modal fade address-model" id="exampleModal" tabindex="-1" role="dialog"
+     <div class="modal fade  address-model" id="exampleModal" tabindex="-1" role="dialog"
                     aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
                             <div class="modal-body">
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <i class="bx bx-x btn-close"></i>
                                 </button>
-                                <h5 class="mb-4">Add New Address</h5>
-                                @section('content')
-                                @if(Session::has('success'))
-                                    <div class="alert alert-success">
-                                        {{ Session::get('success') }}
-                                        @php
-                                            Session::forget('success');
-                                        @endphp
-                                    </div>
-                                    @endif
+                                <h5 class="mb-4">Add Delivery Address</h5>
+
+
                                 <form method="post" action="{{route('customer.address_store')}}" enctype="multipart/form-data">
-                                    @csrf
                                     <div class="form-row">
+                                        @csrf 
+                                       @if(Session::get('success'))
+                                          <div class="alert alert-success"> 
+                                             {{ Session::get('success') }} 
+                                           </div>
+                                        @endif
 
                                         <div class="form-group col-lg-12">
                                             <input type="text" name="location" class="form-control" placeholder="Location">
-                                            @if ($errors->has('location'))
-                                                <span class="text-danger">{{ $errors->first('location') }}</span>
-                                            @endif
+                                               @error("location")
+                                                    <p style="color:red">{{$errors->first("location")}}
+                                                @enderror
                                         </div>
-                                        <div class="form-group col-lg-12">
-                                            <input type="text" name="house_name"class="form-control" placeholder="House Name/Flat No/Building">
-                                            @if ($errors->has('house_name'))
-                                                <span class="text-danger">{{ $errors->first('house_name') }}</span>
-                                            @endif
+                                         <div class="form-group col-lg-12">
+                                            <input type="text" name="house_name" class="form-control" placeholder="House Name / Flat / Building"> 
+                                            @error("house_name")
+                                                    <p style="color:red">{{$errors->first("house_name")}}
+                                                @enderror
                                         </div>
                                         <div class="form-group col-lg-6">
-                                            <input type="text" name="area" class="form-control" placeholder="Area/Street">
-                                            @if ($errors->has('area'))
-                                                <span class="text-danger">{{ $errors->first('area') }}</span>
-                                            @endif
+                                            <input type="text" name="area" class="form-control" placeholder="Area / Street">
+                                            @error("area")
+                                                    <p style="color:red">{{$errors->first("area")}}
+                                                @enderror
                                         </div>
                                         <div class="form-group col-lg-6">
                                             <input type="text" name="city" class="form-control" placeholder="City">
-                                            @if ($errors->has('city'))
-                                                <span class="text-danger">{{ $errors->first('city') }}</span>
-                                            @endif
+                                            @error("city")
+                                                    <p style="color:red">{{$errors->first("city")}}
+                                                @enderror
                                         </div>
-                                        <div class="form-group col-lg-12">
+                                          <div class="form-group col-lg-12">
                                             <input type="text" name="landmark" class="form-control" placeholder="Landmark">
-                                            @if ($errors->has('landmark'))
-                                                <span class="text-danger">{{ $errors->first('landmark') }}</span>
-                                            @endif
                                         </div>
+                                       
                                         <div class="form-group col-lg-6">
                                             <input type="text" name="pincode" class="form-control" placeholder="Pincode">
-                                            @if ($errors->has('pincode'))
-                                                <span class="text-danger">{{ $errors->first('pincode') }}</span>
-                                            @endif
+                                            @error("pincode")
+                                                    <p style="color:red">{{$errors->first("pincode")}}
+                                                @enderror
                                         </div>
                                         <div class="form-group col-lg-6">
-                                        <select name="home" id="home" class="form-select form-select-md" >
-                                            <option value="0" disabled selected>Address Type</option>
-                                            
-                                            <option value="Home">Home</option>
-                                            <option value="Office">Office</option>
-                                            <option value="Other">Other</option>
+                                            <select name="home" id="home" class="form-control">
 
+                                                <option value="0" disabled selected>Address Type</option>
 
-                                            
-                                        </select>
-                                            @if ($errors->has('home'))
-                                                <span class="text-danger">{{ $errors->first('home') }}</span>
-                                            @endif
-                                        </div>
+                                                <option value="Home">Home</option>
+
+                                                <option value="Office">Office</option>
+
+                                                <option value="Other">Other</option>
+
+                                            </select>                                        </div>
                                         <div class="form-group col-lg-12">
-                                            <input type="text" name="note_a_driver" class="form-control" placeholder="Note for Driver">
-                                            @if ($errors->has('note_a_driver'))
-                                                <span class="text-danger">{{ $errors->first('note_a_driver') }}</span>
-                                            @endif
+                                            <textarea class="form-control" name="note" id="exampleFormControlTextarea1" rows="3"
+                                                placeholder="Note for Driver"></textarea>
                                         </div>
-                                        
 
                                         <div class="form-group col-md-6 mb-md-0 d-none d-md-block">
                                             <button type="button" class="btn btn-outline-primary w-100"
                                                 data-dismiss="modal" aria-label="Close">Close</button>
                                         </div>
                                         <div class="form-group col-md-6 mb-0">
-                                            <button class="btn btn-secondary w-100">Save changes</button>
+                                            <button class="btn btn-secondary w-100">Save</button>
                                         </div>
 
                                     </div>
+
+
+
+                            
                                 </form>
-
-
-                                
                             </div>
 
                         </div>
                     </div>
-                    
                 </div>
 
-                
+    <!-- Address Modal End -->
 
-                <!-- Address Modal End -->
 
-    <!-- footer -->
+   <!-- footer -->
 
-    <footer>
+   <footer>
         <div class="footer-top">
             <div class="container">
                 <div class="row">
@@ -533,26 +430,27 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
     <script src="{{asset('assets/js/custom.js')}}"></script>
 
-    <script type="text/javascript">
 
+<script type="text/javascript">
+$(document).ready(function(){
+    document.getElementById('pick1').style.display = "none";
+})
 function status(select){
    if(select.value=='delivery'){
-    document.getElementById('yes').style.display = "block";
-    document.getElementById('no').style.display = "none";
+    document.getElementById('sub1').style.display = "block";
+    document.getElementById('pick1').style.display = "none";
+
    }else
    {
-    document.getElementById('yes').style.display = "none";
-    document.getElementById('no').style.display = "block";
+    document.getElementById('sub1').style.display = "none";
+    document.getElementById('pick1').style.display = "block";
 
    }
-}
-
-
-
+} 
 </script>
-    
-                        
-             
+@livewireScripts
+
+
 </body>
 
 </html>

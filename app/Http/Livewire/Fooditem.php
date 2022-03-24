@@ -42,9 +42,10 @@ class Fooditem extends Component
         }
           
         session()->put('cart', $cart);
-        $ss=$cart[$id]['quantity'];
+       
         
         $this->emit('increment');
+        $this->emit('some-event');
     }
     
     public function removeFromCart($id){
@@ -52,9 +53,6 @@ class Fooditem extends Component
            
         $cart = session()->get('cart', []);
         $itemId=$cart[$id]['quantity'];
-
-        
-   
         if(isset($cart[$id]) && $cart[$id]['quantity'] > "1") {
             $cart[$id]['quantity']--;
         } 
@@ -77,20 +75,22 @@ class Fooditem extends Component
           
         session()->put('cart', $cart);
         $this->emit('decrement');
+        $this->emit('some-event');
     }
      
     public function itemQuantity($id){
-
-        $item = Itemfood::findOrFail($id);
-        $cartId=$this->cart;
-        
-        if($cartId==$item)
+        $cart = session()->get('cart', []);
+        if(isset($cart[$id]['quantity']))
         {
-            return $cart[$id]['quantity'];
+            $cartId=$cart[$id]['quantity'];
+            return $cartId;
         }
-       
+        else{
+            return 0;
+        }
         
-        
+            
+  
     }
 
     public function render()

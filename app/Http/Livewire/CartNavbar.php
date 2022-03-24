@@ -29,9 +29,12 @@ class CartNavbar extends Component
         }
           
         session()->put('cart', $cart);
-        $ss=$cart[$id]['quantity'];
+    
+        
         
         $this->emit('increment');
+        $this->emit('some-event');
+        
     }
     
     public function removeFromCartNav($id){
@@ -63,8 +66,12 @@ class CartNavbar extends Component
         }
           
         session()->put('cart', $cart);
+
+        
+    
         $this->emit('decrement');
-    }
+        $this->emit('some-event');
+    }  
     public function render()
     {
         return view('livewire.cart-navbar');

@@ -39,9 +39,12 @@ class Cart extends Component
         }
           
         session()->put('cart', $cart);
-        $ss=$cart[$id]['quantity'];
+       
+       
         
         $this->emit('increment');
+        $this->emit('some-event');
+        
     }
     
     public function removeItemFromCart($id){
@@ -73,8 +76,11 @@ class Cart extends Component
         }
           
         session()->put('cart', $cart);
-        
+
         $this->emit('decrement');
+        
+        $this->emit('some-event');
+       
     }
     public function checkout()
     {
