@@ -14,6 +14,8 @@
     <link rel="stylesheet" href="{{asset('assets/css/styles.css')}}">
     <title>FoodDay - Cart</title>
     @livewireStyles
+
+   
 </head>
 
 <body>
@@ -55,23 +57,12 @@
     </header>
     <!-- Header -->
 
-    <div class="search-nav">
-        <div class="container">
-            <h3 class="mb-0">Cart</h3>
-        </div>
-    </div>
-
-
-    <section class="py-60">
-        <div class="container cart-page-new">
-            <div class="row cuisine-dish-wrap">
+    
               
-
+                                                    
                                         <livewire:cart-navbar />
                                    
-            </div>
-        </div>
-    </section>
+          
 
 
     <!-- footer -->

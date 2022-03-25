@@ -1,3 +1,14 @@
+<div>
+<div class="search-nav">
+        <div class="container">
+            <h3 class="mb-0">Cart</h3>
+        </div>
+    </div>
+
+    @if(session('cart'))
+    <section class="py-60">
+        <div class="container cart-page-new">
+            <div class="row cuisine-dish-wrap">
 <div class="col-lg-8 cuisine-col">
                
 
@@ -58,7 +69,7 @@
                                    
                                     
                                                     </div>
-                                                        </div>
+                                            </div>
                                                       
                                                         <p class="text-to-kitchen">
                                                             Text to kitchen. Delete this if you are not using.
@@ -71,9 +82,12 @@
                                                     
                                                 </div>
                                                 
-</div>
+                                </div>
                                             @endforeach
-                                                                @endif               
+                                            @endif
+
+                                         
+                                                          
                                             
                                             
                                            
@@ -136,8 +150,33 @@
                             </ul>
                         </div>
                     </div>
-
+                   
                   
                 </div>
                 </div>
+
+               
+              
+</div>
+</div>
+        </div>
+    </section>
+    @else
+
+
+                
+    <section class="py-60 min-window-height">
+        <div class="container">
+
+<div class="empty-orders-div"  style="align:center">
+<!-- <img src="assets/images/cart.svg" alt="" class="mt-0"> -->
+<i class="bx bx-shopping-bag"></i>
+<h4 class="mb-3">Your Cart is Empty</h4>
+<p class="mb-2">Looks like you haven't added anything to your cart yet.</p>
+<a href="{{route('customer.restaurant_listing')}}" class="btn btn-primary mt-3">See Restaurants Near You</a>
+</div>
+
+</div>
+</section>
+@endif
 </div>

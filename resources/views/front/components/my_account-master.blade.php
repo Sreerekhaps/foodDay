@@ -97,7 +97,7 @@ Cart</a>
                     <div class="my-account-menu">
                         <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist"
                             aria-orientation="vertical">
-                            <a class="nav-link active" id="v-pills-profile-tab" data-toggle="pill"
+                            <a class="nav-link " id="v-pills-profile-tab" data-toggle="pill"
                                 href="#v-pills-orders" role="tab" aria-controls="v-pills-profile"
                                 aria-selected="false"><i class='bx bxs-cart'></i> Orders</a>
                             <!-- <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-wishlist"
@@ -106,7 +106,7 @@ Cart</a>
                             <a class="nav-link" href="{{route('customer.address')}}"
                                 role="tab" aria-controls="v-pills-messages" aria-selected="false"><i
                                     class='bx bxs-home-smile'></i> Addresses</a>
-                            <a class="nav-link"   href="{{route('customer.account')}}"
+                            <a class="nav-link "   href="{{route('customer.account')}}"
                                 role="tab" aria-controls="v-pills-settings" aria-selected="false"><i
                                     class='bx bxs-user-rectangle'></i> Account Details</a>
                             <a class="nav-link"  href="{{route('customer.show_password')}}"

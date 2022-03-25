@@ -15,9 +15,15 @@
                                                         </h5>
                                                         <div class="pricing">
                                                             <div class="price-wrap">
+                                                                @if($item->status==1)
                                                                 <div class="non-div food-type-div">
                                                                     <i class="bx bxs-circle" ></i>
                                                                 </div>
+                                                                @else
+                                                                <div class="veg-div food-type-div">
+                                                                    <i class="bx bxs-circle"></i>
+                                                                </div>
+                                                                @endif
                                                                 <span class="price">${{$item->rate}}</span>
                                                                 <span class="actual-price">$180.99</span>
                                                             </div>

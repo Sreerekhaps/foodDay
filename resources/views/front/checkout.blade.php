@@ -40,9 +40,7 @@
                             <a class="nav-link" href="restaurant-listing.html">Restaurants</a>
                         </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link" href="login.html">Sign In</a>
-                        </li>
+                       
 
                         <li class="nav-item">
                             <a class="nav-link" href="{{route('customer.myaccount')}}">
@@ -86,7 +84,7 @@
                                 <div class="custom-radio">
                                     <input type="radio" id="radio1" name="payment-type" checked="checked">
                                     <label for="radio1">Pay via Cash</label>
-                                    <img src="{{asset('images/cash.png')}}" alt="Icon">
+                                    <img src="{{asset('assets/images/cash.png')}}" alt="Icon">
                                 </div>
                              </div>
 
@@ -95,25 +93,25 @@
                     <div class="checkout-delivery-address food-item-cards-wrap" id="sub1">
                         <h6 class="checkout-title">Delivery Address</h6>
                           <div class="row">
-                            @foreach($address as $value)
+                            @foreach($address as $add)
                             <div class="col-xl-6">
                                 <div class="card address-card">
                                     <div class="card-body deliverable">
                                         <div class="delivery">
                                             <i class='bx bxs-check-circle'></i>
-                                            <h5 class="card-title">{{$value->home}}</h5>
+                                            <h5 class="card-title">{{$add->home}}</h5>
                                         </div>
-                                        <h6>{{$value->location}}, {{$value->pincode}}</h6>
+                                        <h6>{{$add->location}}, {{$add->pincode}}</h6>
                                         <p class="card-text">
-                                           {{$value->landmark}}
+                                           {{$add->landmark}}
                                           
                                         </p>
-                                        <button class="btn btn-primary btn-sm">Deliver here</button>
+                                        <button class="btn btn-primary btn-sm"><a href="{{route('customer.addressStore',$add->id)}}">Deliver here</a></button>
                                         <button type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal"
                                             data-target="#exampleModal">
                                             Edit</button>
                                         <button class="btn btn-outline-primary btn-sm">
-                                            <a href="customer/AddressDel/{{$value->id}}"> Delete</a></button>
+                                            <a href="customer/AddressDel/{{$add->id}}"> Delete</a></button>
                                     </div>
                                 </div>
                             </div>
@@ -125,15 +123,19 @@
                             data-target="#exampleModal">Add New Address</button>
 
                        </div>
+                      
                     @if('delvery_method' !='delivery')
                       <div class="checkout-delivery-address" id="pick1">
-
+                         
+                      
+                       
                         <h6 class="checkout-title">Pick up</h6>
                         <p>This is a Pickup order. You'll need to go to
-                            <strong>vxvxv</strong> to
+                            <strong>aaaa{{$restaurant->name}}</strong> to
                             pick up this order.
-                            Pick up at <strong>cvxcv</strong>.vxzvcxcz
-                            <strong>xcxzc</strong> </p>
+                            Pick up at <strong>calicut</strong>.xxxx
+                            <strong>xxxx</strong> </p>
+                           
                        
                     </div>
                     @endif
@@ -186,7 +188,7 @@
                                 </li>
                                 <li>
                                     <p>
-                                        <span>Delivery fre</span>
+                                        <span>Delivery fee</span>
                                         <span class="float-right">$00.00</span>
                                     </p>
                                 </li>
@@ -208,8 +210,12 @@
 
                                     </p>
                                 </li>
+                                @if(session('store'))
                                 <button class="btn btn-primary mt-3 w-100"
-                                    onclick="window.location.href='{{route('customer.checkout')}}';">Checkout</button>
+                                    onclick="window.location.href='{{route('customer.order')}}';">Checkout</button>
+                            
+                                
+                                @endif
                             </ul>
                         </div>
                     </div>
@@ -234,7 +240,7 @@
                                 <h5 class="mb-4">Add Delivery Address</h5>
 
 
-                                <form method="post" action="{{route('customer.address_store')}}" enctype="multipart/form-data">
+                                <form method="post" action="" enctype="multipart/form-data">
                                     <div class="form-row">
                                         @csrf 
                                        @if(Session::get('success'))

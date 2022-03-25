@@ -375,7 +375,7 @@ public function logout(){
             
             unset($cart[$id]);
             session()->put('cart', $cart);
-            
+           
             session()->flash('success', 'Product removed successfully');
         
     }
@@ -400,11 +400,11 @@ public function logout(){
 
     }
 
-    public function checkout(){
+    public function checkout(Restaurant $restaurant){
         $address=Address::all();
         $itemfoods=Itemfood::all();
-        $restaurant=Restaurant::all();
-        return view('front.checkout',['restaurants'=>$restaurant],compact('itemfoods','address'));
+        
+        return view('front.checkout',['restaurant'=>$restaurant],compact('itemfoods','address'));
     }
      public function order(){
          return view('front.order');
@@ -412,6 +412,55 @@ public function logout(){
      public function order_tracking(){
          return view('front.order_tracking');
      }
+
+     public function addressStore($id)
+     {
+         $address = Address::findOrFail($id);
+            
+         $store = session()->get('store', []);
+         
+         
+             $store[$id] = [
+                 "id" => $address->id,
+                 "location" => $address->location, 
+             ];
+         
+         session()->put('store', $store);
+         
+         
+         return redirect()->back()->with('success', 'Address selected successfully!');
+     }
+
+     public function store(Request $request){
+        $request->validate([
+            'first_name'=>'required|min:3|max:15',
+            'last_name'=>'required|max:8',
+            'mobile'=>'required|min:10|max:12',
+            'email'=>'required|email',
+            'password'=>'required|min:4',
+        
+
+        ]);
+        $customer = new Customer;
+        $customer->first_name = $request->first_name;
+
+        $customer->last_name = $request->last_name;
+        
+        $customer->mobile = $request->mobile;
+        
+        $customer->email = $request->email;
+        
+        $customer->password = Hash::make($request->password);
+        
+        $save= $customer->save();
+        return redirect('signin');
+            
+    }
+
+
+     
+
+     
                 
             
 }

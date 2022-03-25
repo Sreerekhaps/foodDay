@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FrontController;
+use App\Http\Controllers\OrderStore;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -159,6 +161,8 @@ Route::prefix('customer')->name('customer.')->group(function (){
         Route::get('/checkout',[FrontController::class,'checkout'])->name('checkout');
         Route::get('/order',[FrontController::class,'order'])->name('order');
         Route::get('/order_tracking',[FrontController::class,'order_tracking'])->name('order_tracking');
+        Route::get('/addressStore/{id}', [FrontController::class, 'addressStore'])->name('addressStore');
+
        
     });
 
