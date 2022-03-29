@@ -13,6 +13,7 @@
     <link rel="icon" type="image/png" href="{{asset('assets/images/favicon.png')}}">
     <link rel="stylesheet" href="{{asset('assets/css/styles.css')}}">
     <title>FoodDay - Order Summery</title>
+    @livewireStyles
 </head>
 
 <body>
@@ -46,14 +47,7 @@
                                 <i class='bx bx-user mr-1'></i>
                                 My Account</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="cart.html">
-                                <span class="cart-badge-wrap">
-                                    <span class="cart-badge">9</span>
-                                    <i class='bx bx-shopping-bag mr-1'></i>
-                                </span>
-                                Cart</a>
-                        </li>
+                        <livewire:cart-count />
                     </ul>
                 </div>
             </nav>
@@ -201,6 +195,7 @@
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
         </script>
     <script src="{{asset('assets/js/custom.js')}}"></script>
+    @livewireScripts
 </body>
 
 </html>

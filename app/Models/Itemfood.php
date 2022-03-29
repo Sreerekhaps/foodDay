@@ -14,4 +14,8 @@ class Itemfood extends Model
     public function restaurants(){
         return $this->hasMany(Restaurant::class);
     }
+    public function orderstores()
+    {
+        return $this->belongsToMany(OrederStore::class, 'item_order');
+    }
 }

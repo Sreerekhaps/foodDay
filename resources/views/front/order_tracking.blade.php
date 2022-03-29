@@ -10,9 +10,10 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="icon" type="image/png" href="assets/images/favicon.png">
-    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="icon" type="image/png" href="{{asset('assets/images/favicon.png')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/styles.css')}}">
     <title>FoodDay - Order Summery</title>
+    @livewireStyles
 </head>
 
 <body>
@@ -46,14 +47,7 @@
                                 <i class='bx bx-user mr-1'></i>
                                 My Account</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="cart.html">
-                                <span class="cart-badge-wrap">
-                                    <span class="cart-badge">9</span>
-                                    <i class='bx bx-shopping-bag mr-1'></i>
-                                </span>
-                                Cart</a>
-                        </li>
+                        <livewire:cart-count />
                     </ul>
                 </div>
             </nav>
@@ -448,7 +442,8 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
         </script>
-    <script src="assets/js/custom.js"></script>
+    <script src="{{asset('assets/js/custom.js')}}"></script>
+    @livewireScripts
 </body>
 
 </html>

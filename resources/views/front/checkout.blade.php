@@ -63,12 +63,12 @@
 
     <section class="py-60">
         <div class="container">
-
+        <form method="post" action="/customer/order/store" enctype="multipart/form-data" >
+            @csrf
             <div class="row cuisine-dish-wrap">
                 <div class="col-lg-8 cuisine-col">
 
-                    <form method="Post" action="" enctype="multipart/form-data" >
-                        @csrf
+                    
                        
                             <div class="form-row">
                                 <div class="form-group col-lg-6">
@@ -127,11 +127,9 @@
                     @if('delvery_method' !='delivery')
                       <div class="checkout-delivery-address" id="pick1">
                          
-                      
-                       
                         <h6 class="checkout-title">Pick up</h6>
                         <p>This is a Pickup order. You'll need to go to
-                            <strong>aaaa{{$restaurant->name}}</strong> to
+                            <strong>{{$restaurant->name}}</strong> to
                             pick up this order.
                             Pick up at <strong>calicut</strong>.xxxx
                             <strong>xxxx</strong> </p>
@@ -141,10 +139,10 @@
                     @endif
                       </div>
 
-                    </form>
+                   
 
                               
-                               <div class="col-lg-4 cart-col">
+                <div class="col-lg-4 cart-col">
                     <div class="cart d-none d-md-block">
                         <div class="cart-head">
                             <span>Your order</span>
@@ -210,19 +208,19 @@
 
                                     </p>
                                 </li>
-                                @if(session('store'))
+                                
                                 <button class="btn btn-primary mt-3 w-100"
                                     onclick="window.location.href='{{route('customer.order')}}';">Checkout</button>
                             
+
                                 
-                                @endif
                             </ul>
                         </div>
                     </div>
 
                 </div>
             </div>
-
+            </form>
         </div>
     </section>
 

@@ -8,8 +8,10 @@ use App\Models\Address;
 use App\Models\Restaurant;
 use App\Models\Cuisine;
 use App\Models\Itemfood;
-use App\Rules\MatchOldPassword;
+use App\Models\OrderStore;
 
+use App\Rules\MatchOldPassword;
+use Session;
 
 use Carbon\Carbon;
 
@@ -296,6 +298,7 @@ public function logout(){
         public function restaurant_listing(Restaurant $restaurant){
             $restaurant=Restaurant::all();
             $cuisines=Cuisine::all();
+            
             return view('front.restaurant_listing',['restaurants'=>$restaurant],compact('cuisines'));
         }
         public function search(Request $request){
@@ -395,7 +398,7 @@ public function logout(){
     {
     $itemfoods=Itemfood::all();
     $cuisines=Cuisine::all();
-
+    
     return view('front.restaurant_details', ['restaurant'=>$restaurant], compact('cuisines','itemfoods'));
 
     }
@@ -418,50 +421,66 @@ public function logout(){
          $address = Address::findOrFail($id);
             
          $store = session()->get('store', []);
-         
+        
+         if(!isset($store[$id])) {     
+        
          
              $store[$id] = [
                  "id" => $address->id,
                  "location" => $address->location, 
              ];
-         
+            
+            
          session()->put('store', $store);
          
-         
+        //  dd($store);
+            }
          return redirect()->back()->with('success', 'Address selected successfully!');
      }
 
-     public function store(Request $request){
-        $request->validate([
-            'first_name'=>'required|min:3|max:15',
-            'last_name'=>'required|max:8',
-            'mobile'=>'required|min:10|max:12',
-            'email'=>'required|email',
-            'password'=>'required|min:4',
+     public function orderStore(OrderStore $order,Request $request){
+       
+        $store = session()->get('store', []);
         
+        $cart = session()->get('cart', []);
+        $inputs=request()->validate([
+            'delivery_method'=>'required',]);
 
-        ]);
-        $customer = new Customer;
-        $customer->first_name = $request->first_name;
-
-        $customer->last_name = $request->last_name;
-        
-        $customer->mobile = $request->mobile;
-        
-        $customer->email = $request->email;
-        
-        $customer->password = Hash::make($request->password);
-        
-        $save= $customer->save();
-        return redirect('signin');
+        $address_id= 0;
+        foreach($store as $storeaddress){
+            $address_id=$storeaddress['id'];
+        }    
+        $total=0;
+        $cartid=array();
+        foreach($cart as $cartitems){
+            $total +=($cartitems['rate'] * $cartitems['quantity']);
             
-    }
+            array_push($cartid,$cartitems);
+            $cid[]=$cartitems['id'];
+            $quantity[]=$cartitems['quantity'];
+            $name[]=$cartitems['food_item'];
+        }
+        
+        $order->total=$total;
+        $order->address_id=$address_id;
+        $order->payment=$inputs['delivery_method'];
+        // dd($name);
+        $order->save();
+        $order->itemfoods()->attach($cid );
 
+
+        
+        
+
+        return view('front.order');
+        
+
+     }
 
      
 
-     
-                
+
+               
             
 }
 
