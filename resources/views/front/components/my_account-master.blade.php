@@ -39,7 +39,9 @@
                         <!-- <li class="nav-item">
                             <a class="nav-link" href="login.html">Sign In</a>
                         </li> -->
-
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('customer.restaurant_listing')}}">Restaurants</a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{route('customer.myaccount')}}">
                                 <i class='bx bx-user mr-1'></i>
@@ -97,8 +99,8 @@ Cart</a>
                     <div class="my-account-menu">
                         <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist"
                             aria-orientation="vertical">
-                            <a class="nav-link " id="v-pills-profile-tab" data-toggle="pill"
-                                href="#v-pills-orders" role="tab" aria-controls="v-pills-profile"
+                            <a class="nav-link " 
+                                href="/customer/orderhistory" role="tab" aria-controls="v-pills-profile"
                                 aria-selected="false"><i class='bx bxs-cart'></i> Orders</a>
                             <!-- <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-wishlist"
                                 role="tab" aria-controls="v-pills-messages" aria-selected="false"><i
@@ -122,163 +124,12 @@ Cart</a>
                     </div>
 
                 </div>
-
+              @yield('order_history')  
               @yield('content')
               @yield('change_password')
               @yield('address')
               
-              
-                <!-- View Orders Modal -->
-                <div class="modal fade address-model view-orders-model" id="exampleModal2" tabindex="-1" role="dialog"
-                    aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <div class="text-center w-100">
-                                    <h5 class="modal-title" id="exampleModalLabel">Order #29687</h5>
-                                    <h6>September 07 2019, 09:08 AM</h6>
-                                </div>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <i class="bx bx-x btn-close"></i>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-
-                                <table class="table table-striped">
-                                    <tbody>
-                                        <tr>
-                                            <td>Order status</td>
-                                            <td>Pending</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Total amount</td>
-                                            <td>$20.00</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Total discount</td>
-                                            <td>$0.00</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Delivery charge</td>
-                                            <td>$5.00</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Amount Paid</td>
-                                            <td>$25.63</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-
-                                <table class="table table-striped table-responsive mt-5 mb-0">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Ordered Items</th>
-                                            <th scope="col">Price</th>
-                                            <th scope="col">Total</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>1 x Chicken spring rolls
-                                                <h6 class="my-2">Modifiers</h6>
-                                                <ul class="modifiers">
-                                                    <h6>Sauce</h6>
-                                                    <li>
-                                                        <div class="items-list"><span>Tomato
-                                                            </span><span>$12.00</span></div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="items-list"><span>Chilly
-                                                            </span><span>$12.00</span></div>
-                                                    </li>
-                                                    <h6 class="my-2">Mayonnaise</h6>
-                                                    <li>
-                                                        <div class="items-list"><span>mayonnaise
-                                                                with olive oil</span> <span>$1.00</span></div>
-                                                    </li>
-                                                </ul>
-                                                <h6 class=" my-2">Size</h6>
-                                                <ul class="modifiers">
-                                                    <li>
-                                                        <div class="items-list"><span>Large
-                                                            </span><span>$1.00</span>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                                <h6 class="my-2">Addons</h6>
-                                                <ul class="modifiers">
-                                                    <li>
-                                                        <div class="items-list"><span>Fries</span>
-                                                            <span>$34.00</span>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="items-list">
-                                                            <span>Chocolate</span>
-                                                            Brownie <span>$3.00</span>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </td>
-                                            <td>$19.00</td>
-                                            <td>$19.00</td>
-                                        </tr>
-                                        <tr>
-                                            <td>1 x Chicken spring rolls
-                                                <h6 class="my-2">Modifiers</h6>
-                                                <ul class="modifiers">
-                                                    <h6>Sauce</h6>
-                                                    <li>
-                                                        <div class="items-list"><span>Tomato
-                                                            </span><span>$12.00</span></div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="items-list"><span>Chilly
-                                                            </span><span>$12.00</span></div>
-                                                    </li>
-                                                    <h6 class="my-2">Mayonnaise</h6>
-                                                    <li>
-                                                        <div class="items-list"><span>mayonnaise
-                                                                with olive oil</span> <span>$1.00</span></div>
-                                                    </li>
-                                                </ul>
-                                                <h6 class=" my-2">Size</h6>
-                                                <ul class="modifiers">
-                                                    <li>
-                                                        <div class="items-list"><span>Large
-                                                            </span><span>$1.00</span>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                                <h6 class="my-2">Addons</h6>
-                                                <ul class="modifiers">
-                                                    <li>
-                                                        <div class="items-list"><span>Fries</span>
-                                                            <span>$34.00</span>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="items-list">
-                                                            <span>Chocolate</span>
-                                                            Brownie <span>$3.00</span>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </td>
-                                            <td>$20.00</td>
-                                            <td>$40.00</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
-                <!-- View Orders Modal End -->
-
-
+             
                 <!-- Address Modal -->
                 <div class="modal fade address-model" id="exampleModal" tabindex="-1" role="dialog"
                     aria-labelledby="exampleModalLabel" aria-hidden="true">

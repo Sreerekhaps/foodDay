@@ -4,7 +4,8 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\Itemfood;
-
+use App\Models\Restaurant;
+use Illuminate\Http\Request;
 class Cart extends Component
 {
     public $show = false;
@@ -19,13 +20,21 @@ class Cart extends Component
         $this->show=true;
 
     }
-    public function addItemToCart($id)
+    public function addItemToCart($id, Request $request)
     {
+       
         $itemfoods = Itemfood::findOrFail($id);
-           
+        
         $cart = session()->get('cart', []);
         
-   
+        $cartsession = session()->get('cartsession', []);
+        
+        if(isset($cartsession[$id]) && $cartsession[$id]['quantity'] == "1") {
+                    unset($cartsession[$id]);
+                } 
+       
+        // dd($rest);
+        
         if(isset($cart[$id])) {
             $cart[$id]['quantity']++;
         } else {
@@ -33,14 +42,30 @@ class Cart extends Component
                 "id"=>$itemfoods->id,
                 "food_item" => $itemfoods->food_item,
                 "quantity" => 1,
-                "rate" => $itemfoods->rate,
+                "rate" => $itemfoods->rate,  
                 
             ];
         }
-          
-        session()->put('cart', $cart);
-       
-       
+        
+        session()->put('cartsession', $cart);
+      
+        if(isset($cartsession[$id])) {
+            $cartsession[$id]['quantity']++;
+        } else {
+            $cartsession[$id] = [
+                "id"=>$itemfoods->id,
+                "food_item" => $itemfoods->food_item,
+                "quantity" => 1,
+                "rate" => $itemfoods->rate,
+                
+                
+               
+                
+            ];
+        }
+        
+        session()->put('cartsession', $cartsession);
+        
         
         $this->emit('increment');
         $this->emit('some-event');
@@ -51,6 +76,9 @@ class Cart extends Component
         $itemfoods = Itemfood::findOrFail($id);
            
         $cart = session()->get('cart', []);
+        
+        $cartsession = session()->get('cartsession', []);
+       
         $itemId=$cart[$id]['quantity'];
 
         
@@ -76,7 +104,27 @@ class Cart extends Component
         }
           
         session()->put('cart', $cart);
-
+        if(isset($cartsession[$id]) && $cartsession[$id]['quantity'] > "1") {
+            $cartsession[$id]['quantity']--;
+        } 
+        elseif($itemId== 1){
+           
+                unset($cartsession[$id]);
+            }
+        
+        
+        else {
+            $cartsession[$id] = [
+                "id"=>$itemfoods->id,
+                "food_item" => $itemfoods->food_item,
+                "quantity" => 1,
+                "rate" => $itemfoods->rate,
+            
+                
+            ];
+        }
+        session()->put('cartsession', $cartsession);
+        
         $this->emit('decrement');
         
         $this->emit('some-event');
@@ -90,6 +138,7 @@ class Cart extends Component
 
     public function render()
     {
+        
         
         return view('livewire.cart');
     }

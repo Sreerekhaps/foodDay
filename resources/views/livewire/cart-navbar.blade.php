@@ -9,7 +9,7 @@
     <section class="py-60">
         <div class="container cart-page-new">
             <div class="row cuisine-dish-wrap">
-<div class="col-lg-8 cuisine-col">
+                <div class="col-lg-8 cuisine-col">
                
 
             <div class="rest-menus" id="rest-menus">
@@ -90,7 +90,7 @@
                                                           
                                             
                                             
-                                           
+</div>   
                                            
                                                
                                             </div>
@@ -107,7 +107,7 @@
                     
                         </div>
                     </div>
-           
+
 
                 
                 <div class="col-lg-4 cart-col">
@@ -157,7 +157,6 @@
 
                
               
-</div>
 </div>
         </div>
     </section>

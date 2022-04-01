@@ -9,13 +9,13 @@ class Itemfood extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'food_item', 'image', 'description','status','type','name', 'rate'
+        'food_item', 'image', 'description','status','type','name', 'rate','restaurant_id',
     ];
     public function restaurants(){
         return $this->hasMany(Restaurant::class);
     }
-    public function orderstores()
+    public function orders()
     {
-        return $this->belongsToMany(OrederStore::class, 'item_order');
+        return $this->belongsToMany(Order::class, 'itemfood_order');
     }
 }

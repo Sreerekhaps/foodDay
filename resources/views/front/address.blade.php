@@ -7,10 +7,10 @@
                                     <h4>Manage Addresses</h4>
                                     <div class="row">
                                     
+                                    
+                                    
+                                    <div class="col-md-12">
                                     @foreach($address as $add)
-                                    
-                                    <div class="col-md-6">
-                                    
                                             <div class="card address-card">
                                                 <div class="card-body">
                                                     <h5 class="card-title">{{$add->home}}</h5>
@@ -30,9 +30,9 @@
                                                     <!-- <a href="#" class=""><i class='bx bx-trash' ></i>Delete</a> -->
                                                 </div>
                                             </div>
-              
+                                            @endforeach
                                         </div>
-                                        @endforeach
+                                        
                                         <br>
                                         <div>
                                         <button type="button" class="btn btn-primary" data-toggle="modal"

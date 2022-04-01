@@ -8,7 +8,7 @@ use App\Models\Address;
 use App\Models\Restaurant;
 use App\Models\Cuisine;
 use App\Models\Itemfood;
-use App\Models\OrderStore;
+use App\Models\Order;
 
 use App\Rules\MatchOldPassword;
 use Session;
@@ -86,8 +86,12 @@ class FrontController extends Controller
         // }
 }
 ////////////////Logout//////////////////////////
-public function logout(){
+public function logout(Request $request){
     Auth::guard('customer')->logout();
+    $request->session()->forget('cart');
+    $request->session()->forget('store');
+    $request->session()->forget('cartsession');
+
     return redirect('/front');
    
 }
@@ -241,10 +245,11 @@ public function logout(){
         public function edit_address($id){
             $address=Address::find($id);
             
-            return response()->json([
-                'status'=>200,
-                'address'=>$address,
-            ]);
+            // return response()->json([
+            //     'status'=>200,
+            //     'address'=>$address,
+            // ]);
+            return back();
     
         }
         public function address_destroy($id){
@@ -333,7 +338,8 @@ public function logout(){
         $itemfoods = Itemfood::findOrFail($id);
            
         $cart = session()->get('cart', []);
-   
+        $cartsession = session()->get('cartsession', []);
+
         if(isset($cart[$id])) {
             $cart[$id]['quantity']++;
         } else {
@@ -346,6 +352,23 @@ public function logout(){
         }
           
         session()->put('cart', $cart);
+        if(isset($cartsession[$id])) {
+            $cartsession[$id]['quantity']++;
+        } else {
+            $cartsession[$id] = [
+                "id"=>$itemfoods->id,
+                "food_item" => $itemfoods->food_item,
+                "quantity" => 1,
+                "rate" => $itemfoods->rate,
+                
+                
+               
+                
+            ];
+        }
+        
+        session()->put('cartsession', $cartsession);
+        dd($cartsession);
         return redirect()->back()->with('success', 'Product added to cart successfully!');
         
 
@@ -353,12 +376,18 @@ public function logout(){
     public function removeFromCart($id){
         $itemfoods = Itemfood::findOrFail($id);
            
-        $cart = session()->get('cart', []);
-   
-        if(isset($cart[$id])) {
+        if(isset($cart[$id]) && $cart[$id]['quantity'] > "1") {
             $cart[$id]['quantity']--;
-        } else {
+        } 
+        elseif($itemId== 1){
+           
+                unset($cart[$id]);
+            }
+        
+        
+        else {
             $cart[$id] = [
+                "id"=>$itemfoods->id,
                 "food_item" => $itemfoods->food_item,
                 "quantity" => 1,
                 "rate" => $itemfoods->rate,
@@ -368,6 +397,26 @@ public function logout(){
         }
           
         session()->put('cart', $cart);
+        if(isset($cartsession[$id]) && $cartsession[$id]['quantity'] > "1") {
+            $cartsession[$id]['quantity']--;
+        } 
+        elseif($itemId== 1){
+           
+                unset($cartsession[$id]);
+            }
+        
+        
+        else {
+            $cartsession[$id] = [
+                "id"=>$itemfoods->id,
+                "food_item" => $itemfoods->food_item,
+                "quantity" => 1,
+                "rate" => $itemfoods->rate,
+            
+                
+            ];
+        }
+        session()->put('cartsession', $cartsession);
         return redirect()->back()->with('success', 'Product added to cart successfully!');
 
     }
@@ -393,27 +442,76 @@ public function logout(){
     public function emptycart(){
         return view('front.emptycart');
     }
-    public function restaurant_details(Restaurant $restaurant )
+    public function restaurant_details($id,Request $request)
 
     {
     $itemfoods=Itemfood::all();
     $cuisines=Cuisine::all();
+    $restaurant=Restaurant::find($id);
+    $rest=session()->get('rest',[]);
+   
+    if(isset($rest[$id])) {
+        unset($rest[$id]);
+    } else {
+        $rest[$id]=[
+            "id"=>$restaurant->id,
+            "name"=>$restaurant->name,
+            "location"=>$restaurant->location,
+            "address"=>$restaurant->address,
+            "mobile"=>$restaurant->mobile,
+        ];
+            
+        
+    }
     
+       
+        session()->put('rest',$rest);
+       
+        
+        
     return view('front.restaurant_details', ['restaurant'=>$restaurant], compact('cuisines','itemfoods'));
 
     }
 
-    public function checkout(Restaurant $restaurant){
+    public function checkout(Restaurant $restaurant,Request $request){
+        $rest=session()->get('rest',[]);
+        $cartsession=session()->get('cartsession',[]);
+
         $address=Address::all();
         $itemfoods=Itemfood::all();
+        $restaurant=Restaurant::all();
         
-        return view('front.checkout',['restaurant'=>$restaurant],compact('itemfoods','address'));
+        // session()->put('rest',$rest);
+       
+        
+        return view('front.checkout',compact('itemfoods','address'));
     }
-     public function order(){
-         return view('front.order');
+     public function order(orderStore $order,$id){
+        $order=Order::findOrFail($id);
+        
+         return view('front.order',['order'=>$order]);
      }
-     public function order_tracking(){
+     public function order_tracking(Request $request){
+         
+         $store=session()->get('store',[]);
+        //  $cart=session()->get('cart',[]);
+        
+        //  if(session('cart')){
+        //      unset($cart[$id]);
+        //  }
+        //  dd($cart);
+        
+        $cartsession=session()->get('cartsession');
+        
+        $request->session()->forget('cart');
+
          return view('front.order_tracking');
+         
+        // $request->session()->forget('cart');
+        // $request->session()->forget('store');
+
+        // return redirect('/customer/my_home');
+        
      }
 
      public function addressStore($id)
@@ -422,59 +520,108 @@ public function logout(){
             
          $store = session()->get('store', []);
         
-         if(!isset($store[$id])) {     
-        
+         if(isset($store[$id])) {     
+            unset($store[$id]);
+        } else {
          
              $store[$id] = [
                  "id" => $address->id,
                  "location" => $address->location, 
+                 "home"=>$address->home,
+                 "house_name"=>$address->house_name,
+                 "area"=>$address->area,
+                 "pincode"=>$address->pincode,
+                 "city"=>$address->city,
              ];
             
-            
+        }
+       
          session()->put('store', $store);
          
-        //  dd($store);
-            }
+        
+            
          return redirect()->back()->with('success', 'Address selected successfully!');
      }
 
-     public function orderStore(OrderStore $order,Request $request){
+     public function orderStore(Order $order,Request $request){
        
         $store = session()->get('store', []);
         
         $cart = session()->get('cart', []);
+        // $restaurant=session()->get('restaurant',[]);
+        $rest=session()->get('rest',[]);
+        
+       
+        
         $inputs=request()->validate([
             'delivery_method'=>'required',]);
 
         $address_id= 0;
         foreach($store as $storeaddress){
             $address_id=$storeaddress['id'];
+
         }    
-        $total=0;
-        $cartid=array();
-        foreach($cart as $cartitems){
-            $total +=($cartitems['rate'] * $cartitems['quantity']);
-            
-            array_push($cartid,$cartitems);
-            $cid[]=$cartitems['id'];
-            $quantity[]=$cartitems['quantity'];
-            $name[]=$cartitems['food_item'];
+        $restaurant_id=null;
+        foreach($rest as $restaurant){
+            $restaurant_id=$restaurant['id'];
         }
+
         
-        $order->total=$total;
+        
+        $total=0;
+        
+            
+        foreach($cart as $cartitems){
+                $total +=($cartitems['rate'] * $cartitems['quantity']);       
+        }
+        // if($address_id==0){
+        //     if('delivery_method'=='pickup'){
+        //         return redirect()->back();
+
+        //     }
+               
+            
+            
+        // }
+        
+        $customer=Auth::user()->id;
+       $customer1=Auth::user()->mobile;
+        $order->order_date=Carbon::now();
+        $order->mobile=$customer1;
+        $order->item_total=$total;
+        $order->sub_total=$total;
+        $order->grand_total=$total;
         $order->address_id=$address_id;
-        $order->payment=$inputs['delivery_method'];
-        // dd($name);
+        $order->order_type=$inputs['delivery_method'];
+        $order->order_status='pending';
+        $order->payment_status='pending';
+        $order->payment_method='cash on delivery';
+        $order->customer_id=$customer;
+        $order->restaurant_id=$restaurant_id;
+        
+        // dd($cid);
+        // dd($quantity);
         $order->save();
-        $order->itemfoods()->attach($cid );
-
-
         
-        
-
+        $cartid=array();
+        foreach($cart as $cartItem){
+            array_push($cartid,$cartItem);
+            $cid=$cartItem['id'];
+            $quantity=$cartItem['quantity'];
+            $name=$cartItem['food_item'];
+            $order->itemfoods()->attach($cid,['quantity'=>$quantity,'food_item'=>$name]);
+            
+        }    
+       
+       
         return view('front.order');
         
 
+     }
+     public function order_history(Order $order){
+         $order=Order::all();
+         $itemfoods=Itemfood::all();
+         return view('front.orderhistory',['order'=>$order],compact('itemfoods'));
      }
 
      

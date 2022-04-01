@@ -25,7 +25,11 @@ class Fooditem extends Component
     public function addToCart($id)
     {
         $itemfoods = Itemfood::findOrFail($id);
-           
+        $cartsession = session()->get('cartsession', []);
+        
+        if(isset($cartsession[$id]) && $cartsession[$id]['quantity'] == "1") {
+                 unset($cartsession[$id]);
+             } 
         $cart = session()->get('cart', []);
         
    
@@ -43,6 +47,20 @@ class Fooditem extends Component
           
         session()->put('cart', $cart);
        
+       
+        if(isset($cartsession[$id])) {
+            $cartsession[$id]['quantity']++;
+        } else {
+            $cartsession[$id] = [
+                "id"=>$itemfoods->id,
+                "food_item" => $itemfoods->food_item,
+                "quantity" => 1,
+                "rate" => $itemfoods->rate,
+                
+            ];
+        }
+          
+        session()->put('cartsession', $cartsession);
         
         $this->emit('increment');
         $this->emit('some-event');
@@ -74,6 +92,30 @@ class Fooditem extends Component
         }
           
         session()->put('cart', $cart);
+        $cartsession = session()->get('cartsession', []);
+        $itemId=$cartsession[$id]['quantity'];
+        if(isset($cartsession[$id]) && $cartsession[$id]['quantity'] > "1") {
+            $cartsession[$id]['quantity']--;
+        } 
+        elseif($itemId== 1){
+           
+                unset($cartsession[$id]);
+            }
+        
+        
+        else {
+            $cartsession[$id] = [
+                "id"=>$itemfoods->id,
+                "food_item" => $itemfoods->food_item,
+                "quantity" => 1,
+                "rate" => $itemfoods->rate,
+            
+                
+            ];
+        }
+          
+        session()->put('cartsession', $cartsession);
+      
         $this->emit('decrement');
         $this->emit('some-event');
     }

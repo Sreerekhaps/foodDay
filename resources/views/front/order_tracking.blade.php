@@ -32,18 +32,11 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item active">
-                            <a class="nav-link" href="home.html">Home <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="{{route('customer.my_home')}}">Home <span class="sr-only">(current)</span></a>
                         </li>
+                       
                         <li class="nav-item">
-                            <a class="nav-link" href="restaurant-listing.html">Restaurants</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="login.html">Sign In</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="my-account.html">
+                            <a class="nav-link" href="{{route('customer.myaccount')}}">
                                 <i class='bx bx-user mr-1'></i>
                                 My Account</a>
                         </li>
@@ -72,34 +65,42 @@
 
 
                         <div class="order-tracking-status-head">
+                       
+
+
+                          @if(session('store'))  
+
                             <p class="mb-0">Your order has been confirmed. The restaurant will deliver your order by
                                 11.22PM.</p>
-                            <span>For any questions, reach out to us on hello@foodday.co</span>
+                            <span>For any questions, reach out to us on hello@foodday.com</span>
                             <h6 class="mt-3">Delivery Address</h6>
                             <div class="card address-card">
                                 <div class="card-body deliverable">
+                                @if(session('store'))
+                               @foreach(session('store') as $id=>$details)
                                     <div class="delivery">
                                         <i class="bx bxs-check-circle"></i>
-                                        <h5 class="card-title">Home</h5>
+                                       
+                                        <h5 class="card-title">{{$details['home']}}</h5>
                                     </div>
-                                    <h6>John Doe, 7845 155 555,</h6>
+                                    <h6>{{Auth::user()->first_name}}, 7845 155 555,</h6>
                                     <p class="card-text">
-                                        7th Street, Downtown, West Avenue, London, United Kingodom,
-                                        784512.
+                                    {{$details['location']}}, {{$details['house_name']}}, {{$details['area']}},{{$details['city']}}, 
+                                    {{$details['pincode']}}.
                                     </p>
-                                </div>
+                                    @endforeach
+                                @endif
+                                </div>      
                             </div>
+                            @else
+                            <p>Thanks for shopping! Your order number is <strong>#111</strong>.
+                           Pickup the order from the <strong>adssd</strong> by
+                           <strong>aaasd</strong>
+                           </p>
+                            @endif
                         </div>
 
-                        <!-- <div class="status-or-info-div">
-                            <h4>Congratulations! Your order is placed!</h4>
-                            <p>Your order number is <strong>#123456</strong>. The restaurant will deliver your order by
-                                <strong>11.22PM.</strong>
-                            </p>
-                            <p>You can view your order on your account page, when you are logged in.</p>
-                            <p>For any questions, reach out to us on hello@foodday.co</p>
-                            <a href="home.html" class="btn btn-primary mt-3">Return to Restaurants</a>
-                        </div> -->
+                
 
                         <div class="map-wrap">
                             <iframe width="100%" height="330" class="map"
@@ -197,135 +198,66 @@
                         <div class="cart-head">
                             <span>Your order</span>
                         </div>
+                        @php $total = 0 @endphp
+        @if(session('cartsession'))
+            @foreach(session('cartsession') as $id => $details)
+           
+                @php
+                 $total=0;
+                 $total += $details['rate'] * $details['quantity'] 
+                 @endphp
                         <div class="cart-body">
-
                             <div class="cart-item">
                                 <div class="details">
-                                    <h6>Spicy Beetroot & Potato Burger</h6>
-                                    <p class="text-to-kitchen">Text to kitchen. Delete this if you are not using.
-                                        adipisicing elit. Enim illum adipisci natus ducimus, voluptatem</p>
-                                    <ul class="modifiers">
-                                        <h6>Toppings</h6>
-                                        <li>Extra chease <span>$5.00</span></li>
-                                        <li>Drinks <span>$6.00</span></li>
-                                        <li>Butter <span>$7.00</span></li>
-                                    </ul>
+                                    <h6> {{ $details['food_item'] }}</h6>
+                                  
+                                   
                                 </div>
                                 <div class="price">
-                                    <h6>$12.99</h6>
-                                    <div class="add-remove-button">
-                                        <div class="input-group">
-                                            <input type="button" value="-" class="button-minus" data-field="quantity">
-                                            <input type="number" step="1" max="" value="1" name="quantity"
-                                                class="quantity-field">
-                                            <input type="button" value="+" class="button-plus" data-field="quantity">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="cart-item">
-                                <div class="details">
-                                    <h6>Spicy Beetroot & Potato Burger</h6>
-                                    <ul class="modifiers">
-                                        <h6>Toppings</h6>
-                                        <li>Extra chease <span>$5.00</span></li>
-                                        <li>Drinks <span>$6.00</span></li>
-                                        <li>Butter <span>$7.00</span></li>
-                                    </ul>
-                                </div>
-                                <div class="price">
-                                    <h6>$12.99</h6>
-                                    <div class="add-remove-button">
-                                        <div class="input-group">
-                                            <input type="button" value="-" class="button-minus" data-field="quantity">
-                                            <input type="number" step="1" max="" value="1" name="quantity"
-                                                class="quantity-field">
-                                            <input type="button" value="+" class="button-plus" data-field="quantity">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="cart-item">
-                                <div class="details">
-                                    <h6>Spicy Beetroot & Potato Burger</h6>
-                                </div>
-                                <div class="price">
-                                    <h6>$12.99</h6>
-                                    <div class="add-remove-button">
-                                        <div class="input-group">
-                                            <input type="button" value="-" class="button-minus" data-field="quantity">
-                                            <input type="number" step="1" max="" value="1" name="quantity"
-                                                class="quantity-field">
-                                            <input type="button" value="+" class="button-plus" data-field="quantity">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="cart-item">
-                                <div class="details">
-                                    <h6>Spicy Beetroot & Potato Burger</h6>
-                                    <ul class="modifiers">
-                                        <h6>Addons</h6>
-                                        <li>Extra chease</li>
-                                        <li>Drinks</li>
-                                        <li>Butter</li>
-                                    </ul>
-                                </div>
-                                <div class="price">
-                                    <h6>$12.99</h6>
-                                    <div class="add-remove-button">
-                                        <div class="input-group">
-                                            <input type="button" value="-" class="button-minus" data-field="quantity">
-                                            <input type="number" step="1" max="" value="1" name="quantity"
-                                                class="quantity-field">
-                                            <input type="button" value="+" class="button-plus" data-field="quantity">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="cart-item">
-                                <div class="details">
-                                    <h6>Spicy Beetroot & Potato Burger</h6>
-                                </div>
-                                <div class="price">
-                                    <h6>$12.99</h6>
-                                    <div class="add-remove-button">
-                                        <div class="input-group">
-                                            <input type="button" value="-" class="button-minus" data-field="quantity">
-                                            <input type="number" step="1" max="" value="1" name="quantity"
-                                                class="quantity-field">
-                                            <input type="button" value="+" class="button-plus" data-field="quantity">
-                                        </div>
-                                    </div>
+                                    <h6>${{ $total }}.00</h6>
+                                  
                                 </div>
                             </div>
 
                         </div>
-
+                @endforeach
+                            @endif
                         <div class="cart-footer">
+                              @php $total = 0 @endphp
+                            @foreach((array) session('cartsession') as $id => $details)
+                                @php $total += $details['rate'] * $details['quantity'] @endphp
+                               
+                            @endforeach
                             <ul>
                                 <li>
-                                    <h5><span>SubTotal</span> <span class="float-right">$121.99</span></h5>
+                                    <h5>
+                                        <span>SubTotal</span>
+                                        <span class="float-right">${{$total}}.00</span>
+                                    </h5>
                                 </li>
                                 <li>
-                                    <p><span>Delivery fre</span> <span class="float-right">$20.00</span></p>
+                                    <p>
+                                        <span>Delivery fee</span>
+                                        <span class="float-right">$00.00</span>
+                                    </p>
                                 </li>
                                 <li>
-                                    <p><span>Tax</span> <span class="float-right">$18.00</span></p>
+                                    <p>
+                                        <span>Tax</span> <span class="float-right">$00.00</span>
+                                    </p>
                                 </li>
                                 <li>
-                                    <h4><span>Total</span> <span class="float-right">$159.99</span>
+                                    <h4>
+                                        <span>Total</span>
+                                        <span class="float-right">${{$total}}.00</span>
                                     </h4>
+                                
                                 </li>
+                               
                             </ul>
                         </div>
-
                     </div>
-
+                   
                 </div>
             </div>
 

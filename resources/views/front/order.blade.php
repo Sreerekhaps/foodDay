@@ -32,18 +32,14 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item active">
-                            <a class="nav-link" href="home.html">Home <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="{{route('customer.my_home')}}">Home <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="restaurant-listing.html">Restaurants</a>
-                        </li>
+                            <a class="nav-link" href="{{route('customer.restaurant_listing')}}">Restaurants</a>
+</li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="login.html">Sign In</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="my-account.html">
+                            <a class="nav-link" href="{{route('customer.myaccount')}}">
                                 <i class='bx bx-user mr-1'></i>
                                 My Account</a>
                         </li>
@@ -73,7 +69,7 @@
                         <p>Your order number is <strong>#123456</strong>. The restaurant will deliver your order by
                             <strong>11.22PM.</strong>
                             You can view your order on your account page, when you are logged in.
-                            For any questions, reach out to us on hello@foodday.co
+                            For any questions, reach out to us on hello@foodday.com
                         </p>
                         <a href="{{route('customer.my_home')}}" class="btn btn-outline-primary mt-3 mr-sm-3">Continue Shopping</a>
                         <a href="{{route('customer.order_tracking')}}" class="btn btn-primary mt-3">View Order</a>

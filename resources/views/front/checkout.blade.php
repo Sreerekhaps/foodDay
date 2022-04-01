@@ -126,15 +126,19 @@
                       
                     @if('delvery_method' !='delivery')
                       <div class="checkout-delivery-address" id="pick1">
-                         
+                    
+                        
                         <h6 class="checkout-title">Pick up</h6>
+                        @if(session('rest'))
+                        @foreach(session('rest') as $id=>$details)
                         <p>This is a Pickup order. You'll need to go to
-                            <strong>{{$restaurant->name}}</strong> to
+                            <strong>{{$details['name']}}</strong> to
                             pick up this order.
-                            Pick up at <strong>calicut</strong>.xxxx
-                            <strong>xxxx</strong> </p>
-                           
-                       
+                            Pick up at <strong>{{$details['location']}}</strong>.{{$details['address']}}
+                            <strong>{{$details['mobile']}}</strong> </p>
+                            @endforeach
+                          @endif 
+                      
                     </div>
                     @endif
                       </div>
@@ -209,9 +213,11 @@
                                     </p>
                                 </li>
                                 
+                                   
                                 <button class="btn btn-primary mt-3 w-100"
                                     onclick="window.location.href='{{route('customer.order')}}';">Checkout</button>
-                            
+                                     
+                                   
 
                                 
                             </ul>
