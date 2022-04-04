@@ -29,11 +29,11 @@ class Cart extends Component
         
         $cartsession = session()->get('cartsession', []);
         
-        if(isset($cartsession[$id]) && $cartsession[$id]['quantity'] == "1") {
+        if(isset($cartsession[$id])) {
                     unset($cartsession[$id]);
                 } 
        
-        // dd($rest);
+        dd($cartsession);
         
         if(isset($cart[$id])) {
             $cart[$id]['quantity']++;

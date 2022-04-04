@@ -205,7 +205,7 @@ Cart</a>
                                             @endif
                                         </div>
                                         <div class="form-group col-lg-12">
-                                            <input type="text" name="note_a_driver" class="form-control" placeholder="Note for Driver">
+                                            <input type="text" name="note_a_driver" id="note_a_driver" class="form-control" placeholder="Note for Driver">
                                             @if ($errors->has('note_a_driver'))
                                                 <span class="text-danger">{{ $errors->first('note_a_driver') }}</span>
                                             @endif

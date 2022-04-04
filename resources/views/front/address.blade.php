@@ -20,10 +20,10 @@
                                                         {{$add->pincode}}
                                                        
                                                     </p>
-                                                    <button type="button" value="{{$add->id}}" class="btn-link" data-toggle="modal" id="edit-item">
+                                                    <button type="button" value="" class="btn-link" data-toggle="modal" id="edit-item" data-target="#edit-modal{{$add->id}}">
                                                         <i class='bx bx-edit'></i>Edit</button>
                                                        
-                                                    <button class="btn-link"><i class='bx bx-trash'><a href="/address/{{$add->id}}"></i>Delete</a></button>
+                                                    <button class="btn-link"><i class='bx bx-trash'><a href="/customer/address/{{$add->id}}"></i>Delete</a></button>
                                     
                                                     <button class="btn-link"><i class='bx bx-location-plus'></i>Set as
                                                         default</button>
@@ -41,8 +41,9 @@
                                 </div>
                             </div>
     </div>
+    @foreach($address as $add)
                              <!-- Address Modal Edit -->
-                             <div class="modal fade  " id="edit-modal" tabindex="-1" role="dialog"
+                             <div class="modal fade  " id="edit-modal{{$add->id}}" tabindex="-1" role="dialog"
                     aria-labelledby="edit-modal-label" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
@@ -53,11 +54,12 @@
                                 <h5 class="mb-4">Edit Delivery Address</h5>
 
 
-                                <form method="post" action="" enctype="multipart/form-data">
-                                <!-- @foreach($address as $addr) -->
-                                
+                                <form method="post" action="{{route('customer.update_address',$add->id)}}" enctype="multipart/form-data">
+                               
+                                @csrf
+                                    @method('PATCH')
                                     <div class="form-row">
-                                        @csrf 
+                                       
                                        @if(Session::get('success'))
                                           <div class="alert alert-success"> 
                                              {{ Session::get('success') }} 
@@ -65,42 +67,42 @@
                                         @endif
 
                                         <div class="form-group col-lg-12">
-                                            <input type="text" name="location" class="form-control" id="location" placeholder="Location" value="{{$addr->area}}">
+                                            <input type="text" name="location" class="form-control" id="location" placeholder="Location" value="{{$add->area}}">
                                                @error("location")
                                                     <p style="color:red">{{$errors->first("location")}}
                                                 @enderror
                                         </div>
                                          <div class="form-group col-lg-12">
-                                            <input type="text" name="house_name" class="form-control" id="house_name" placeholder="House Name / Flat / Building" value="{{$addr->house_name}}"> 
+                                            <input type="text" name="house_name" class="form-control" id="house_name" placeholder="House Name / Flat / Building" value="{{$add->house_name}}"> 
                                             @error("house_name")
                                                     <p style="color:red">{{$errors->first("house_name")}}
                                                 @enderror
                                         </div>
                                         <div class="form-group col-lg-6">
-                                            <input type="text" name="area" class="form-control" id="area" placeholder="Area / Street" value="{{$addr->area}}">
+                                            <input type="text" name="area" class="form-control" id="area" placeholder="Area / Street" value="{{$add->area}}">
                                             @error("area")
                                                     <p style="color:red">{{$errors->first("area")}}
                                                 @enderror
                                         </div>
                                         <div class="form-group col-lg-6">
-                                            <input type="text" name="city" class="form-control" id="city" placeholder="City" value="{{$addr->city}}">
+                                            <input type="text" name="city" class="form-control" id="city" placeholder="City" value="{{$add->city}}">
                                             @error("city")
                                                     <p style="color:red">{{$errors->first("city")}}
                                                 @enderror
                                         </div>
                                           <div class="form-group col-lg-12">
-                                            <input type="text" name="landmark" class="form-control" id="landmark" placeholder="Landmark" value="{{$addr->landmark}}">
+                                            <input type="text" name="landmark" class="form-control" id="landmark" placeholder="Landmark" value="{{$add->landmark}}">
                                         </div>
                                        
                                         <div class="form-group col-lg-6">
-                                            <input type="text" name="pincode" class="form-control" id="pincode" placeholder="Pincode" value="{{$addr->pincode}}">
+                                            <input type="text" name="pincode" class="form-control" id="pincode" placeholder="Pincode" value="{{$add->pincode}}">
                                             @error("pincode")
                                                     <p style="color:red">{{$errors->first("pincode")}}
                                                 @enderror
                                         </div>
                                         <div class="form-group col-lg-6">
                                             <select name="home" id="home" class="form-control">
-                                            <option value="{{$addr->home}}">{{$addr->home}}</option>   
+                                            <option value="{{$add->home}}">{{$add->home}}</option>   
 
                                                
 
@@ -113,8 +115,8 @@
                                             </select>    
                                                                    </div>
                                         <div class="form-group col-lg-12">
-                                            <textarea class="form-control" name="note" id="exampleFormControlTextarea1" rows="3"
-                                                placeholder="Note for Driver">{{$addr->note_a_driver}}</textarea>
+                                            <textarea class="form-control" name="note_a_driver" id="note_a_driver" rows="3"
+                                                placeholder="Note for Driver">{{$add->note_a_driver}}</textarea>
                                         </div>
 
                                         <div class="form-group col-md-6 mb-md-0 d-none d-md-block">
@@ -127,13 +129,14 @@
 
                                     </div>
                                     
-                                    <!-- @endforeach -->
+                                    
                                 </form>
                             </div>
 
                         </div>
                     </div>
                 </div>
+                @endforeach
         <!-- Address Modal End -->
 @endsection
 

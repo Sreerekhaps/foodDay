@@ -56,7 +56,7 @@ class FrontController extends Controller
         $customer->password = Hash::make($request->password);
         
         $save= $customer->save();
-        return redirect('signin');
+        return redirect('/customer/signin');
             
     }
     public function check(Request $request)//signin 
@@ -151,7 +151,7 @@ public function logout(Request $request){
             \DB::table('password_resets')->where([
                 'email'=>$request->email
             ])->delete();
-            return redirect()->route('signin')->with('info','password changed')->with('verifiedemail',$request->email);
+            return redirect()->route('customer.signin')->with('info','password changed')->with('verifiedemail',$request->email);
         }
     }
     
@@ -242,56 +242,81 @@ public function logout(Request $request){
             
         }
        
+       
+        // public function edit_address(Address $address,$id){
+        //     $address=Address::find($id);
+            
+        //     // return response()->json([
+        //     //     'status'=>200,
+        //     //     'address'=>$address,
+        //     // ]);
+        //     // return back();
+        //     // dd($address);
+        //     return view('front.address',['address'=>$address]);
+    
+        // }
+        // public function update_address(Address $add){
+        //     $inputs=request()->validate([
+        //         'location'=>'required',
+        //         'house_name'=>'required',
+        //         'area'=>'required',
+        //         'city'=>'required',
+        //         'landmark'=>'required',
+        //         'pincode'=>'required',
+        //         'home'=>'required',
+        //         'note_a_driver'=>'required',
+            
+        //     ],[
+        //         'location.required' => 'Location is required',
+        //         'house_name.required' =>'House Name is required',
+        //         'area.required' =>'Area is required',
+        //         'city.required' =>'City is required',
+        //         'landmark.required' =>'Landmark is required',
+        //         'pincode.required' =>'Pincode is required',
+        //         'home.required' =>'Address Type is required',
+        //         'note_a_driver.required' =>'Note for Driver is required',
+
+        //     ]);
+        //     $add->location=$inputs['location'];
+        //     $add->house_name=$inputs['house_name'];
+        //     $add->area=$inputs['area'];
+        //     $add->city=$inputs['city'];
+        //     $add->landmark=$inputs['landmark'];
+        //     $add->pincode=$inputs['pincode'];
+        //     $add->home=$inputs['home'];
+        //     $add->note_a_driver=$inputs['note_a_driver'];
+        //     $add->save();
+            
+        //     return back();
+        // }
         public function edit_address($id){
             $address=Address::find($id);
             
-            // return response()->json([
-            //     'status'=>200,
-            //     'address'=>$address,
-            // ]);
-            return back();
+            return view('front.address',compact('address'));
     
         }
+        public function update_address(Request $request, $id){
+            $address = Address::find($id);
+            $address->location = $request->input('location');
+            $address->house_name = $request->input('house_name');
+            $address->area = $request->input('area');
+            $address->city = $request->input('city');
+            $address->landmark = $request->input('landmark');
+            $address->pincode = $request->input('pincode');
+            $address->home = $request->input('home');
+            $address->note_a_driver = $request->input('note_a_driver');
+
+            $address->update();
+            return back();
+        }
+
         public function address_destroy($id){
             $address=Address::find($id);
             $address->delete();
             return back();
         }
 
-        public function update_address(Address $add){
-            $inputs=request()->validate([
-                'location'=>'required',
-                'house_name'=>'required',
-                'area'=>'required',
-                'city'=>'required',
-                'landmark'=>'required',
-                'pincode'=>'required',
-                'home'=>'required',
-                'note_a_driver'=>'required',
-            
-            ],[
-                'location.required' => 'Location is required',
-                'house_name.required' =>'House Name is required',
-                'area.required' =>'Area is required',
-                'city.required' =>'City is required',
-                'landmark.required' =>'Landmark is required',
-                'pincode.required' =>'Pincode is required',
-                'home.required' =>'Address Type is required',
-                'note_a_driver.required' =>'Note for Driver is required',
-
-            ]);
-            $add->location=$inputs['location'];
-            $add->house_name=$inputs['house_name'];
-            $add->area=$inputs['area'];
-            $add->city=$inputs['city'];
-            $add->landmark=$inputs['landmark'];
-            $add->pincode=$inputs['pincode'];
-            $add->home=$inputs['home'];
-            $add->note_a_driver=$inputs['note_a_driver'];
-            $add->save();
-            return back();
-        }
-
+       
 
 
         ////////////////Search/////////////
@@ -491,9 +516,10 @@ public function logout(Request $request){
         
          return view('front.order',['order'=>$order]);
      }
-     public function order_tracking(Request $request){
+     public function order_tracking(Order $order,Request $request){
          
          $store=session()->get('store',[]);
+        
         //  $cart=session()->get('cart',[]);
         
         //  if(session('cart')){
@@ -502,10 +528,10 @@ public function logout(Request $request){
         //  dd($cart);
         
         $cartsession=session()->get('cartsession');
-        
         $request->session()->forget('cart');
+        $order=Order::all();
 
-         return view('front.order_tracking');
+         return view('front.order_tracking',['order'=>$order]);
          
         // $request->session()->forget('cart');
         // $request->session()->forget('store');
@@ -612,7 +638,6 @@ public function logout(Request $request){
             $order->itemfoods()->attach($cid,['quantity'=>$quantity,'food_item'=>$name]);
             
         }    
-       
        
         return view('front.order');
         

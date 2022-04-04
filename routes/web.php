@@ -147,7 +147,7 @@ Route::prefix('customer')->name('customer.')->group(function (){
         Route::post('/address_store', [App\Http\Controllers\FrontController::class, 'address_store'])->name('address_store');
         Route::get('/edit_address/{id}', [App\Http\Controllers\FrontController::class, 'edit_address'])->name('edit_address');
         Route::get('/address/{id}', [App\Http\Controllers\FrontController::class, 'address_destroy'])->name('address_destroy');
-        Route::patch('/edit_address/{address}', [App\Http\Controllers\FrontController::class, 'update_address'])->name('update_address');
+        Route::patch('/update_address/{id}', [App\Http\Controllers\FrontController::class, 'update_address'])->name('update_address');
         Route::get('/show_password', [App\Http\Controllers\FrontController::class, 'show_password'])->name('show_password');
         Route::post('/changePassword',[App\Http\Controllers\FrontController::class, 'change_password'])->name('change_password');
         Route::get('/logoutuser', [App\Http\Controllers\FrontController::class, 'logout'])->name('logout');
@@ -165,7 +165,7 @@ Route::prefix('customer')->name('customer.')->group(function (){
         Route::get('/addressStore/{id}', [FrontController::class, 'addressStore'])->name('addressStore');
 
         Route::post('/order/store', [FrontController::class, 'orderStore'])->name('orderStore');
-        Route::get('/orderhistory',[App\Http\Controllers\FrontController::class, 'order_history'])->name('order_history');
+        Route::get('/orderhistory',[FrontController::class, 'order_history'])->name('order_history');
 
     });
 
