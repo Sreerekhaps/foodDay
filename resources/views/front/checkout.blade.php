@@ -106,7 +106,7 @@
                                            {{$add->landmark}}
                                           
                                         </p>
-                                        <button class="btn btn-primary btn-sm"><a href="{{route('customer.addressStore',$add->id)}}">Deliver here</a></button>
+                                        <button class="btn btn-primary btn-sm"><a href="{{route('customer.addressStore',$add->id)}} "style="color:white">Deliver here</a></button>
                                         <button type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal"
                                             data-target="#exampleModal">
                                             Edit</button>

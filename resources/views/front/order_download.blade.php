@@ -18,122 +18,38 @@
 </head>
 
 <body>
-    <div class="p-4">
-        <h2>Order #345</h2>
-        <p>July 30 2021, 04:47 PM</p>
+    
+<div class="p-4 container-fluid">
+    
+
+        <h2>Order #{{$order->id}}</h2>
+        <p>{{$order->order_date}}</p>
         <table class="table table-bordered" style="width:50%">
-            <tr>
+        <tr>
                 <td>Order status</td>
-                <td>Pending</td>
+                <td>{{ $order->order_status }}</td>
             </tr>
             <tr>
                 <td>Total amount</td>
-                <td>$150</td>
+                <td>${{ $order->item_total }}</td>
             </tr>
             <tr>
                 <td>Total discount</td>
-                <td>$12</td>
+                <td>${{ $order->discount }}</td>
             </tr>
             <tr>
                 <td>Delivery charge</td>
-                <td>$10</td>
+                <td>${{ $order->delivery_fee }}</td>
             </tr>
             <tr>
                 <td>Amount</td>
-                <td>$160</td>
-            </tr>
+                <td>${{ $order->grand_total}}</td>
+    </tr>
 
         </table>
-
-        <table class="table table-bordered mt-4" style="width:100%">
-            <thead>
-                <tr>
-                    <th scope="col">Ordered Items</th>
-                    <th scope="col">Price</th>
-                    <th scope="col">Total</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>
-                        <h5>1 X Chocolate Milkshake</h5>
-                        <table class="table-borderless" style="width: 100%;">
-                            
-                            <tr>
-                                <td>
-                                    <h6>Modifier</h6>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Vanilla Special</td>
-                                <td>$12</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <h6>Size</h6>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Full</td>
-                                <td>$12</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <h6>Addons</h6>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Cool Mint</td>
-                                <td>$5</td>
-                            </tr>
-                        </table>
-                    </td>
-                    <td>$130</td>
-                    <td>$150</td>
-                </tr>
-
-                <tr>
-                    <td>
-                        <table class="table-borderless" style="width: 100%;">
-                            <h5>1 X Chocolate Milkshake</h5>
-                            <tr>
-                                <td>
-                                    <h6>Modifier</h6>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Vanilla Special</td>
-                                <td>$12</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <h6>Size</h6>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Full</td>
-                                <td>$12</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <h6>Addons</h6>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Cool Mint</td>
-                                <td>$5</td>
-                            </tr>
-                        </table>
-                    </td>
-                    <td>$130</td>
-                    <td>$150</td>
-                </tr>
-
-            </tbody>
-
-        </table>
-
-        <h4 class="mt-4">Restuarant address</h4>
+       
+      
+        <!-- <h4 class="mt-4">Restuarant address</h4>
         <p class="mb-1">Blue Bell Restuarant</p>
         <p class="mb-1">Park Avenue road, Ernakulam, 682 011</p>
 
@@ -143,7 +59,7 @@
             City,
             Pincode
         </p>
-        <p class="mb-1">999 9999 999, John@gmail.com </p>
+        <p class="mb-1">999 9999 999, John@gmail.com </p> -->
 
 
     </div>

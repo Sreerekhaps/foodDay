@@ -48,6 +48,6 @@ class Restaurant extends Model
             }//display image
 
             public function itemfoods(){
-                return $this->belongsToMany(Itemfood::class,'itemfood_restaurants');
+                return $this->belongsToMany(Itemfood::class,'itemfood_restaurants','restaurant_id','itemfood_id');
             }
 }

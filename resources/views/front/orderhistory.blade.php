@@ -46,7 +46,8 @@
                                                                 Details</button>
                                                             <button class="btn btn-primary btn-sm"><i
                                                                     class="bx bx-download align-middle mr-1"></i>
-                                                                Download</button>
+                                                                <a href="{{route('customer.downloadPDF',$orderstore->id)}}" style="color:white">Download</a></button>
+                                                               
                                                         </div>
                                                     </div>
                                                 </div>

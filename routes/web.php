@@ -166,6 +166,9 @@ Route::prefix('customer')->name('customer.')->group(function (){
 
         Route::post('/order/store', [FrontController::class, 'orderStore'])->name('orderStore');
         Route::get('/orderhistory',[FrontController::class, 'order_history'])->name('order_history');
+        Route::get('download-pdf', [FrontController::class, 'downloadPDF'])->name('downloadPDF'); 
+
+
 
     });
 

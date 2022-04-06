@@ -9,7 +9,7 @@ use App\Models\Restaurant;
 use App\Models\Cuisine;
 use App\Models\Itemfood;
 use App\Models\Order;
-
+Use PDF;
 use App\Rules\MatchOldPassword;
 use Session;
 
@@ -648,6 +648,16 @@ public function logout(Request $request){
          $itemfoods=Itemfood::all();
          return view('front.orderhistory',['order'=>$order],compact('itemfoods'));
      }
+
+
+     public function downloadPDF(Order $order,$id){
+         $order=Order::find($id);
+        
+        $pdf = PDF::loadView('front.order_download',['Order' => $order],compact('order'))->setOptions(['defaultFont' => 'sans-serif']);
+        
+        return $pdf->download('order_download.pdf');
+       
+    }
 
      
 

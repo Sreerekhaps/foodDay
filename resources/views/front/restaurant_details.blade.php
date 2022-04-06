@@ -129,9 +129,46 @@
                                     <div class="sub-cat mt-0" id="sub-cat1">
                                         <h4 class="mb-4">Most Popular</h4>
                                        
-                                       
-                                       <livewire:fooditem :restaurant="$restaurant"/>
-                                           
+                                    @if($restaurant->is_open==1)
+                                        <livewire:fooditem :restaurant="$restaurant"/>
+                                    @else
+                                    <div class="row">
+                                    @foreach($restaurant->itemfoods as $item)
+                                    <div class="col-lg-6">
+                                         <div class="food-item-card unavailable">
+                                                    <div class="food-item-img" style="
+                                background-image: url({{asset('assets/images/img2.jpg')}});
+                              "></div>
+                                                    <div class="food-item-body">
+                                                        <h5 class="card-title">
+                                                            {{$item->food_item}}
+                                                        </h5>
+                                                        <div class="pricing">
+                                                        <div class="price-wrap">
+                                                                @if($item->status==1)
+                                                                <div class="non-div food-type-div">
+                                                                    <i class="bx bxs-circle" ></i>
+                                                                </div>
+                                                                @else
+                                                                <div class="veg-div food-type-div">
+                                                                    <i class="bx bxs-circle"></i>
+                                                                </div>
+                                                                @endif
+                                                                <span class="price">${{$item->rate}}</span>
+                                                                <span class="actual-price">$180.99</span>
+                                                            </div>
+                                                            
+                                                            <span class="unavailable-text">Unavailable</span>
+                                                           
+                                                            
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                </div>
+                                                @endforeach
+                                                </div>
+                                               @endif   
                                                 
                                             </div>
                                         </div>

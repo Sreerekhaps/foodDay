@@ -59,9 +59,9 @@
         <div class="container">
 
             
-            
-            <h3>All restaurants delivering to</h3>
-            
+            @if (app('request')->has('location'))
+            <h3>All restaurants delivering to {{ app('request')->input('location')}}</h3>
+            @endif
             
             <p>Change location</p>
             <div class="row">
