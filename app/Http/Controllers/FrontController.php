@@ -157,8 +157,10 @@ public function logout(Request $request){
     
     ////////////////////
    
-    public function myaccount(Customer $customer){
+    public function myaccount(Customer $customer,Request $request){
         $customer=Auth::user();
+        $request->session()->forget('address');
+        $request->session()->forget('cartsession');
         return view('front.components.my_account-master',['customer'=>$customer]);
         
     }
@@ -473,24 +475,31 @@ public function logout(Request $request){
     $itemfoods=Itemfood::all();
     $cuisines=Cuisine::all();
     $restaurant=Restaurant::find($id);
-    $rest=session()->get('rest',[]);
+    
+    $data=$request->session()->put(['restaurant'=>['restaurant'=>$id,'name'=>$restaurant->name,'location'=>$restaurant->location,
+    'addess'=>$restaurant->address,'mobile'=>$restaurant->mobile]]);  
+    $rest=$request->session()->get('restaurant');
    
-    if(isset($rest[$id])) {
-        unset($rest[$id]);
-    } else {
-        $rest[$id]=[
-            "id"=>$restaurant->id,
-            "name"=>$restaurant->name,
-            "location"=>$restaurant->location,
-            "address"=>$restaurant->address,
-            "mobile"=>$restaurant->mobile,
-        ];
+  
+    // $rest=session()->get('rest');
+   
+    // if(isset($rest[$id])) {
+    //     unset($rest[$id]);
+    // } else {
+    //     $rest[$id]=[
+    //         "id"=>$restaurant->id,
+    //         "name"=>$restaurant->name,
+    //         "location"=>$restaurant->location,
+    //         "address"=>$restaurant->address,
+    //         "mobile"=>$restaurant->mobile,
+    //     ];
+        
             
         
-    }
+    // }
     
-       
-        session()->put('rest',$rest);
+    
+    //     session()->put('rest',$rest);
        
         
         
@@ -499,7 +508,8 @@ public function logout(Request $request){
     }
 
     public function checkout(Restaurant $restaurant,Request $request){
-        $rest=session()->get('rest',[]);
+        $rest=$request->session()->get('restaurant');
+        
         $cartsession=session()->get('cartsession',[]);
 
         $address=Address::all();
@@ -518,18 +528,12 @@ public function logout(Request $request){
      }
      public function order_tracking(Order $order,Request $request){
          
-         $store=session()->get('store',[]);
+        //  $store=session()->get('address');
         
-        //  $cart=session()->get('cart',[]);
-        
-        //  if(session('cart')){
-        //      unset($cart[$id]);
-        //  }
-        //  dd($cart);
-        
+        $order=Order::all();
         $cartsession=session()->get('cartsession');
         $request->session()->forget('cart');
-        $order=Order::all();
+        
 
          return view('front.order_tracking',['order'=>$order]);
          
@@ -540,59 +544,66 @@ public function logout(Request $request){
         
      }
 
-     public function addressStore($id)
+     public function addressStore($id,Request $request)
      {
          $address = Address::findOrFail($id);
             
-         $store = session()->get('store', []);
+        //  $store = session()->get('store');
+         $data=$request->session()->put(['address'=>['address'=>$id,'location'=>$address->location,'home'=>$address->home,
+         'house_name'=>$address->house_name,'area'=>$address->area,'pincode'=>$address->pincode,'city'=>$address->city]]);  
+         $store=$request->session()->get('address');
         
-         if(isset($store[$id])) {     
-            unset($store[$id]);
-        } else {
+        //  if(isset($store[$id])) {     
+        //     unset($store[$id]);
+        // } 
+        // else {
          
-             $store[$id] = [
-                 "id" => $address->id,
-                 "location" => $address->location, 
-                 "home"=>$address->home,
-                 "house_name"=>$address->house_name,
-                 "area"=>$address->area,
-                 "pincode"=>$address->pincode,
-                 "city"=>$address->city,
-             ];
+        //      $store[$id] = [
+        //          "id" => $address->id,
+        //          "location" => $address->location, 
+        //          "home"=>$address->home,
+        //          "house_name"=>$address->house_name,
+        //          "area"=>$address->area,
+        //          "pincode"=>$address->pincode,
+        //          "city"=>$address->city,
+        //      ];
             
-        }
+        // }
        
-         session()->put('store', $store);
+        //  session()->put('store', $store);
          
-        
+         
             
          return redirect()->back()->with('success', 'Address selected successfully!');
      }
 
      public function orderStore(Order $order,Request $request){
-       
-        $store = session()->get('store', []);
         
+        // $store = session()->get('store');
+        $store=session()->get('address');
+
         $cart = session()->get('cart', []);
-        // $restaurant=session()->get('restaurant',[]);
-        $rest=session()->get('rest',[]);
         
+        $rest=session()->get('restaurant');
+        // dd($store);
        
-        
+        // $rest=$request->session()->get('restaurant');
+    
         $inputs=request()->validate([
             'delivery_method'=>'required',]);
-
-        $address_id= 0;
-        foreach($store as $storeaddress){
-            $address_id=$storeaddress['id'];
-
-        }    
-        $restaurant_id=null;
-        foreach($rest as $restaurant){
-            $restaurant_id=$restaurant['id'];
-        }
-
+        $address_id=0; 
+         
+        $address_id=isset($store['address']) ? $store['address'] : 0;
+      
         
+        $restaurant_id=null;
+        $restaurant_id=$rest['restaurant'];
+       
+        // foreach($rest as $restaurant){
+        //     $restaurant_id=$restaurant['id'];
+        // }
+
+       
         
         $total=0;
         
@@ -638,13 +649,13 @@ public function logout(Request $request){
             $order->itemfoods()->attach($cid,['quantity'=>$quantity,'food_item'=>$name]);
             
         }    
-       
+        
         return view('front.order');
         
 
      }
      public function order_history(Order $order){
-         $order=Order::all();
+         $order=Order::all()->sortDesc();
          $itemfoods=Itemfood::all();
          return view('front.orderhistory',['order'=>$order],compact('itemfoods'));
      }

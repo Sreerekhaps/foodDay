@@ -126,17 +126,18 @@
                       
                     @if('delvery_method' !='delivery')
                       <div class="checkout-delivery-address" id="pick1">
-                    
-                        
                         <h6 class="checkout-title">Pick up</h6>
-                        @if(session('rest'))
-                        @foreach(session('rest') as $id=>$details)
+
+                        @if(session('restaurant'))                    
+                        
+                       
+                       
                         <p>This is a Pickup order. You'll need to go to
-                            <strong>{{$details['name']}}</strong> to
+                            <strong>{{ session('restaurant')['name'] }}</strong> to
                             pick up this order.
-                            Pick up at <strong>{{$details['location']}}</strong>.{{$details['address']}}
-                            <strong>{{$details['mobile']}}</strong> </p>
-                            @endforeach
+                            Pick up at <strong>{{ session('restaurant')['location'] }}</strong>.{{ session('restaurant')['addess'] }}
+                            <strong>{{ session('restaurant')['mobile'] }}</strong> </p>
+                           
                           @endif 
                       
                     </div>

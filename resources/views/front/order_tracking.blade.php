@@ -68,7 +68,7 @@
                        
 
 
-                          @if(session('store'))  
+                          @if(session('address'))  
 
                             <p class="mb-0">Your order has been confirmed. The restaurant will deliver your order by
                                 11.22PM.</p>
@@ -76,23 +76,23 @@
                             <h6 class="mt-3">Delivery Address</h6>
                             <div class="card address-card">
                                 <div class="card-body deliverable">
-                                @if(session('store'))
-                               @foreach(session('store') as $id=>$details)
+                                @if(session('address'))
+                              
                                     <div class="delivery">
                                         <i class="bx bxs-check-circle"></i>
                                        
-                                        <h5 class="card-title">{{$details['home']}}</h5>
+                                        <h5 class="card-title">{{ session('address')['home'] }}</h5>
                                     </div>
-                                    <h6>{{Auth::user()->first_name}}, 7845 155 555,</h6>
+                                    <h6>{{Auth::user()->first_name}}, {{Auth::user()->mobile}},</h6>
                                     <p class="card-text">
-                                    {{$details['location']}}, {{$details['house_name']}}, {{$details['area']}},{{$details['city']}}, 
-                                    {{$details['pincode']}}.
+                                    {{ session('address')['location'] }}, {{ session('address')['house_name'] }}, {{ session('address')['area'] }},{{ session('address')['city'] }}, 
+                                    {{ session('address')['pincode'] }}.
                                     </p>
-                                    @endforeach
+                                   
                                 @endif
                                 </div>      
                             </div>
-                            @else
+                           @elseif(!session('address'))
                             <p>Thanks for shopping! Your order number is <strong>#111</strong>.
                            Pickup the order from the <strong>adssd</strong> by
                            <strong>aaasd</strong>
@@ -260,7 +260,6 @@ $total += $details['rate'] * $details['quantity']
 
 </div>
 </div>
-
 
 
 
