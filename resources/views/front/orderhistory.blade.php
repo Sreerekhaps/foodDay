@@ -1,5 +1,6 @@
 <x-my_account-master>
     @section('order_history')
+    <div class="col-lg-9">
 
     <div class="tab-pane fade show active" id="v-pills-orders" role="tabpanel"
                                 aria-labelledby="v-pills-profile-tab">
@@ -46,7 +47,7 @@
                                                                 Details</button>
                                                             <button class="btn btn-primary btn-sm"><i
                                                                     class="bx bx-download align-middle mr-1"></i>
-                                                                <a href="{{route('customer.downloadPDF',$orderstore->id)}}" style="color:white">Download</a></button>
+                                                                <a href="/customer/download-pdf/{{$orderstore->id}}" style="color:white">Download</a></button>
                                                                
                                                         </div>
                                                     </div>
@@ -111,15 +112,35 @@
                                     </tbody>
                                 </table>
                               
-
-                              
+                                <table class="table table-striped table-responsive mt-5 mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Ordered Items</th>
+                                            <th scope="col">Price</th>
+                                            <th scope="col">Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach ($orderstore->itemfoods as $item)
+                                        <tr>
+                                            <td>{{$item->food_item}}
+                                               
+                                               
+                                            </td>
+                                            <td>${{$item->rate}}</td>
+                                            <td>${{$orderstore->grand_total}}</td>
+                                        </tr>
+                                     @endforeach
+                                    </tbody>
+                                </table>
+                               
                             </div>
                           
                         </div>
                     </div>
                 </div>
                 @endforeach  
-
+</div>
                 <!-- View Orders Modal End -->
     @endsection
 </x-my_account-master>

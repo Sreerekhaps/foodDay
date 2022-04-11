@@ -1,5 +1,6 @@
 <x-my_account-master>
 @section('change_password')
+<div class="col-lg-9">
 <div class="tab-pane fade show active" id="v-pills-password" role="tabpanel"
                                 aria-labelledby="v-pills-settings-tab">
                                 <div class="my-account-content">
@@ -46,5 +47,6 @@
                                     </form>
                                 </div>
                             </div>
+</div>
 @endsection('change_password')
 </x-my_account-master>

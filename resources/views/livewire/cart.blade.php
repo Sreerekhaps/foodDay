@@ -83,7 +83,7 @@
                                     </h4>
                                 </li>
                                 <button class="btn btn-primary mt-3 w-100"
-                                    wire:click="checkout">Proceed to Buy</button>
+                                onclick="window.location.href='{{route('customer.checkout')}}';">Proceed to Buy</button>
                             </ul>
                         </div>
                     </div>

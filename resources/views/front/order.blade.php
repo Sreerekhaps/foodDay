@@ -67,13 +67,13 @@
                             <i class='bx bx-check'></i>
                         </div>
                         <h4>Order Placed!</h4>
-                        <p>Your order number is <strong>#123456</strong>. The restaurant will deliver your order by
-                            <strong>11.22PM.</strong>
+                        <p>Your order number is <strong>#{{$order->id}}</strong>. The restaurant will deliver your order by
+                            <strong>{{$order->created_at->format('H:i:s')}}.</strong>
                             You can view your order on your account page, when you are logged in.
                             For any questions, reach out to us on hello@foodday.com
                         </p>
                         <a href="{{route('customer.my_home')}}" class="btn btn-outline-primary mt-3 mr-sm-3">Continue Shopping</a>
-                        <a href="{{route('customer.order_tracking')}}" class="btn btn-primary mt-3">View Order</a>
+                        <a href="{{route('customer.order_tracking',$order->id)}}" class="btn btn-primary mt-3">View Order</a>
                     </div>
                 </div>
             </div>
@@ -87,7 +87,7 @@
         <div class="footer-top">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-3 col-md-6">
+                    <div class="col-lg-4 col-md-6">
                         <h3>Quick links</h3>
                         <ul>
                             <li><a href="home.html">Home</a></li>
@@ -96,7 +96,7 @@
                             <li><a href="contact-us.html">Contact</a></li>
                         </ul>
                     </div>
-                    <div class="col-lg-3 col-md-6">
+                    <div class="col-lg-4 col-md-6">
                         <h3>Quick links</h3>
                         <ul>
 
@@ -108,7 +108,7 @@
                         </ul>
                     </div>
 
-                    <div class="col-lg-3 col-md-6">
+                    <!-- <div class="col-lg-3 col-md-6">
                         <h3>Subscribe to newsletter</h3>
                         <p>Join our newsletter to keep be informed about offers and news.</p>
                         <form action="">
@@ -121,8 +121,8 @@
                                 </div>
                             </div>
                         </form>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
+                    </div> -->
+                    <div class="col-lg-4 col-md-6">
                         <h3>Contact us</h3>
                         <ul class="contact">
                             <li><i class='bx bx-location-plus'></i><span>Down Town Building, MG Road, Toronto, Canada,

@@ -71,7 +71,7 @@
                           @if(session('address'))  
 
                             <p class="mb-0">Your order has been confirmed. The restaurant will deliver your order by
-                                11.22PM.</p>
+                                {{$order->created_at->format('H:i:s')}}.</p>
                             <span>For any questions, reach out to us on hello@foodday.com</span>
                             <h6 class="mt-3">Delivery Address</h6>
                             <div class="card address-card">
@@ -93,9 +93,10 @@
                                 </div>      
                             </div>
                            @elseif(!session('address'))
-                            <p>Thanks for shopping! Your order number is <strong>#111</strong>.
-                           Pickup the order from the <strong>adssd</strong> by
-                           <strong>aaasd</strong>
+                          
+                            <p>Thanks for shopping! Your order number is <strong>#{{$order->id}}</strong>.
+                           Pickup the order from the <strong>{{$order->restaurant->name}}</strong> by
+                           <strong>{{ $order->order_date }}</strong>
                            </p>
                             @endif
                         </div>
@@ -112,58 +113,28 @@
                             <li class="previous">
                                 <div class="timeline-item">
                                     <h6>Order received</h6>
-                                    <p>The shipment have been successsfully delivered.</p>
-                                    <p class="location">Delhi</p>
-                                    <div class="delivery-date">
-                                        <span class="date">01.01.2021</span>
-                                        <span class="time">06:00 AM</span>
-                                    </div>
+                                   
                                 </div>
                             </li>
                             <li class="previous">
                                 <div class="timeline-item">
                                     <h6>Order Packed</h6>
-                                    <p>The shipment have been successsfully delivered.</p>
-                                    <p class="location">Delhi</p>
-                                    <div class="delivery-date">
-                                        <span class="date">01.01.2021</span>
-                                        <span class="time">06:00 AM</span>
-                                    </div>
+                                    
                                 </div>
                             </li>
                             <li class="active">
                                 <div class="timeline-item">
                                     <h6>Order Shipped</h6>
-                                    <p>The shipment have been successsfully delivered.</p>
-                                    <p class="location">Delhi</p>
-                                    <div class="delivery-date">
-                                        <span class="date">01.01.2021</span>
-                                        <span class="time">06:00 AM</span>
-                                    </div>
+                                   
                                 </div>
                             </li>
                             <li class="next">
                                 <div class="timeline-item">
                                     <h6>Order delivered</h6>
-                                    <p>The shipment have been successsfully delivered.</p>
-                                    <p class="location">Delhi</p>
-                                    <div class="delivery-date">
-                                        <span class="date">01.01.2021</span>
-                                        <span class="time">06:00 AM</span>
-                                    </div>
+                                   
                                 </div>
                             </li>
-                            <li class="next">
-                                <div class="timeline-item">
-                                    <h6>Order delivered</h6>
-                                    <p>The shipment have been successsfully delivered.</p>
-                                    <p class="location">Delhi</p>
-                                    <div class="delivery-date">
-                                        <span class="date">01.01.2021</span>
-                                        <span class="time">06:00 AM</span>
-                                    </div>
-                                </div>
-                            </li>
+                            
 
                         </ul>
 
@@ -193,74 +164,66 @@
                 </div>
 
                 <div class="col-lg-4 cuisine-col">
-
-<div class="cart">
-    <div class="cart-head">
-        <span>Your order</span>
-    </div>
-    @php $total = 0 @endphp
-@if(session('cartsession'))
-@foreach(session('cartsession') as $id => $details)
-
-@php
-$total=0;
-$total += $details['rate'] * $details['quantity'] 
-@endphp
-    <div class="cart-body">
-        <div class="cart-item">
-            <div class="details">
-                <h6> {{ $details['food_item'] }}</h6>
+             
               
-               
-            </div>
-            <div class="price">
-                <h6>${{ $total }}.00</h6>
-              
-            </div>
-        </div>
 
-    </div>
-@endforeach
-        @endif
-    <div class="cart-footer">
-          @php $total = 0 @endphp
-        @foreach((array) session('cartsession') as $id => $details)
-            @php $total += $details['rate'] * $details['quantity'] @endphp
-           
-        @endforeach
-        <ul>
-            <li>
-                <h5>
-                    <span>SubTotal</span>
-                    <span class="float-right">${{$total}}.00</span>
-                </h5>
-            </li>
-            <li>
-                <p>
-                    <span>Delivery fee</span>
-                    <span class="float-right">$00.00</span>
-                </p>
-            </li>
-            <li>
-                <p>
-                    <span>Tax</span> <span class="float-right">$00.00</span>
-                </p>
-            </li>
-            <li>
-                <h4>
-                    <span>Total</span>
-                    <span class="float-right">${{$total}}.00</span>
-                </h4>
-            
-            </li>
-           
-        </ul>
-    </div>
-</div>
-
-</div>
-</div>
-
+             @if(session('cartsession'))
+                      <div class="cart">
+                     
+                          <div class="cart-head">
+                              <span>Your order</span>
+                          </div>
+                          <div class="cart-body">
+                          @foreach($order->itemfoods as $item)
+                              <div class="cart-item">
+                             
+                                  <div class="details">
+                                     
+                                      <h6>{{$item->food_item}}</h6>
+                                     
+                                     
+                                  </div>
+                                  <div class="price">
+                                      <h6>${{$item->rate}}</h6>
+                                      <div class="add-remove-button">
+                                          
+                                      </div>
+                                  </div>
+                                
+                                 
+                              </div>
+                              @endforeach
+                             
+  
+                            
+                             
+  
+                          </div>
+  
+                          <div class="cart-footer">
+                              <ul>
+                                  <li>
+                                      <h5><span>SubTotal</span> <span class="float-right">${{$order->grand_total}}</span></h5>
+                                  </li>
+                                  <li>
+                                      <p><span>Delivery fre</span> <span class="float-right">$00.00</span></p>
+                                  </li>
+                                  <li>
+                                      <p><span>Tax</span> <span class="float-right">$00.00</span></p>
+                                  </li>
+                                  <li>
+                                      <h4><span>Total</span> <span class="float-right">${{$order->grand_total}}</span>
+                                      </h4>
+                                  </li>
+                              </ul>
+                          </div>
+                         
+                      </div>
+                      @endif
+                    
+                    
+                    
+                  </div>
 
 
 
@@ -279,7 +242,7 @@ $total += $details['rate'] * $details['quantity']
         <div class="footer-top">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-3 col-md-6">
+                    <div class="col-lg-4 col-md-6">
                         <h3>Quick links</h3>
                         <ul>
                             <li><a href="home.html">Home</a></li>
@@ -288,7 +251,7 @@ $total += $details['rate'] * $details['quantity']
                             <li><a href="contact-us.html">Contact</a></li>
                         </ul>
                     </div>
-                    <div class="col-lg-3 col-md-6">
+                    <div class="col-lg-4 col-md-6">
                         <h3>Quick links</h3>
                         <ul>
 
@@ -300,7 +263,7 @@ $total += $details['rate'] * $details['quantity']
                         </ul>
                     </div>
 
-                    <div class="col-lg-3 col-md-6">
+                    <!-- <div class="col-lg-3 col-md-6">
                         <h3>Subscribe to newsletter</h3>
                         <p>Join our newsletter to keep be informed about offers and news.</p>
                         <form action="">
@@ -313,8 +276,8 @@ $total += $details['rate'] * $details['quantity']
                                 </div>
                             </div>
                         </form>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
+                    </div> -->
+                    <div class="col-lg-4 col-md-6">
                         <h3>Contact us</h3>
                         <ul class="contact">
                             <li><i class='bx bx-location-plus'></i><span>Down Town Building, MG Road, Toronto, Canada,

@@ -117,7 +117,13 @@ Route::name('admin.')->prefix('admin')->namespace('Admin')->group(function (){
 
 Route::get('/front', [App\Http\Controllers\FrontController::class, 'index'])->name('index');
 Route::prefix('customer')->name('customer.')->group(function (){
-   
+        Route::get('/search', [App\Http\Controllers\FrontController::class, 'search'])->name('search');
+        Route::get('/restaurant_listing', [App\Http\Controllers\FrontController::class, 'restaurant_listing'])->name('restaurant_listing');
+        Route::get('/restaurant_details/{restaurant}', [FrontController::class, 'restaurant_details'])->name('restaurant_details'); 
+        ///cart///
+        Route::get('/cart2',[FrontController::class,'cart2'])->name('cart2');
+        Route::get('/emptycart',[FrontController::class,'emptycart'])->name('emptycart');
+
 
     Route::middleware(['guest:customer'])->group(function (){
         
@@ -137,9 +143,7 @@ Route::prefix('customer')->name('customer.')->group(function (){
     Route::middleware(['auth:customer'])->group(function (){
         Route::get('/my_home', [App\Http\Controllers\FrontController::class, 'my_home'])->name('my_home');
         //////////////search/////////////
-        Route::get('/search', [App\Http\Controllers\FrontController::class, 'search'])->name('search');
-        Route::get('/restaurant_listing', [App\Http\Controllers\FrontController::class, 'restaurant_listing'])->name('restaurant_listing');
-        Route::get('/restaurant_details/{restaurant}', [FrontController::class, 'restaurant_details'])->name('restaurant_details'); 
+       
         Route::get('/myaccount', [App\Http\Controllers\FrontController::class, 'myaccount'])->name('myaccount'); 
         Route::get('/account', [App\Http\Controllers\FrontController::class, 'account'])->name('account');
         Route::patch('/update/{id}', [App\Http\Controllers\FrontController::class, 'profile_update'])->name('profile_update');
@@ -156,17 +160,16 @@ Route::prefix('customer')->name('customer.')->group(function (){
         Route::get('/add-to-cart/{id}', [FrontController::class, 'addToCart'])->name('addToCart');
         Route::get('/remove-from-cart/{id}', [FrontController::class, 'removeFromCart'])->name('removeFromCart');
         Route::delete('cartDelete/{id}', [FrontController::class, 'cartDelete'])->name('cartDelete');
-        Route::get('/cart2',[FrontController::class,'cart2'])->name('cart2');
-        Route::get('/emptycart',[FrontController::class,'emptycart'])->name('emptycart');
+        
         Route::get('/checkout',[FrontController::class,'checkout'])->name('checkout');
         Route::get('/order',[FrontController::class,'order'])->name('order');
-        Route::get('/order_tracking',[FrontController::class,'order_tracking'])->name('order_tracking');
+        Route::get('/order_tracking/{order}',[FrontController::class,'order_tracking'])->name('order_tracking');
 
         Route::get('/addressStore/{id}', [FrontController::class, 'addressStore'])->name('addressStore');
 
         Route::post('/order/store', [FrontController::class, 'orderStore'])->name('orderStore');
         Route::get('/orderhistory',[FrontController::class, 'order_history'])->name('order_history');
-        Route::get('download-pdf', [FrontController::class, 'downloadPDF'])->name('downloadPDF'); 
+        Route::get('download-pdf/{order}', [FrontController::class, 'downloadPDF'])->name('downloadPDF'); 
 
 
 

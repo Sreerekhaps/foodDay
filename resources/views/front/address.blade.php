@@ -1,49 +1,59 @@
 <x-my_account-master>
     @section('address')
+    <div class="col-lg-9">
+    <script type="text/javascript">
+// @if (count($errors) > 0)
+//     $('# address-model').modal('show');
+// @endif
+</script>
 
-    <div class="tab-pane fade show active" id="v-pills-address" role="tabpanel"
+  <div class="tab-pane fade show active" id="v-pills-address"  role="tabpanel"
                                 aria-labelledby="v-pills-messages-tab">
+
+                               
+
                                 <div class="my-account-content food-item-cards-wrap">
+
                                     <h4>Manage Addresses</h4>
+
                                     <div class="row">
-                                    
-                                    
-                                    
-                                    <div class="col-md-12">
-                                    @foreach($address as $add)
+                                    @foreach($address as $value)
+                                        <div class="col-md-6">
                                             <div class="card address-card">
                                                 <div class="card-body">
-                                                    <h5 class="card-title">{{$add->home}}</h5>
-                                                    <h6>{{$add->location}}</h6>
+                                                    <h5 class="card-title">{{$value->home}}</h5>
+                                                    <h6> {{$value->house_name}} ,  {{$value->area}}, {{$value->city}}, {{$value->pincode}}</h6>
                                                     <p class="card-text">
-                                                        {{$add->area}},{{$add->house_name}},{{$add->city}},{{$add->landmark}},
-                                                        {{$add->pincode}}
-                                                       
+                                                       {{$value->landmark}}
                                                     </p>
-                                                    <button type="button" value="" class="btn-link" data-toggle="modal" id="edit-item" data-target="#edit-modal{{$add->id}}">
+                                                    <button type="button" class="btn-link" id="edit-item"
+                                                        data-toggle="modal"
+                                                        data-target="#exampleModal{{$value->id}}">
                                                         <i class='bx bx-edit'></i>Edit</button>
-                                                       
-                                                    <button class="btn-link"><i class='bx bx-trash'><a href="/customer/address/{{$add->id}}"></i>Delete</a></button>
-                                    
+                                                    <button class="btn-link"><i class='bx bx-trash'></i>
+                                                    
+                                                    <a href="{{route('customer.address_destroy', $value->id)}}">
+                                                    Delete</a></button>
                                                     <button class="btn-link"><i class='bx bx-location-plus'></i>Set as
                                                         default</button>
+
                                                     <!-- <a href="#" class=""><i class='bx bx-trash' ></i>Delete</a> -->
                                                 </div>
                                             </div>
-                                            @endforeach
                                         </div>
-                                        
-                                        <br>
-                                        <div>
-                                        <button type="button" class="btn btn-primary" data-toggle="modal"
+                                        @endforeach
+
+                                    </div>
+
+                        <button type="button" class="btn btn-primary" data-toggle="modal"
                                         data-target="#exampleModal">Add Address</button>
-                                        </div>
                                 </div>
+
                             </div>
-    </div>
-    @foreach($address as $add)
-                             <!-- Address Modal Edit -->
-                             <div class="modal fade  " id="edit-modal{{$add->id}}" tabindex="-1" role="dialog"
+
+                             <!-- Address EDIT Modal -->
+                              @foreach($address as $value)
+                <div class="modal fade  " id="exampleModal{{$value->id}}" tabindex="-1" role="dialog"
                     aria-labelledby="edit-modal-label" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
@@ -54,69 +64,65 @@
                                 <h5 class="mb-4">Edit Delivery Address</h5>
 
 
-                                <form method="post" action="{{route('customer.update_address',$add->id)}}" enctype="multipart/form-data">
-                               
-                                @csrf
-                                    @method('PATCH')
+                                <form method="post" action="{{route('customer.update_address',$value->id)}}" enctype="multipart/form-data">
                                     <div class="form-row">
-                                       
-                                       @if(Session::get('success'))
+                                        @csrf 
+                                          @method('PATCH')
+                                       <!-- @if(Session::get('success'))
                                           <div class="alert alert-success"> 
                                              {{ Session::get('success') }} 
                                            </div>
-                                        @endif
+                                        @endif -->
 
                                         <div class="form-group col-lg-12">
-                                            <input type="text" name="location" class="form-control" id="location" placeholder="Location" value="{{$add->area}}">
+                                            <input type="text" name="location" class="form-control" id="location" placeholder="Location" value="{{$value->location}}">
                                                @error("location")
                                                     <p style="color:red">{{$errors->first("location")}}
                                                 @enderror
                                         </div>
                                          <div class="form-group col-lg-12">
-                                            <input type="text" name="house_name" class="form-control" id="house_name" placeholder="House Name / Flat / Building" value="{{$add->house_name}}"> 
+                                            <input type="text" name="house_name" class="form-control" placeholder="House Name / Flat / Building" value="{{$value->house_name}}"> 
                                             @error("house_name")
                                                     <p style="color:red">{{$errors->first("house_name")}}
                                                 @enderror
                                         </div>
                                         <div class="form-group col-lg-6">
-                                            <input type="text" name="area" class="form-control" id="area" placeholder="Area / Street" value="{{$add->area}}">
+                                            <input type="text" name="area" class="form-control" placeholder="Area / Street" value="{{$value->area}}">
                                             @error("area")
                                                     <p style="color:red">{{$errors->first("area")}}
                                                 @enderror
                                         </div>
                                         <div class="form-group col-lg-6">
-                                            <input type="text" name="city" class="form-control" id="city" placeholder="City" value="{{$add->city}}">
+                                            <input type="text" name="city" class="form-control" placeholder="City" value="{{$value->city}}">
                                             @error("city")
                                                     <p style="color:red">{{$errors->first("city")}}
                                                 @enderror
                                         </div>
                                           <div class="form-group col-lg-12">
-                                            <input type="text" name="landmark" class="form-control" id="landmark" placeholder="Landmark" value="{{$add->landmark}}">
+                                            <input type="text" name="landmark" class="form-control" placeholder="Landmark" value="{{$value->landmark}}">
                                         </div>
                                        
                                         <div class="form-group col-lg-6">
-                                            <input type="text" name="pincode" class="form-control" id="pincode" placeholder="Pincode" value="{{$add->pincode}}">
+                                            <input type="text" name="pincode" class="form-control" placeholder="Pincode" value="{{$value->pincode}}">
                                             @error("pincode")
                                                     <p style="color:red">{{$errors->first("pincode")}}
                                                 @enderror
                                         </div>
                                         <div class="form-group col-lg-6">
-                                            <select name="home" id="home" class="form-control">
-                                            <option value="{{$add->home}}">{{$add->home}}</option>   
+                                            <select name="home" id="home" class="form-control" >
 
-                                               
+                                                <option value="0" disabled selected >Address Type</option>
 
-                                                <option value="Home">Home</option>
+                                                <option value="Home" {{ $value->home === 'Home' ? 'selected' : '' }}>Home</option>
 
-                                                <option value="Office">Office</option>
+                                                <option value="Office"  {{ $value->home === 'Office' ? 'selected' : '' }}>Office</option>
 
-                                                <option value="Other">Other</option>
+                                                <option value="Other"  {{ $value->home === 'Other' ? 'selected' : '' }}>Other</option>
 
-                                            </select>    
-                                                                   </div>
+                                            </select>                                        </div>
                                         <div class="form-group col-lg-12">
-                                            <textarea class="form-control" name="note_a_driver" id="note_a_driver" rows="3"
-                                                placeholder="Note for Driver">{{$add->note_a_driver}}</textarea>
+                                            <textarea class="form-control" name="note_a_driver" id="note_A_driver" rows="3"
+                                                placeholder="Note for Driver" value="{{$value->note}}">{{$value->note_a_driver}}</textarea>
                                         </div>
 
                                         <div class="form-group col-md-6 mb-md-0 d-none d-md-block">
@@ -128,8 +134,6 @@
                                         </div>
 
                                     </div>
-                                    
-                                    
                                 </form>
                             </div>
 
@@ -138,52 +142,21 @@
                 </div>
                 @endforeach
         <!-- Address Modal End -->
-@endsection
+</div>               
+    @endsection
 
-@section('edit')
-@parent
-<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@2.8.2/dist/alpine.min.js"></script>
+      @section('editJs')
+    @parent
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@2.8.2/dist/alpine.min.js"></script>
 
-<script>
- $(document).ready(function() {
-/**
-* for showing edit item popup
-*/
+     <script>
+        $("document").ready(function(){
+          setTimeout(function(){
+            $("div.alert").remove();
+         }, 3000 ); // 5 secs
 
-$(document).on('click', "#edit-item", function() {
-$(this).addClass('edit-item-trigger-clicked'); //useful for identifying which trigger was clicked and consequently grab data from the correct row and not the wrong one.
-
-var options = {
-'backdrop': 'static'
-};
-$('#edit-modal').modal(options)
-})
-
-// on modal show
-$('#edit-modal').on('show.bs.modal', function() {
-var el = $(".edit-item-trigger-clicked"); // See how its usefull right here? 
-var row = el.closest(".data-row");
-
-// get the data
-// var id = el.data('item-id');
-// var location = row.children(".location").text();
-// var house_name = row.children(".house_name").text();
-
-
-// fill the data in the input fields
-// $("#id").val(id);
-// $("#location").val(location);
-// $("#house_name").val(house_name);
-
-
-})
-
-// on modal hide
-$('#edit-modal').on('hide.bs.modal', function() {
-$('.edit-item-trigger-clicked').removeClass('edit-item-trigger-clicked')
-$("#edit-form").trigger("reset");
-})
-})
-</script>
+       });
+    </script>
+  
 @stop
 </x-my_account-master>

@@ -22,7 +22,7 @@
     <header>
         <div class="container-fluid">
             <nav id="navbar_top" class="navbar navbar-expand-lg navbar-light fixed-top">
-                <a class="navbar-brand" href="home.html"><img src="assets/images/logo.png" alt=""></a>
+                <a class="navbar-brand" href="home.html"><img src="{{asset('assets/images/logo.png')}}" alt=""></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
                     data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                     aria-label="Toggle navigation">
@@ -32,7 +32,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item active">
-                            <a class="nav-link" href="">Home <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="{{route('customer.my_home')}}">Home <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{route('customer.restaurant_listing')}}">Restaurants</a>
@@ -116,7 +116,7 @@
                         @endif
                         </span>
                         <div class="restaurant-image" style="
-                                background-image: url('{{$rest->banner}}');
+                                background-image: url('{{$rest->logo}}');
                               ">
                         </div>
                         <div class="card-body">
@@ -191,7 +191,7 @@
         <div class="footer-top">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-3 col-md-6">
+                    <div class="col-lg-4 col-md-6">
                         <h3>Quick links</h3>
                         <ul>
                             <li><a href="home.html">Home</a></li>
@@ -200,7 +200,7 @@
                             <li><a href="contact-us.html">Contact</a></li>
                         </ul>
                     </div>
-                    <div class="col-lg-3 col-md-6">
+                    <div class="col-lg-4 col-md-6">
                         <h3>Quick links</h3>
                         <ul>
 
@@ -212,7 +212,7 @@
                         </ul>
                     </div>
 
-                    <div class="col-lg-3 col-md-6">
+                    <!-- <div class="col-lg-3 col-md-6">
                         <h3>Subscribe to newsletter</h3>
                         <p>Join our newsletter to keep be informed about offers and news.</p>
                         <form action="">
@@ -225,8 +225,8 @@
                                 </div>
                             </div>
                         </form>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
+                    </div> -->
+                    <div class="col-lg-4 col-md-6">
                         <h3>Contact us</h3>
                         <ul class="contact">
                             <li><i class='bx bx-location-plus'></i><span>Down Town Building, MG Road, Toronto, Canada,

@@ -13,7 +13,7 @@ class Fooditem extends Component
     public $cart;
     public $sum=[];
     
-    
+    protected $listeners = ['some-event' => '$refresh'];
     public function mount($restaurant){
 
         $this->itemfoods=Itemfood::all();
@@ -68,9 +68,11 @@ class Fooditem extends Component
     
     public function removeFromCart($id){
         $itemfoods = Itemfood::findOrFail($id);
-           
+       
         $cart = session()->get('cart', []);
+        
         $itemId=$cart[$id]['quantity'];
+        
         if(isset($cart[$id]) && $cart[$id]['quantity'] > "1") {
             $cart[$id]['quantity']--;
         } 

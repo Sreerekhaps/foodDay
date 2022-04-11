@@ -20,7 +20,7 @@
     <header>
         <div class="container-fluid">
             <nav id="navbar_top" class="navbar navbar-expand-lg navbar-light fixed-top">
-                <a class="navbar-brand" href="home.html"><img src="assets/images/logo.png" alt=""></a>
+                <a class="navbar-brand" href="home.html"><img src="{{asset('assets/images/logo.png')}}" alt=""></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
                     data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                     aria-label="Toggle navigation">
@@ -190,16 +190,17 @@ Cart</a>
                                             @endif
                                         </div>
                                         <div class="form-group col-lg-6">
-                                        <select name="home" id="home" class="form-select form-select-md" >
-                                            <option value="0" disabled selected>Address Type</option>
-                                            
-                                            <option value="Home">Home</option>
-                                            <option value="Office">Office</option>
-                                            <option value="Other">Other</option>
+                                            <select name="home" id="home" class="form-control" >
 
+                                                <option value="0" disabled selected >Address Type</option>
 
-                                            
-                                        </select>
+                                                <option value="Home" >Home</option>
+
+                                                <option value="Office" >Office</option>
+
+                                                <option value="Other" >Other</option>
+
+                                            </select>                                     
                                             @if ($errors->has('home'))
                                                 <span class="text-danger">{{ $errors->first('home') }}</span>
                                             @endif
@@ -242,7 +243,7 @@ Cart</a>
         <div class="footer-top">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-3 col-md-6">
+                    <div class="col-lg-4 col-md-6">
                         <h3>Quick links</h3>
                         <ul>
                             <li><a href="home.html">Home</a></li>
@@ -251,7 +252,7 @@ Cart</a>
                             <li><a href="contact-us.html">Contact</a></li>
                         </ul>
                     </div>
-                    <div class="col-lg-3 col-md-6">
+                    <div class="col-lg-4 col-md-6">
                         <h3>Quick links</h3>
                         <ul>
 
@@ -263,7 +264,7 @@ Cart</a>
                         </ul>
                     </div>
 
-                    <div class="col-lg-3 col-md-6">
+                    <!-- <div class="col-lg-3 col-md-6">
                         <h3>Subscribe to newsletter</h3>
                         <p>Join our newsletter to keep be informed about offers and news.</p>
                         <form action="">
@@ -276,8 +277,8 @@ Cart</a>
                                 </div>
                             </div>
                         </form>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
+                    </div> -->
+                    <div class="col-lg-4 col-md-6">
                         <h3>Contact us</h3>
                         <ul class="contact">
                             <li><i class='bx bx-location-plus'></i><span>Down Town Building, MG Road, Toronto, Canada,

@@ -110,7 +110,7 @@
         <div class="footer-top">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-3 col-md-6">
+                    <div class="col-lg-4 col-md-6">
                         <h3>Quick links</h3>
                         <ul>
                             <li><a href="home.html">Home</a></li>
@@ -119,7 +119,7 @@
                             <li><a href="contact-us.html">Contact</a></li>
                         </ul>
                     </div>
-                    <div class="col-lg-3 col-md-6">
+                    <div class="col-lg-4 col-md-6">
                         <h3>Quick links</h3>
                         <ul>
 
@@ -131,7 +131,7 @@
                         </ul>
                     </div>
 
-                    <div class="col-lg-3 col-md-6">
+                    <!-- <div class="col-lg-3 col-md-6">
                         <h3>Subscribe to newsletter</h3>
                         <p>Join our newsletter to keep be informed about offers and news.</p>
                         <form action="">
@@ -144,8 +144,8 @@
                                 </div>
                             </div>
                         </form>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
+                    </div> -->
+                    <div class="col-lg-4 col-md-6">
                         <h3>Contact us</h3>
                         <ul class="contact">
                             <li><i class='bx bx-location-plus'></i><span>Down Town Building, MG Road, Toronto, Canada,

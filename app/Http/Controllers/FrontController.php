@@ -61,6 +61,8 @@ class FrontController extends Controller
     }
     public function check(Request $request)//signin 
 {
+
+    
     $request->validate([
         'email'=>'required|email',  
         'password'=>'required|min:4',
@@ -68,10 +70,14 @@ class FrontController extends Controller
 
         $userInfo=$request->only('email','password');
         if(Auth::guard('customer')->attempt($userInfo)){
-            return redirect('/customer/my_home');
+            return redirect()->intended();
         }else{
             return back()->with('fail','We do not recognize your email address');
         }
+    }
+        
+
+        
         // $userInfo = Customer::where('email','=', $request->email)->first();
         // if(!$userInfo){
         // return back()->with('fail','We do not recognize your email address');
@@ -84,7 +90,7 @@ class FrontController extends Controller
         // return back()->with('fail','Incorrect password');
         // }
         // }
-}
+
 ////////////////Logout//////////////////////////
 public function logout(Request $request){
     Auth::guard('customer')->logout();
@@ -500,7 +506,15 @@ public function logout(Request $request){
     
     
     //     session()->put('rest',$rest);
-       
+    // $request->validate([
+    //     'email'=>'required|email',  
+    //     'password'=>'required|min:4',
+    //     ]);
+
+    //     $userInfo=$request->only('email','password');
+    // if(Auth::guard('customer')->attempt($userInfo)){
+    //     return redirect()->intended('/customer/checkout');
+    // }  
         
         
     return view('front.restaurant_details', ['restaurant'=>$restaurant], compact('cuisines','itemfoods'));
@@ -517,9 +531,9 @@ public function logout(Request $request){
         $restaurant=Restaurant::all();
         
         // session()->put('rest',$rest);
-       
         
         return view('front.checkout',compact('itemfoods','address'));
+       
     }
      public function order(orderStore $order,$id){
         $order=Order::findOrFail($id);
@@ -530,12 +544,12 @@ public function logout(Request $request){
          
         //  $store=session()->get('address');
         
-        $order=Order::all();
+       
         $cartsession=session()->get('cartsession');
         $request->session()->forget('cart');
-        
 
-         return view('front.order_tracking',['order'=>$order]);
+           
+         return view('front.order_tracking',['Order'=>$order],compact('order'));
          
         // $request->session()->forget('cart');
         // $request->session()->forget('store');
@@ -594,7 +608,7 @@ public function logout(Request $request){
         $address_id=0; 
          
         $address_id=isset($store['address']) ? $store['address'] : 0;
-      
+      dd($address_id);
         
         $restaurant_id=null;
         $restaurant_id=$rest['restaurant'];
@@ -602,8 +616,6 @@ public function logout(Request $request){
         // foreach($rest as $restaurant){
         //     $restaurant_id=$restaurant['id'];
         // }
-
-       
         
         $total=0;
         
@@ -611,16 +623,7 @@ public function logout(Request $request){
         foreach($cart as $cartitems){
                 $total +=($cartitems['rate'] * $cartitems['quantity']);       
         }
-        // if($address_id==0){
-        //     if('delivery_method'=='pickup'){
-        //         return redirect()->back();
-
-        //     }
-               
-            
-            
-        // }
-        
+       
         $customer=Auth::user()->id;
        $customer1=Auth::user()->mobile;
         $order->order_date=Carbon::now();
@@ -650,7 +653,7 @@ public function logout(Request $request){
             
         }    
         
-        return view('front.order');
+        return view('front.order',['Order' => $order],compact('order'));
         
 
      }
@@ -661,8 +664,8 @@ public function logout(Request $request){
      }
 
 
-     public function downloadPDF(Order $order,$id){
-         $order=Order::find($id);
+     public function downloadPDF(Order $order,Request $request){
+       
         
         $pdf = PDF::loadView('front.order_download',['Order' => $order],compact('order'))->setOptions(['defaultFont' => 'sans-serif']);
         

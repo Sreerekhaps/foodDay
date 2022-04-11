@@ -31,8 +31,10 @@
                                                             <div class="add-remove-button">
 
                                                             <div class="input-group">
-                                                            <input wire:click="removeFromCart({{ $item->id }})" type="button" value="-" class="button-minus changeQuantity" id="changeQuantity"
+                                                              
+                                                             <input wire:click="removeFromCart({{ $item->id }})" type="button" value="-" class="button-minus changeQuantity" id="changeQuantity"
                                                             data-field="quantity" />
+
                                                            
                                                             <input type="number" step="1" min="1" value="{{$this->itemQuantity($item->id)}}"
                                                             name="quantity" readonly class="quantity-field qty-input" />

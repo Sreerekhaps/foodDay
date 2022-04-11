@@ -53,7 +53,7 @@
         <div class="container">
             <div class="rest-info-wrap">
                 <div class="rest-logo" style="
-            background-image: url('{{$restaurant->banner}}');
+            background-image: url('{{$restaurant->logo}}');
           "></div>
                 <div>
                     <h3>{{$restaurant->name}}</h3>
@@ -176,8 +176,6 @@
                                 </div>
                                   
 </div>          
-
-
 </div>
 
                                 <livewire:cart />
@@ -195,7 +193,7 @@
         <div class="footer-top">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-3 col-md-6">
+                    <div class="col-lg-4 col-md-6">
                         <h3>Quick links</h3>
                         <ul>
                             <li><a href="home.html">Home</a></li>
@@ -204,7 +202,7 @@
                             <li><a href="contact-us.html">Contact</a></li>
                         </ul>
                     </div>
-                    <div class="col-lg-3 col-md-6">
+                    <div class="col-lg-4 col-md-6">
                         <h3>Quick links</h3>
                         <ul>
                             <li>
@@ -221,7 +219,7 @@
                         </ul>
                     </div>
 
-                    <div class="col-lg-3 col-md-6">
+                    <!-- <div class="col-lg-3 col-md-6">
                         <h3>Subscribe to newsletter</h3>
                         <p>
                             Join our newsletter to keep be informed about offers and news.
@@ -237,8 +235,8 @@
                                 </div>
                             </div>
                         </form>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
+                    </div> -->
+                    <div class="col-lg-4 col-md-6">
                         <h3>Contact us</h3>
                         <ul class="contact">
                             <li>

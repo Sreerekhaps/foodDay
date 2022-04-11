@@ -146,7 +146,7 @@
                                     </h4>
                                 </li>
                                 <button class="btn btn-primary mt-3 w-100"
-                                    onclick="window.location.href='/customer/checkout';">Checkout</button>
+                                    onclick="window.location.href='{{route('customer.checkout')}}';">Checkout</button>
                             </ul>
                         </div>
                     </div>

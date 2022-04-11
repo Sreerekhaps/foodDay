@@ -22,7 +22,7 @@
     <header>
         <div class="container-fluid">
             <nav id="navbar_top" class="navbar navbar-expand-lg navbar-light fixed-top">
-                <a class="navbar-brand" href="{{route('customer.my_home')}}"><img src="assets/images/logo.png" alt=""></a>
+                <a class="navbar-brand" href="{{route('customer.my_home')}}"><img src="{{asset('assets/images/logo.png')}}" alt=""></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
                     data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                     aria-label="Toggle navigation">
@@ -355,7 +355,7 @@ Cart</a>
             <div class="row align-items-center">
                 <div class="col-md-6">
                     <div class="app-image">
-                        <img src="assets/images/mobile-app.png" alt="">
+                        <img src="{{asset('assets/images/mobile-app.png')}}" alt="">
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -364,8 +364,8 @@ Cart</a>
                         <p>Now you can make food happen pretty much wherever you are. Get our app, it's the fastest way
                             to order food on the go.</p>
                         <div>
-                            <a href=""><img src="assets/images/play.png" alt=""></a>
-                            <a href=""><img src="assets/images/app-store.png" alt=""></a>
+                            <a href=""><img src="{{asset('assets/images/play.png')}}" alt=""></a>
+                            <a href=""><img src="{{asset('assets/images/app-store.png')}}" alt=""></a>
                         </div>
                     </div>
                 </div>
@@ -379,7 +379,7 @@ Cart</a>
         <div class="footer-top">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-3 col-md-6">
+                    <div class="col-lg-4 col-md-6">
                         <h3>Quick links</h3>
                         <ul>
                             <li><a href="home.html">Home</a></li>
@@ -390,7 +390,7 @@ Cart</a>
                             <li><a href="cart.html">Cart</a></li>
                         </ul>
                     </div>
-                    <div class="col-lg-3 col-md-6">
+                    <div class="col-lg-4 col-md-6">
                         <h3>Quick links</h3>
                         <ul>
                             <li><a href="enrol-your-restaurant.html">Enroll as Restaurant</a></li>
@@ -401,8 +401,8 @@ Cart</a>
                         </ul>
                     </div>
 
-                    <div class="col-lg-3 col-md-6">
-                        <h3>Subscribe to newsletter</h3>
+                    <!-- <div class="col-lg-3 col-md-6"> -->
+                        <!-- <h3>Subscribe to newsletter</h3>
                         <p>Join our newsletter to keep be informed about offers and news.</p>
                         <form action="">
                             <div class="input-group newsletter-group">
@@ -412,10 +412,10 @@ Cart</a>
                                     <button class="btn btn-danger" type="button" id="find-food-btn"><i
                                             class='bx bx-send'></i></button>
                                 </div>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
+                            </div> -->
+                        <!-- </form> -->
+                    <!-- </div> -->
+                    <div class="col-lg-4 col-md-6">
                         <h3>Contact us</h3>
                         <ul class="contact">
                             <li><i class='bx bx-location-plus'></i><span>Down Town Building, MG Road, Toronto, Canada,
