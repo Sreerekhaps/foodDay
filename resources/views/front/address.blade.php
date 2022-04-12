@@ -7,7 +7,7 @@
 // @endif
 </script>
 
-  <div class="tab-pane fade show active" id="v-pills-address"  role="tabpanel"
+  <div class="tab-pane fade show" id="v-pills-address"  role="tabpanel"
                                 aria-labelledby="v-pills-messages-tab">
 
                                

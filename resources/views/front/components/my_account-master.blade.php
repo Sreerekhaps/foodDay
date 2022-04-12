@@ -43,7 +43,7 @@
                             <a class="nav-link" href="{{route('customer.restaurant_listing')}}">Restaurants</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{route('customer.myaccount')}}">
+                            <a class="nav-link" href="{{route('customer.account')}}">
                                 <i class='bx bx-user mr-1'></i>
                                 My Account</a>
                         </li>
@@ -99,19 +99,20 @@ Cart</a>
                     <div class="my-account-menu">
                         <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist"
                             aria-orientation="vertical">
-                            <a class="nav-link " 
-                                href="/customer/orderhistory" role="tab" aria-controls="v-pills-profile"
+                            <a class="nav-link {{Request::is('customer/order_history') ? 'active' :'' ;}}" 
+                                href="{{route('customer.order_history')}}" role="tab" aria-controls="v-pills-profile"
                                 aria-selected="false"><i class='bx bxs-cart'></i> Orders</a>
+                                
                             <!-- <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-wishlist"
                                 role="tab" aria-controls="v-pills-messages" aria-selected="false"><i
                                     class='bx bxs-heart'></i> Wishlist</a> -->
-                            <a class="nav-link" href="{{route('customer.address')}}"
+                            <a class="nav-link {{Request::is('customer/address') ? 'active' :'' ;}}" href="{{route('customer.address')}}"
                                 role="tab" aria-controls="v-pills-messages" aria-selected="false"><i
                                     class='bx bxs-home-smile'></i> Addresses</a>
-                            <a class="nav-link "   href="{{route('customer.account')}}"
+                            <a class="nav-link {{Request::is('customer/account') ? 'active' :'' ;}}"    href="{{route('customer.account')}}"
                                 role="tab" aria-controls="v-pills-settings" aria-selected="false"><i
                                     class='bx bxs-user-rectangle'></i> Account Details</a>
-                            <a class="nav-link"  href="{{route('customer.show_password')}}"
+                            <a class="nav-link {{Request::is('customer/change_password') ? 'active' :'' ;}}"  href="{{route('customer.show_password')}}"
                                 role="tab" aria-controls="v-pills-settings" aria-selected="false"><i
                                     class='bx bxs-wallet-alt'></i> Change Password</a>
                             <a class="nav-link"  href="{{route('customer.logout')}}"

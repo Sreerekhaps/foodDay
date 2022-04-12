@@ -32,7 +32,7 @@ class FrontController extends Controller
     }
    
     public function signup(){
-        return view('front.signup');
+        return view('front.my_home');
     }
     public function signup_store(Request $request){
         $request->validate([
@@ -608,7 +608,7 @@ public function logout(Request $request){
         $address_id=0; 
          
         $address_id=isset($store['address']) ? $store['address'] : 0;
-      dd($address_id);
+     
         
         $restaurant_id=null;
         $restaurant_id=$rest['restaurant'];

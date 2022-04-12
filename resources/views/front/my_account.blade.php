@@ -1,7 +1,7 @@
 <x-my_account-master>
 @section('content')
 <div class="col-lg-9">
-<div class="tab-pane fade show active" id="v-pills-account" role="tabpanel"
+<div class="tab-pane fade show active"  id="v-pills-account" role="tabpanel"
                                 aria-labelledby="v-pills-settings-tab">
                                 <div class="my-account-content">
                                     <h4>Account Details</h4>

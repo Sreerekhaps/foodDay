@@ -36,7 +36,7 @@
                     
 
                         <li class="nav-item">
-                            <a class="nav-link" href="{{route('customer.myaccount')}}">My Account</a>
+                            <a class="nav-link" href="{{route('customer.account')}}">My Account</a>
                         </li>
 
                         
@@ -60,13 +60,15 @@
                     <!-- <span class="rest-unserviceable">Restaurant Unserviceable</span> -->
                     
                     <div class="cuisines">
-                                <span>
+                                
                                 @foreach($cuisines as $cuisine)
-                                 @if($restaurant->cuisines->contains($cuisine->id))
-                                  {{$cuisine->name}},
+                                 @if($restaurant->cuisines->contains($cuisine->id)) 
+                                 <span>                               
+                                  {{$cuisine->name}}
+                                  </span>
                                  @endif               
                                 @endforeach 
-                                </span>
+                                
                             </div>
                     <p><i class="bx bx-location-plus"></i> {{$restaurant->address}}</p>
                 </div>

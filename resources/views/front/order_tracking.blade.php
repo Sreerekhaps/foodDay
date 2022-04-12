@@ -36,7 +36,7 @@
                         </li>
                        
                         <li class="nav-item">
-                            <a class="nav-link" href="{{route('customer.myaccount')}}">
+                            <a class="nav-link" href="{{route('customer.account')}}">
                                 <i class='bx bx-user mr-1'></i>
                                 My Account</a>
                         </li>
@@ -68,37 +68,39 @@
                        
 
 
-                          @if(session('address'))  
-
-                            <p class="mb-0">Your order has been confirmed. The restaurant will deliver your order by
+                           
+                     @if(($order->address_id) !=0)
+                           
+                                <p class="mb-0">Your order has been confirmed. The restaurant will deliver your order by
                                 {{$order->created_at->format('H:i:s')}}.</p>
                             <span>For any questions, reach out to us on hello@foodday.com</span>
                             <h6 class="mt-3">Delivery Address</h6>
                             <div class="card address-card">
                                 <div class="card-body deliverable">
-                                @if(session('address'))
+                              
                               
                                     <div class="delivery">
                                         <i class="bx bxs-check-circle"></i>
                                        
-                                        <h5 class="card-title">{{ session('address')['home'] }}</h5>
+                                        <h5 class="card-title">{{ $order->address->home }}</h5>
                                     </div>
-                                    <h6>{{Auth::user()->first_name}}, {{Auth::user()->mobile}},</h6>
+                                    <h6>{{Auth::user()->first_name}}, {{Auth::user()->mobile}}</h6>
                                     <p class="card-text">
-                                    {{ session('address')['location'] }}, {{ session('address')['house_name'] }}, {{ session('address')['area'] }},{{ session('address')['city'] }}, 
-                                    {{ session('address')['pincode'] }}.
+                                    {{ $order->address->location }}, {{ $order->address->house_name }}, {{ $order->address->area }},{{ $order->address->city }}, 
+                                    {{ $order->address->pincode }}.
                                     </p>
                                    
-                                @endif
+                                
                                 </div>      
                             </div>
-                           @elseif(!session('address'))
-                          
-                            <p>Thanks for shopping! Your order number is <strong>#{{$order->id}}</strong>.
-                           Pickup the order from the <strong>{{$order->restaurant->name}}</strong> by
-                           <strong>{{ $order->order_date }}</strong>
-                           </p>
-                            @endif
+                    @else
+                                
+                                
+                                    <p>Thanks for shopping! Your order number is <strong>#{{$order->id}}</strong>.
+                                Pickup the order from the <strong>{{$order->restaurant->name}}</strong> by
+                                <strong>{{ $order->order_date }}</strong>
+                                </p>
+                    @endif
                         </div>
 
                 

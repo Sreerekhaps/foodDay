@@ -114,6 +114,7 @@ Route::name('admin.')->prefix('admin')->namespace('Admin')->group(function (){
         Route::get('/logout', [App\Http\Controllers\HomeController::class, 'perform'])->name('logout.perform');
         
     });
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 Route::get('/front', [App\Http\Controllers\FrontController::class, 'index'])->name('index');
 Route::prefix('customer')->name('customer.')->group(function (){

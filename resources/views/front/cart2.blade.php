@@ -45,7 +45,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="{{route('customer.myaccount')}}">
+                            <a class="nav-link" href="{{route('customer.account')}}">
                                 <i class='bx bx-user mr-1'></i>
                                 My Account</a>
                         </li>

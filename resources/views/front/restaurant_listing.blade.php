@@ -43,7 +43,7 @@
                         </li> -->
 
                         <li class="nav-item">
-                            <a class="nav-link" href="{{route('customer.myaccount')}}">
+                            <a class="nav-link" href="{{route('customer.account')}}">
                                 <i class='bx bx-user mr-1'></i>
                                 My Account</a>
                         </li>
@@ -68,8 +68,14 @@
                 <div class="col-lg-8 col-xl-6">
                     <form action="{{route('customer.search')}}" method="GET">
                         <div class="input-group search-location-group">
-                            <input type="text" name="location" class="form-control" placeholder="Enter your delivery location"
+                        @if (app('request')->has('location'))
+                            <input type="text" name="location" class="form-control" value="{{ app('request')->input('location')}}"placeholder="Enter your delivery location"
                                >
+                               @else
+                               <input type="text" name="location" class="form-control" placeholder="Enter your delivery location"
+                               >
+                               @endif
+
                             <a href="" class="btn-locate"><i class='bx bx-target-lock'></i> Locate Me</a>
                             <!-- <button class="btn-locate"><i class='bx bx-target-lock'></i> Locate Me</button> -->
                             <div class="input-group-append btn-find-food">
@@ -82,14 +88,16 @@
 
             <!-- location popup -->
 
-            <!-- <div class="location-popup">
-                <h5 class="mb-3">Add your delivery address</h5>
-                <p class="mb-4">To find out if we can delivery at your location, please enter your address
+            <!-- @unless(app('request')->has('location'))
+            <div class="location-popup" id="location-popup">
+                <h5 class="mb-3">Add your delivery location</h5>
+                <p class="mb-4">Please set a more precise location to see more relevant options.
                 </p>
                 <form action="">
-                    <button class="btn btn-light">Set Location</button>
+                <button class="btn btn-light" onclick="locationPopup()">Set Location</button>
                 </form>
-            </div> -->
+            </div>
+            @endunless -->
 
             <!-- location popup end -->
 
@@ -122,13 +130,15 @@
                         <div class="card-body">
                             <h5 class="card-title">{{$rest->name}}</h5>
                             <div class="cuisines">
-                                <span>{{$rest->location}}</span><span>
+                                <span>{{$rest->location}}</span>
                                 @foreach($cuisines as $cuisine)
                                  @if($rest->cuisines->contains($cuisine->id))
-                                  {{$cuisine->name}},
+                                 <span>                               
+                                  {{$cuisine->name}}
+                                  </span>
                                  @endif               
                                 @endforeach 
-                                </span>
+                                
                             </div>
                             <p class="location"><i class="bx bx-location-plus"></i> {{$rest->address}}</p>
                             <div class="details">
@@ -297,6 +307,22 @@
         </script>
     <script src="{{asset('assets/js/custom.js')}}"></script>
     @livewireScripts
+
+    <!-- <script type="text/javascript">
+
+
+
+function locationPopup() {
+
+document.getElementById('location').focus();
+
+document.getElementById('location-popup').style.display = "none";
+
+}
+
+
+
+</script> -->
 </body>
 
 </html>

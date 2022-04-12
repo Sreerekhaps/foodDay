@@ -2,7 +2,7 @@
     @section('order_history')
     <div class="col-lg-9">
 
-    <div class="tab-pane fade show active" id="v-pills-orders" role="tabpanel"
+    <div class="tab-pane fade show " id="v-pills-orders" role="tabpanel"
                                 aria-labelledby="v-pills-profile-tab">
                                 <div class="my-account-content">
                                     <h4>Order History</h4>

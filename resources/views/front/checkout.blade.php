@@ -43,7 +43,7 @@
                        
 
                         <li class="nav-item">
-                            <a class="nav-link" href="{{route('customer.myaccount')}}">
+                            <a class="nav-link" href="{{route('customer.account')}}">
                                 <i class='bx bx-user mr-1'></i>
                                 My Account</a>
                         </li>
@@ -107,11 +107,12 @@
                                           
                                         </p>
                                         <button class="btn btn-primary btn-sm"><a href="{{route('customer.addressStore',$add->id)}} "style="color:white">Deliver here</a></button>
-                                        <button type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal"
-                                            data-target="#exampleModal">
+                                        
+                                        <button type="button" class="btn btn-outline-primary btn-sm" id="edit-item" data-toggle="modal"
+                                            data-target="#exampleModal{{$add->id}}">
                                             Edit</button>
                                         <button class="btn btn-outline-primary btn-sm">
-                                            <a href="customer/AddressDel/{{$add->id}}"> Delete</a></button>
+                                            <a href="{{route('customer.address_destroy', $add->id)}}"> Delete</a></button>
                                     </div>
                                 </div>
                             </div>
@@ -120,8 +121,8 @@
                         </div>
 
                         <button type="button" class="btn btn-outline-primary mb-lg-auto mb-4" data-toggle="modal"
-                            data-target="#exampleModal">Add New Address</button>
-
+                        data-target="#exampleModal">Add New Address</button>
+                                     
                        </div>
                       
                     @if('delvery_method' !='delivery')
@@ -234,7 +235,7 @@
 
 
     <!-- Address Modal -->
-     <div class="modal fade  address-model" id="exampleModal" tabindex="-1" role="dialog"
+    <div class="modal fade address-model" id="exampleModal" tabindex="-1" role="dialog"
                     aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
@@ -243,66 +244,166 @@
                                     <i class="bx bx-x btn-close"></i>
                                 </button>
                                 <h5 class="mb-4">Add Delivery Address</h5>
-
-
-                                <form method="post" action="" enctype="multipart/form-data">
+                                @section('content')
+                                @if(Session::has('success'))
+                                    <div class="alert alert-success">
+                                        {{ Session::get('success') }}
+                                        @php
+                                            Session::forget('success');
+                                        @endphp
+                                    </div>
+                                    @endif
+                                <form method="post" action="{{route('customer.address_store')}}" enctype="multipart/form-data">
+                                    @csrf
                                     <div class="form-row">
-                                        @csrf 
-                                       @if(Session::get('success'))
-                                          <div class="alert alert-success"> 
-                                             {{ Session::get('success') }} 
-                                           </div>
-                                        @endif
 
                                         <div class="form-group col-lg-12">
                                             <input type="text" name="location" class="form-control" placeholder="Location">
+                                            @if ($errors->has('location'))
+                                                <span class="text-danger">{{ $errors->first('location') }}</span>
+                                            @endif
+                                        </div>
+                                        <div class="form-group col-lg-12">
+                                            <input type="text" name="house_name"class="form-control" placeholder="House Name/Flat No/Building">
+                                            @if ($errors->has('house_name'))
+                                                <span class="text-danger">{{ $errors->first('house_name') }}</span>
+                                            @endif
+                                        </div>
+                                        <div class="form-group col-lg-6">
+                                            <input type="text" name="area" class="form-control" placeholder="Area/Street">
+                                            @if ($errors->has('area'))
+                                                <span class="text-danger">{{ $errors->first('area') }}</span>
+                                            @endif
+                                        </div>
+                                        <div class="form-group col-lg-6">
+                                            <input type="text" name="city" class="form-control" placeholder="City">
+                                            @if ($errors->has('city'))
+                                                <span class="text-danger">{{ $errors->first('city') }}</span>
+                                            @endif
+                                        </div>
+                                        <div class="form-group col-lg-12">
+                                            <input type="text" name="landmark" class="form-control" placeholder="Landmark">
+                                            @if ($errors->has('landmark'))
+                                                <span class="text-danger">{{ $errors->first('landmark') }}</span>
+                                            @endif
+                                        </div>
+                                        <div class="form-group col-lg-6">
+                                            <input type="text" name="pincode" class="form-control" placeholder="Pincode">
+                                            @if ($errors->has('pincode'))
+                                                <span class="text-danger">{{ $errors->first('pincode') }}</span>
+                                            @endif
+                                        </div>
+                                        <div class="form-group col-lg-6">
+                                            <select name="home" id="home" class="form-control" >
+
+                                                <option value="0" disabled selected >Address Type</option>
+
+                                                <option value="Home" >Home</option>
+
+                                                <option value="Office" >Office</option>
+
+                                                <option value="Other" >Other</option>
+
+                                            </select>                                     
+                                            @if ($errors->has('home'))
+                                                <span class="text-danger">{{ $errors->first('home') }}</span>
+                                            @endif
+                                        </div>
+                                        <div class="form-group col-lg-12">
+                                            <input type="text" name="note_a_driver" id="note_a_driver" class="form-control" placeholder="Note for Driver">
+                                            @if ($errors->has('note_a_driver'))
+                                                <span class="text-danger">{{ $errors->first('note_a_driver') }}</span>
+                                            @endif
+                                        </div>
+                                        
+
+                                        <div class="form-group col-md-6 mb-md-0 d-none d-md-block">
+                                            <button type="button" class="btn btn-outline-primary w-100"
+                                                data-dismiss="modal" aria-label="Close">Close</button>
+                                        </div>
+                                        <div class="form-group col-md-6 mb-0">
+                                            <button class="btn btn-secondary w-100">Save changes</button>
+                                        </div>
+
+                                    </div>
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                 <!-- Address EDIT Modal -->
+                 @foreach($address as $value)
+                <div class="modal fade  " id="exampleModal{{$value->id}}" tabindex="-1" role="dialog"
+                    aria-labelledby="edit-modal-label" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <i class="bx bx-x btn-close"></i>
+                                </button>
+                                <h5 class="mb-4">Edit Delivery Address</h5>
+
+
+                                <form method="post" action="{{route('customer.update_address',$value->id)}}" enctype="multipart/form-data">
+                                    <div class="form-row">
+                                        @csrf 
+                                          @method('PATCH')
+                                       <!-- @if(Session::get('success'))
+                                          <div class="alert alert-success"> 
+                                             {{ Session::get('success') }} 
+                                           </div>
+                                        @endif -->
+
+                                        <div class="form-group col-lg-12">
+                                            <input type="text" name="location" class="form-control" id="location" placeholder="Location" value="{{$value->location}}">
                                                @error("location")
                                                     <p style="color:red">{{$errors->first("location")}}
                                                 @enderror
                                         </div>
                                          <div class="form-group col-lg-12">
-                                            <input type="text" name="house_name" class="form-control" placeholder="House Name / Flat / Building"> 
+                                            <input type="text" name="house_name" class="form-control" placeholder="House Name / Flat / Building" value="{{$value->house_name}}"> 
                                             @error("house_name")
                                                     <p style="color:red">{{$errors->first("house_name")}}
                                                 @enderror
                                         </div>
                                         <div class="form-group col-lg-6">
-                                            <input type="text" name="area" class="form-control" placeholder="Area / Street">
+                                            <input type="text" name="area" class="form-control" placeholder="Area / Street" value="{{$value->area}}">
                                             @error("area")
                                                     <p style="color:red">{{$errors->first("area")}}
                                                 @enderror
                                         </div>
                                         <div class="form-group col-lg-6">
-                                            <input type="text" name="city" class="form-control" placeholder="City">
+                                            <input type="text" name="city" class="form-control" placeholder="City" value="{{$value->city}}">
                                             @error("city")
                                                     <p style="color:red">{{$errors->first("city")}}
                                                 @enderror
                                         </div>
                                           <div class="form-group col-lg-12">
-                                            <input type="text" name="landmark" class="form-control" placeholder="Landmark">
+                                            <input type="text" name="landmark" class="form-control" placeholder="Landmark" value="{{$value->landmark}}">
                                         </div>
                                        
                                         <div class="form-group col-lg-6">
-                                            <input type="text" name="pincode" class="form-control" placeholder="Pincode">
+                                            <input type="text" name="pincode" class="form-control" placeholder="Pincode" value="{{$value->pincode}}">
                                             @error("pincode")
                                                     <p style="color:red">{{$errors->first("pincode")}}
                                                 @enderror
                                         </div>
                                         <div class="form-group col-lg-6">
-                                            <select name="home" id="home" class="form-control">
+                                            <select name="home" id="home" class="form-control" >
 
-                                                <option value="0" disabled selected>Address Type</option>
+                                                <option value="0" disabled selected >Address Type</option>
 
-                                                <option value="Home">Home</option>
+                                                <option value="Home" {{ $value->home === 'Home' ? 'selected' : '' }}>Home</option>
 
-                                                <option value="Office">Office</option>
+                                                <option value="Office"  {{ $value->home === 'Office' ? 'selected' : '' }}>Office</option>
 
-                                                <option value="Other">Other</option>
+                                                <option value="Other"  {{ $value->home === 'Other' ? 'selected' : '' }}>Other</option>
 
                                             </select>                                        </div>
                                         <div class="form-group col-lg-12">
-                                            <textarea class="form-control" name="note" id="exampleFormControlTextarea1" rows="3"
-                                                placeholder="Note for Driver"></textarea>
+                                            <textarea class="form-control" name="note_a_driver" id="note_A_driver" rows="3"
+                                                placeholder="Note for Driver" value="{{$value->note}}">{{$value->note_a_driver}}</textarea>
                                         </div>
 
                                         <div class="form-group col-md-6 mb-md-0 d-none d-md-block">
@@ -314,18 +415,16 @@
                                         </div>
 
                                     </div>
-
-
-
-                            
                                 </form>
                             </div>
 
                         </div>
                     </div>
                 </div>
+                @endforeach
+        <!-- Address Modal End -->
 
-    <!-- Address Modal End -->
+                <!-- Address Modal End -->
 
 
    <!-- footer -->
