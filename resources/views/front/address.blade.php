@@ -1,12 +1,6 @@
 <x-my_account-master>
     @section('address')
     <div class="col-lg-9">
-    <script type="text/javascript">
-// @if (count($errors) > 0)
-//     $('# address-model').modal('show');
-// @endif
-</script>
-
   <div class="tab-pane fade show" id="v-pills-address"  role="tabpanel"
                                 aria-labelledby="v-pills-messages-tab">
 
@@ -18,6 +12,7 @@
 
                                     <div class="row">
                                     @foreach($address as $value)
+                                    @if(Auth::user()->id==$value->customer_id)
                                         <div class="col-md-6">
                                             <div class="card address-card">
                                                 <div class="card-body">
@@ -32,20 +27,27 @@
                                                         <i class='bx bx-edit'></i>Edit</button>
                                                     <button class="btn-link"><i class='bx bx-trash'></i>
                                                     
-                                                    <a href="{{route('customer.address_destroy', $value->id)}}">
+                                                    <a href="{{route('customer.address_destroy', $value->id)}}" style="color:#CC0000">
                                                     Delete</a></button>
-                                                    <button class="btn-link"><i class='bx bx-location-plus'></i>Set as
-                                                        default</button>
+
+                                                    @if($value->default==0 )
+                                                    <button class="btn-link"><i class='bx bx-location-plus'></i><a href="{{route('customer.default', $value->id)}}" style="color:#CC0000">Set as
+                                                        default</a></button>
+                                                    @else   
+                                                    <button class="btn-link"><i class='bx bx-location-plus'></i><a href="{{route('customer.removedefault', $value->id)}}" style="color:#CC0000">Remove
+                                                        default</a></button>
+                                                    @endif     
 
                                                     <!-- <a href="#" class=""><i class='bx bx-trash' ></i>Delete</a> -->
                                                 </div>
                                             </div>
                                         </div>
+                                        @endif
                                         @endforeach
 
                                     </div>
 
-                        <button type="button" class="btn btn-primary" data-toggle="modal"
+                        <button type="button" class="btn btn-outline-primary mb-lg-auto mb-4" data-toggle="modal"
                                         data-target="#exampleModal">Add Address</button>
                                 </div>
 
@@ -68,11 +70,11 @@
                                     <div class="form-row">
                                         @csrf 
                                           @method('PATCH')
-                                       <!-- @if(Session::get('success'))
+                                       @if(Session::get('success'))
                                           <div class="alert alert-success"> 
                                              {{ Session::get('success') }} 
                                            </div>
-                                        @endif -->
+                                        @endif
 
                                         <div class="form-group col-lg-12">
                                             <input type="text" name="location" class="form-control" id="location" placeholder="Location" value="{{$value->location}}">
@@ -100,6 +102,9 @@
                                         </div>
                                           <div class="form-group col-lg-12">
                                             <input type="text" name="landmark" class="form-control" placeholder="Landmark" value="{{$value->landmark}}">
+                                            @error("landmark")
+                                                    <p style="color:red">{{$errors->first("landmark")}}
+                                                @enderror
                                         </div>
                                        
                                         <div class="form-group col-lg-6">
@@ -121,7 +126,7 @@
 
                                             </select>                                        </div>
                                         <div class="form-group col-lg-12">
-                                            <textarea class="form-control" name="note_a_driver" id="note_A_driver" rows="3"
+                                            <textarea class="form-control" name="note_a_driver" id="note_A_driver" rows="3" cols="6"
                                                 placeholder="Note for Driver" value="{{$value->note}}">{{$value->note_a_driver}}</textarea>
                                         </div>
 
@@ -144,19 +149,22 @@
         <!-- Address Modal End -->
 </div>               
     @endsection
-
-      @section('editJs')
-    @parent
-    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@2.8.2/dist/alpine.min.js"></script>
-
-     <script>
-        $("document").ready(function(){
-          setTimeout(function(){
-            $("div.alert").remove();
-         }, 3000 ); // 5 secs
-
-       });
-    </script>
-  
+   
+    @section('javascript')
+@parent
+<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@2.8.2/dist/alpine.min.js"></script>
+@if($errors->any())
+       <script type="text/javascript">  
+            $(document).ready(function(){ 
+            $('#exampleModal').modal('show');   
+            });   
+     </script>              
+  @endif
+ 
+</script>
 @stop
+
+
+
+
 </x-my_account-master>

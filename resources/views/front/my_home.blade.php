@@ -34,9 +34,9 @@
                         <li class="nav-item active">
                             <a class="nav-link" href="{{route('customer.my_home')}}">Home <span class="sr-only">(current)</span></a>
                         </li>
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                             <a class="nav-link" href="{{route('customer.restaurant_listing')}}">Restaurants</a>
-                        </li>
+                        </li> -->
 
                         <li class="nav-item">
                             <a class="nav-link" href="{{route('customer.account')}}">
@@ -382,12 +382,11 @@ Cart</a>
                     <div class="col-lg-4 col-md-6">
                         <h3>Quick links</h3>
                         <ul>
-                            <li><a href="home.html">Home</a></li>
-                            <li><a href="restaurant-listing.html">Restaurants</a></li>
-                            <li><a href="about-us.html">About us</a></li>
-                            <li><a href="contact-us.html">Contact</a></li>
-                            <li><a href="my-account.html">My Account</a></li>
-                            <li><a href="cart.html">Cart</a></li>
+                            <li><a href="{{route('index')}}">Home</a></li>
+                            <li><a href="{{route('customer.restaurant_listing')}}">Restaurants</a></li>
+                            <li><a href="{{route('customer.aboutus')}}">About us</a></li>
+                            <li><a href="{{route('customer.contact')}}">Contact</a></li>
+                           
                         </ul>
                     </div>
                     <div class="col-lg-4 col-md-6">

@@ -24,7 +24,7 @@
 
         <h2>Order #{{$order->id}}</h2>
         <p>{{$order->order_date}}</p>
-        <table class="table table-bordered" style="width:50%">
+        <table class="table table-bordered mt-4" style="width:50%">
         <tr>
                 <td>Order status</td>
                 <td>{{ $order->order_status }}</td>

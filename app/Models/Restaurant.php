@@ -50,4 +50,7 @@ class Restaurant extends Model
             public function itemfoods(){
                 return $this->belongsToMany(Itemfood::class,'itemfood_restaurants','restaurant_id','itemfood_id');
             }
+            public function modifiers(){
+                return $this->belongsToMany(Modifier::class,'itemfood_modifier');
+            }
 }

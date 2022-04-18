@@ -89,6 +89,11 @@ Cart</a>
                 <h1 class="text-center">Sign in to FoodDay</h1>
                 <form action="{{route('customer.check')}}" method="post">
                 @csrf
+                @if(Session::get('fail'))
+                                          <div class="alert alert-danger" role="alert"> 
+                                             {{ Session::get('fail') }} 
+                                           </div>
+                                        @endif
                
                     <div class="form-group">
                         <input type="text" name="email" class="form-control" placeholder="Email">
@@ -102,11 +107,7 @@ Cart</a>
                             <p style="color:red">{{$errors->first("password")}}
                          @enderror
                     </div>
-                    @if(Session::get('fail'))
-                    <div class="alert alert-danger" role="alert"> 
-                     {{ Session::get('fail') }} 
-                    </div>
-                    @endif
+                  
                     <div class="form-group">
                         <a href="{{route('customer.showforgotForm')}}">Forgot password?</a>
                     </div>
@@ -135,10 +136,11 @@ Cart</a>
                     <div class="col-lg-4 col-md-6">
                         <h3>Quick links</h3>
                         <ul>
-                            <li><a href="home.html">Home</a></li>
-                            <li><a href="restaurant-listing.html">Restaurants</a></li>
-                            <li><a href="about-us.html">About us</a></li>
-                            <li><a href="contact-us.html">Contact</a></li>
+                            <li><a href="{{route('index')}}">Home</a></li>
+                            <li><a href="{{route('customer.restaurant_listing')}}">Restaurants</a></li>
+                            <li><a href="{{route('customer.aboutus')}}">About us</a></li>
+                            <li><a href="{{route('customer.contact')}}">Contact</a></li>
+                           
                         </ul>
                     </div>
                     <div class="col-lg-4 col-md-6">

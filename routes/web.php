@@ -125,6 +125,10 @@ Route::prefix('customer')->name('customer.')->group(function (){
         Route::get('/cart2',[FrontController::class,'cart2'])->name('cart2');
         Route::get('/emptycart',[FrontController::class,'emptycart'])->name('emptycart');
 
+        Route::get('/aboutus',[FrontController::class,'aboutus'])->name('aboutus');
+        Route::get('/contact',[FrontController::class,'contact'])->name('contact');
+
+
 
     Route::middleware(['guest:customer'])->group(function (){
         
@@ -153,6 +157,10 @@ Route::prefix('customer')->name('customer.')->group(function (){
         Route::get('/edit_address/{id}', [App\Http\Controllers\FrontController::class, 'edit_address'])->name('edit_address');
         Route::get('/address/{id}', [App\Http\Controllers\FrontController::class, 'address_destroy'])->name('address_destroy');
         Route::patch('/update_address/{id}', [App\Http\Controllers\FrontController::class, 'update_address'])->name('update_address');
+        Route::get('/default/{id}', [App\Http\Controllers\FrontController::class, 'default'])->name('default');
+        Route::get('/removedefault/{id}', [App\Http\Controllers\FrontController::class, 'removedefault'])->name('removedefault');
+
+
         Route::get('/show_password', [App\Http\Controllers\FrontController::class, 'show_password'])->name('show_password');
         Route::post('/changePassword',[App\Http\Controllers\FrontController::class, 'change_password'])->name('change_password');
         Route::get('/logoutuser', [App\Http\Controllers\FrontController::class, 'logout'])->name('logout');

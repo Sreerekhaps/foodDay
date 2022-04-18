@@ -33,7 +33,7 @@ class Cart extends Component
                     unset($cartsession[$id]);
                 } 
        
-        dd($cartsession);
+        
         
         if(isset($cart[$id])) {
             $cart[$id]['quantity']++;

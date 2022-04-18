@@ -68,11 +68,11 @@
                        
 
 
+                    @if($order->order_type == "delivery")      
+                     
                            
-                     @if(($order->address_id) !=0)
-                           
-                                <p class="mb-0">Your order has been confirmed. The restaurant will deliver your order by
-                                {{$order->created_at->format('H:i:s')}}.</p>
+                                <p class="mb-0">Thanks for shopping! Your order number is<strong>#{{$order->id}}</strong>. The restaurant will deliver your order by
+                                {{$order->created_at->format('H:m')}}PM.</p>
                             <span>For any questions, reach out to us on hello@foodday.com</span>
                             <h6 class="mt-3">Delivery Address</h6>
                             <div class="card address-card">
@@ -93,14 +93,17 @@
                                 
                                 </div>      
                             </div>
-                    @else
-                                
+                     @else
+                     
+                          
                                 
                                     <p>Thanks for shopping! Your order number is <strong>#{{$order->id}}</strong>.
                                 Pickup the order from the <strong>{{$order->restaurant->name}}</strong> by
-                                <strong>{{ $order->order_date }}</strong>
+                                <strong>{{ $order->created_at->format('H:m:i') }}</strong>
+                            
                                 </p>
-                    @endif
+                    @endif            
+                   
                         </div>
 
                 
@@ -112,27 +115,33 @@
                         </div>
 
                         <ul class="timeline">
-                            <li class="previous">
-                                <div class="timeline-item">
-                                    <h6>Order received</h6>
-                                   
-                                </div>
-                            </li>
-                            <li class="previous">
-                                <div class="timeline-item">
-                                    <h6>Order Packed</h6>
-                                    
-                                </div>
-                            </li>
                             <li class="active">
                                 <div class="timeline-item">
-                                    <h6>Order Shipped</h6>
+                                    <h6>ORDER PLACED</h6>
                                    
                                 </div>
                             </li>
                             <li class="next">
                                 <div class="timeline-item">
-                                    <h6>Order delivered</h6>
+                                    <h6>ORDER ACCEPTED</h6>
+                                    
+                                </div>
+                            </li>
+                            <li class="next">
+                                <div class="timeline-item">
+                                    <h6>ORDER ACCEPTED</h6>
+                                   
+                                </div>
+                            </li>
+                            <li class="next">
+                                <div class="timeline-item">
+                                    <h6>ORDER READY</h6>
+                                   
+                                </div>
+                            </li>
+                            <li class="next">
+                                <div class="timeline-item">
+                                    <h6>ORDER PICKEDUP</h6>
                                    
                                 </div>
                             </li>
@@ -208,7 +217,9 @@
                                       <h5><span>SubTotal</span> <span class="float-right">${{$order->grand_total}}</span></h5>
                                   </li>
                                   <li>
-                                      <p><span>Delivery fre</span> <span class="float-right">$00.00</span></p>
+                                      @if($order->order_type == "delivery")
+                                      <p><span>Delivery fee</span> <span class="float-right">$00.00</span></p>
+                                      @endif
                                   </li>
                                   <li>
                                       <p><span>Tax</span> <span class="float-right">$00.00</span></p>
@@ -247,10 +258,11 @@
                     <div class="col-lg-4 col-md-6">
                         <h3>Quick links</h3>
                         <ul>
-                            <li><a href="home.html">Home</a></li>
-                            <li><a href="restaurant-listing.html">Restaurants</a></li>
-                            <li><a href="about-us.html">About us</a></li>
-                            <li><a href="contact-us.html">Contact</a></li>
+                            <li><a href="{{route('index')}}">Home</a></li>
+                            <li><a href="{{route('customer.restaurant_listing')}}">Restaurants</a></li>
+                            <li><a href="{{route('customer.aboutus')}}">About us</a></li>
+                            <li><a href="{{route('customer.contact')}}">Contact</a></li>
+                           
                         </ul>
                     </div>
                     <div class="col-lg-4 col-md-6">

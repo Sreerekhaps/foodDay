@@ -39,9 +39,9 @@
                         <!-- <li class="nav-item">
                             <a class="nav-link" href="login.html">Sign In</a>
                         </li> -->
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                             <a class="nav-link" href="{{route('customer.restaurant_listing')}}">Restaurants</a>
-                        </li>
+                        </li> -->
                         <li class="nav-item">
                             <a class="nav-link" href="{{route('customer.account')}}">
                                 <i class='bx bx-user mr-1'></i>
@@ -99,9 +99,9 @@ Cart</a>
                     <div class="my-account-menu">
                         <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist"
                             aria-orientation="vertical">
-                            <a class="nav-link {{Request::is('customer/order_history') ? 'active' :'' ;}}" 
+                            <a class="nav-link {{Request::is('customer/orderhistory') ? 'active' :'' ;}}" 
                                 href="{{route('customer.order_history')}}" role="tab" aria-controls="v-pills-profile"
-                                aria-selected="false"><i class='bx bxs-cart'></i> Orders</a>
+                                aria-selected="false"><i class='bx bxs-cart'></i> Order History</a>
                                 
                             <!-- <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-wishlist"
                                 role="tab" aria-controls="v-pills-messages" aria-selected="false"><i
@@ -112,7 +112,7 @@ Cart</a>
                             <a class="nav-link {{Request::is('customer/account') ? 'active' :'' ;}}"    href="{{route('customer.account')}}"
                                 role="tab" aria-controls="v-pills-settings" aria-selected="false"><i
                                     class='bx bxs-user-rectangle'></i> Account Details</a>
-                            <a class="nav-link {{Request::is('customer/change_password') ? 'active' :'' ;}}"  href="{{route('customer.show_password')}}"
+                            <a class="nav-link {{Request::is('customer/show_password') ? 'active' :'' ;}}"  href="{{route('customer.show_password')}}"
                                 role="tab" aria-controls="v-pills-settings" aria-selected="false"><i
                                     class='bx bxs-wallet-alt'></i> Change Password</a>
                             <a class="nav-link"  href="{{route('customer.logout')}}"
@@ -207,7 +207,8 @@ Cart</a>
                                             @endif
                                         </div>
                                         <div class="form-group col-lg-12">
-                                            <input type="text" name="note_a_driver" id="note_a_driver" class="form-control" placeholder="Note for Driver">
+                                            <textarea class="form-control" name="note_a_driver" id="note_A_driver" rows="3" 
+                                                placeholder="Note for Driver"></textarea>
                                             @if ($errors->has('note_a_driver'))
                                                 <span class="text-danger">{{ $errors->first('note_a_driver') }}</span>
                                             @endif
@@ -247,10 +248,11 @@ Cart</a>
                     <div class="col-lg-4 col-md-6">
                         <h3>Quick links</h3>
                         <ul>
-                            <li><a href="home.html">Home</a></li>
-                            <li><a href="restaurant-listing.html">Restaurants</a></li>
-                            <li><a href="about-us.html">About us</a></li>
-                            <li><a href="contact-us.html">Contact</a></li>
+                            <li><a href="{{route('index')}}">Home</a></li>
+                            <li><a href="{{route('customer.restaurant_listing')}}">Restaurants</a></li>
+                            <li><a href="{{route('customer.aboutus')}}">About us</a></li>
+                            <li><a href="{{route('customer.contact')}}">Contact</a></li>
+                           
                         </ul>
                     </div>
                     <div class="col-lg-4 col-md-6">

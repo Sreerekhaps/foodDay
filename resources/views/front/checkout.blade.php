@@ -36,9 +36,9 @@
                         <li class="nav-item active">
                             <a class="nav-link" href="home.html">Home <span class="sr-only">(current)</span></a>
                         </li>
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                             <a class="nav-link" href="{{route('customer.restaurant_listing')}}">Restaurants</a>
-                        </li>
+                        </li> -->
 
                        
 
@@ -94,11 +94,17 @@
                         <h6 class="checkout-title">Delivery Address</h6>
                           <div class="row">
                             @foreach($address as $add)
+                           
+                           
                             <div class="col-xl-6">
                                 <div class="card address-card">
                                     <div class="card-body deliverable">
                                         <div class="delivery">
+                                        @if(session('store')==$add->id)
                                             <i class='bx bxs-check-circle'></i>
+                                          
+                                        @endif
+                                        
                                             <h5 class="card-title">{{$add->home}}</h5>
                                         </div>
                                         <h6>{{$add->location}}, {{$add->pincode}}</h6>
@@ -116,6 +122,25 @@
                                     </div>
                                 </div>
                             </div>
+                          
+                            <!-- <div class="col-xl-6">
+                                <div class="card address-card">
+                                    <div class="card-body unavailable">
+                                        <div class="delivery ">
+                                            <i class='bx bxs-x-circle'></i>
+                                            <h5 class="card-title">{{$add->home}}</h5>
+                                        </div>
+                                        <h6>{{$add->location}}, {{$add->pincode}}</h6>
+                                        <p class="card-text">
+                                           {{$add->landmark}}
+                                          
+                                        </p>
+                                        <button class="btn btn-outline-primary btn-sm">Does not deliver here</button>
+                                    </div>
+                                </div>
+                            </div> -->
+                           
+                            
                     @endforeach
                            
                         </div>
@@ -436,10 +461,11 @@
                     <div class="col-lg-4 col-md-6">
                         <h3>Quick links</h3>
                         <ul>
-                            <li><a href="home.html">Home</a></li>
-                            <li><a href="restaurant-listing.html">Restaurants</a></li>
-                            <li><a href="about-us.html">About us</a></li>
-                            <li><a href="contact-us.html">Contact</a></li>
+                            <li><a href="{{route('index')}}">Home</a></li>
+                            <li><a href="{{route('customer.restaurant_listing')}}">Restaurants</a></li>
+                            <li><a href="{{route('customer.aboutus')}}">About us</a></li>
+                            <li><a href="{{route('customer.contact')}}">Contact</a></li>
+                           
                         </ul>
                     </div>
                     <div class="col-lg-4 col-md-6">

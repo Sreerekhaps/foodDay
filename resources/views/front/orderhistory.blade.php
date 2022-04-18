@@ -1,13 +1,29 @@
 <x-my_account-master>
+
     @section('order_history')
     <div class="col-lg-9">
 
-    <div class="tab-pane fade show " id="v-pills-orders" role="tabpanel"
+    <div class="tab-pane fade show" id="v-pills-orders" role="tabpanel"
                                 aria-labelledby="v-pills-profile-tab">
                                 <div class="my-account-content">
                                     <h4>Order History</h4>
+                                @if ($order->isEmpty())
+
+                                    <div class="empty-orders-div ">
+
+                                    <i class="bx bx-shopping-bag"></i>
+
+                                    <p class="mb-1">Look like you haven't made any orders yet.</p>
+
+                                    <p class="mb-0">Click <a href="{{ route('customer.my_home') }}">here</a> to continue shopping.</p>
+
+                                    </div>
+
+
+
+                    @else
                                     @foreach($order as $orderstore) 
-                                       @if(Auth::user()->id==$orderstore->customer_id)
+                                       <!-- @if(Auth::user()->id==$orderstore->customer_id) -->
                                        
                                    
                                     <div class="row">
@@ -63,8 +79,9 @@
 
 
 </div>
-@endif
-                                            @endforeach 
+<!-- @endif -->
+                                            @endforeach
+                                            @endif 
 
                             </div>
 </div>
@@ -112,7 +129,7 @@
                                     </tbody>
                                 </table>
                               
-                                <table class="table table-striped table-responsive mt-5 mb-0">
+                                <table class="table table-striped mt-5 mb-0" >
                                     <thead>
                                         <tr>
                                             <th scope="col">Ordered Items</th>

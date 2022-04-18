@@ -21,7 +21,7 @@
     <header>
         <div class="container-fluid">
             <nav id="navbar_top" class="navbar navbar-expand-lg navbar-light fixed-top">
-                <a class="navbar-brand" href="home.html"><img src="assets/images/logo.png" alt=""></a>
+                <a class="navbar-brand" href="home.html"><img src="{{asset('assets/images/logo.png')}}" alt=""></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
                     data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                     aria-label="Toggle navigation">
@@ -91,37 +91,52 @@ Cart</a>
     <section class="log-reg-sec">
         <div class="content">
             <div class="form-content">
-                <img src="assets/images/logo-round.png" alt="" class="form-logo">
+                <img src="{{asset('assets/images/logo-round.png')}}" alt="" class="form-logo">
                 <h1 class="text-center">Sign up to FoodDay</h1>
                 <form method="post" action="{{route('customer.signup_store')}}">
                 @csrf
-                    <!-- <div class="form-group ">
-                        <a href="#" class="fb btn btn-blue w-100">
-                            <i class='bx bxl-facebook'></i> Continue with Facebook
-                        </a>
-                    </div>
-                    <div class="form-group ">
-                        <a href="#" class="google btn btn-primary w-100">
-                            <i class='bx bxl-google'></i> Continue with Google
-                        </a>
-                    </div>
-
-                    <span class="email-text">Or continue with email</span> -->
+                @if(Session::get('fail'))
+                                          <div class="alert alert-danger" role="alert"> 
+                                             {{ Session::get('fail') }} 
+                                           </div>
+                                        @endif
+                   
 
                     <div class="form-group ">
-                        <input type="text" name="first_name" class="form-control" placeholder="First Name">
+                        <input type="text" name="first_name" class="form-control" placeholder="First Name" value="{{old('first_name')}}">
+                        @error("first_name")
+                                                    <p style="color:red">{{$errors->first("first_name")}}
+                                                @enderror
                     </div>
                     <div class="form-group ">
-                        <input type="text" name="last_name" class="form-control" placeholder="Last Name">
+                        <input type="text" name="last_name" class="form-control" placeholder="Last Name" value="{{old('last_name')}}">
+                        @error("last_name")
+                                                    <p style="color:red">{{$errors->first("last_name")}}
+                                                @enderror
                     </div>
                     <div class="form-group ">
-                        <input type="text" name="email" class="form-control" placeholder="Email">
+                        <input type="text" name="email" class="form-control" placeholder="Email" value="{{old('email')}}">
+                        @error("email")
+                                                    <p style="color:red">{{$errors->first("email")}}
+                                                @enderror
                     </div>
                     <div class="form-group ">
-                        <input type="text" name="mobile" class="form-control" placeholder="Mobile Number">
+                        <input type="text" name="mobile" class="form-control" placeholder="Mobile Number" value="{{old('mobile')}}">
+                        @error("mobile")
+                                                    <p style="color:red">{{$errors->first("mobile")}}
+                                                @enderror
                     </div>
                     <div class="form-group ">
                         <input type="password" name="password" class="form-control" placeholder="Password">
+                        @error("password")
+                                                    <p style="color:red">{{$errors->first("password")}}
+                                                @enderror
+                    </div>
+                    <div class="form-group ">
+                        <input type="password" name="confirm_password" class="form-control" placeholder=" Confirm Password">
+                        @error("confirm_password")
+                                                    <p style="color:red">{{$errors->first("confirm_password")}}
+                                                @enderror
                     </div>
                     <div class="form-group  text-center">
                         <span class="d-inline-block">By clcking Sign up, Continue with Faecbook or Continue with
@@ -153,10 +168,11 @@ Cart</a>
                     <div class="col-lg-4 col-md-6">
                         <h3>Quick links</h3>
                         <ul>
-                            <li><a href="home.html">Home</a></li>
-                            <li><a href="restaurant-listing.html">Restaurants</a></li>
-                            <li><a href="about-us.html">About us</a></li>
-                            <li><a href="contact-us.html">Contact</a></li>
+                            <li><a href="{{route('index')}}">Home</a></li>
+                            <li><a href="{{route('customer.restaurant_listing')}}">Restaurants</a></li>
+                            <li><a href="{{route('customer.aboutus')}}">About us</a></li>
+                            <li><a href="{{route('customer.contact')}}">Contact</a></li>
+                           
                         </ul>
                     </div>
                     <div class="col-lg-4 col-md-6">

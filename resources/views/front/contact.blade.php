@@ -10,9 +10,9 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+    <link rel="icon" type="image/png" href="{{asset('assets/images/favicon.png')}}">
     <link rel="stylesheet" href="{{asset('assets/css/styles.css')}}">
-    <title>FoodDay - Reset password</title>
+    <title>FoodDay - Cart</title>
 </head>
 
 <body>
@@ -21,7 +21,7 @@
     <header>
         <div class="container-fluid">
             <nav id="navbar_top" class="navbar navbar-expand-lg navbar-light fixed-top">
-                <a class="navbar-brand" href="home.html"><img src="assets/images/logo.png" alt=""></a>
+                <a class="navbar-brand" href="home.html"><img src="{{asset('assets/images/logo.png')}}" alt=""></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
                     data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                     aria-label="Toggle navigation">
@@ -31,29 +31,16 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item active">
-                            <a class="nav-link" href="home.html">Home <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="{{route('index')}}">Home <span class="sr-only">(current)</span></a>
                         </li>
-                        <!-- <li class="nav-item">
-                            <a class="nav-link" href="restaurant-listing.html">Restaurants</a>
-                        </li> -->
+                       
 
                         <li class="nav-item">
-                            <a class="nav-link" href="login.html">Sign In</a>
+                            <a class="nav-link" href="{{route('customer.signin')}}">Sign In</a>
                         </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="my-account.html">
-                                <i class='bx bx-user mr-1'></i>
-                                My Account</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="cart.html">
-                                <span class="cart-badge-wrap">
-                                    <span class="cart-badge">9</span>
-                                    <i class='bx bx-shopping-bag mr-1'></i>
-                                </span>
-                                Cart</a>
-                        </li>
+                        <livewire:cart-count />
+                      
+                       
                     </ul>
                 </div>
             </nav>
@@ -61,66 +48,77 @@
     </header>
     <!-- Header -->
 
-    <!-- <div class="search-nav">
+    <div class="search-nav">
         <div class="container">
-            <h3 class="mb-0">Reset Your Password</h3>
+            <h3 class="mb-0">Contact Us</h3>
         </div>
-    </div> -->
+    </div>
 
-    <section class="log-reg-sec">
+    <section class="py-60">
+        <div class="container">
 
-        <div class="content">
-            <div class="form-content">
-                <img src="assets/images/logo-round.png" alt="" class="form-logo">
-                <h1 class="text-center">Reset Password?</h1>
-                @if (Session::has('info'))
-                         <div class="alert alert-success" role="alert">
-                            {{ Session::get('info') }}
-                        </div>
-                    @endif
-                    @if (Session::has('fail'))
-                         <div class="alert alert-danger" role="alert">
-                            {{ Session::get('fail') }}
-                        </div>
-                    @endif
-                <form action="{{route('customer.resetPassword')}}" method="POST">
-                          @csrf
-                          <input type="hidden" name="token" value="{{ $token }}">
-                    <input type="hidden" name="token" value="{{$token}}">
-                    <span class="email-text">Enter a new password for your account</span>
-                    <div class="form-group">
-                        <input type="text" class="form-control" name="email" placeholder="Email" value="{{$email ?? old('email')}}">
-                        @if ($errors->has('email'))
-                                      <span class="text-danger">{{ $errors->first('email') }}</span>
-                                  @endif
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="contact-item">
+                        <h6>Address</h6>
+                        <p>123, Downtown,</p>
+                        <p>New York,
+                            NG 1231, UK</p>
                     </div>
-                    <div class="form-group">
-                        <input type="password" class="form-control" name="password" placeholder="New Password">
-                        @if ($errors->has('password'))
-                                      <span class="text-danger">{{ $errors->first('password') }}</span>
-                                  @endif
+                </div>
+                <div class="col-md-4">
+                    <div class="contact-item">
+                        <h6>Phone</h6>
+                        <p>+01 2342 234 232,</p>
+                        <p>+01 2342 243 234</p>
                     </div>
-                    <div class="form-group">
-                        <input type="password" class="form-control" name="password_confirmation" placeholder="Confirm New Password">
-                        @if ($errors->has('password_confirmation'))
-                                      <span class="text-danger">{{ $errors->first('password_confirmation') }}</span>
-                                  @endif
+                </div>
+                <div class="col-md-4">
+                    <div class="contact-item">
+                        <h6>Mail</h6>
+                        <p>johndoe@gmail.com</p>
+                        <p>contact@foodday.com</p>
                     </div>
-
-                    <div class="form-group">
-                        <button class="btn btn-primary w-100">Reset Password</button>
-                    </div>
-                    <div class="form-group text-center mb-0">
-                        <span>Don't have an account?</span>
-                        <a href="">Sign up</a>
-                    </div>
-
-                </form>
+                </div>
             </div>
+
+            <div class="row">
+
+                <div class="col-lg-8 offset-lg-2 mt-4">
+                    <h5 class="mb-4 text-center">Send us a message</h5>
+                    <form>
+                        <div class="form-row">
+
+                            <div class="form-group col-lg-6">
+                                <input type="text" class="form-control" placeholder="First Name">
+                            </div>
+                            <div class="form-group col-lg-6">
+                                <input type="text" class="form-control" placeholder="Last Name">
+                            </div>
+                            <div class="form-group col-lg-6">
+                                <input type="text" class="form-control" placeholder="Email">
+                            </div>
+                            <div class="form-group col-lg-6">
+                                <input type="text" class="form-control" placeholder="Phone">
+                            </div>
+                            <div class="form-group col-lg-12">
+                                <input type="text" class="form-control" placeholder="Subject">
+                            </div>
+                            <div class="form-group col-lg-12">
+                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="4"
+                                    placeholder="Message"></textarea>
+                            </div>
+                            <div class="form-group col-lg-12">
+                                <button class="btn btn-primary">Submit Message</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+
         </div>
-
     </section>
-
 
 
     <!-- footer -->
@@ -129,7 +127,7 @@
         <div class="footer-top">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-4 col-md-6">
+                    <div class="col-lg-3 col-md-6">
                         <h3>Quick links</h3>
                         <ul>
                             <li><a href="{{route('index')}}">Home</a></li>
@@ -139,7 +137,7 @@
                            
                         </ul>
                     </div>
-                    <div class="col-lg-4 col-md-6">
+                    <div class="col-lg-3 col-md-6">
                         <h3>Quick links</h3>
                         <ul>
 
@@ -151,7 +149,7 @@
                         </ul>
                     </div>
 
-                    <!-- <div class="col-lg-3 col-md-6">
+                    <div class="col-lg-3 col-md-6">
                         <h3>Subscribe to newsletter</h3>
                         <p>Join our newsletter to keep be informed about offers and news.</p>
                         <form action="">
@@ -159,13 +157,13 @@
                                 <input type="text" class="form-control" placeholder="Enter your email" aria-label=""
                                     aria-describedby="button-addon2">
                                 <div class="input-group-append">
-                                    <button class="btn btn-primary" type="button" id="find-food-btn"><i
+                                    <button class="btn btn-danger" type="button" id="find-food-btn"><i
                                             class='bx bx-send'></i></button>
                                 </div>
                             </div>
                         </form>
-                    </div> -->
-                    <div class="col-lg-4 col-md-6">
+                    </div>
+                    <div class="col-lg-3 col-md-6">
                         <h3>Contact us</h3>
                         <ul class="contact">
                             <li><i class='bx bx-location-plus'></i><span>Down Town Building, MG Road, Toronto, Canada,
@@ -222,8 +220,6 @@
     </footer>
 
     <!-- footer end -->
-
-
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"

@@ -34,19 +34,24 @@
                         <li class="nav-item active">
                             <a class="nav-link" href="{{route('customer.my_home')}}">Home <span class="sr-only">(current)</span></a>
                         </li>
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                             <a class="nav-link" href="{{route('customer.restaurant_listing')}}">Restaurants</a>
-                        </li>
+                        </li> -->
 
                         <!-- <li class="nav-item">
                             <a class="nav-link" href="/signin">Sign In</a>
                         </li> -->
-
+                       @if(app('request')->has('customer_id'))
                         <li class="nav-item">
                             <a class="nav-link" href="{{route('customer.account')}}">
                                 <i class='bx bx-user mr-1'></i>
                                 My Account</a>
                         </li>
+                        @else
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('customer.signin')}}">Sign In</a>
+                        </li>
+                        @endif
                         <livewire:cart-count />
                     </ul>
                 </div>
@@ -88,7 +93,7 @@
 
             <!-- location popup -->
 
-            <!-- @unless(app('request')->has('location'))
+            @unless(app('request')->has('location'))
             <div class="location-popup" id="location-popup">
                 <h5 class="mb-3">Add your delivery location</h5>
                 <p class="mb-4">Please set a more precise location to see more relevant options.
@@ -97,7 +102,7 @@
                 <button class="btn btn-light" onclick="locationPopup()">Set Location</button>
                 </form>
             </div>
-            @endunless -->
+            @endunless
 
             <!-- location popup end -->
 
@@ -106,8 +111,10 @@
 
     <section class="py-60">
         <div class="container">
+        @if (app('request')->has('location'))
             <h4 class="mb-4">Restaurants</h4>
             <div class="row rest-listing-row">
+                
             @foreach($restaurants as $rest)
             @if($rest->is_open==1)
                 <div class="col-md-4 col-sm-6">
@@ -189,8 +196,13 @@
                 </div>
                 @endif
                 @endforeach
+               
             </div>
-            
+            @else
+            <div class="empty-status-div">
+            <h4 class="mb-4" >Sorry! We couldn't find any results</h4>
+            </div>
+            @endif
         </div>
     </section>
 
@@ -204,10 +216,11 @@
                     <div class="col-lg-4 col-md-6">
                         <h3>Quick links</h3>
                         <ul>
-                            <li><a href="home.html">Home</a></li>
-                            <li><a href="restaurant-listing.html">Restaurants</a></li>
-                            <li><a href="about-us.html">About us</a></li>
-                            <li><a href="contact-us.html">Contact</a></li>
+                            <li><a href="{{route('index')}}">Home</a></li>
+                            <li><a href="{{route('customer.restaurant_listing')}}">Restaurants</a></li>
+                            <li><a href="{{route('customer.aboutus')}}">About us</a></li>
+                            <li><a href="{{route('customer.contact')}}">Contact</a></li>
+                           
                         </ul>
                     </div>
                     <div class="col-lg-4 col-md-6">
@@ -308,7 +321,7 @@
     <script src="{{asset('assets/js/custom.js')}}"></script>
     @livewireScripts
 
-    <!-- <script type="text/javascript">
+    <script type="text/javascript">
 
 
 
@@ -318,11 +331,12 @@ document.getElementById('location').focus();
 
 document.getElementById('location-popup').style.display = "none";
 
+
 }
 
 
 
-</script> -->
+</script>
 </body>
 
 </html>

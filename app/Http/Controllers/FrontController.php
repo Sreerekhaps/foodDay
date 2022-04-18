@@ -32,7 +32,13 @@ class FrontController extends Controller
     }
    
     public function signup(){
-        return view('front.my_home');
+        return view('front.signup');
+    }
+    public function aboutus(){
+        return view('front.aboutus');
+    }
+    public function contact(){
+        return view('front.contact');
     }
     public function signup_store(Request $request){
         $request->validate([
@@ -41,6 +47,7 @@ class FrontController extends Controller
             'mobile'=>'required|min:10|max:12',
             'email'=>'required|email',
             'password'=>'required|min:4',
+            'confirm_password'=>['same:password'],
         
 
         ]);
@@ -56,7 +63,15 @@ class FrontController extends Controller
         $customer->password = Hash::make($request->password);
         
         $save= $customer->save();
-        return redirect('/customer/signin');
+        $userInfo=$request->only('email','password');
+        if(Auth::guard('customer')->attempt($userInfo)){
+            return redirect('customer/my_home');
+        }
+        else{
+            return back()->with('fail','Something went wrong');  
+
+        }
+        
             
     }
     public function check(Request $request)//signin 
@@ -207,7 +222,7 @@ public function logout(Request $request){
    
         Customer::find(auth()->user()->id)->update(['password'=> Hash::make($request->new_password)]);
    
-        return back();
+        return back()->with('success','Password Updated Successfully.');
         }
         /////////////Address///////////////////
         public function address(Address $address){
@@ -237,6 +252,7 @@ public function logout(Request $request){
 
             ]);
             $address = new Address;
+            $customer=Auth::user()->id;
             $address->location=$inputs['location'];
             $address->house_name=$inputs['house_name'];
             $address->area=$inputs['area'];
@@ -245,12 +261,34 @@ public function logout(Request $request){
             $address->pincode=$inputs['pincode'];
             $address->home=$inputs['home'];
             $address->note_a_driver=$inputs['note_a_driver'];
+            $address->customer_id=$customer;
             $address->save();
             return back();
             
         }
+       public function default($id){
+        $inputs=request()->validate([
+            'default'=>['sometimes', 'in:1,0'],
+        ]);
+        $address=Address::find($id);
        
-       
+        $address->default=1;
+        
+        $address->save();
+        return back();
+
+       }
+       public function removedefault($id){
+        $inputs=request()->validate([
+            'default'=>['sometimes', 'in:1,0'],
+        ]);
+        $address=Address::find($id);
+        $address->default=0;
+            
+        $address->save();
+        return back();
+
+       }
         // public function edit_address(Address $address,$id){
         //     $address=Address::find($id);
             
@@ -304,15 +342,36 @@ public function logout(Request $request){
     
         }
         public function update_address(Request $request, $id){
+            $inputs=request()->validate([
+                'location'=>'required',
+                'house_name'=>'required',
+                'area'=>'required',
+                'city'=>'required',
+                'landmark'=>'required',
+                'pincode'=>'required',
+                'home'=>'required',
+                'note_a_driver'=>'required',
+            
+            ],[
+                'location.required' => 'Location is required',
+                'house_name.required' =>'House Name is required',
+                'area.required' =>'Area is required',
+                'city.required' =>'City is required',
+                'landmark.required' =>'Landmark is required',
+                'pincode.required' =>'Pincode is required',
+                'home.required' =>'Address Type is required',
+                'note_a_driver.required' =>'Note for Driver is required',
+
+            ]);
             $address = Address::find($id);
-            $address->location = $request->input('location');
-            $address->house_name = $request->input('house_name');
-            $address->area = $request->input('area');
-            $address->city = $request->input('city');
-            $address->landmark = $request->input('landmark');
-            $address->pincode = $request->input('pincode');
-            $address->home = $request->input('home');
-            $address->note_a_driver = $request->input('note_a_driver');
+            $address->location=$inputs['location'];
+            $address->house_name=$inputs['house_name'];
+            $address->area=$inputs['area'];
+            $address->city=$inputs['city'];
+            $address->landmark=$inputs['landmark'];
+            $address->pincode=$inputs['pincode'];
+            $address->home=$inputs['home'];
+            $address->note_a_driver=$inputs['note_a_driver'];
 
             $address->update();
             return back();
@@ -526,7 +585,7 @@ public function logout(Request $request){
         
         $cartsession=session()->get('cartsession',[]);
 
-        $address=Address::all();
+        $address=Address::where('customer_id',auth()->user()->id)->get();
         $itemfoods=Itemfood::all();
         $restaurant=Restaurant::all();
         
@@ -658,7 +717,8 @@ public function logout(Request $request){
 
      }
      public function order_history(Order $order){
-         $order=Order::all()->sortDesc();
+         $order=Order::orderBy('created_at', 'DESC')->where('customer_id',auth()->user()->id)->get();
+         
          $itemfoods=Itemfood::all();
          return view('front.orderhistory',['order'=>$order],compact('itemfoods'));
      }
