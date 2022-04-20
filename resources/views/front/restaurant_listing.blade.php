@@ -93,7 +93,7 @@
 
             <!-- location popup -->
 
-            @unless(app('request')->has('location'))
+            <!-- @unless(app('request')->has('location'))
             <div class="location-popup" id="location-popup">
                 <h5 class="mb-3">Add your delivery location</h5>
                 <p class="mb-4">Please set a more precise location to see more relevant options.
@@ -102,7 +102,7 @@
                 <button class="btn btn-light" onclick="locationPopup()">Set Location</button>
                 </form>
             </div>
-            @endunless
+            @endunless -->
 
             <!-- location popup end -->
 

@@ -110,7 +110,7 @@ class FrontController extends Controller
 public function logout(Request $request){
     Auth::guard('customer')->logout();
     $request->session()->forget('cart');
-    $request->session()->forget('store');
+    $request->session()->forget('address');
     $request->session()->forget('cartsession');
 
     return redirect('/front');
@@ -180,7 +180,7 @@ public function logout(Request $request){
    
     public function myaccount(Customer $customer,Request $request){
         $customer=Auth::user();
-        $request->session()->forget('address');
+        // $request->session()->forget('address');
         $request->session()->forget('cartsession');
         return view('front.components.my_account-master',['customer'=>$customer]);
         
@@ -266,15 +266,13 @@ public function logout(Request $request){
             return back();
             
         }
-       public function default($id){
-        $inputs=request()->validate([
-            'default'=>['sometimes', 'in:1,0'],
-        ]);
+       public function default(Request $request,$id){
+       
         $address=Address::find($id);
        
-        $address->default=1;
+        Address::where('default', 1)->update(['default' => 0]);
         
-        $address->save();
+        Address::where('id', $request->id)->update(['default' => 1]);
         return back();
 
        }
@@ -584,7 +582,7 @@ public function logout(Request $request){
         $rest=$request->session()->get('restaurant');
         
         $cartsession=session()->get('cartsession',[]);
-
+         
         $address=Address::where('customer_id',auth()->user()->id)->get();
         $itemfoods=Itemfood::all();
         $restaurant=Restaurant::all();
@@ -606,13 +604,12 @@ public function logout(Request $request){
        
         $cartsession=session()->get('cartsession');
         $request->session()->forget('cart');
-
+        $request->session()->forget('address');
            
          return view('front.order_tracking',['Order'=>$order],compact('order'));
          
         // $request->session()->forget('cart');
-        // $request->session()->forget('store');
-
+       
         // return redirect('/customer/my_home');
         
      }
@@ -620,9 +617,10 @@ public function logout(Request $request){
      public function addressStore($id,Request $request)
      {
          $address = Address::findOrFail($id);
-            
+            // dd($address->default);
         //  $store = session()->get('store');
-         $data=$request->session()->put(['address'=>['address'=>$id,'location'=>$address->location,'home'=>$address->home,
+        
+         $data=$request->session()->put(['address'=>['id'=>$id,'location'=>$address->location,'home'=>$address->home,
          'house_name'=>$address->house_name,'area'=>$address->area,'pincode'=>$address->pincode,'city'=>$address->city]]);  
          $store=$request->session()->get('address');
         
@@ -650,11 +648,13 @@ public function logout(Request $request){
          return redirect()->back()->with('success', 'Address selected successfully!');
      }
 
-     public function orderStore(Order $order,Request $request){
+     public function orderStore(Order $order,Request $request,Address $address){
         
-        // $store = session()->get('store');
+       
+        // $address=Address::where('customer_id',auth()->user()->id)->get();
+        $address=Address::where('default','1')->first();
+       
         $store=session()->get('address');
-
         $cart = session()->get('cart', []);
         
         $rest=session()->get('restaurant');
@@ -664,10 +664,14 @@ public function logout(Request $request){
     
         $inputs=request()->validate([
             'delivery_method'=>'required',]);
-        $address_id=0; 
-         
-        $address_id=isset($store['address']) ? $store['address'] : 0;
-     
+        
+        
+        $address_id=0;
+        if($request->delivery_method == "delivery") {
+        
+         $address_id=isset($store['id']) ? $store['id'] : ($address->id);
+        }
+      dd($address_id);
         
         $restaurant_id=null;
         $restaurant_id=$rest['restaurant'];

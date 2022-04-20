@@ -34,7 +34,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item active">
-                            <a class="nav-link" href="home.html">Home <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="{{route('customer.my_home')}}">Home <span class="sr-only">(current)</span></a>
                         </li>
                         <!-- <li class="nav-item">
                             <a class="nav-link" href="{{route('customer.restaurant_listing')}}">Restaurants</a>
@@ -100,7 +100,7 @@
                                 <div class="card address-card">
                                     <div class="card-body deliverable">
                                         <div class="delivery">
-                                        @if(session('store')==$add->id)
+                                        @if($add->default==1)
                                             <i class='bx bxs-check-circle'></i>
                                           
                                         @endif
@@ -112,13 +112,20 @@
                                            {{$add->landmark}}
                                           
                                         </p>
+                                        @if(!session('address'))
                                         <button class="btn btn-primary btn-sm"><a href="{{route('customer.addressStore',$add->id)}} "style="color:white">Deliver here</a></button>
+                                        @else
+                                          
+                                      
+                                        <button class="btn btn-primary btn-sm"><a href="{{route('customer.addressStore',$add->id)}} "style="color:white">Delivered here</a></button>
                                         
+                                        @endif
                                         <button type="button" class="btn btn-outline-primary btn-sm" id="edit-item" data-toggle="modal"
                                             data-target="#exampleModal{{$add->id}}">
-                                            Edit</button>
+                                            Edit</button>   {{session()->get('location')}}
                                         <button class="btn btn-outline-primary btn-sm">
                                             <a href="{{route('customer.address_destroy', $add->id)}}"> Delete</a></button>
+                                            
                                     </div>
                                 </div>
                             </div>

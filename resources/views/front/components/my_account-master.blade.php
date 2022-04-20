@@ -192,11 +192,9 @@ Cart</a>
                                         </div>
                                         <div class="form-group col-lg-6">
                                             <select name="home" id="home" class="form-control" >
-
-                                                <option value="0" disabled selected >Address Type</option>
-
-                                                <option value="Home" >Home</option>
-
+                                            <option value="0" disabled selected >Address Type</option>
+                                            <option value="Home" >Home</option>
+                                               
                                                 <option value="Office" >Office</option>
 
                                                 <option value="Other" >Other</option>
